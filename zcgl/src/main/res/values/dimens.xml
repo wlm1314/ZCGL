@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="margin_horizontal">16dp</dimen>
+    <dimen name="margin_vertical">16dp</dimen>
+    <dimen name="margin_fab">16dp</dimen>
+    <dimen name="margin_bottom_card_view">0dp</dimen>
+
+    <dimen name="button">14sp</dimen>
+    <!--给（图片、照片等）加说明文字-->
+    <dimen name="caption">12sp</dimen>
+    <dimen name="body">14sp</dimen>
+    <!--副标题-->
+    <dimen name="title">20sp</dimen>
+    <dimen name="subheading">16sp</dimen>
+
+    <dimen name="dimen_10">10dp</dimen>
+    <dimen name="dimen_2">2dp</dimen>
+    <dimen name="dimen_160">160dp</dimen>
+
+</resources>

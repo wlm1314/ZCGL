@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="viewModel" type="com.bjprd.zcgl.main.MainViewModel"/>
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:id="@+id/llayout_sbdj"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+                    <TextView
+                        style="@style/CommonText"
+                        android:gravity="center"
+                        android:text="@string/main_sbdj"/>
+                </LinearLayout>
+
+                <View style="@style/DividerVertical"/>
+
+                <LinearLayout
+                    android:id="@+id/llayout_sbsh"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+                    <TextView
+                        style="@style/CommonText"
+                        android:gravity="center"
+                        android:text="@string/main_sbsh"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View style="@style/DividerHorizontal"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:id="@+id/llayout_zmxg"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+                    <TextView
+                        style="@style/CommonText"
+                        android:gravity="center"
+                        android:text="@string/main_zmxg"/>
+                </LinearLayout>
+
+                <View style="@style/DividerVertical"/>
+
+                <LinearLayout
+                    android:id="@+id/llayout_zccx"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+                    <TextView
+                        style="@style/CommonText"
+                        android:gravity="center"
+                        android:text="@string/main_zccx"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View style="@style/DividerHorizontal"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:id="@+id/llayout_txfx"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+                    <TextView
+                        style="@style/CommonText"
+                        android:gravity="center"
+                        android:text="@string/main_txfx"/>
+                </LinearLayout>
+
+                <View style="@style/DividerVertical"/>
+
+                <LinearLayout
+                    android:id="@+id/llayout_zcbg"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+                    <TextView
+                        style="@style/CommonText"
+                        android:gravity="center"
+                        android:text="@string/main_zcbg"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</layout>
