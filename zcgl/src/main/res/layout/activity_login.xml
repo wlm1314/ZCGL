@@ -5,58 +5,56 @@
 
     <data>
         <variable name="viewModel" type="com.bjprd.zcgl.login.LoginViewModel"/>
-        <variable name="appbar" type="com.bjprd.zcgl.base.AppBarViewModel"/>
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
         android:orientation="vertical">
 
-        <include layout="@layout/app_bar"
-                 app:appbar="@{appbar}"/>
+        <ImageView android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="center"
+                   android:layout_marginTop="70dp"
+                   android:src="@mipmap/logo_gdzc"/>
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/ti_username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="150dp">
+        <EditText
+            android:id="@+id/et_username"
+            style="@style/CommonText"
+            android:layout_marginTop="@dimen/margin_vertical"
+            android:background="@color/app_bg"
+            android:drawableLeft="@mipmap/icon_user"
+            android:drawablePadding="@dimen/dimen_10"
+            android:hint="@string/hint_username"
+            android:maxLines="1"
+            android:padding="@dimen/margin_horizontal"
+            android:text="@={viewModel.username}"/>
 
-            <EditText
-                android:id="@+id/et_username"
-                style="@style/CommonText"
-                android:drawableLeft="@mipmap/icon_user"
-                android:drawablePadding="@dimen/dimen_10"
-                android:hint="@string/hint_username"
-                android:maxLines="1"
-                android:paddingLeft="@dimen/margin_horizontal"
-                android:text="@={viewModel.username}"/>
-        </android.support.design.widget.TextInputLayout>
+        <View style="@style/DividerHorizontal"/>
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/ti_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/et_password"
-                style="@style/CommonText"
-                android:drawableLeft="@mipmap/icon_pwd"
-                android:drawablePadding="@dimen/dimen_10"
-                android:hint="@string/hint_password"
-                android:imeActionLabel="登录"
-                android:imeOptions="actionDone"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:paddingLeft="@dimen/margin_horizontal"
-                android:text="@={viewModel.password}"/>
-        </android.support.design.widget.TextInputLayout>
+        <EditText
+            android:id="@+id/et_password"
+            style="@style/CommonText"
+            android:background="@color/app_bg"
+            android:drawableLeft="@mipmap/icon_pwd"
+            android:drawablePadding="@dimen/dimen_10"
+            android:hint="@string/hint_password"
+            android:imeActionLabel="登录"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:padding="@dimen/margin_horizontal"
+            android:text="@={viewModel.password}"/>
 
         <TextView
-            style="@style/CommonButton"
-            android:layout_margin="@dimen/margin_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="@dimen/margin_vertical"
             android:text="登录"
+            android:textColor="@color/white"
+            android:textSize="@dimen/subheading"
             app:clickCommand="@{viewModel.loginCommand}"/>
 
     </LinearLayout>
