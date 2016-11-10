@@ -15,7 +15,6 @@
     <dimen name="subheading">16sp</dimen>
 
     <dimen name="dimen_10">10dp</dimen>
-    <dimen name="dimen_2">2dp</dimen>
     <dimen name="dimen_160">160dp</dimen>
 
 </resources>

@@ -23,7 +23,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".main.MainActivity"
-                  android:screenOrientation="portrait"/>
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".login.LoginActivity"
                   android:screenOrientation="portrait"/>
     </application>

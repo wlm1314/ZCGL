@@ -15,8 +15,8 @@ import com.bjprd.zcgl.utils.Utils;
  * Created by 王少岩 on 2016/11/9.
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
-    protected ViewDataBinding binding;
+public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatActivity {
+    protected T mBinding;
     private AppBarViewModel mBarViewModel;
     private long mClickTime = 0l;
     private static int EXIT_TIMEOUT = 2500;
@@ -32,12 +32,12 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void setTitle(String title) {
         mBarViewModel.setTitle(title);
-        binding.setVariable(com.bjprd.zcgl.BR.appbar, mBarViewModel);
+        mBinding.setVariable(com.bjprd.zcgl.BR.appbar, mBarViewModel);
     }
 
-    public void showNavi(){
+    public void showLeft(){
         mBarViewModel.setNavigation(R.mipmap.icon_back);
-        binding.setVariable(com.bjprd.zcgl.BR.appbar, mBarViewModel);
+        mBinding.setVariable(com.bjprd.zcgl.BR.appbar, mBarViewModel);
     }
 
     public void showSnackbar(View view, CharSequence text) {

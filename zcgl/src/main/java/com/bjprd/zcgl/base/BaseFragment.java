@@ -8,16 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bjprd.zcgl.BR;
 import com.bjprd.zcgl.R;
-
 
 /**
  * Created by 王少岩 on 2016/11/9.
  */
 
-public abstract class BaseFragment extends Fragment {
-    protected ViewDataBinding binding;
+public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment {
+    protected T binding;
     private AppBarViewModel mBarViewModel;
 
     @Nullable
@@ -32,11 +30,11 @@ public abstract class BaseFragment extends Fragment {
 
     public void setTitle(String title){
         mBarViewModel.setTitle(title);
-        binding.setVariable(BR.appbar, mBarViewModel);
+        binding.setVariable(com.bjprd.zcgl.BR.appbar, mBarViewModel);
     }
 
     public void showLeft(){
         mBarViewModel.setNavigation(R.mipmap.icon_back);
-        binding.setVariable(BR.appbar, mBarViewModel);
+        binding.setVariable(com.bjprd.zcgl.BR.appbar, mBarViewModel);
     }
 }

@@ -6,21 +6,22 @@ import android.support.annotation.Nullable;
 
 import com.bjprd.zcgl.R;
 import com.bjprd.zcgl.base.BaseActivity;
+import com.bjprd.zcgl.databinding.ActivityMainBinding;
 
 /**
  * Created by 王少岩 on 2016/10/19.
  */
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity<ActivityMainBinding> {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("固定资产管理系统");
-        binding.setVariable(com.bjprd.zcgl.BR.viewModel, new MainViewModel(this));
+        mBinding.setViewModel(new MainViewModel(this));
     }
 
     @Override
     public void initBinding() {
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
     }
 }

@@ -1,23 +1,27 @@
 package com.bjprd.zcgl.splash;
 
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 
 import com.bjprd.zcgl.R;
+import com.bjprd.zcgl.base.BaseActivity;
+import com.bjprd.zcgl.databinding.ActivitySplashBinding;
 
 /**
  * Created by 王少岩 on 2016/8/5.
  */
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity<ActivitySplashBinding> {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ViewDataBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_splash);
-        binding.setVariable(com.bjprd.zcgl.BR.viewModel, new SplashViewModel(this));
+        mBinding.setViewModel(new SplashViewModel(this));
+    }
+
+    @Override
+    public void initBinding() {
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_splash);
     }
 
     //屏蔽返回键的代码:
