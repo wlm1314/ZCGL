@@ -1,10 +1,7 @@
 package com.bjprd.zcgl.main;
 
-import android.databinding.DataBindingUtil;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-
 import com.bjprd.zcgl.R;
+import com.bjprd.zcgl.base.AppBarViewModel;
 import com.bjprd.zcgl.base.BaseActivity;
 import com.bjprd.zcgl.databinding.ActivityMainBinding;
 
@@ -13,15 +10,15 @@ import com.bjprd.zcgl.databinding.ActivityMainBinding;
  */
 
 public class MainActivity extends BaseActivity<ActivityMainBinding> {
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setTitle("固定资产管理系统");
-        mBinding.setViewModel(new MainViewModel(this));
+    protected int getLayoutId() {
+        return R.layout.activity_main;
     }
 
     @Override
-    public void initBinding() {
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+    protected void setViewModel() {
+        mBinding.setViewModel(new MainViewModel(this));
+        mBinding.setAppbar(new AppBarViewModel(this, "固定资产管理系统", false));
     }
 }

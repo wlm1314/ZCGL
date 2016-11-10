@@ -1,5 +1,6 @@
 package com.bjprd.zcgl.base;
 
+import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,7 +9,6 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.bjprd.zcgl.R;
 import com.bjprd.zcgl.utils.Utils;
 
 /**
@@ -17,28 +17,27 @@ import com.bjprd.zcgl.utils.Utils;
 
 public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatActivity {
     protected T mBinding;
-    private AppBarViewModel mBarViewModel;
     private long mClickTime = 0l;
     private static int EXIT_TIMEOUT = 2500;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initBinding();
-        mBarViewModel = new AppBarViewModel(this);
+        mBinding = DataBindingUtil.setContentView(this, getLayoutId());
+        setViewModel();
     }
 
-    public abstract void initBinding();
+    /**
+     * 该抽象方法就是 onCreate中需要的layoutID
+     *
+     * @return
+     */
+    protected abstract int getLayoutId();
 
-    public void setTitle(String title) {
-        mBarViewModel.setTitle(title);
-        mBinding.setVariable(com.bjprd.zcgl.BR.appbar, mBarViewModel);
-    }
-
-    public void showLeft(){
-        mBarViewModel.setNavigation(R.mipmap.icon_back);
-        mBinding.setVariable(com.bjprd.zcgl.BR.appbar, mBarViewModel);
-    }
+    /**
+     * 绑定ViewModel
+     */
+    protected abstract void setViewModel();
 
     public void showSnackbar(View view, CharSequence text) {
         Utils.showSnackBar(view, text);

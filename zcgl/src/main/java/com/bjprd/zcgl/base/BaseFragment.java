@@ -1,5 +1,6 @@
 package com.bjprd.zcgl.base;
 
+import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,33 +9,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bjprd.zcgl.R;
-
 /**
  * Created by 王少岩 on 2016/11/9.
  */
 
 public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment {
-    protected T binding;
-    private AppBarViewModel mBarViewModel;
+    protected T mBinding;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        initBinding(inflater, container);
-        mBarViewModel = new AppBarViewModel(getActivity());
-        return binding.getRoot();
+        mBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
+        setViewModel();
+        return mBinding.getRoot();
     }
 
-    public abstract void initBinding(LayoutInflater inflater, ViewGroup container);
+    /**
+     * 该抽象方法就是 onCreate中需要的layoutID
+     *
+     * @return
+     */
+    protected abstract int getLayoutId();
 
-    public void setTitle(String title){
-        mBarViewModel.setTitle(title);
-        binding.setVariable(com.bjprd.zcgl.BR.appbar, mBarViewModel);
-    }
-
-    public void showLeft(){
-        mBarViewModel.setNavigation(R.mipmap.icon_back);
-        binding.setVariable(com.bjprd.zcgl.BR.appbar, mBarViewModel);
-    }
+    /**
+     * 绑定ViewModel
+     */
+    protected abstract void setViewModel();
 }

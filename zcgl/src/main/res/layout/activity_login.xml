@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="appbar" type="com.bjprd.zcgl.base.AppBarViewModel"/>
         <variable name="viewModel" type="com.bjprd.zcgl.login.LoginViewModel"/>
+        <variable name="appbar" type="com.bjprd.zcgl.base.AppBarViewModel"/>
     </data>
 
     <LinearLayout

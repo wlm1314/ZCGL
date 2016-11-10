@@ -1,7 +1,5 @@
 package com.bjprd.zcgl.splash;
 
-import android.databinding.DataBindingUtil;
-import android.os.Bundle;
 import android.view.KeyEvent;
 
 import com.bjprd.zcgl.R;
@@ -14,14 +12,13 @@ import com.bjprd.zcgl.databinding.ActivitySplashBinding;
 public class SplashActivity extends BaseActivity<ActivitySplashBinding> {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mBinding.setViewModel(new SplashViewModel(this));
+    protected int getLayoutId() {
+        return R.layout.activity_splash;
     }
 
     @Override
-    public void initBinding() {
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_splash);
+    protected void setViewModel() {
+        mBinding.setViewModel(new SplashViewModel(this));
     }
 
     //屏蔽返回键的代码:

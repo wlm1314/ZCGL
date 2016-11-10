@@ -16,17 +16,16 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:visibility="@{appbar.isShow}"
-            app:toolbar_logo="@{appbar.logo}"
-            app:toolbar_navigationIcon="@{appbar.navigation}"
             app:naviCommand="@{appbar.naviCommon}"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:title=" "
-            tools:visibility="visible">
+            app:toolbar_logo="@{appbar.logo}"
+            app:toolbar_navigationIcon="@{appbar.navigation}">
             <TextView
                 android:id="@+id/tv_title"
                 style="@style/CommonButton"
-                android:textSize="@dimen/subheading"
                 android:text="@{appbar.title}"
+                android:textSize="@dimen/subheading"
                 android:visibility="@{appbar.title!=null?View.VISIBLE : View.GONE}"/>
 
         </android.support.v7.widget.Toolbar>
