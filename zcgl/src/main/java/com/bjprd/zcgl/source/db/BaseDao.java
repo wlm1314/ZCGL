@@ -29,14 +29,13 @@ public abstract class BaseDao<T, Integer> {
     protected final String LEFT = "left";
     protected final String RIGHT = "right";
 
-    protected BaseDao(Activity activity) {
-        mActivity = activity;
+    protected BaseDao() {
         getHelper();
     }
 
     protected DatabaseHelper getHelper() {
         if (mDataBaseHelper == null) {
-            mDataBaseHelper = DatabaseHelper.getHelper(mActivity);
+            mDataBaseHelper = DatabaseHelper.getHelper();
         }
         return mDataBaseHelper;
     }

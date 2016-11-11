@@ -9,11 +9,11 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Zcgl" />
             <option value="$PROJECT_DIR$/databinding" />
             <option value="$PROJECT_DIR$/pickerview" />
             <option value="$PROJECT_DIR$/pulltofresh" />
             <option value="$PROJECT_DIR$/viewpagerindicator" />
-            <option value="$PROJECT_DIR$/zcgl" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
