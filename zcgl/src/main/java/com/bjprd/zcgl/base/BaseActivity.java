@@ -2,12 +2,17 @@ package com.bjprd.zcgl.base;
 
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.LayoutInflaterCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.bjprd.zcgl.utils.Utils;
 
@@ -19,9 +24,22 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
     protected T mBinding;
     private long mClickTime = 0l;
     private static int EXIT_TIMEOUT = 2500;
+    public static Typeface typeface;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        if (typeface == null) {
+            typeface = Typeface.createFromAsset(getAssets(), "iconfont.ttf");
+        }
+        LayoutInflaterCompat.setFactory(LayoutInflater.from(this), (parent, name, context, attrs) -> {
+            AppCompatDelegate delegate = getDelegate();
+            View view = delegate.createView(parent, name, context, attrs);
+
+            if (view != null && (view instanceof TextView)) {
+                ((TextView) view).setTypeface(typeface);
+            }
+            return view;
+        });
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, getLayoutId());
         setViewModel();

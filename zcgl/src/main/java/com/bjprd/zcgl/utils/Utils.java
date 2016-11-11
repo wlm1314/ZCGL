@@ -2,16 +2,15 @@ package com.bjprd.zcgl.utils;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.app.Service;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.support.design.widget.Snackbar;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -20,7 +19,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.bjprd.zcgl.R;
-import com.bjprd.zcgl.widget.LoadingDialog;
 import com.bjprd.zcgl.widget.MessageDialog;
 
 import java.io.ByteArrayOutputStream;
@@ -32,7 +30,7 @@ import java.util.TimerTask;
 
 public class Utils {
     private static final String TAG = "Utils";
-    private static LoadingDialog mLoadingDialog;
+    private static ProgressDialog progressDialog;
 
     // 土司
     public static void showToast(Context context, CharSequence text) {
@@ -46,17 +44,11 @@ public class Utils {
 
     //显示loading
     public static void showLoading(final Activity activity) {
-        hideLoading();
-        mLoadingDialog = new LoadingDialog(activity);
-        mLoadingDialog.setCancelable(false);
-        mLoadingDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-            @Override
-            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                activity.onKeyDown(keyCode, event);
-                return false;
-            }
-        });
-        mLoadingDialog.show();
+        progressDialog = new ProgressDialog(activity,
+                R.style.AppTheme_Dark_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("加载中...");
+        progressDialog.show();
     }
 
     public static void showMsgDialog(Activity activity, String msg, MessageDialog.OnDialogFinishListener listener) {
@@ -66,8 +58,8 @@ public class Utils {
 
     //隐藏loading
     public static void hideLoading() {
-        if (mLoadingDialog != null && mLoadingDialog.isShowing()) {
-            mLoadingDialog.dismiss();
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
         }
     }
 

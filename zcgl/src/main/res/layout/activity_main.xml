@@ -27,6 +27,7 @@
 
         </LinearLayout>
 
-        <include layout="@layout/nav_header"/>
+        <include layout="@layout/layout_nav"
+                 app:viewModel="@{viewModel}"/>
     </android.support.v4.widget.DrawerLayout>
 </layout>

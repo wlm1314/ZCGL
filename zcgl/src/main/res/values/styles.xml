@@ -5,6 +5,12 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="colorControlHighlight">@color/white</item>
+        <item name="android:textColorHint">@color/gray</item>
+        <item name="colorButtonNormal">@color/colorPrimaryDark</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -12,24 +18,38 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppTheme.Dark.Dialog" parent="Theme.AppCompat.Dialog">
+        <item name="colorAccent">@color/white</item>
+        <item name="android:textColorPrimary">@color/gray</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
     <style name="FloatingActionButton">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_margin">@dimen/margin_fab</item>
     </style>
-    <style name="CommonText">
+
+    <style name="IconText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/text_sub</item>
+        <item name="android:padding">@dimen/dimen_10</item>
+    </style>
+
+    <style name="CommonBase">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/text_nomal</item>
-        <item name="android:textColorHint">@color/text_hint</item>
         <item name="android:textSize">@dimen/body</item>
     </style>
 
-    <style name="CommonButton">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="CommonText" parent="CommonBase">
+        <item name="android:textColor">@color/text_nomal</item>
+        <item name="android:textColorHint">@color/text_hint</item>
+    </style>
+
+    <style name="CommonButton" parent="CommonBase">
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">@dimen/button</item>
         <item name="android:padding">@dimen/dimen_10</item>
         <item name="android:background">?android:attr/colorPrimary</item>
         <item name="android:gravity">center</item>
