@@ -21,6 +21,11 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding> {
         mBinding.setViewModel(new SplashViewModel(this));
     }
 
+    @Override
+    protected void init() {
+
+    }
+
     //屏蔽返回键的代码:
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

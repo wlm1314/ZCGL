@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ZCGL.iml" filepath="$PROJECT_DIR$/ZCGL.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Zcgl/zcgl.iml" filepath="$PROJECT_DIR$/Zcgl/zcgl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Zcgl/Zcgl.iml" filepath="$PROJECT_DIR$/Zcgl/Zcgl.iml" />
       <module fileurl="file://$PROJECT_DIR$/databinding/databinding.iml" filepath="$PROJECT_DIR$/databinding/databinding.iml" />
       <module fileurl="file://$PROJECT_DIR$/pickerview/pickerview.iml" filepath="$PROJECT_DIR$/pickerview/pickerview.iml" />
       <module fileurl="file://$PROJECT_DIR$/pulltofresh/pulltofresh.iml" filepath="$PROJECT_DIR$/pulltofresh/pulltofresh.iml" />

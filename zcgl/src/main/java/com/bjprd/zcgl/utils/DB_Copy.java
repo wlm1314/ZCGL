@@ -17,7 +17,7 @@ import java.io.InputStream;
  */
 public class DB_Copy {
     private Context mContext;
-    public static final String DATABASE_NAME = "gdzc.db";
+    public static final String DATABASE_NAME = "zcgl.db";
     public static final File SD_CACHE_DIR = App.getAppContext().getExternalCacheDir();
     public static final String PATH_DB = "databases";
 
@@ -35,7 +35,7 @@ public class DB_Copy {
         if(dest.exists()) return;
         try {
             SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase(dest, null);
-            InputStream is = mContext.getResources().openRawResource(R.raw.gdzc);
+            InputStream is = mContext.getResources().openRawResource(R.raw.zcgl);
             FileOutputStream fos = new FileOutputStream(dest);
             byte[] buffer = new byte[8192];
             int count = 0;

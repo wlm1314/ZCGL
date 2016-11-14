@@ -17,101 +17,127 @@
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-                <LinearLayout
-                    android:id="@+id/llayout_sbdj"
+                android:layout_height="@dimen/dimen_160">
+                <android.support.v7.widget.CardView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_margin="@dimen/dimen_10"
                     android:layout_weight="1"
-                    android:gravity="center">
-                    <TextView
-                        style="@style/CommonText"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardCornerRadius="2dp">
+                    <LinearLayout
+                        android:id="@+id/llayout_sbdj"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:clickCommand="@{viewModel.zcdjCommon}"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@string/main_sbdj"/>
-                </LinearLayout>
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="@dimen/dimen_10"
+                            android:src="@mipmap/icon_zcdj"/>
+                        <TextView
+                            style="@style/CommonText"
+                            android:gravity="center"
+                            android:text="@string/main_zcdj"/>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
 
-                <View style="@style/DividerVertical"/>
-
-                <LinearLayout
-                    android:id="@+id/llayout_sbsh"
+                <android.support.v7.widget.CardView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_margin="@dimen/dimen_10"
                     android:layout_weight="1"
-                    android:gravity="center">
-                    <TextView
-                        style="@style/CommonText"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardCornerRadius="2dp">
+
+                    <LinearLayout
+                        android:id="@+id/llayout_sbsh"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:clickCommand="@{viewModel.zccxCommon}"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@string/main_sbsh"/>
-                </LinearLayout>
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="@dimen/dimen_10"
+                            android:src="@mipmap/icon_zccx"/>
+                        <TextView
+                            style="@style/CommonText"
+                            android:gravity="center"
+                            android:text="@string/main_zccx"/>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
             </LinearLayout>
-
-            <View style="@style/DividerHorizontal"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-                <LinearLayout
-                    android:id="@+id/llayout_zmxg"
+                android:layout_height="@dimen/dimen_160">
+
+                <android.support.v7.widget.CardView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_margin="@dimen/dimen_10"
                     android:layout_weight="1"
-                    android:gravity="center">
-                    <TextView
-                        style="@style/CommonText"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardCornerRadius="2dp">
+
+                    <LinearLayout
+                        android:id="@+id/llayout_zmxg"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:clickCommand="@{viewModel.zcbgCommon}"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@string/main_zmxg"/>
-                </LinearLayout>
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="@dimen/dimen_10"
+                            android:src="@mipmap/icon_zcbg"/>
+                        <TextView
+                            style="@style/CommonText"
+                            android:gravity="center"
+                            android:text="@string/main_zcbg"/>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
 
-                <View style="@style/DividerVertical"/>
-
-                <LinearLayout
-                    android:id="@+id/llayout_zccx"
+                <android.support.v7.widget.CardView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_margin="@dimen/dimen_10"
                     android:layout_weight="1"
-                    android:gravity="center">
-                    <TextView
-                        style="@style/CommonText"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardCornerRadius="2dp">
+                    <LinearLayout
+                        android:id="@+id/llayout_zccx"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:clickCommand="@{viewModel.zcqcCommon}"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@string/main_zccx"/>
-                </LinearLayout>
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="@dimen/dimen_10"
+                            android:src="@mipmap/icon_zcqc"/>
+                        <TextView
+                            style="@style/CommonText"
+                            android:gravity="center"
+                            android:text="@string/main_zcqc"/>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
             </LinearLayout>
 
-            <View style="@style/DividerHorizontal"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-                <LinearLayout
-                    android:id="@+id/llayout_txfx"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center">
-                    <TextView
-                        style="@style/CommonText"
-                        android:gravity="center"
-                        android:text="@string/main_txfx"/>
-                </LinearLayout>
-
-                <View style="@style/DividerVertical"/>
-
-                <LinearLayout
-                    android:id="@+id/llayout_zcbg"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center">
-                    <TextView
-                        style="@style/CommonText"
-                        android:gravity="center"
-                        android:text="@string/main_zcbg"/>
-                </LinearLayout>
-
-            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </layout>

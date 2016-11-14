@@ -21,4 +21,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         mBinding.setViewModel(new MainViewModel(this));
         mBinding.setAppbar(new AppBarViewModel(this, "固定资产管理系统", false));
     }
+
+    @Override
+    protected void init() {
+        mBinding.drawerLayout.findViewById(R.id.tv_home).setOnClickListener(v -> mBinding.drawerLayout.closeDrawers());
+    }
 }

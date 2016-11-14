@@ -19,4 +19,9 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
     protected void setViewModel() {
         mBinding.setViewModel(new LoginViewModel(this));
     }
+
+    @Override
+    protected void init() {
+
+    }
 }

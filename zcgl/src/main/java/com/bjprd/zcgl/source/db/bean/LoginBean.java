@@ -7,11 +7,11 @@ import com.j256.ormlite.table.DatabaseTable;
  * Created by 王少岩 on 2016/8/23.
  */
 
-@DatabaseTable(tableName = "EMP_CODE")
+@DatabaseTable(tableName = "Z_USER")
 public class LoginBean {
-    @DatabaseField(columnName = "用户名")
+    @DatabaseField(columnName = "username")
     private String userName;
-    @DatabaseField(columnName = "密码")
+    @DatabaseField(columnName = "password")
     private String passWord;
 
     public LoginBean() {

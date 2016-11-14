@@ -107,11 +107,12 @@ public class Utils {
 
     /**
      * 在屏幕中间显示dialog
+     *
      * @param context
      * @param view
      * @return
      */
-    public static Dialog showCenterDialog(Context context, View view){
+    public static Dialog showCenterDialog(Context context, View view) {
         DisplayMetrics mDisplayMetrics = new DisplayMetrics();
         ((WindowManager) context.getSystemService(Service.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(mDisplayMetrics);
         Dialog dialog = new Dialog(context, R.style.DialogStyleBottom);
@@ -134,11 +135,12 @@ public class Utils {
 
     /**
      * 在屏幕底部显示dialog
+     *
      * @param context
      * @param view
      * @return
      */
-    public static Dialog showBottomDialog(Context context, View view){
+    public static Dialog showBottomDialog(Context context, View view) {
         DisplayMetrics mDisplayMetrics = new DisplayMetrics();
         ((WindowManager) context.getSystemService(Service.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(mDisplayMetrics);
         Dialog dialog = new Dialog(context, R.style.DialogStyleBottom);
@@ -160,6 +162,7 @@ public class Utils {
 
     /**
      * bitmap转String
+     *
      * @param bitmap
      * @return
      */
@@ -174,6 +177,7 @@ public class Utils {
 
     /**
      * 加密
+     *
      * @param val
      * @return
      */
@@ -201,14 +205,14 @@ public class Utils {
     }
 
 
-    public static void waitWhilePopInput(final EditText editNum1){
+    public static void waitWhilePopInput(final EditText editNum1) {
         //等界面绘制完再弹出否则无效果
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
 
             @Override
             public void run() {
-                if(editNum1!=null){
+                if (editNum1 != null) {
                     //设置可获得焦点
                     editNum1.setFocusable(true);
                     editNum1.setFocusableInTouchMode(true);
@@ -221,6 +225,10 @@ public class Utils {
                 }
             }
         }, 200);
+    }
+
+    public static boolean isNull(String str) {
+        return str.equals("1");
     }
 
 }

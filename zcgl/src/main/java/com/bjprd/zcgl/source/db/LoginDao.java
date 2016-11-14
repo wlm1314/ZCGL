@@ -25,8 +25,8 @@ public class LoginDao extends BaseDao<LoginBean, Integer> {
 
     public boolean getData(String username, String password) throws SQLException {
         HashMap<String, String> map = new HashMap<>();
-        map.put("用户名", username);
-        map.put("密码", password);
+        map.put("username", username);
+        map.put("password", password);
         List<LoginBean> list = query(-1, map);
         return list.size() > 0 ? true : false;
     }
