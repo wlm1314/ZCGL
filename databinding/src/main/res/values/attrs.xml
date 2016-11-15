@@ -74,11 +74,7 @@
         <!--height for ResizeOptions (use Fresco to load bitmap). -->
         <attr name="request_height" format="integer" />
         <attr name="placeholderImageRes" format="reference|color" />
-        <!--  require ReplyCommand<Bitmap> See {@link @link com.kelin.mvvmlight.command.ReplyCommand} -->
-        <attr name="onSuccessCommand" format="reference" />
-        <!--require ReplyCommand<CloseableReference<CloseableImage>> See {@link com.kelin.mvvmlight.command.ReplyCommand} -->
-        <attr name="onFailureCommand" format="reference" />
-
+        <attr name="errorImageRes" format="reference|color" />
     </declare-styleable>
 
     <declare-styleable name="ViewGroup">

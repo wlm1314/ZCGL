@@ -1,11 +1,12 @@
 package com.bjprd.zcgl.base;
 
+import android.app.Activity;
 import android.databinding.ObservableField;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 
 import com.binding.command.ReplyCommand;
+import com.bjprd.zcgl.App;
 import com.bjprd.zcgl.R;
 
 /**
@@ -13,7 +14,7 @@ import com.bjprd.zcgl.R;
  */
 
 public class AppBarViewModel {
-    private AppCompatActivity mActivity;
+    private Activity mActivity;
     public final ObservableField<String> title = new ObservableField<>();
     public final ObservableField<Integer> navigation = new ObservableField<>();
     public final ObservableField<Integer> logo = new ObservableField<>();
@@ -23,8 +24,8 @@ public class AppBarViewModel {
         mActivity.finish();
     });
 
-    public AppBarViewModel(AppCompatActivity activity, String str_title, boolean showLeft) {
-        mActivity = activity;
+    public AppBarViewModel(String str_title, boolean showLeft) {
+        mActivity = App.getAppContext().getCurrentActivity();
         setTitle(str_title);
         setNavigation(showLeft ? R.mipmap.icon_back : 0);
         setLogo(0);

@@ -1,6 +1,10 @@
 package com.bjprd.zcgl.zcdj;
 
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.bjprd.zcgl.BR;
 import com.bjprd.zcgl.R;
@@ -9,8 +13,10 @@ import com.bjprd.zcgl.base.BaseActivity;
 import com.bjprd.zcgl.databinding.ActivityZcdjBinding;
 import com.bjprd.zcgl.source.DataManager;
 import com.bjprd.zcgl.source.db.DBSubscriber;
-import com.bjprd.zcgl.source.db.bean.ZcdjBean;
+import com.bjprd.zcgl.source.db.bean.TsxxBean;
+import com.bjprd.zcgl.utils.Utils;
 import com.bjprd.zcgl.widget.recycleview.BindingAdapter;
+import com.bjprd.zcgl.widget.recycleview.BindingTool;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,8 +28,8 @@ import java.util.List;
 
 public class ZcdjActivity extends BaseActivity<ActivityZcdjBinding> {
     private LinearLayoutManager layoutManager;
-    HashMap<String, BindingAdapter.BindingTool> map = new HashMap<>();
-    private List<ZcdjBean> mList = new ArrayList<>();
+    HashMap<String, BindingTool> map = new HashMap<>();
+    private List<TsxxBean> mList = new ArrayList<>();
 
     @Override
     protected int getLayoutId() {
@@ -32,8 +38,9 @@ public class ZcdjActivity extends BaseActivity<ActivityZcdjBinding> {
 
     @Override
     protected void setViewModel() {
-        mBinding.setAppbar(new AppBarViewModel(this, "资产登记", true));
-        mBinding.setViewModel(new ZcdjViewModel(this));
+        mBinding.setAppbar(new AppBarViewModel("资产登记", true));
+        mBinding.setViewModel(new TsxxViewModel(this));
+        setSupportActionBar((Toolbar) mBinding.getRoot().findViewById(R.id.toolbar));
     }
 
     @Override
@@ -45,18 +52,38 @@ public class ZcdjActivity extends BaseActivity<ActivityZcdjBinding> {
     private void initView() {
         layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mBinding.rvZcdj.setLayoutManager(layoutManager);
-        mBinding.rvZcdj.setHasFixedSize(true);
+        mBinding.recycler.setLayoutManager(layoutManager);
+        mBinding.recycler.setHasFixedSize(true);
     }
 
     private void initData() {
-        map.put(ZcdjBean.class.getSimpleName(), new BindingAdapter.BindingTool(R.layout.item_zcdj, BR.data));
+        map.put(TsxxBean.class.getSimpleName(), new BindingTool(R.layout.item_zcdj, BR.data));
         DataManager.getZcdj().subscribe(new DBSubscriber<>(this, list -> {
             mList.addAll(list);
-            BindingAdapter<ZcdjBean> adapter = new BindingAdapter<>(map, mList);
-            mBinding.rvZcdj.setAdapter(adapter);
+            BindingAdapter<TsxxBean> adapter = new BindingAdapter<>(map, mList);
+            mBinding.recycler.setAdapter(adapter);
         }));
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.meun, menu);
+        menu.findItem(R.id.action_right).setTitle("保存");
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_right:
+                for (TsxxBean bean : mList) {
+                    if (TsxxBean.isNull(bean.isNull) && TextUtils.isEmpty(bean.editText.get())) {
+                        Utils.showToast(this, bean.tsnr);
+                        break;
+                    }
+                }
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

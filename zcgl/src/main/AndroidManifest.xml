@@ -28,6 +28,13 @@
         <activity android:name=".login.LoginActivity"
                   android:screenOrientation="portrait"/>
         <activity android:name=".zcdj.ZcdjActivity"
+                  android:theme="@style/AppTheme.AppComEdit"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".zccx.ZccxActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".zcbg.ZcbgActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".zcqc.ZcqcActivity"
                   android:screenOrientation="portrait"/>
     </application>
 

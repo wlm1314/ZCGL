@@ -2,7 +2,7 @@ package com.bjprd.zcgl.source;
 
 import com.bjprd.zcgl.source.db.LoginDao;
 import com.bjprd.zcgl.source.db.ZcdjDao;
-import com.bjprd.zcgl.source.db.bean.ZcdjBean;
+import com.bjprd.zcgl.source.db.bean.TsxxBean;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -44,12 +44,12 @@ public class DataManager {
      * 资产登记字段
      * @return
      */
-    public static Observable<List<ZcdjBean>> getZcdj(){
-        return Observable.create(new Observable.OnSubscribe<List<ZcdjBean>>() {
+    public static Observable<List<TsxxBean>> getZcdj(){
+        return Observable.create(new Observable.OnSubscribe<List<TsxxBean>>() {
             @Override
-            public void call(Subscriber<? super List<ZcdjBean>> subscriber) {
+            public void call(Subscriber<? super List<TsxxBean>> subscriber) {
                 try {
-                    List<ZcdjBean> list = new ZcdjDao().getData();
+                    List<TsxxBean> list = new ZcdjDao().getData();
                     subscriber.onNext(list);
                     subscriber.onCompleted();
                 } catch (SQLException e) {

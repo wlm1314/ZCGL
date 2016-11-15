@@ -8,7 +8,6 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 
 import com.bjprd.zcgl.utils.DB_Copy;
-import com.facebook.drawee.backends.pipeline.Fresco;
 
 /**
  * Created by 王少岩 on 2016/8/16.
@@ -25,7 +24,6 @@ public class App extends Application {
         mInstance = this;
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mUserPreference = mInstance.getSharedPreferences("gdzc_user_pref", Context.MODE_PRIVATE);
-        Fresco.initialize(this);
 
         /**
          * 复制数据库
@@ -52,7 +50,6 @@ public class App extends Application {
     public void setCurrentActivity(@NonNull Activity mCurrentActivity) {
         this.mCurrentActivity = mCurrentActivity;
     }
-
     /**
      * 复制数据库
      */

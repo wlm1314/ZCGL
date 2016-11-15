@@ -3,7 +3,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="viewModel" type="com.bjprd.zcgl.zcdj.ZcdjViewModel"/>
+        <variable name="viewModel" type="com.bjprd.zcgl.zcdj.TsxxViewModel"/>
         <variable name="appbar" type="com.bjprd.zcgl.base.AppBarViewModel"/>
     </data>
 
@@ -14,7 +14,7 @@
                  app:appbar="@{appbar}"/>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_zcdj"
+            android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </LinearLayout>

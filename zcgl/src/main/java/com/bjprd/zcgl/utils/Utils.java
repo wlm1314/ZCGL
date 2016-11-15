@@ -227,8 +227,4 @@ public class Utils {
         }, 200);
     }
 
-    public static boolean isNull(String str) {
-        return str.equals("1");
-    }
-
 }

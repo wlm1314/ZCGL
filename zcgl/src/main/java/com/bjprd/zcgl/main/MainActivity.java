@@ -18,8 +18,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     @Override
     protected void setViewModel() {
-        mBinding.setViewModel(new MainViewModel(this));
-        mBinding.setAppbar(new AppBarViewModel(this, "固定资产管理系统", false));
+        mBinding.setViewModel(new MainViewModel());
+        mBinding.setAppbar(new AppBarViewModel("固定资产管理系统", false));
     }
 
     @Override

@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.bjprd.zcgl.App;
 import com.bjprd.zcgl.utils.Utils;
 
 /**
@@ -23,6 +24,7 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        App.getAppContext().setCurrentActivity(this);
         mBinding = DataBindingUtil.setContentView(this, getLayoutId());
         setViewModel();
         init();

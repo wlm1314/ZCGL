@@ -1,34 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:bind="http://schemas.android.com/apk/res-auto">
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <import type="android.view.View"/>
-        <import type="com.bjprd.zcgl.utils.Utils"/>
-        <variable name="data" type="com.bjprd.zcgl.source.db.bean.ZcdjBean"/>
+        <import type="com.bjprd.zcgl.source.db.bean.TsxxBean"/>
+        <variable name="data" type="com.bjprd.zcgl.source.db.bean.TsxxBean"/>
     </data>
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="horizontal"
-                  android:paddingLeft="@dimen/dimen_10"
-                  android:paddingRight="@dimen/dimen_10">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/margin_horizontal"
+        android:paddingRight="@dimen/margin_horizontal"
+        android:paddingTop="@dimen/dimen_5"
+        app:clickCommand="@{data.clickCommand}">
+        <TextView
+            style="@style/CommonText"
+            android:layout_width="wrap_content"
+            android:paddingBottom="@dimen/dimen_10"
+            android:paddingRight="@dimen/dimen_5"
+            android:paddingTop="@dimen/dimen_10"
+            android:text="*"
+            android:textColor="@color/red"
+            android:visibility="@{TsxxBean.isNull(data.isNull)?View.VISIBLE:View.GONE}"/>
 
-        <TextView style="@style/CommonText"
-                  android:layout_width="wrap_content"
-                  android:text="@{data.columName}"/>
+        <TextView
+            style="@style/CommonText"
+            android:layout_width="wrap_content"
+            android:paddingBottom="@dimen/dimen_10"
+            android:paddingTop="@dimen/dimen_10"
+            android:text="@{data.columName}"/>
 
-        <EditText style="@style/CommonText"
-                  android:layout_width="0dp"
-                  android:layout_weight="1"
-                  android:hint="@{data.tsnr}"
-                  android:text="@={data.editText}"/>
+        <EditText
+            style="@style/CommonText"
+            android:layout_width="0dp"
+            android:layout_marginLeft="@dimen/margin_horizontal"
+            android:layout_weight="1"
+            android:hint="@{data.tsnr}"
+            android:maxLines="1"
+            android:paddingBottom="@dimen/dimen_10"
+            android:paddingTop="@dimen/dimen_10"
+            android:text="@={data.editText}"
+            android:visibility="@{!TsxxBean.isNull(data.isQz)?View.VISIBLE:View.GONE}"
+            app:colorControlActivated="@color/colorPrimary"/>
 
-        <TextView style="@style/CommonText"
-                  android:layout_width="wrap_content"
-                  android:text="*"
-                  android:textColor="@color/red"
-                  android:visibility="@{Utils.isNull(data.isNull)?View.VISIBLE:View.GONE}"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{TsxxBean.isNull(data.isQz)?View.VISIBLE:View.GONE}">
+
+            <TextView
+                style="@style/CommonText"
+                android:layout_width="0dp"
+                android:layout_marginLeft="@dimen/margin_horizontal"
+                android:layout_weight="1"
+                android:hint="@{data.tsnr}"
+                android:maxLines="1"
+                android:paddingBottom="@dimen/dimen_10"
+                android:paddingTop="@dimen/dimen_10"
+                android:text="@={data.editText}"
+                app:colorControlActivated="@color/colorPrimary"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@mipmap/icon_right_gray"/>
+        </LinearLayout>
+
     </LinearLayout>
 
 </layout>
