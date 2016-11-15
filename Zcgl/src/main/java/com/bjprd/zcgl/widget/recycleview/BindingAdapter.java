@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by 王少岩 on 2016/11/3.
@@ -15,7 +14,7 @@ import java.util.Map;
 
 public class BindingAdapter<T> extends RecyclerView.Adapter<BindingViewHolder> {
 
-    protected Map<String, BindingTool> map;
+    protected BindingTool mBindingTool;
     protected List<T> list;
     private OnItemClickListener mOnItemClickListener;
 
@@ -23,14 +22,14 @@ public class BindingAdapter<T> extends RecyclerView.Adapter<BindingViewHolder> {
         this.mOnItemClickListener = onItemClickListener;
     }
 
-    public BindingAdapter(Map<String, BindingTool> map, List<T> list) {
-        this.map = map;
+    public BindingAdapter(BindingTool bindingTool, List<T> list) {
+        this.mBindingTool = bindingTool;
         this.list = list;
     }
 
     @Override
     public BindingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), viewType, parent, false);
+        ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), mBindingTool.getLayoutId(), parent, false);
         BindingViewHolder bindingViewHolder = new BindingViewHolder(binding);
         setListener(binding, bindingViewHolder, parent);
         return bindingViewHolder;
@@ -56,14 +55,8 @@ public class BindingAdapter<T> extends RecyclerView.Adapter<BindingViewHolder> {
     @Override
     public void onBindViewHolder(BindingViewHolder holder, int position) {
         T t = list.get(position);
-        int variableId = map.get(t.getClass().getSimpleName()).getVariableId();
+        int variableId = mBindingTool.getVariableId();
         holder.getBinding().setVariable(variableId, t);
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        //把它的layoutid直接作为type返回
-        return map.get(list.get(position).getClass().getSimpleName()).getLayoutId();
     }
 
     @Override

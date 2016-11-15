@@ -19,7 +19,6 @@ import com.bjprd.zcgl.widget.recycleview.BindingAdapter;
 import com.bjprd.zcgl.widget.recycleview.BindingTool;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -28,7 +27,7 @@ import java.util.List;
 
 public class ZcdjActivity extends BaseActivity<ActivityZcdjBinding> {
     private LinearLayoutManager layoutManager;
-    HashMap<String, BindingTool> map = new HashMap<>();
+    private BindingTool mBindingTool;
     private List<TsxxBean> mList = new ArrayList<>();
 
     @Override
@@ -57,10 +56,10 @@ public class ZcdjActivity extends BaseActivity<ActivityZcdjBinding> {
     }
 
     private void initData() {
-        map.put(TsxxBean.class.getSimpleName(), new BindingTool(R.layout.item_zcdj, BR.data));
+        mBindingTool = new BindingTool(R.layout.item_zcdj, BR.data);
         DataManager.getZcdj().subscribe(new DBSubscriber<>(this, list -> {
             mList.addAll(list);
-            BindingAdapter<TsxxBean> adapter = new BindingAdapter<>(map, mList);
+            BindingAdapter adapter = new BindingAdapter(mBindingTool, mList);
             mBinding.recycler.setAdapter(adapter);
         }));
     }
