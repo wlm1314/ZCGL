@@ -17,7 +17,7 @@ import com.bjprd.zcgl.utils.Utils;
  */
 
 public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatActivity {
-    protected T mBinding;
+    private T mBinding;
     private long mClickTime = 0l;
     private static int EXIT_TIMEOUT = 2500;
 
@@ -41,6 +41,10 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
      * 绑定ViewModel
      */
     protected abstract void setViewModel();
+
+    protected T getMBinding(){
+        return mBinding;
+    }
 
     /**
      * 初始化页面

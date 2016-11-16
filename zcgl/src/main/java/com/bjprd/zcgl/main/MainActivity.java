@@ -18,12 +18,12 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     @Override
     protected void setViewModel() {
-        mBinding.setViewModel(new MainViewModel());
-        mBinding.setAppbar(new AppBarViewModel("固定资产管理系统", false));
+        getMBinding().setViewModel(new MainViewModel());
+        getMBinding().setAppbar(new AppBarViewModel("固定资产管理系统", false));
     }
 
     @Override
     protected void init() {
-        mBinding.drawerLayout.findViewById(R.id.tv_home).setOnClickListener(v -> mBinding.drawerLayout.closeDrawers());
+        getMBinding().drawerLayout.findViewById(R.id.tv_home).setOnClickListener(v -> getMBinding().drawerLayout.closeDrawers());
     }
 }

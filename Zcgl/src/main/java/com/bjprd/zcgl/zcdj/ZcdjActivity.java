@@ -37,9 +37,9 @@ public class ZcdjActivity extends BaseActivity<ActivityZcdjBinding> {
 
     @Override
     protected void setViewModel() {
-        mBinding.setAppbar(new AppBarViewModel("资产登记", true));
-        mBinding.setViewModel(new TsxxViewModel(this));
-        setSupportActionBar((Toolbar) mBinding.getRoot().findViewById(R.id.toolbar));
+        getMBinding().setAppbar(new AppBarViewModel("资产登记", true));
+        getMBinding().setViewModel(new TsxxViewModel(this));
+        setSupportActionBar((Toolbar) getMBinding().getRoot().findViewById(R.id.toolbar));
     }
 
     @Override
@@ -51,8 +51,8 @@ public class ZcdjActivity extends BaseActivity<ActivityZcdjBinding> {
     private void initView() {
         layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mBinding.recycler.setLayoutManager(layoutManager);
-        mBinding.recycler.setHasFixedSize(true);
+        getMBinding().recycler.setLayoutManager(layoutManager);
+        getMBinding().recycler.setHasFixedSize(true);
     }
 
     private void initData() {
@@ -60,7 +60,7 @@ public class ZcdjActivity extends BaseActivity<ActivityZcdjBinding> {
         DataManager.getZcdj().subscribe(new DBSubscriber<>(this, list -> {
             mList.addAll(list);
             BindingAdapter adapter = new BindingAdapter(mBindingTool, mList);
-            mBinding.recycler.setAdapter(adapter);
+            getMBinding().recycler.setAdapter(adapter);
         }));
     }
 

@@ -18,7 +18,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding> {
 
     @Override
     protected void setViewModel() {
-        mBinding.setViewModel(new SplashViewModel(this));
+        getMBinding().setViewModel(new SplashViewModel(this));
     }
 
     @Override

@@ -33,9 +33,9 @@ public class ZcbgActivity extends BaseActivity<ActivityZcdjBinding> {
 
     @Override
     protected void setViewModel() {
-        mBinding.setAppbar(new AppBarViewModel("资产变更", true));
-        mBinding.setViewModel(new TsxxViewModel(this));
-        setSupportActionBar((Toolbar) mBinding.getRoot().findViewById(R.id.toolbar));
+        getMBinding().setAppbar(new AppBarViewModel("资产变更", true));
+        getMBinding().setViewModel(new TsxxViewModel(this));
+        setSupportActionBar((Toolbar) getMBinding().getRoot().findViewById(R.id.toolbar));
     }
 
     @Override
