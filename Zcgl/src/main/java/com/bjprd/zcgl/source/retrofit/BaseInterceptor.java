@@ -19,9 +19,9 @@ public class BaseInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
 
         String time = System.currentTimeMillis() + "";
-        String timeCheckValue = Utils.md5(time + HttpConsts.kTime);
-        String token = SPUtils.getUserToken();
-        String tokenCheckValue = Utils.md5(token + HttpConsts.kToken);
+        String timeCheckValue = Utils.INSTANCE.md5(time + HttpConsts.kTime);
+        String token = SPUtils.INSTANCE.getUserToken();
+        String tokenCheckValue = Utils.INSTANCE.md5(token + HttpConsts.kToken);
 
         Request original = chain.request();
         //添加通用请求参数

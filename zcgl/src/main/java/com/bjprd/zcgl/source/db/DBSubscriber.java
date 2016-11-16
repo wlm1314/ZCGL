@@ -31,17 +31,17 @@ public class DBSubscriber<T> extends Subscriber<T> {
 
     @Override
     public void onStart() {
-        Utils.showLoading(mActivity);
+        Utils.INSTANCE.showLoading(mActivity);
     }
 
     @Override
     public void onCompleted() {
-        Utils.hideLoading();
+        Utils.INSTANCE.hideLoading();
     }
 
     @Override
     public void onError(Throwable e) {
-        Utils.hideLoading();
+        Utils.INSTANCE.hideLoading();
         if (onError != null) onError.call(e);
     }
 

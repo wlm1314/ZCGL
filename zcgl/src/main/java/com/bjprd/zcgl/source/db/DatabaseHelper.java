@@ -22,7 +22,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private Map<String, Dao> daos = new HashMap<String, Dao>();
 
     private DatabaseHelper(Context context) {
-        super(context, DB_Copy.SD_CACHE_DIR + File.separator + DB_Copy.PATH_DB + File.separator + DB_Copy.DATABASE_NAME, null, 2);
+        super(context, DB_Copy.Companion.getSD_CACHE_DIR() + File.separator + DB_Copy.Companion.getPATH_DB() + File.separator + DB_Copy.Companion.getDATABASE_NAME(), null, 2);
     }
 
     @Override
@@ -34,12 +34,12 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     }
 
     public synchronized SQLiteDatabase getWritableDatabase() {
-        return SQLiteDatabase.openDatabase(DB_Copy.SD_CACHE_DIR + File.separator + DB_Copy.PATH_DB + File.separator + DB_Copy.DATABASE_NAME, null,
+        return SQLiteDatabase.openDatabase(DB_Copy.Companion.getSD_CACHE_DIR() + File.separator + DB_Copy.Companion.getPATH_DB() + File.separator + DB_Copy.Companion.getDATABASE_NAME(), null,
                 SQLiteDatabase.OPEN_READWRITE);
     }
 
     public synchronized SQLiteDatabase getReadableDatabase() {
-        return SQLiteDatabase.openDatabase(DB_Copy.SD_CACHE_DIR + File.separator + DB_Copy.PATH_DB + File.separator + DB_Copy.DATABASE_NAME, null,
+        return SQLiteDatabase.openDatabase(DB_Copy.Companion.getSD_CACHE_DIR() + File.separator + DB_Copy.Companion.getPATH_DB() + File.separator + DB_Copy.Companion.getDATABASE_NAME(), null,
                 SQLiteDatabase.OPEN_READONLY);
     }
 
@@ -52,7 +52,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         if (instance == null) {
             synchronized (DatabaseHelper.class) {
                 if (instance == null)
-                    instance = new DatabaseHelper(App.getAppContext());
+                    instance = new DatabaseHelper(App.Companion.getAppContext());
             }
         }
 

@@ -49,7 +49,7 @@ public class HttpConsts {
     }
 
     private static SharedPreferences getDefaultSharedPreferences() {
-        return App.getAppContext().getPreferences();
+        return App.Companion.getAppContext().getPreferences();
     }
 
     /**

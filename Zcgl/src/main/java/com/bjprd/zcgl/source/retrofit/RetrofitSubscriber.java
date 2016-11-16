@@ -32,29 +32,29 @@ public class RetrofitSubscriber<T extends BaseBean> extends Subscriber<T> {
 
     @Override
     public void onStart() {
-        Utils.showLoading(mActivity);
-        if (!NetStateUtils.isNetworkConnected(mActivity)) {
-            Utils.showToast(mActivity, "请检查网络是否连接");
+        Utils.INSTANCE.showLoading(mActivity);
+        if (!NetStateUtils.INSTANCE.isNetworkConnected(mActivity)) {
+            Utils.INSTANCE.showToast(mActivity, "请检查网络是否连接");
         }
     }
 
     @Override
     public void onCompleted() {
-        Utils.hideLoading();
+        Utils.INSTANCE.hideLoading();
     }
 
     @Override
     public void onError(Throwable e) {
-        Utils.hideLoading();
+        Utils.INSTANCE.hideLoading();
         if (onError != null) onError.call(e);
     }
 
     @Override
     public void onNext(T t) {
-        BaseLog.i(t.toString());
+        BaseLog.INSTANCE.i(t.toString());
         if (t.status.isSuccess())
             onNext.call(t);
         else
-            Utils.showToast(mActivity, t.status.msg);
+            Utils.INSTANCE.showToast(mActivity, t.status.msg);
     }
 }

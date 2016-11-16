@@ -33,7 +33,7 @@ public class HttpPostParams {
         }
         params.clear();
         String time = System.currentTimeMillis() + "";
-        String timeCheckValue = Utils.md5(time + HttpConsts.kTime);
+        String timeCheckValue = Utils.INSTANCE.md5(time + HttpConsts.kTime);
         params.put(HttpConsts.kRequest_params_time, time);
         params.put(HttpConsts.kRequest_params_timeCheckValue, timeCheckValue);
         params.put(HttpConsts.kRequest_params_sourceType, HttpConsts.kSourceType_android);
@@ -42,9 +42,9 @@ public class HttpPostParams {
     }
 
     private void autoAddToken() {
-        String token = SPUtils.getUserToken();
+        String token = SPUtils.INSTANCE.getUserToken();
         try {
-            String tokenCheckValue = Utils.md5(token + HttpConsts.kToken);
+            String tokenCheckValue = Utils.INSTANCE.md5(token + HttpConsts.kToken);
             params.put(HttpConsts.kRequest_params_token, token);
             params.put(HttpConsts.kRequest_params_tokenCheckValue, tokenCheckValue);
         } catch (Exception e) {

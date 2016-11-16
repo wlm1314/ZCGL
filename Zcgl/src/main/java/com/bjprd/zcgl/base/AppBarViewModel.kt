@@ -15,7 +15,7 @@ import rx.functions.Action0
  */
 
 class AppBarViewModel(str_title: String, showLeft: Boolean) {
-    private val mActivity: Activity = App.getAppContext().currentActivity
+    private val mActivity: Activity = App.appContext?.currentActivity!!
     val title = ObservableField<String>()
     val navigation = ObservableField<Int>()
     val logo = ObservableField<Int>()
