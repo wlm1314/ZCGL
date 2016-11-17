@@ -16,15 +16,6 @@
         android:paddingRight="@dimen/margin_horizontal"
         android:paddingTop="@dimen/dimen_5"
         app:clickCommand="@{data.clickCommand}">
-        <TextView
-            style="@style/CommonText"
-            android:layout_width="wrap_content"
-            android:paddingBottom="@dimen/dimen_10"
-            android:paddingRight="@dimen/dimen_5"
-            android:paddingTop="@dimen/dimen_10"
-            android:text="*"
-            android:textColor="@color/red"
-            android:visibility="@{TsxxBean.isNull(data.isNull)?View.VISIBLE:View.GONE}"/>
 
         <TextView
             style="@style/CommonText"
@@ -33,10 +24,20 @@
             android:paddingTop="@dimen/dimen_10"
             android:text="@{data.columName}"/>
 
+        <TextView
+            style="@style/CommonText"
+            android:layout_width="wrap_content"
+            android:paddingBottom="@dimen/dimen_10"
+            android:paddingLeft="@dimen/dimen_5"
+            android:paddingTop="@dimen/dimen_10"
+            android:text="*"
+            android:textColor="@color/red"
+            android:visibility="@{TsxxBean.isNull(data.isNull)?View.VISIBLE:View.GONE}"/>
+
         <EditText
             style="@style/CommonText"
             android:layout_width="0dp"
-            android:layout_marginLeft="@dimen/margin_horizontal"
+            android:layout_marginLeft="@dimen/dimen_10"
             android:layout_weight="1"
             android:hint="@{data.tsnr}"
             android:maxLines="1"
@@ -49,12 +50,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_10"
             android:visibility="@{TsxxBean.isNull(data.isQz)?View.VISIBLE:View.GONE}">
 
             <TextView
                 style="@style/CommonText"
                 android:layout_width="0dp"
-                android:layout_marginLeft="@dimen/margin_horizontal"
                 android:layout_weight="1"
                 android:hint="@{data.tsnr}"
                 android:maxLines="1"
