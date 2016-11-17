@@ -13,45 +13,31 @@ object SPUtils {
     val kUser_password = "password"
     val kUser_remember = "remember"
 
-    val isLogin: Boolean
-        get() = App.appContext!!.userPreference!!.getBoolean(kUser_login, false)
-
-    fun setLoginStatus(isLogin: Boolean) {
-        App.appContext!!.userPreference!!.edit().putBoolean(kUser_login, isLogin).commit()
-    }
-
-    var userToken: String
-        get() = App.appContext!!.userPreference!!.getString(kUser_token, "")
-        set(userToken) {
-            App.appContext!!.userPreference!!.edit().putString(kUser_token, userToken).commit()
-        }
-
-    var userAccount: String
-        get() = App.appContext!!.userPreference!!.getString(kUser_account, "")
-        set(account) {
-            App.appContext!!.userPreference!!.edit().putString(kUser_account, account).commit()
-        }
-
-    var userPassword: String
-        get() = App.appContext!!.userPreference!!.getString(kUser_password, "")
-        set(password) {
-            App.appContext!!.userPreference!!.edit().putString(kUser_password, password).commit()
-        }
-
-    var isRemember: Boolean
-        get() = App.appContext!!.userPreference!!.getBoolean(kUser_remember, false)
-        set(remember) {
-            App.appContext!!.userPreference!!.edit().putBoolean(kUser_remember, remember).commit()
-        }
-
     /**
      * 用户登录，保持必要的数据
      */
     fun onLogin(token: String, account: String, password: String, remember: Boolean) {
-        userToken = token
-        userAccount = account
-        userPassword = password
-        isRemember = remember
-        setLoginStatus(true)
+        save(kUser_token, token)
+        save(kUser_account, account)
+        save(kUser_password, password)
+        save(kUser_remember, remember)
+        save(kUser_login, true)
     }
+
+    fun save(key: String, value: Any) {
+        val editor = App.appContext!!.userPreference!!.edit()
+        when (value) {
+            is Int -> editor.putInt(key, value)
+            is Float -> editor.putFloat(key, value)
+            is Long -> editor.putLong(key, value)
+            is Boolean -> editor.putBoolean(key, value)
+            is String -> editor.putString(key, value)
+            else -> throw Exception("not supported type")
+        }
+        editor.apply()
+    }
+
+    fun getString(key: String) :String = App.appContext!!.userPreference!!.getString(key, "")
+    fun getInt(key: String) :Int = App.appContext!!.userPreference!!.getInt(key, 0)
+    fun getBoolean(key: String) :Boolean = App.appContext!!.userPreference!!.getBoolean(key, false)
 }

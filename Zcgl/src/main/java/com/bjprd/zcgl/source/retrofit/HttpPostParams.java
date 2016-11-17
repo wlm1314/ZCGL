@@ -42,7 +42,7 @@ public class HttpPostParams {
     }
 
     private void autoAddToken() {
-        String token = SPUtils.INSTANCE.getUserToken();
+        String token = SPUtils.INSTANCE.getString(SPUtils.INSTANCE.getKUser_token());
         try {
             String tokenCheckValue = Utils.INSTANCE.md5(token + HttpConsts.kToken);
             params.put(HttpConsts.kRequest_params_token, token);

@@ -20,7 +20,7 @@ public class BaseInterceptor implements Interceptor {
 
         String time = System.currentTimeMillis() + "";
         String timeCheckValue = Utils.INSTANCE.md5(time + HttpConsts.kTime);
-        String token = SPUtils.INSTANCE.getUserToken();
+        String token = SPUtils.INSTANCE.getString(SPUtils.INSTANCE.getKUser_token());
         String tokenCheckValue = Utils.INSTANCE.md5(token + HttpConsts.kToken);
 
         Request original = chain.request();

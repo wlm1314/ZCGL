@@ -25,7 +25,7 @@ class MainViewModel {
     val company = ObservableField<String>()
 
     var logoutCommon = ReplyCommand<Any>(Action0 {
-        SPUtils.setLoginStatus(false)
+        SPUtils.save(SPUtils.kUser_login, false)
         mActivity.startActivity(Intent(mActivity, LoginActivity::class.java))
         mActivity.finish()
     })
@@ -39,7 +39,7 @@ class MainViewModel {
     var zcqcCommon = ReplyCommand<Any>(Action0 { mActivity.startActivity(Intent(mActivity, ZcqcActivity::class.java)) })
 
     init {
-        username.set(SPUtils.userAccount)
-        company.set(SPUtils.userAccount)
+        username.set(SPUtils.getString(SPUtils.kUser_account))
+        company.set(SPUtils.getString(SPUtils.kUser_account))
     }
 }

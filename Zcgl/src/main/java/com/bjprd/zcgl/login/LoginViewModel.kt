@@ -27,8 +27,8 @@ class LoginViewModel(private val mActivity: Activity) : ViewModel {
     val password = ObservableField<String>()
 
     init {
-        username.set(SPUtils.userAccount)
-        password.set(SPUtils.userPassword)
+        username.set(SPUtils.getString(SPUtils.kUser_account))
+        password.set(SPUtils.getString(SPUtils.kUser_password))
     }
 
     var loginCommand = ReplyCommand<Any>(Action0 {
@@ -39,9 +39,7 @@ class LoginViewModel(private val mActivity: Activity) : ViewModel {
                 //根据输入的用户名和密码查询数据库
                 DataManager.login(username.get(), password.get()).subscribe(DBSubscriber<Boolean>(mActivity, Action1{ status ->
                     if (status!!) {
-                        SPUtils.setLoginStatus(true)
-                        SPUtils.userAccount = username.get()
-                        SPUtils.userPassword = password.get()
+                        SPUtils.onLogin("", username.get(), password.get(), true)
                         NavigateUtils.startActivity(mActivity, MainActivity::class.java)
                         mActivity.finish()
                     } else

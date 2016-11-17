@@ -26,7 +26,7 @@ class SplashViewModel() : ViewModel {
 
     var clickCommand = ReplyCommand<Any>(Action0 {
         mCount.cancel()
-        if (SPUtils.isLogin)
+        if (SPUtils.getBoolean(SPUtils.kUser_login))
             startMainActivity()
         else
             startLoginActivity()
@@ -46,7 +46,7 @@ class SplashViewModel() : ViewModel {
 
         override fun onFinish() {
             seconds.set("跳过0s")
-            if (SPUtils.isLogin)
+            if (SPUtils.getBoolean(SPUtils.kUser_login))
                 startMainActivity()
             else
                 startLoginActivity()

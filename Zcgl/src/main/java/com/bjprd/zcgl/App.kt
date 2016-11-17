@@ -21,14 +21,17 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         appContext = this
-        preferences = PreferenceManager.getDefaultSharedPreferences(this)
-        userPreference = appContext!!.getSharedPreferences("gdzc_user_pref", Context.MODE_PRIVATE)
+        preferences = openPrefences()
+        userPreference = openUserPrefences()
 
         /**
          * 复制数据库
          */
         copyDB()
     }
+
+    fun openPrefences(): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+    fun openUserPrefences(): SharedPreferences = getSharedPreferences("gdzc_user_pref", Context.MODE_PRIVATE)
 
     /**
      * 复制数据库
