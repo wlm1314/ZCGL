@@ -17,8 +17,9 @@ import com.bjprd.zcgl.utils.Utils
 
 abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
     protected var mBinding: T? = null
-        private set
     private var mClickTime = 0L
+    private val EXIT_TIMEOUT = 2500
+    private val isRoot: Boolean = isTaskRoot || parent != null && parent.isTaskRoot
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,12 +57,8 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
                 //对没有处理的事件，交给父类来处理
                 return super.onOptionsItemSelected(item)
         }
-
         return true
     }
-
-    private val isRoot: Boolean
-        get() = isTaskRoot || parent != null && parent.isTaskRoot
 
     override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
 
@@ -79,7 +76,4 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         return super.onKeyUp(keyCode, event)
     }
 
-    companion object {
-        private val EXIT_TIMEOUT = 2500
-    }
 }
