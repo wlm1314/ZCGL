@@ -3,11 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ZCGL.iml" filepath="$PROJECT_DIR$/ZCGL.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Zcgl/Zcgl.iml" filepath="$PROJECT_DIR$/Zcgl/Zcgl.iml" />
       <module fileurl="file://$PROJECT_DIR$/databinding/databinding.iml" filepath="$PROJECT_DIR$/databinding/databinding.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gdzc/gdzc.iml" filepath="$PROJECT_DIR$/gdzc/gdzc.iml" />
       <module fileurl="file://$PROJECT_DIR$/pickerview/pickerview.iml" filepath="$PROJECT_DIR$/pickerview/pickerview.iml" />
       <module fileurl="file://$PROJECT_DIR$/pulltofresh/pulltofresh.iml" filepath="$PROJECT_DIR$/pulltofresh/pulltofresh.iml" />
-      <module fileurl="file://$PROJECT_DIR$/viewpagerindicator/viewpagerindicator.iml" filepath="$PROJECT_DIR$/viewpagerindicator/viewpagerindicator.iml" />
     </modules>
   </component>
 </project>

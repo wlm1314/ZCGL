@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="viewModel" type="com.gdzc.flh.viewmodel.FlhViewModel"/>
+        <variable name="appbar" type="com.gdzc.base.AppBar"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/layout_appbar"
+            layout="@layout/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            app:appbar="@{appbar}"/>
+
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:layout_below="@id/layout_appbar"
+                      android:orientation="vertical">
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:padding="@dimen/dimen_10">
+
+                <EditText
+                    android:id="@+id/et_flh"
+                    style="@style/CommonEdit"
+                    android:layout_weight="1"
+                    android:hint="请输入分类号"
+                    android:inputType="text"
+                    android:padding="@dimen/dimen_10"
+                    android:singleLine="true"
+                    android:text="@={viewModel.flh}"/>
+                <TextView style="@style/CommonText"
+                          android:layout_marginLeft="@dimen/dimen_10"
+                          android:background="@drawable/rect_radius_blue"
+                          android:padding="@dimen/dimen_10"
+                          android:text="搜索"
+                          android:textColor="@color/white"
+                          app:clickCommand="@{viewModel.searchCommand}"/>
+            </LinearLayout>
+
+            <View style="@style/line_cell_light_h"/>
+            <com.pulltofresh.PullToRefreshRecyclerView
+                android:id="@+id/ptr_rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:ptrMode="pullFromStart"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</layout>

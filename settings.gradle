@@ -1,2 +1,2 @@
-include ':Zcgl', ':databinding',':viewpagerindicator', ':pulltofresh', ':pickerview'
+include ':databinding', ':pulltofresh', ':pickerview', ':gdzc'
 
