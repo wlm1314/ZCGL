@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <import type="com.gdzc.zcdj.model.ZcdjBean.Zcdj"/>
+        <variable name="data" type="Zcdj"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/margin_horizontal">
+
+        <LinearLayout android:layout_width="0dp"
+                      android:layout_height="wrap_content"
+                      android:layout_marginRight="@dimen/dimen_10"
+                      android:layout_weight="1"
+                      android:orientation="vertical">
+            <ImageView android:layout_width="match_parent" android:layout_height="100dp"
+                       android:background="@drawable/rect_radius_white"
+                       android:scaleType="fitXY"
+                       android:src="@mipmap/place_holder"/>
+            <TextView style="@style/CommonText"
+                      android:layout_gravity="center_horizontal"
+                      android:layout_marginTop="@dimen/dimen_10"
+                      android:text="资产照片"/>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="0dp"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:orientation="vertical">
+            <ImageView android:layout_width="match_parent" android:layout_height="100dp"
+                       android:background="@drawable/rect_radius_white"
+                       android:scaleType="fitXY"
+                       android:src="@mipmap/place_holder"/>
+            <TextView style="@style/CommonText"
+                      android:layout_gravity="center_horizontal"
+                      android:layout_marginTop="@dimen/dimen_10"
+                      android:text="发票照片"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</layout>

@@ -1,4 +1,4 @@
-package com.gdzc.flh.view;
+package com.gdzc.syfx.view;
 
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,15 +7,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.gdzc.BR;
 import com.gdzc.R;
 import com.gdzc.base.App;
 import com.gdzc.base.AppBar;
 import com.gdzc.base.BaseActivity;
-import com.gdzc.databinding.ActivityFlhBinding;
-import com.gdzc.flh.model.FlhBean;
+import com.gdzc.databinding.ActivityCustomBinding;
 import com.gdzc.net.HttpPostParams;
 import com.gdzc.net.HttpRequest;
 import com.gdzc.net.RetrofitSubscriber;
+import com.gdzc.syfx.model.SyfxBean;
 import com.gdzc.utils.Utils;
 import com.gdzc.widget.recycleview.BindingAdapter;
 import com.gdzc.widget.recycleview.BindingTool;
@@ -26,39 +27,37 @@ import java.util.List;
 
 import rx.Observable;
 
-
 /**
- * Created by 王少岩 on 2016/12/20.
+ * Created by 王少岩 on 2016/12/21.
  */
 
-public class FlhActivity extends BaseActivity<ActivityFlhBinding> {
+public class SyfxActivity extends BaseActivity<ActivityCustomBinding> {
     private BindingAdapter mAdapter;
-    private List<FlhBean.Flh> mFlhList = new ArrayList<>();
-    private FlhBean.Flh mFlh;
-    private int pageNo = 1;
+    private List<SyfxBean.Syfx> mList = new ArrayList<>();
+    private SyfxBean.Syfx mSyfx;
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_flh;
+        return R.layout.activity_custom;
     }
 
     @Override
     protected void setViewModel() {
         setSupportActionBar((Toolbar) mBinding.layoutAppbar.getRoot().findViewById(R.id.toolbar));
-        mBinding.setAppbar(new AppBar("分类号", true));
+        mBinding.setAppbar(new AppBar("使用方向", true));
     }
 
     @Override
     protected void init() {
         initView();
         setListener();
-        getFlh(pageNo++);
+        getSyfx();
     }
 
     private void initView() {
         mBinding.ptrRv.getRefreshableView().setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mBinding.ptrRv.getRefreshableView().setHasFixedSize(true);
-        mAdapter = new BindingAdapter(new BindingTool(R.layout.adapter_flh_item, com.gdzc.BR.data), mFlhList);
+        mAdapter = new BindingAdapter(new BindingTool(R.layout.adapter_syfx_item, BR.data), mList);
         mBinding.ptrRv.getRefreshableView().setAdapter(mAdapter);
     }
 
@@ -66,43 +65,29 @@ public class FlhActivity extends BaseActivity<ActivityFlhBinding> {
         mBinding.ptrRv.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<RecyclerView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
-                pageNo = 1;
-                getFlh(pageNo++);
+                getSyfx();
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
-                getFlh(pageNo++);
+
             }
         });
         mAdapter.setOnViewClickListener((view, position) -> {
-            Observable.from(mFlhList).subscribe(flh -> flh.checked.set(false));
-            mFlh = mFlhList.get(position);
-            mFlh.checked.set(true);
+            Observable.from(mList).subscribe(syfx -> syfx.checked.set(false));
+            mSyfx = mList.get(position);
+            mSyfx.checked.set(true);
         }, R.id.cb_flh);
-
-        mBinding.tvSearch.setOnClickListener(v -> {
-            pageNo = 1;
-            getFlh(pageNo++);
-        });
     }
 
-
-    public void getFlh(int pageNo) {
-        HttpRequest.GetFlh(HttpPostParams.paramGetFlh(mBinding.etFlh.getText().toString(), "", pageNo + "", "10"))
-                .subscribe(new RetrofitSubscriber<>(
-                        flhBean -> {
-                            mBinding.ptrRv.onRefreshComplete();
-                            if (flhBean.data.isLastPage)
-                                mBinding.ptrRv.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
-                            else
-                                mBinding.ptrRv.setMode(PullToRefreshBase.Mode.BOTH);
-                            if (flhBean.data.isFirstPage)
-                                mFlhList.clear();
-                            mFlhList.addAll(flhBean.data.list);
-                            mAdapter.notifyDataSetChanged();
-                        }
-                ));
+    private void getSyfx() {
+        HttpRequest.GetMkList(HttpPostParams.paramGetMkList("使用方向", "1"))
+                .subscribe(new RetrofitSubscriber<>(syfxBean -> {
+                    mBinding.ptrRv.onRefreshComplete();
+                    mList.clear();
+                    mList.addAll(syfxBean.data.list);
+                    mAdapter.notifyDataSetChanged();
+                }));
     }
 
     @Override
@@ -114,11 +99,11 @@ public class FlhActivity extends BaseActivity<ActivityFlhBinding> {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (mFlh == null)
-            Utils.showToast(App.getAppContext(), "请选择分类");
+        if (mSyfx == null)
+            Utils.showToast(App.getAppContext(), "请选择使用方向");
         else {
             Intent data = new Intent();
-            data.putExtra("Flh", mFlh);
+            data.putExtra("Syfx", mSyfx);
             setResult(RESULT_OK, data);
             finish();
         }

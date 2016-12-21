@@ -33,10 +33,10 @@ public class LoginViewModel {
 
         HttpRequest.Login(HttpPostParams.login(username.get(), password.get()))
                 .subscribe(new RetrofitSubscriber<>(loginBean -> {
-                    SPUtils.onLogin(username.get());
+                    SPUtils.onLogin(username.get(), loginBean.data.dwbh);
                     Utils.showToast(App.getAppContext(), "登录成功");
                     NavigateUtils.startActivity(App.getAppContext().getCurrentActivity(), MainActivity.class);
                     App.getAppContext().getCurrentActivity().finish();
-                }, throwable -> Utils.showToast(App.getAppContext(), "登录失败")));
+                }));
     });
 }

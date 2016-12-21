@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View"/>
+        <variable name="appbar" type="com.gdzc.base.AppBar"/>
+    </data>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:visibility="@{appbar.title!=null?View.VISIBLE : View.GONE}"
+        app:naviCommand="@{appbar.naviCommon}"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title=" "
+        app:toolbar_navigationIcon="@{appbar.navigation}">
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/CommonButton"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:text="@{appbar.title}"
+            android:textSize="@dimen/subheading"
+            android:visibility="@{appbar.title!=null?View.VISIBLE : View.GONE}"/>
+
+    </android.support.v7.widget.Toolbar>
+</layout>

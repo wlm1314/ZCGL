@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="com.gdzc.syfx.model.SyfxBean.Syfx"/>
+        <variable name="data" type="Syfx"/>
+    </data>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical">
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:paddingLeft="@dimen/dimen_10">
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/cb_flh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{data.checked==null?false:data.checked}"/>
+            <TextView style="@style/CommonText"
+                      android:padding="@dimen/dimen_10"
+                      android:text="@{Syfx.getMC(data)}"/>
+        </LinearLayout>
+        <View style="@style/line_cell_light_h"/>
+    </LinearLayout>
+
+</layout>

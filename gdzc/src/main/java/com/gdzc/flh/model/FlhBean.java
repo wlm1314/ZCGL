@@ -15,6 +15,7 @@ public class FlhBean extends BaseBean {
     public DataBean data;
 
     public static class DataBean {
+        public boolean isFirstPage;
         public boolean isLastPage;
         public List<Flh> list;
     }

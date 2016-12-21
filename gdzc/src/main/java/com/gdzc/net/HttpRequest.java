@@ -2,6 +2,8 @@ package com.gdzc.net;
 
 import com.gdzc.flh.model.FlhBean;
 import com.gdzc.login.model.LoginBean;
+import com.gdzc.lydw.model.LydwBean;
+import com.gdzc.syfx.model.SyfxBean;
 import com.gdzc.utils.BaseLog;
 import com.gdzc.zcdj.model.ZcdjBean;
 
@@ -62,10 +64,11 @@ public class HttpRequest {
 
     /**
      * 获取分类号
+     *
      * @param params
      * @return
      */
-    public static Observable<FlhBean> GetFlh(Map<String, String> params){
+    public static Observable<FlhBean> GetFlh(Map<String, String> params) {
         printParam(params);
         return getInstance().create(RequestApi.class).GetFlh(params)
                 .subscribeOn(Schedulers.io())
@@ -74,16 +77,42 @@ public class HttpRequest {
 
     /**
      * 获取资产登记页面
+     *
      * @param params
      * @return
      */
-    public static Observable<ZcdjBean> GetTsxxUrl(Map<String, String> params){
+    public static Observable<ZcdjBean> GetTsxx(Map<String, String> params) {
         printParam(params);
-        return getInstance().create(RequestApi.class).GetTsxxUrl(params)
+        return getInstance().create(RequestApi.class).GetTsxx(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    /**
+     * 获取单位
+     *
+     * @param params
+     * @return
+     */
+    public static Observable<LydwBean> GetDwList(Map<String, String> params) {
+        printParam(params);
+        return getInstance().create(RequestApi.class).GetDwList(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 获取使用方向
+     *
+     * @param params
+     * @return
+     */
+    public static Observable<SyfxBean> GetMkList(Map<String, String> params) {
+        printParam(params);
+        return getInstance().create(RequestApi.class).GetMkList(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
 
     /**
      * 打印请求参数

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <import type="com.gdzc.zcdj.model.ZcdjBean.Zcdj"/>
+        <variable name="data" type="Zcdj"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/margin_horizontal"
+        android:paddingRight="@dimen/margin_horizontal"
+        android:paddingTop="@dimen/dimen_5">
+
+        <TextView
+            style="@style/CommonText"
+            android:layout_width="wrap_content"
+            android:paddingBottom="@dimen/dimen_10"
+            android:paddingTop="@dimen/dimen_10"
+            android:text="@{data.columName}"/>
+
+        <TextView
+            style="@style/CommonText"
+            android:layout_width="wrap_content"
+            android:paddingBottom="@dimen/dimen_10"
+            android:paddingLeft="@dimen/dimen_5"
+            android:paddingTop="@dimen/dimen_10"
+            android:text="*"
+            android:textColor="@color/red"
+            android:visibility="@{data.isNull.equals(`1`)?View.VISIBLE:View.GONE}"/>
+
+        <EditText
+            style="@style/CommonText"
+            android:layout_width="0dp"
+            android:layout_marginLeft="@dimen/dimen_10"
+            android:layout_weight="1"
+            android:hint="@{data.tsnr}"
+            android:maxLines="1"
+            android:paddingBottom="@dimen/dimen_10"
+            android:paddingTop="@dimen/dimen_10"
+            android:text="@={data.editText}"
+            android:visibility="@{!data.isQz.equals(`1`)?View.VISIBLE:View.GONE}"
+            app:colorControlActivated="@color/colorPrimary"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_10"
+            app:param="@{data}"
+            app:clickCommand="@{data.clickCommand}"
+            android:visibility="@{data.isQz.equals(`1`)?View.VISIBLE:View.GONE}">
+
+            <TextView
+                style="@style/CommonText"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:hint="@{data.tsnr}"
+                android:maxLines="1"
+                android:paddingBottom="@dimen/dimen_10"
+                android:paddingTop="@dimen/dimen_10"
+                android:text="@={data.editText}"
+                app:colorControlActivated="@color/colorPrimary"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@mipmap/icon_right_gray"
+                android:visibility="@{data.isSelected?View.VISIBLE:View.GONE}"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

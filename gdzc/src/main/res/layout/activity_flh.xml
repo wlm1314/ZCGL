@@ -3,7 +3,6 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="viewModel" type="com.gdzc.flh.viewmodel.FlhViewModel"/>
         <variable name="appbar" type="com.gdzc.base.AppBar"/>
     </data>
 
@@ -31,20 +30,19 @@
 
                 <EditText
                     android:id="@+id/et_flh"
-                    style="@style/CommonEdit"
+                    style="@style/CommonText"
                     android:layout_weight="1"
-                    android:hint="请输入分类号"
+                    android:hint="请输入分类号/分类名称"
                     android:inputType="text"
                     android:padding="@dimen/dimen_10"
-                    android:singleLine="true"
-                    android:text="@={viewModel.flh}"/>
-                <TextView style="@style/CommonText"
+                    android:singleLine="true"/>
+                <TextView android:id="@+id/tv_search"
+                          style="@style/CommonText"
                           android:layout_marginLeft="@dimen/dimen_10"
                           android:background="@drawable/rect_radius_blue"
                           android:padding="@dimen/dimen_10"
                           android:text="搜索"
-                          android:textColor="@color/white"
-                          app:clickCommand="@{viewModel.searchCommand}"/>
+                          android:textColor="@color/white"/>
             </LinearLayout>
 
             <View style="@style/line_cell_light_h"/>

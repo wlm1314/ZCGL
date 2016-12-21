@@ -9,12 +9,14 @@ import com.gdzc.base.App;
 public class SPUtils {
     public static final String kUser_login = "login_flag";
     public static final String kUser_username = "username";
+    public static final String kUser_dwbh = "dwbh";
 
     /**
      * 用户登录，保持必要的数据
      */
-    public static void onLogin(String userName) {
+    public static void onLogin(String userName, String dwbh) {
         saveString(kUser_username, userName);
+        saveString(kUser_dwbh, dwbh);
         saveBoolean(kUser_login, true);
     }
 

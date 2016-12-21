@@ -3,80 +3,82 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers"/>
         <variable name="viewModel" type="com.gdzc.zcdj.viewmodel.ZcdjViewModel"/>
         <variable name="appbar" type="com.gdzc.base.AppBar"/>
     </data>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+    <RelativeLayout android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
         <include
             android:id="@+id/layout_appbar"
             layout="@layout/app_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             app:appbar="@{appbar}"/>
 
-        <LinearLayout
+        <com.pulltofresh.PullToRefreshNestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/layout_appbar"
-            android:orientation="vertical">
-            <LinearLayout android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingBottom="@dimen/dimen_10"
-                    android:paddingTop="@dimen/dimen_10">
-                    <TextView style="@style/CommonText"
-                              android:padding="@dimen/dimen_10"
-                              android:text="分类号"/>
-                    <TextView style="@style/CommonText"
-                              android:layout_weight="1"
-                              android:drawableRight="@mipmap/icon_details"
-                              android:hint="请选择分类号"
-                              android:paddingRight="@dimen/dimen_10"
-                              android:text="@{viewModel.flh}"
-                              app:clickCommand="@{viewModel.flhCommand}"/>
-                </LinearLayout>
-                <View style="@style/line_cell_light_h"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingBottom="@dimen/dimen_10"
-                    android:paddingTop="@dimen/dimen_10">
-                    <TextView style="@style/CommonText"
-                              android:padding="@dimen/dimen_10"
-                              android:text="单    价"/>
-                    <EditText style="@style/CommonEdit"
-                              android:layout_weight="1"
-                              android:hint="请输入单价"
-                              android:inputType="numberDecimal"
-                              android:paddingRight="@dimen/dimen_10"
-                              android:text="@{viewModel.dj}"/>
-                </LinearLayout>
-                <View style="@style/line_cell_light_h"/>
-                <android.support.v7.widget.AppCompatButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_vertical"
-                    android:padding="12dp"
-                    android:text="资产登记"
-                    android:textColor="@color/white"
-                    app:clickCommand="@{viewModel.zcdjCommand}"/>
-            </LinearLayout>
-
-            <android.support.v7.widget.RecyclerView
+            app:ptrMode="disabled">
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:background="@color/white"
+                              android:orientation="vertical"
+                              app:layout_scrollFlags="scroll|enterAlways">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/margin_horizontal">
+                        <TextView style="@style/CommonText"
+                                  android:text="分类号"/>
+                        <TextView style="@style/CommonText"
+                                  android:layout_marginLeft="@dimen/dimen_10"
+                                  android:layout_weight="1"
+                                  android:drawableRight="@mipmap/icon_details"
+                                  android:hint="请选择分类号"
+                                  android:text="@{viewModel.flh.mc}"
+                                  app:clickCommand="@{viewModel.flhCommand}"/>
+                    </LinearLayout>
+                    <View style="@style/line_cell_light_h"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/margin_horizontal">
+                        <TextView style="@style/CommonText"
+                                  android:text="单    价"/>
+                        <EditText style="@style/CommonText"
+                                  android:layout_marginLeft="@dimen/dimen_10"
+                                  android:layout_weight="1"
+                                  android:hint="请输入单价"
+                                  android:inputType="numberDecimal"
+                                  android:text="@={viewModel.dj}"/>
+                    </LinearLayout>
+                    <View style="@style/line_cell_light_h"/>
+                    <android.support.v7.widget.AppCompatButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_10"
+                        android:text="生成资产登记表单"
+                        android:textColor="@color/white"
+                        app:clickCommand="@{viewModel.zcdjCommand}"/>
+                </LinearLayout>
 
-        </LinearLayout>
+                <View style="@style/line_cell_light_h"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:itemView="@{viewModel.itemView}"
+                    app:items="@{viewModel.items}"
+                    app:layoutManager="@{LayoutManagers.linear()}"/>
+            </LinearLayout>
+        </com.pulltofresh.PullToRefreshNestedScrollView>
+
     </RelativeLayout>
-
 </layout>

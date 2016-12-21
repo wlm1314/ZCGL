@@ -12,6 +12,7 @@
     <attr name="onScrollChangeCommand" format="reference" />
     <attr name="onScrollStateChangedCommand" format="reference" />
     <attr name="uri" format="string" />
+    <attr name="param"/>
     <attr name="onTouchCommand" format="reference" />
 
     <!-- require ReplyCommand {@link com.kelin.mvvmlight.command.ReplyCommand } to deal with view click event. -->
@@ -24,6 +25,7 @@
 
         <!-- require ReplyCommand {@link com.kelin.mvvmlight.command.ReplyCommand } to deal with view click event. -->
         <attr name="clickCommand" />
+        <attr name="param"/>
         <!-- require ReplyCommand<Boolean> {@link com.kelin.mvvmlight.command.ReplyCommand } to deal with view focus change event.
          ReplyCommand would has params which means if view hasFocus.-->
         <attr name="onFocusChangeCommand" />

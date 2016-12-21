@@ -53,15 +53,35 @@ public class HttpPostParams {
     }
 
     /**
-     *
      * @param flh
      * @param dj
      * @return
      */
-    public static Map<String, String> paramGetTsxxUrl(String flh,String dj){
+    public static Map<String, String> paramGetTsxx(String flh, String dj) {
         Map<String, String> map = BaseParams();
         map.put("flh", flh);
         map.put("dj", dj);
+        return map;
+    }
+
+    /**
+     * @param dwid
+     * @return
+     */
+    public static Map<String, String> paramGetDwList(String dwid) {
+        Map<String, String> map = BaseParams();
+        map.put("dwid", dwid);
+        return map;
+    }
+
+    /**
+     * @param bj
+     * @return
+     */
+    public static Map<String, String> paramGetMkList(String bj, String Bj2) {
+        Map<String, String> map = BaseParams();
+        map.put("bj", bj);
+        map.put("Bj2", Bj2);
         return map;
     }
 

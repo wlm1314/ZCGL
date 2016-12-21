@@ -2,6 +2,8 @@ package com.gdzc.net;
 
 import com.gdzc.flh.model.FlhBean;
 import com.gdzc.login.model.LoginBean;
+import com.gdzc.lydw.model.LydwBean;
+import com.gdzc.syfx.model.SyfxBean;
 import com.gdzc.zcdj.model.ZcdjBean;
 
 import java.util.Map;
@@ -35,6 +37,14 @@ public interface RequestApi {
     //资产登记页面
     @FormUrlEncoded
     @POST(HttpPath.getTsxxUrl)
-    Observable<ZcdjBean> GetTsxxUrl(@FieldMap Map<String, String> params);
+    Observable<ZcdjBean> GetTsxx(@FieldMap Map<String, String> params);
+    //获取单位列表
+    @FormUrlEncoded
+    @POST(HttpPath.getDwUrl)
+    Observable<LydwBean> GetDwList(@FieldMap Map<String, String> params);
+    //获取使用方向
+    @FormUrlEncoded
+    @POST(HttpPath.getMkUrl)
+    Observable<SyfxBean> GetMkList(@FieldMap Map<String, String> params);
 
 }
