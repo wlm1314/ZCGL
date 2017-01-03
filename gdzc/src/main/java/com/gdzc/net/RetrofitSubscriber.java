@@ -39,7 +39,7 @@ public class RetrofitSubscriber<T extends BaseBean> extends Subscriber<T> {
     public void onStart() {
         Utils.showLoading(App.getAppContext().getCurrentActivity());
         if (!NetStateUtils.isNetworkConnected(App.getAppContext())) {
-            Utils.showToast(App.getAppContext(), "请检查网络是否连接");
+            Utils.showToast("请检查网络是否连接");
         }
     }
 
@@ -52,9 +52,9 @@ public class RetrofitSubscriber<T extends BaseBean> extends Subscriber<T> {
     public void onError(Throwable e) {
         Utils.hideLoading();
         if (e instanceof SocketTimeoutException) {
-            Utils.showToast(App.getAppContext(), "请求超时,请重试");
+            Utils.showToast("请求超时,请重试");
         } else if (e instanceof JsonSyntaxException) {
-            Utils.showToast(App.getAppContext(), "数据解析错误");
+            Utils.showToast("数据解析错误");
             BaseLog.e("数据解析错误:::" + e.getMessage());
         }
         if (onError != null) onError.call(e);
@@ -66,6 +66,6 @@ public class RetrofitSubscriber<T extends BaseBean> extends Subscriber<T> {
         if (t.status.isSuccess())
             onNext.call(t);
         else
-            Utils.showToast(App.getAppContext(), t.status.msg);
+            Utils.showToast(t.status.msg);
     }
 }

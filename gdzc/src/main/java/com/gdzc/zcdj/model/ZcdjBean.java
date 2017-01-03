@@ -2,12 +2,7 @@ package com.gdzc.zcdj.model;
 
 import android.databinding.ObservableField;
 
-import com.binding.command.ReplyCommand;
-import com.gdzc.base.App;
 import com.gdzc.base.BaseBean;
-import com.gdzc.lydw.view.LydwActivity;
-import com.gdzc.syfx.view.SyfxActivity;
-import com.gdzc.utils.NavigateUtils;
 
 import java.util.List;
 
@@ -40,18 +35,13 @@ public class ZcdjBean extends BaseBean {
         public String 查询显示;
         public String 登记必填;
         public String 卡片显示;
-
-        public ObservableField<String> editText = new ObservableField<>();
-
-        public ReplyCommand clickCommand = new ReplyCommand(() -> {
-        });
     }
 
     public static class Zcdj {
         public String id;
         public String num;
         public String columName;
-        public String columEng;
+        public String columEng="";
         public String isEdit;
         public String isNull;
         public String tsnr;
@@ -66,16 +56,19 @@ public class ZcdjBean extends BaseBean {
         public String djbt;
         public String kpxs;
 
+        public String getIsQz() {
+            if (columEng.equals("gzrq"))
+                isQz = "1";
+            return isQz;
+        }
+
+        public static boolean contains(String str){
+            return "批量数量".contains(str);
+        }
+
         public boolean isSelected = true;
 
         public ObservableField<String> editText = new ObservableField<>();
-
-        public ReplyCommand clickCommand = new ReplyCommand<Zcdj>(zcdj -> {
-            if (zcdj.columEng.equals("lydwh"))
-                NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), LydwActivity.class, 1001);
-            if (zcdj.columEng.equals("syfx"))
-                NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), SyfxActivity.class, 1002);
-        });
 
         public static Zcdj castToZcdj(ServerBean bean) {
             Zcdj zcdj = new Zcdj();

@@ -9,7 +9,6 @@ import android.view.MenuItem;
 
 import com.gdzc.BR;
 import com.gdzc.R;
-import com.gdzc.base.App;
 import com.gdzc.base.AppBar;
 import com.gdzc.base.BaseActivity;
 import com.gdzc.databinding.ActivityCustomBinding;
@@ -101,7 +100,7 @@ public class LydwActivity extends BaseActivity<ActivityCustomBinding> {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (mLydw == null)
-            Utils.showToast(App.getAppContext(), "请选择单位");
+            Utils.showToast("请选择单位");
         else {
             Intent data = new Intent();
             data.putExtra("Lydw", mLydw);

@@ -1,5 +1,6 @@
 package com.gdzc.net;
 
+import com.gdzc.base.BaseBean;
 import com.gdzc.flh.model.FlhBean;
 import com.gdzc.login.model.LoginBean;
 import com.gdzc.lydw.model.LydwBean;
@@ -110,6 +111,19 @@ public class HttpRequest {
     public static Observable<SyfxBean> GetMkList(Map<String, String> params) {
         printParam(params);
         return getInstance().create(RequestApi.class).GetMkList(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 新增数据
+     *
+     * @param params
+     * @return
+     */
+    public static Observable<BaseBean> AddNew(Map<String, String> params) {
+        printParam(params);
+        return getInstance().create(RequestApi.class).AddNew(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

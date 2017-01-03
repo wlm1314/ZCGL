@@ -85,5 +85,17 @@ public class HttpPostParams {
         return map;
     }
 
+    /**
+     * @param whatsystem
+     * @param addnewstr
+     * @return
+     */
+    public static Map<String, String> paramAddNew(String whatsystem, String addnewstr) {
+        Map<String, String> map = BaseParams();
+        map.put("whatsystem", whatsystem);
+        map.put("addnewstr", addnewstr);
+        return map;
+    }
+
 
 }

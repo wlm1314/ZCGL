@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.gdzc.R;
-import com.gdzc.base.App;
 import com.gdzc.base.AppBar;
 import com.gdzc.base.BaseActivity;
 import com.gdzc.databinding.ActivityFlhBinding;
@@ -115,7 +114,7 @@ public class FlhActivity extends BaseActivity<ActivityFlhBinding> {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (mFlh == null)
-            Utils.showToast(App.getAppContext(), "请选择分类");
+            Utils.showToast("请选择分类");
         else {
             Intent data = new Intent();
             data.putExtra("Flh", mFlh);

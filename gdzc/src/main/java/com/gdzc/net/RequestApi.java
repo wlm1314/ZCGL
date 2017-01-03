@@ -1,5 +1,6 @@
 package com.gdzc.net;
 
+import com.gdzc.base.BaseBean;
 import com.gdzc.flh.model.FlhBean;
 import com.gdzc.login.model.LoginBean;
 import com.gdzc.lydw.model.LydwBean;
@@ -46,5 +47,9 @@ public interface RequestApi {
     @FormUrlEncoded
     @POST(HttpPath.getMkUrl)
     Observable<SyfxBean> GetMkList(@FieldMap Map<String, String> params);
+    //新增数据
+    @FormUrlEncoded
+    @POST(HttpPath.addnewUrl)
+    Observable<BaseBean> AddNew(@FieldMap Map<String, String> params);
 
 }

@@ -13,20 +13,26 @@ import java.util.Map;
  */
 
 public class MultiBindingAdapter extends RecyclerView.Adapter<BindingViewHolder> {
-
+    private BindingViewHolder bindingViewHolder;
     private Map<String, BindingTool> map;
     private List<Object> list;
     private BindingViewHolder.ItemClickLister mItemClickLister;
     private BindingViewHolder.ItemClickLister mItemViewClickLister;
-    private int viewId;
+    private BindingViewHolder.TextChangeListener mTextChangeListener;
+    private int[] viewId, viewId_change;
 
     public void setItemClickLister(BindingViewHolder.ItemClickLister itemClickLister) {
         this.mItemClickLister = itemClickLister;
     }
 
-    public void setItemViewClickLister(BindingViewHolder.ItemClickLister itemViewClickLister, int viewId) {
+    public void setItemViewClickLister(BindingViewHolder.ItemClickLister itemViewClickLister, int... viewId) {
         this.mItemViewClickLister = itemViewClickLister;
         this.viewId = viewId;
+    }
+
+    public void setTextChangeListener(BindingViewHolder.TextChangeListener listener, int... viewId){
+        this.mTextChangeListener = listener;
+        this.viewId_change = viewId;
     }
 
     public MultiBindingAdapter(Map<String, BindingTool> map, List<Object> list) {
@@ -36,9 +42,10 @@ public class MultiBindingAdapter extends RecyclerView.Adapter<BindingViewHolder>
 
     @Override
     public BindingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        BindingViewHolder bindingViewHolder = new BindingViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), viewType, parent, false));
+        bindingViewHolder = new BindingViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), viewType, parent, false));
         bindingViewHolder.setItemClickLister(mItemClickLister);
         bindingViewHolder.setItemClickLister(mItemViewClickLister, viewId);
+        bindingViewHolder.addTextChangeListener(mTextChangeListener, viewId_change);
         return bindingViewHolder;
     }
 
@@ -58,6 +65,10 @@ public class MultiBindingAdapter extends RecyclerView.Adapter<BindingViewHolder>
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    public BindingViewHolder getHolder(){
+        return bindingViewHolder;
     }
 
     public void add(Object t) {

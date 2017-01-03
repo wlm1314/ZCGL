@@ -19,7 +19,7 @@
             android:background="@android:color/transparent"
             android:paddingRight="@dimen/pickerview_topbar_paddingleft"
             android:text="取消"
-            android:textSize="@dimen/pickerview_topbar_btn_textsize"
+            android:textSize="@dimen/pickerview_textsize"
             android:textColor="@drawable/selector_pickerview_btn" />
     </FrameLayout>
 
@@ -33,7 +33,7 @@
         android:layout_toRightOf="@+id/fl_cancel"
         android:gravity="center"
         android:textColor="@color/pickerview_topbar_title"
-        android:textSize="@dimen/pickerview_topbar_title_textsize" />
+        android:textSize="@dimen/pickerview_topbar_btn_textsize" />
 
     <Button
         android:id="@id/btnSubmit"
@@ -46,5 +46,5 @@
         android:paddingRight="@dimen/pickerview_topbar_paddingleft"
         android:text="@string/pickerview_submit"
         android:textColor="@drawable/selector_pickerview_btn"
-        android:textSize="@dimen/pickerview_topbar_btn_textsize" />
+        android:textSize="@dimen/pickerview_textsize" />
 </RelativeLayout>

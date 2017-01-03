@@ -4,6 +4,7 @@
 
     <data>
         <import type="android.view.View"/>
+        <import type="android.text.InputType"/>
         <import type="com.gdzc.zcdj.model.ZcdjBean.Zcdj"/>
         <variable name="data" type="Zcdj"/>
     </data>
@@ -34,11 +35,13 @@
             android:visibility="@{data.isNull.equals(`1`)?View.VISIBLE:View.GONE}"/>
 
         <EditText
+            android:id="@+id/et_text"
             style="@style/CommonText"
             android:layout_width="0dp"
             android:layout_marginLeft="@dimen/dimen_10"
             android:layout_weight="1"
             android:hint="@{data.tsnr}"
+            android:inputType="@{Zcdj.contains(data.columName)?InputType.TYPE_CLASS_NUMBER:InputType.TYPE_CLASS_TEXT}"
             android:maxLines="1"
             android:paddingBottom="@dimen/dimen_10"
             android:paddingTop="@dimen/dimen_10"
@@ -47,23 +50,30 @@
             app:colorControlActivated="@color/colorPrimary"/>
 
         <LinearLayout
+            android:id="@+id/select_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dimen_10"
-            app:param="@{data}"
-            app:clickCommand="@{data.clickCommand}"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/dimen_10"
+            android:paddingTop="@dimen/dimen_10"
             android:visibility="@{data.isQz.equals(`1`)?View.VISIBLE:View.GONE}">
 
-            <TextView
-                style="@style/CommonText"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:hint="@{data.tsnr}"
-                android:maxLines="1"
-                android:paddingBottom="@dimen/dimen_10"
-                android:paddingTop="@dimen/dimen_10"
-                android:text="@={data.editText}"
-                app:colorControlActivated="@color/colorPrimary"/>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="1"
+                          android:orientation="vertical">
+                <TextView
+                    style="@style/CommonText"
+                    android:layout_width="match_parent"
+                    android:hint="@{data.tsnr}"
+                    android:maxLines="1"
+                    android:text="@={data.editText}"
+                    app:colorControlActivated="@color/colorPrimary"/>
+                <View style="@style/line_cell_light_h"
+                      android:layout_height="1dp"
+                      android:background="@color/gray"/>
+            </LinearLayout>
 
             <ImageView
                 android:layout_width="wrap_content"

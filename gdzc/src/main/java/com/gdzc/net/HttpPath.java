@@ -15,4 +15,5 @@ public class HttpPath {
     public static final String getTsxxUrl = "AndroidInterface-0.0.1-SNAPSHOT/common/getTsxxByFlhAndDj";//获取分类号
     public static final String getDwUrl = "AndroidInterface-0.0.1-SNAPSHOT/common/getDwlist";//获取单位
     public static final String getMkUrl = "AndroidInterface-0.0.1-SNAPSHOT/common/getMkList";//获取使用方向
+    public static final String addnewUrl = "AndroidInterface-0.0.1-SNAPSHOT/zj/addnew";//新增数据
 }

@@ -11,6 +11,7 @@ import com.google.gson.Gson;
  * 具体类型继承BaseBean并在子类添加data属性
  */
 public class BaseBean {
+    public String whatsystem="";
     public BaseStatus status;
 
     public static class BaseStatus {
@@ -38,5 +39,14 @@ public class BaseBean {
             return new Gson().toJson(bean);
         }
         return null;
+    }
+
+    public boolean containsSQR(){
+        return "SQR".contains(whatsystem);
+    }
+
+
+    public boolean containsDJ(){
+        return "DJ".contains(whatsystem);
     }
 }

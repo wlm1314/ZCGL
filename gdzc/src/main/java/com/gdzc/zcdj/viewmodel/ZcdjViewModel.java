@@ -53,11 +53,11 @@ public class ZcdjViewModel {
     //生成表单
     public ReplyCommand zcdjCommand = new ReplyCommand(() -> {
         if (flh.get() == null) {
-            Utils.showToast(App.getAppContext(), "请选择分类号");
+            Utils.showToast("请选择分类号");
             return;
         }
         if (TextUtils.isEmpty(dj.get())) {
-            Utils.showToast(App.getAppContext(), "请输入单价");
+            Utils.showToast("请输入单价");
             return;
         }
         HttpRequest.GetTsxx(HttpPostParams.paramGetTsxx(flh.get().flh, dj.get()))
@@ -73,6 +73,15 @@ public class ZcdjViewModel {
                                         mZcdjList.add(zcdj);
                                     });
 
+                            ZcdjBean.Zcdj pl = getZcdj("批量", "", "0");
+                            items.add(pl);
+                            mZcdjList.add(pl);
+                            ZcdjBean.Zcdj sl = getZcdj("数量", "", "0");
+                            items.add(sl);
+                            mZcdjList.add(sl);
+                            ZcdjBean.Zcdj je = getZcdj("金额", "", "0");
+                            items.add(je);
+                            mZcdjList.add(je);
                             items.add(new ZcdjBean.Zcdj());
                         }
                 ));
@@ -80,20 +89,20 @@ public class ZcdjViewModel {
 
     public List<ZcdjBean.Zcdj> getZcdjByFlh(FlhBean.Flh flh) {
         List<ZcdjBean.Zcdj> list = new ArrayList<>();
-        list.add(getZcdj("分类号", flh.flh));
-        list.add(getZcdj("分类名称", flh.mc));
-        list.add(getZcdj("国标分类号", flh.czh));
-        list.add(getZcdj("国标分类名", flh.czm));
+        list.add(getZcdj("分类号", flh.flh, "1"));
+        list.add(getZcdj("分类名称", flh.mc, "1"));
+        list.add(getZcdj("国标分类号", flh.czh, "1"));
+        list.add(getZcdj("国标分类名", flh.czm, "1"));
         return list;
     }
 
-    public ZcdjBean.Zcdj getZcdj(String colName, String value) {
+    public ZcdjBean.Zcdj getZcdj(String colName, String value, String isQz) {
         ZcdjBean.Zcdj zcdj = new ZcdjBean.Zcdj();
         zcdj.columName = colName;
         zcdj.editText.set(value);
         zcdj.isSelected = false;
         zcdj.isNull = "1";
-        zcdj.isQz = "1";
+        zcdj.isQz = isQz;
         return zcdj;
     }
 }

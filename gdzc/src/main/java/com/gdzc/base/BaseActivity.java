@@ -59,7 +59,7 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
      * @param content
      */
     protected void showToast(String content) {
-        Utils.showToast(this, content);
+        Utils.showToast(content);
     }
 
     /**
@@ -123,7 +123,7 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
                 return true;
             } else {
                 mClickTime = second;
-                Utils.showToast(this, "再按一次返回键退出");
+                Utils.showToast("再按一次返回键退出");
                 return true;
             }
         }

@@ -23,18 +23,18 @@ public class LoginViewModel {
 
     public ReplyCommand loginCommand = new ReplyCommand(() -> {
         if (TextUtils.isEmpty(username.get())) {
-            Utils.showToast(App.getAppContext(), "请输入用户名");
+            Utils.showToast("请输入用户名");
             return;
         }
         if (TextUtils.isEmpty(password.get())) {
-            Utils.showToast(App.getAppContext(), "请输入密码");
+            Utils.showToast("请输入密码");
             return;
         }
 
         HttpRequest.Login(HttpPostParams.login(username.get(), password.get()))
                 .subscribe(new RetrofitSubscriber<>(loginBean -> {
                     SPUtils.onLogin(username.get(), loginBean.data.dwbh);
-                    Utils.showToast(App.getAppContext(), "登录成功");
+                    Utils.showToast("登录成功");
                     NavigateUtils.startActivity(App.getAppContext().getCurrentActivity(), MainActivity.class);
                     App.getAppContext().getCurrentActivity().finish();
                 }));

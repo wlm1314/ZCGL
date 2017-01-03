@@ -2,10 +2,10 @@ package com.gdzc.utils;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.app.Service;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.v7.app.AlertDialog;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.view.Display;
@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.gdzc.R;
+import com.gdzc.base.App;
 import com.gdzc.widget.MessageDialog;
 
 import java.io.ByteArrayOutputStream;
@@ -30,17 +31,22 @@ import java.util.TimerTask;
 
 public class Utils {
     private static final String TAG = "Utils";
-    private static AlertDialog mLoadingDialog;
+    private static ProgressDialog mLoadingDialog;
 
     // 土司
-    public static void showToast(Context context, String text) {
-        Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+    public static void showToast(String text) {
+        Toast.makeText(App.getAppContext(), text, Toast.LENGTH_SHORT).show();
     }
 
     //显示loading
     public static void showLoading(Activity activity) {
         hideLoading();
-        mLoadingDialog = UIUtils.showProgressDialog(activity, "加载中", null, null, null, null, null, false);
+        mLoadingDialog = new ProgressDialog(activity, R.style.AppTheme_Dark_Dialog);
+        mLoadingDialog.setIndeterminate(true);
+        mLoadingDialog.setCancelable(false);
+        mLoadingDialog.setCanceledOnTouchOutside(false);
+        mLoadingDialog.setMessage("加载中");
+        mLoadingDialog.show();
     }
 
     //隐藏loading
