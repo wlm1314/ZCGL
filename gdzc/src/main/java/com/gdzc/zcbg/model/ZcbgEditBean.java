@@ -51,8 +51,6 @@ public class ZcbgEditBean extends BaseBean {
         public String isQz;
         public ObservableField<String> val = new ObservableField<>();
 
-        public boolean isAdd = false;
-
         public static Zcbg castToZcgb(DataBean data) {
             Zcbg zcbg = new Zcbg();
             zcbg.colName = data.字段名;

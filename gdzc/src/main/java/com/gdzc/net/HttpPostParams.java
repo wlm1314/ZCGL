@@ -97,9 +97,8 @@ public class HttpPostParams {
         return map;
     }
 
-    public static Map<String, String> paramUpdateZj(String id, String zjstr) {
+    public static Map<String, String> paramUpdateZj(String zjstr) {
         Map<String, String> map = BaseParams();
-        map.put("id", id);
         map.put("zjstr", zjstr);
         return map;
     }

@@ -13,7 +13,6 @@ import com.gdzc.R;
 import com.gdzc.base.App;
 import com.gdzc.base.AppBar;
 import com.gdzc.base.BaseActivity;
-import com.gdzc.base.BaseBean;
 import com.gdzc.databinding.ActivityZcdjEditBinding;
 import com.gdzc.lydw.model.LydwBean;
 import com.gdzc.lydw.view.LydwActivity;
@@ -116,33 +115,35 @@ public class ZcgbEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         JSONObject jsonObj = new JSONObject();
-        for (ZcbgEditBean.Zcbg zcbg : mList) {
-            if (zcbg.isNull.equals("1") && TextUtils.isEmpty(zcbg.val.get())) {
-                Utils.showToast(zcbg.xsnr);
-                return true;
-            } else if (!TextUtils.isEmpty(zcbg.val.get())) {
-                try {
+        try {
+            jsonObj.put("id", zcbg.id);
+            for (ZcbgEditBean.Zcbg zcbg : mList) {
+                if (zcbg.isNull.equals("1") && TextUtils.isEmpty(zcbg.val.get())) {
+                    Utils.showToast(zcbg.xsnr);
+                    return true;
+                } else if (!TextUtils.isEmpty(zcbg.val.get())) {
                     if (zcbg.colName.equals("lydwh"))
                         jsonObj.put(zcbg.colName, lydw.dwId);
                     else if (zcbg.colName.equals("syfx"))
                         jsonObj.put(zcbg.colName, syfx.校编号);
                     else if (zcbg.colName.equals("分类名称"))
                         jsonObj.put("字符字段7", zcbg.val.get().trim());
-                    else if (!zcbg.isAdd)
+                    else
                         jsonObj.put(zcbg.colName, zcbg.val.get().trim());
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
             }
+
+            HttpRequest.UpdateZj(HttpPostParams.paramUpdateZj(jsonObj.toString()))
+                    .subscribe(new RetrofitSubscriber<>(baseBean -> {
+                        Utils.showToast("修改成功");
+                        Intent data = new Intent();
+                        data.putExtra("update", true);
+                        setResult(RESULT_OK, data);
+                        finish();
+                    }));
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        HttpRequest.UpdateZj(HttpPostParams.paramUpdateZj(zcbg.id, jsonObj.toString()))
-                .subscribe(new RetrofitSubscriber<BaseBean>(baseBean -> {
-                    Utils.showToast("修改成功");
-                    Intent data = new Intent();
-                    data.putExtra("update", true);
-                    setResult(RESULT_OK, data);
-                    finish();
-                }));
         return super.onOptionsItemSelected(item);
     }
 
@@ -177,7 +178,6 @@ public class ZcgbEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
         zcbg.isQz = "0";
         zcbg.val.set(value);
         zcbg.xsnr = colName;
-        zcbg.isAdd = true;
         return zcbg;
     }
 
