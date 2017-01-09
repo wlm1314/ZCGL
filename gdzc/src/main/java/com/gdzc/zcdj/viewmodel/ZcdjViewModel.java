@@ -1,91 +1,65 @@
 package com.gdzc.zcdj.viewmodel;
 
-import android.databinding.ObservableArrayList;
-import android.databinding.ObservableField;
 import android.text.TextUtils;
 
-import com.binding.command.ReplyCommand;
-import com.gdzc.BR;
-import com.gdzc.R;
+import com.bigkoo.pickerview.TimePickerView;
 import com.gdzc.base.App;
 import com.gdzc.flh.model.FlhBean;
-import com.gdzc.flh.view.FlhActivity;
 import com.gdzc.net.HttpPostParams;
 import com.gdzc.net.HttpRequest;
 import com.gdzc.net.RetrofitSubscriber;
-import com.gdzc.utils.NavigateUtils;
 import com.gdzc.utils.Utils;
 import com.gdzc.zcdj.model.ZcdjBean;
+import com.gdzc.zcdj.view.ZcdjActivity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
-import me.tatarka.bindingcollectionadapter.BaseItemViewSelector;
-import me.tatarka.bindingcollectionadapter.ItemView;
-import me.tatarka.bindingcollectionadapter.ItemViewSelector;
-import rx.Observable;
 
 /**
  * Created by 王少岩 on 2016/12/20.
  */
 
 public class ZcdjViewModel {
-    public List<ZcdjBean.Zcdj> mZcdjList = new ArrayList<>();
-    //登记表单
-    public ObservableArrayList<ZcdjBean.Zcdj> items = new ObservableArrayList<>();
-    public ItemViewSelector<ZcdjBean.Zcdj> itemView = new BaseItemViewSelector<ZcdjBean.Zcdj>() {
-        @Override
-        public void select(ItemView itemView, int position, ZcdjBean.Zcdj item) {
-            if (TextUtils.isEmpty(item.columName))
-                itemView.set(BR.data, R.layout.adapter_zcdj_img_item);
-            else
-                itemView.set(BR.data, R.layout.adapter_zcdj_item);
-        }
-    };
-
-    //分类号
-    public final ObservableField<FlhBean.Flh> flh = new ObservableField<>();
-    //单价
-    public final ObservableField<String> dj = new ObservableField<>();
-    //分类号跳转
-    public ReplyCommand flhCommand = new ReplyCommand(() -> NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), FlhActivity.class, 1000));
 
     //生成表单
-    public ReplyCommand zcdjCommand = new ReplyCommand(() -> {
-        if (flh.get() == null) {
+    public void getTsxx(String flh, String dj) {
+        if (TextUtils.isEmpty(flh)) {
             Utils.showToast("请选择分类号");
             return;
         }
-        if (TextUtils.isEmpty(dj.get())) {
+        if (TextUtils.isEmpty(dj)) {
             Utils.showToast("请输入单价");
             return;
         }
-        HttpRequest.GetTsxx(HttpPostParams.paramGetTsxx(flh.get().flh, dj.get()))
-                .subscribe(new RetrofitSubscriber<>(
-                        zcdjBean -> {
-                            mZcdjList.clear();
-                            items.clear();
-                            items.addAll(getZcdjByFlh(flh.get()));
-                            Observable.from(zcdjBean.data.list)
-                                    .subscribe(bean -> {
-                                        ZcdjBean.Zcdj zcdj = ZcdjBean.Zcdj.castToZcdj(bean);
-                                        items.add(zcdj);
-                                        mZcdjList.add(zcdj);
-                                    });
+        HttpRequest.GetTsxx(HttpPostParams.paramGetTsxx(flh, dj))
+                .subscribe(zcdjBean -> {
+                    ((ZcdjActivity) App.getAppContext().getCurrentActivity()).setData(zcdjBean);
+                });
+    }
 
-                            ZcdjBean.Zcdj pl = getZcdj("批量", "", "0");
-                            items.add(pl);
-                            mZcdjList.add(pl);
-                            ZcdjBean.Zcdj sl = getZcdj("数量", "", "0");
-                            items.add(sl);
-                            mZcdjList.add(sl);
-                            ZcdjBean.Zcdj je = getZcdj("金额", "", "0");
-                            items.add(je);
-                            mZcdjList.add(je);
-                            items.add(new ZcdjBean.Zcdj());
-                        }
-                ));
-    });
+    //保存表单
+    public void createZcdj(String whatsystem, String addnewstr) {
+        HttpRequest.AddNew(HttpPostParams.paramAddNew(whatsystem, addnewstr))
+                .subscribe(new RetrofitSubscriber<>(baseBean -> {
+                    Utils.showToast(baseBean.status.msg);
+                    if (baseBean.status.isSuccess())
+                        App.getAppContext().getCurrentActivity().finish();
+                }));
+    }
+
+    public void initTimePicker(String title, ZcdjBean.Zcdj zcdj) {
+        TimePickerView mTimePickerView = new TimePickerView(App.getAppContext(), TimePickerView.Type.YEAR_MONTH_DAY);
+        mTimePickerView.setCyclic(false);
+        mTimePickerView.setTitle(title);
+        mTimePickerView.setTime(new Date());
+        mTimePickerView.show();
+        mTimePickerView.setOnTimeSelectListener(date -> {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            zcdj.editText.set(sdf.format(date));
+        });
+    }
 
     public List<ZcdjBean.Zcdj> getZcdjByFlh(FlhBean.Flh flh) {
         List<ZcdjBean.Zcdj> list = new ArrayList<>();

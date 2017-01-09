@@ -6,6 +6,7 @@ import com.gdzc.login.model.LoginBean;
 import com.gdzc.lydw.model.LydwBean;
 import com.gdzc.syfx.model.SyfxBean;
 import com.gdzc.zcbg.model.ZcbgBean;
+import com.gdzc.zcbg.model.ZcbgEditBean;
 import com.gdzc.zcdj.model.ZcdjBean;
 
 import java.util.Map;
@@ -52,9 +53,17 @@ public interface RequestApi {
     @FormUrlEncoded
     @POST(HttpPath.addnewUrl)
     Observable<BaseBean> AddNew(@FieldMap Map<String, String> params);
+    //更新数据
+    @FormUrlEncoded
+    @POST(HttpPath.updateZjUrl)
+    Observable<BaseBean> UpdateZj(@FieldMap Map<String, String> params);
     //新增数据
     @FormUrlEncoded
     @POST(HttpPath.selectMyZjDataUrl)
     Observable<ZcbgBean> SearchMyData(@FieldMap Map<String, String> params);
+    //根据Id查询zj
+    @FormUrlEncoded
+    @POST(HttpPath.selectZjByIdUrl)
+    Observable<ZcbgEditBean> SearchZJById(@FieldMap Map<String, String> params);
 
 }

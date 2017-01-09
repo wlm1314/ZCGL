@@ -1,5 +1,6 @@
 package com.gdzc.zcbg.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 
@@ -70,7 +71,7 @@ public class ZcbgActivity extends BaseActivity<ActivityZcbgBinding> {
         mAdapter.setItemClickLister((view, position) -> {
             Bundle bundle = new Bundle();
             bundle.putSerializable("zcbg", mList.get(position));
-            NavigateUtils.startActivity(this, ZcgbEditActivity.class, bundle);
+            NavigateUtils.startActivityForResult(this, ZcgbEditActivity.class, 1000, bundle);
         });
     }
 
@@ -87,5 +88,17 @@ public class ZcbgActivity extends BaseActivity<ActivityZcbgBinding> {
 
     public void setPageNo(int pageNo) {
         this.pageNo = pageNo;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != RESULT_OK) return;
+        if (requestCode == 1000) {
+            boolean flag = data.getExtras().getBoolean("update");
+            if (flag)
+                mViewModel.getData(pageNo);
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

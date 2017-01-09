@@ -7,6 +7,7 @@ import com.gdzc.lydw.model.LydwBean;
 import com.gdzc.syfx.model.SyfxBean;
 import com.gdzc.utils.BaseLog;
 import com.gdzc.zcbg.model.ZcbgBean;
+import com.gdzc.zcbg.model.ZcbgEditBean;
 import com.gdzc.zcdj.model.ZcdjBean;
 
 import java.util.Map;
@@ -130,6 +131,19 @@ public class HttpRequest {
     }
 
     /**
+     * 更新数据
+     *
+     * @param params
+     * @return
+     */
+    public static Observable<BaseBean> UpdateZj(Map<String, String> params) {
+        printParam(params);
+        return getInstance().create(RequestApi.class).UpdateZj(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
      * 查询自己录入的数据
      *
      * @param params
@@ -138,6 +152,17 @@ public class HttpRequest {
     public static Observable<ZcbgBean> SearchMyData(Map<String, String> params) {
         printParam(params);
         return getInstance().create(RequestApi.class).SearchMyData(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * @param params
+     * @return
+     */
+    public static Observable<ZcbgEditBean> SearchZJById(Map<String, String> params) {
+        printParam(params);
+        return getInstance().create(RequestApi.class).SearchZJById(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

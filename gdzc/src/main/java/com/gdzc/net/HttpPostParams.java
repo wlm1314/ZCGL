@@ -97,11 +97,24 @@ public class HttpPostParams {
         return map;
     }
 
+    public static Map<String, String> paramUpdateZj(String id, String zjstr) {
+        Map<String, String> map = BaseParams();
+        map.put("id", id);
+        map.put("zjstr", zjstr);
+        return map;
+    }
+
     public static Map<String, String> paramSearchMyData(String pageNum, String searchzjstr) {
         Map<String, String> map = BaseParams();
         map.put("pageNum", pageNum);
         map.put("searchzjstr", searchzjstr);
         map.put("pageSize", "10");
+        return map;
+    }
+
+    public static Map<String, String> paramselectZjById(String id) {
+        Map<String, String> map = BaseParams();
+        map.put("id", id);
         return map;
     }
 

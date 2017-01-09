@@ -9,7 +9,6 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.bigkoo.pickerview.TimePickerView;
 import com.gdzc.BR;
 import com.gdzc.R;
 import com.gdzc.base.App;
@@ -21,9 +20,6 @@ import com.gdzc.flh.model.FlhBean;
 import com.gdzc.flh.view.FlhActivity;
 import com.gdzc.lydw.model.LydwBean;
 import com.gdzc.lydw.view.LydwActivity;
-import com.gdzc.net.HttpPostParams;
-import com.gdzc.net.HttpRequest;
-import com.gdzc.net.RetrofitSubscriber;
 import com.gdzc.syfx.model.SyfxBean;
 import com.gdzc.syfx.view.SyfxActivity;
 import com.gdzc.utils.NavigateUtils;
@@ -31,13 +27,12 @@ import com.gdzc.utils.Utils;
 import com.gdzc.widget.recycleview.BindingTool;
 import com.gdzc.widget.recycleview.MultiBindingAdapter;
 import com.gdzc.zcdj.model.ZcdjBean;
+import com.gdzc.zcdj.viewmodel.ZcdjViewModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,13 +44,15 @@ import rx.Observable;
  */
 
 public class ZcdjActivity extends BaseActivity<ActivityZcdjBinding> {
-    public List<Object> mList = new ArrayList<>();
+    private ZcdjViewModel mViewModel;
+    private List<Object> mList = new ArrayList<>();
     private Map<String, BindingTool> mMap = new HashMap<>();
     private MultiBindingAdapter mAdapter;
     private FlhBean.Flh mFlh;
-    private TimePickerView mTimePickerView;
     private int dj = 1;
     private String whatsystem = "";
+
+    private MenuItem saveItem;
 
     @Override
     protected int getLayoutId() {
@@ -66,6 +63,8 @@ public class ZcdjActivity extends BaseActivity<ActivityZcdjBinding> {
     protected void setViewModel() {
         setSupportActionBar((Toolbar) mBinding.layoutAppbar.getRoot().findViewById(R.id.toolbar));
         mBinding.setAppbar(new AppBar("资产登记", true));
+        mViewModel = new ZcdjViewModel();
+        mBinding.setViewModel(mViewModel);
     }
 
     @Override
@@ -89,31 +88,7 @@ public class ZcdjActivity extends BaseActivity<ActivityZcdjBinding> {
 
     private void setListener() {
         mBinding.tvFlh.setOnClickListener(v -> NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), FlhActivity.class, 1000));
-        mBinding.btCreate.setOnClickListener(v -> {
-                    if (TextUtils.isEmpty(mBinding.tvFlh.getText().toString())) {
-                        Utils.showToast("请选择分类号");
-                        return;
-                    }
-                    if (TextUtils.isEmpty(mBinding.tvDj.getText().toString())) {
-                        Utils.showToast("请输入单价");
-                        return;
-                    }
-                    HttpRequest.GetTsxx(HttpPostParams.paramGetTsxx(mBinding.tvFlh.getText().toString(), mBinding.tvDj.getText().toString()))
-                            .subscribe(new RetrofitSubscriber<>(zcdjBean -> {
-                                whatsystem = zcdjBean.whatsystem;
-                                dj = Integer.valueOf(mBinding.tvDj.getText().toString());
-                                mList.clear();
-                                mList.addAll(getZcdjByFlh(mFlh));
-                                Observable.from(zcdjBean.data.list).subscribe(bean -> mList.add(ZcdjBean.Zcdj.castToZcdj(bean)));
-                                mList.add(getZcdj("单价", mBinding.tvDj.getText().toString(), "1"));
-                                mList.add(getZcdj("批量", "1", zcdjBean.containsSQR() ? "1" : "0"));
-                                mList.add(getZcdj("数量", "1", zcdjBean.containsDJ() ? "1" : "0"));
-                                mList.add(getZcdj("金额", mBinding.tvDj.getText().toString(), "1"));
-                                mList.add(new Object());
-                                mAdapter.notifyDataSetChanged();
-                            }));
-                }
-        );
+        mBinding.btCreate.setOnClickListener(v -> mViewModel.getTsxx(mBinding.tvFlh.getText().toString(), mBinding.tvDj.getText().toString()));
         mAdapter.setItemViewClickLister((view, position) -> {
             Object o = mList.get(position);
             if (o instanceof ZcdjBean.Zcdj) {
@@ -126,7 +101,7 @@ public class ZcdjActivity extends BaseActivity<ActivityZcdjBinding> {
                         NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), SyfxActivity.class, 1002);
                         break;
                     case "gzrq":
-                        initTimePicker("购置日期", zcdj);
+                        mViewModel.initTimePicker("购置日期", zcdj);
                         break;
                 }
             } else {
@@ -162,10 +137,25 @@ public class ZcdjActivity extends BaseActivity<ActivityZcdjBinding> {
 
     }
 
+    public void setData(ZcdjBean zcdjBean) {
+        saveItem.setTitle("保存");
+        whatsystem = zcdjBean.whatsystem;
+        dj = Integer.valueOf(mBinding.tvDj.getText().toString());
+        mList.clear();
+        mList.addAll(mViewModel.getZcdjByFlh(mFlh));
+        Observable.from(zcdjBean.data.list).subscribe(bean -> mList.add(ZcdjBean.Zcdj.castToZcdj(bean)));
+        mList.add(mViewModel.getZcdj("单价", mBinding.tvDj.getText().toString(), "1"));
+        mList.add(mViewModel.getZcdj("批量", "1", zcdjBean.containsSQR() ? "1" : "0"));
+        mList.add(mViewModel.getZcdj("数量", "1", zcdjBean.containsDJ() ? "1" : "0"));
+        mList.add(mViewModel.getZcdj("金额", mBinding.tvDj.getText().toString(), "1"));
+        mList.add(new Object());
+        mAdapter.notifyDataSetChanged();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.meun, menu);
-        menu.findItem(R.id.action_right).setTitle("保存");
+        saveItem = menu.findItem(R.id.action_right).setTitle("");
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -194,11 +184,7 @@ public class ZcdjActivity extends BaseActivity<ActivityZcdjBinding> {
                 }
             }
         }
-        HttpRequest.AddNew(HttpPostParams.paramAddNew(whatsystem, jsonObj.toString()))
-                .subscribe(new RetrofitSubscriber<>(baseBean -> {
-                    Utils.showToast(baseBean.status.msg);
-                    if (baseBean.status.isSuccess()) finish();
-                }));
+        mViewModel.createZcdj(whatsystem, jsonObj.toString());
         return super.onOptionsItemSelected(item);
     }
 
@@ -230,36 +216,5 @@ public class ZcdjActivity extends BaseActivity<ActivityZcdjBinding> {
                         .subscribe(zcdj -> zcdj.editText.set(syfx.校名称));
                 break;
         }
-    }
-
-    private void initTimePicker(String title, ZcdjBean.Zcdj zcdj) {
-        mTimePickerView = new TimePickerView(this, TimePickerView.Type.YEAR_MONTH_DAY);
-        mTimePickerView.setCyclic(false);
-        mTimePickerView.setTitle(title);
-        mTimePickerView.setTime(new Date());
-        mTimePickerView.show();
-        mTimePickerView.setOnTimeSelectListener(date -> {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            zcdj.editText.set(sdf.format(date));
-        });
-    }
-
-    private List<ZcdjBean.Zcdj> getZcdjByFlh(FlhBean.Flh flh) {
-        List<ZcdjBean.Zcdj> list = new ArrayList<>();
-        list.add(getZcdj("分类号", flh.flh, "1"));
-        list.add(getZcdj("分类名称", flh.mc, "1"));
-        list.add(getZcdj("国标分类号", flh.czh, "1"));
-        list.add(getZcdj("国标分类名", flh.czm, "1"));
-        return list;
-    }
-
-    private ZcdjBean.Zcdj getZcdj(String colName, String value, String isQz) {
-        ZcdjBean.Zcdj zcdj = new ZcdjBean.Zcdj();
-        zcdj.columName = colName;
-        zcdj.editText.set(value);
-        zcdj.isSelected = false;
-        zcdj.isNull = "1";
-        zcdj.isQz = isQz;
-        return zcdj;
     }
 }
