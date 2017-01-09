@@ -36,6 +36,14 @@
         <activity android:name=".syfx.view.SyfxActivity"
                   android:screenOrientation="portrait"
                   android:theme="@style/AppTheme.AppComEdit"/>
+        <activity android:name=".zcbg.view.ZcbgActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme.AppComEdit"
+                  android:windowSoftInputMode="stateHidden|adjustUnspecified"/>
+        <activity android:name=".zcbg.view.ZcgbEditActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme.AppComEdit"
+                  android:windowSoftInputMode="stateHidden|adjustUnspecified"/>
     </application>
 
 </manifest>

@@ -6,6 +6,7 @@ import com.gdzc.login.model.LoginBean;
 import com.gdzc.lydw.model.LydwBean;
 import com.gdzc.syfx.model.SyfxBean;
 import com.gdzc.utils.BaseLog;
+import com.gdzc.zcbg.model.ZcbgBean;
 import com.gdzc.zcdj.model.ZcdjBean;
 
 import java.util.Map;
@@ -124,6 +125,19 @@ public class HttpRequest {
     public static Observable<BaseBean> AddNew(Map<String, String> params) {
         printParam(params);
         return getInstance().create(RequestApi.class).AddNew(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * 查询自己录入的数据
+     *
+     * @param params
+     * @return
+     */
+    public static Observable<ZcbgBean> SearchMyData(Map<String, String> params) {
+        printParam(params);
+        return getInstance().create(RequestApi.class).SearchMyData(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
