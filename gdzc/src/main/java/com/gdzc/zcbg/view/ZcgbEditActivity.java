@@ -96,11 +96,11 @@ public class ZcgbEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
                     mList.add(getZcbg("分类名称", zcbg.字符字段7));
                     mList.add(getZcbg("国标分类号", zcbg.国标分类号));
                     mList.add(getZcbg("国标分类名", zcbg.国标分类名));
-                    Observable.from(zcbgEditBean.data).subscribe(dataBean -> mList.add(ZcbgEditBean.Zcbg.castToZcgb(dataBean)));
                     mList.add(getZcbg("单价", zcbg.单价));
                     mList.add(getZcbg("批量", zcbg.批量));
                     mList.add(getZcbg("数量", zcbg.数量));
                     mList.add(getZcbg("金额", zcbg.金额));
+                    Observable.from(zcbgEditBean.data).subscribe(dataBean -> mList.add(ZcbgEditBean.Zcbg.castToZcgb(dataBean)));
                     mAdapter.notifyDataSetChanged();
                 }));
     }
@@ -122,10 +122,10 @@ public class ZcgbEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
                     Utils.showToast(zcbg.xsnr);
                     return true;
                 } else if (!TextUtils.isEmpty(zcbg.val.get())) {
-                    if (zcbg.colName.equals("lydwh"))
-                        jsonObj.put(zcbg.colName, lydw.dwId);
-                    else if (zcbg.colName.equals("syfx"))
-                        jsonObj.put(zcbg.colName, syfx.校编号);
+                    if (zcbg.colName.equals("领用单位号"))
+                        jsonObj.put(zcbg.colName, lydw == null ? zcbg.val.get() : lydw.dwId);
+                    else if (zcbg.colName.equals("使用方向"))
+                        jsonObj.put(zcbg.colName, syfx == null ? zcbg.val.get() : syfx.校编号);
                     else if (zcbg.colName.equals("分类名称"))
                         jsonObj.put("字符字段7", zcbg.val.get().trim());
                     else

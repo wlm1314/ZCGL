@@ -18,10 +18,10 @@
             android:layout_marginRight="@dimen/dimen_10"
             android:layout_weight="1"
             android:orientation="vertical">
-            <ImageView android:layout_width="match_parent"
+            <ImageView android:id="@+id/iv_zc"
+                       android:layout_width="match_parent"
                        android:layout_height="100dp"
                        android:background="@drawable/rect_radius_white"
-                       android:scaleType="fitXY"
                        android:src="@mipmap/place_holder"/>
             <TextView style="@style/CommonText"
                       android:layout_gravity="center_horizontal"
@@ -34,10 +34,10 @@
                       android:layout_height="wrap_content"
                       android:layout_weight="1"
                       android:orientation="vertical">
-            <ImageView android:layout_width="match_parent"
+            <ImageView android:id="@+id/iv_fp"
+                       android:layout_width="match_parent"
                        android:layout_height="100dp"
                        android:background="@drawable/rect_radius_white"
-                       android:scaleType="fitXY"
                        android:src="@mipmap/place_holder"/>
             <TextView style="@style/CommonText"
                       android:layout_gravity="center_horizontal"

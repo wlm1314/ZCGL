@@ -74,6 +74,10 @@
                     android:id="@+id/rv_zcdj"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
+
+                <include android:id="@+id/img_layout"
+                         layout="@layout/adapter_zcdj_img_item"
+                         android:visibility="gone"/>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
 

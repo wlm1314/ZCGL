@@ -15,14 +15,16 @@
                       android:layout_margin="@dimen/dimen_10"
                       android:background="@drawable/rect_boundshape_gray_white"
                       android:orientation="vertical">
-            <TextView style="@style/CommonText"
+            <TextView android:id="@+id/takePhote"
+                      style="@style/CommonText"
                       android:layout_width="match_parent"
                       android:gravity="center"
                       android:padding="@dimen/dimen_10"
                       android:text="拍照"
                       android:textColor="@color/blue_primary"/>
 
-            <TextView style="@style/CommonText"
+            <TextView android:id="@+id/selectPhoto"
+                      style="@style/CommonText"
                       android:layout_width="match_parent"
                       android:gravity="center"
                       android:padding="@dimen/dimen_10"

@@ -11,9 +11,13 @@ import com.gdzc.zcdj.model.ZcdjBean;
 
 import java.util.Map;
 
+import okhttp3.RequestBody;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.QueryMap;
 import rx.Observable;
 
 /**
@@ -33,34 +37,47 @@ public interface RequestApi {
     @FormUrlEncoded
     @POST(HttpPath.loginUrl)
     Observable<LoginBean> Login(@FieldMap Map<String, String> params);
+
     //获取分类号
     @FormUrlEncoded
     @POST(HttpPath.getFlhUrl)
     Observable<FlhBean> GetFlh(@FieldMap Map<String, String> params);
+
     //资产登记页面
     @FormUrlEncoded
     @POST(HttpPath.getTsxxUrl)
     Observable<ZcdjBean> GetTsxx(@FieldMap Map<String, String> params);
+
     //获取单位列表
     @FormUrlEncoded
     @POST(HttpPath.getDwUrl)
     Observable<LydwBean> GetDwList(@FieldMap Map<String, String> params);
+
     //获取使用方向
     @FormUrlEncoded
     @POST(HttpPath.getMkUrl)
     Observable<SyfxBean> GetMkList(@FieldMap Map<String, String> params);
+
     //新增数据
     @FormUrlEncoded
     @POST(HttpPath.addnewUrl)
     Observable<BaseBean> AddNew(@FieldMap Map<String, String> params);
+
+    //上传图片
+    @POST(HttpPath.imageUploadUrl)
+    @Multipart
+    Observable<BaseBean> ImageUpload(@Part("file\"; filename=\"test.jpg\"") RequestBody file, @QueryMap Map<String, String> params);
+
     //更新数据
     @FormUrlEncoded
     @POST(HttpPath.updateZjUrl)
     Observable<BaseBean> UpdateZj(@FieldMap Map<String, String> params);
+
     //新增数据
     @FormUrlEncoded
     @POST(HttpPath.selectMyZjDataUrl)
     Observable<ZcbgBean> SearchMyData(@FieldMap Map<String, String> params);
+
     //根据Id查询zj
     @FormUrlEncoded
     @POST(HttpPath.selectZjByIdUrl)

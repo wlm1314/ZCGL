@@ -44,25 +44,26 @@ public class BindingViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void addTextChangeListener(TextChangeListener listener, int... viewId) {
-        if (viewId.length > 0)
-            for (int id : viewId) {
-                EditText et = (EditText) binding.getRoot().findViewById(id);
-                if (et != null)
-                    et.addTextChangedListener(new TextWatcher() {
-                        @Override
-                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                        }
+        if (listener != null)
+            if (viewId.length > 0)
+                for (int id : viewId) {
+                    EditText et = (EditText) binding.getRoot().findViewById(id);
+                    if (et != null)
+                        et.addTextChangedListener(new TextWatcher() {
+                            @Override
+                            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                            }
 
-                        @Override
-                        public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        }
+                            @Override
+                            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                            }
 
-                        @Override
-                        public void afterTextChanged(Editable s) {
-                            listener.onTextChange(binding.getRoot(), getLayoutPosition(), s.toString());
-                        }
-                    });
-            }
+                            @Override
+                            public void afterTextChanged(Editable s) {
+                                listener.onTextChange(binding.getRoot(), getLayoutPosition(), s.toString());
+                            }
+                        });
+                }
     }
 
     public interface ItemClickLister {

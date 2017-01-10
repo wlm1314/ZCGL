@@ -17,15 +17,21 @@ public class BindingAdapter<T> extends RecyclerView.Adapter<BindingViewHolder> {
     private List<T> list;
     private BindingViewHolder.ItemClickLister mItemClickLister;
     private BindingViewHolder.ItemClickLister mItemViewClickLister;
-    private int viewId;
+    private BindingViewHolder.TextChangeListener mTextChangeListener;
+    private int[] viewId, viewId_change;
 
     public void setItemClickLister(BindingViewHolder.ItemClickLister itemClickLister) {
         this.mItemClickLister = itemClickLister;
     }
 
-    public void setOnViewClickListener(BindingViewHolder.ItemClickLister itemClickLister, int viewId) {
+    public void setOnViewClickListener(BindingViewHolder.ItemClickLister itemClickLister, int... viewId) {
         this.viewId = viewId;
         this.mItemViewClickLister = itemClickLister;
+    }
+
+    public void setTextChangeListener(BindingViewHolder.TextChangeListener listener, int... viewId){
+        this.mTextChangeListener = listener;
+        this.viewId_change = viewId;
     }
 
     public BindingAdapter(BindingTool bindingTool, List<T> list) {
@@ -38,6 +44,7 @@ public class BindingAdapter<T> extends RecyclerView.Adapter<BindingViewHolder> {
         BindingViewHolder bindingViewHolder = new BindingViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), mBindingTool.getLayoutId(), parent, false));
         bindingViewHolder.setItemClickLister(mItemClickLister);
         bindingViewHolder.setItemClickLister(mItemViewClickLister, viewId);
+        bindingViewHolder.addTextChangeListener(mTextChangeListener, viewId_change);
         return bindingViewHolder;
     }
 
