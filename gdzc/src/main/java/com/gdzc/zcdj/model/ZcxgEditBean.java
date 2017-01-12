@@ -1,4 +1,4 @@
-package com.gdzc.zcbg.model;
+package com.gdzc.zcdj.model;
 
 import android.databinding.ObservableField;
 
@@ -13,7 +13,7 @@ import java.util.Locale;
  * Created by 王少岩 on 2017/1/9.
  */
 
-public class ZcbgEditBean extends BaseBean {
+public class ZcxgEditBean extends BaseBean {
     public List<DataBean> data;
 
     /**
@@ -43,7 +43,7 @@ public class ZcbgEditBean extends BaseBean {
         }
     }
 
-    public static class Zcbg {
+    public static class Zcxg {
         public String colName;
         public String isEdit;
         public String isNull;
@@ -51,8 +51,8 @@ public class ZcbgEditBean extends BaseBean {
         public String isQz;
         public ObservableField<String> val = new ObservableField<>();
 
-        public static Zcbg castToZcgb(DataBean data) {
-            Zcbg zcbg = new Zcbg();
+        public static Zcxg castToZcxb(DataBean data) {
+            Zcxg zcbg = new Zcxg();
             zcbg.colName = data.字段名;
             zcbg.isEdit = data.修改否;
             zcbg.isNull = data.必填否;

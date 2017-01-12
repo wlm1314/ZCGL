@@ -4,8 +4,8 @@
 
     <data>
         <import type="android.view.View"/>
-        <import type="com.gdzc.zcbg.model.ZcbgEditBean.Zcbg"/>
-        <variable name="data" type="Zcbg"/>
+        <import type="com.gdzc.zcdj.model.ZcxgEditBean.Zcxg"/>
+        <variable name="data" type="Zcxg"/>
     </data>
 
     <LinearLayout

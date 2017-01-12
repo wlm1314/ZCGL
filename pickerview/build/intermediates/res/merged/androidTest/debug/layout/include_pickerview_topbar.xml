@@ -33,7 +33,7 @@
         android:layout_toRightOf="@+id/fl_cancel"
         android:gravity="center"
         android:textColor="@color/pickerview_topbar_title"
-        android:textSize="@dimen/pickerview_topbar_btn_textsize" />
+        android:textSize="@dimen/pickerview_textsize" />
 
     <Button
         android:id="@id/btnSubmit"

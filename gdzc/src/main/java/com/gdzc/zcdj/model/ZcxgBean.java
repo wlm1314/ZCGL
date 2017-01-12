@@ -1,4 +1,4 @@
-package com.gdzc.zcbg.model;
+package com.gdzc.zcdj.model;
 
 import com.gdzc.base.BaseBean;
 
@@ -9,7 +9,7 @@ import java.util.List;
  * Created by 王少岩 on 2017/1/5.
  */
 
-public class ZcbgBean extends BaseBean {
+public class ZcxgBean extends BaseBean {
 
     public TotalBean total;
     public DataBean data;

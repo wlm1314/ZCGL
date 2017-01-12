@@ -1,4 +1,4 @@
-package com.gdzc.zcbg.view;
+package com.gdzc.zcdj.view;
 
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,8 +25,8 @@ import com.gdzc.utils.NavigateUtils;
 import com.gdzc.utils.Utils;
 import com.gdzc.widget.recycleview.BindingAdapter;
 import com.gdzc.widget.recycleview.BindingTool;
-import com.gdzc.zcbg.model.ZcbgBean;
-import com.gdzc.zcbg.model.ZcbgEditBean;
+import com.gdzc.zcdj.model.ZcxgBean;
+import com.gdzc.zcdj.model.ZcxgEditBean;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,10 +42,10 @@ import rx.Observable;
  * Created by 王少岩 on 2017/1/5.
  */
 
-public class ZcgbEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
-    private List<ZcbgEditBean.Zcbg> mList = new ArrayList<>();
-    private BindingAdapter<ZcbgEditBean.Zcbg> mAdapter;
-    private ZcbgBean.ListBean zcbg;
+public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
+    private List<ZcxgEditBean.Zcxg> mList = new ArrayList<>();
+    private BindingAdapter<ZcxgEditBean.Zcxg> mAdapter;
+    private ZcxgBean.ListBean zcbg;
 
     @Override
     protected int getLayoutId() {
@@ -68,7 +68,7 @@ public class ZcgbEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
     private void initView() {
         mBinding.rvZcbg.setLayoutManager(new LinearLayoutManager(this));
         mBinding.rvZcbg.setHasFixedSize(true);
-        mAdapter = new BindingAdapter<>(new BindingTool(R.layout.adapter_zcbg_edit_item, BR.data), mList);
+        mAdapter = new BindingAdapter<>(new BindingTool(R.layout.adapter_zcxg_edit_item, BR.data), mList);
         mBinding.rvZcbg.setAdapter(mAdapter);
     }
 
@@ -89,7 +89,7 @@ public class ZcgbEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
     }
 
     private void getData() {
-        zcbg = (ZcbgBean.ListBean) getIntent().getExtras().getSerializable("zcbg");
+        zcbg = (ZcxgBean.ListBean) getIntent().getExtras().getSerializable("zcbg");
         HttpRequest.SearchZJById(HttpPostParams.paramselectZjById(zcbg.id))
                 .subscribe(new RetrofitSubscriber<>(zcbgEditBean -> {
                     mList.add(getZcbg("分类号", zcbg.分类号));
@@ -100,7 +100,7 @@ public class ZcgbEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
                     mList.add(getZcbg("批量", zcbg.批量));
                     mList.add(getZcbg("数量", zcbg.数量));
                     mList.add(getZcbg("金额", zcbg.金额));
-                    Observable.from(zcbgEditBean.data).subscribe(dataBean -> mList.add(ZcbgEditBean.Zcbg.castToZcgb(dataBean)));
+                    Observable.from(zcbgEditBean.data).subscribe(dataBean -> mList.add(ZcxgEditBean.Zcxg.castToZcxb(dataBean)));
                     mAdapter.notifyDataSetChanged();
                 }));
     }
@@ -117,19 +117,19 @@ public class ZcgbEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
         JSONObject jsonObj = new JSONObject();
         try {
             jsonObj.put("id", zcbg.id);
-            for (ZcbgEditBean.Zcbg zcbg : mList) {
-                if (zcbg.isNull.equals("1") && TextUtils.isEmpty(zcbg.val.get())) {
-                    Utils.showToast(zcbg.xsnr);
+            for (ZcxgEditBean.Zcxg zcxg : mList) {
+                if (zcxg.isNull.equals("1") && TextUtils.isEmpty(zcxg.val.get())) {
+                    Utils.showToast(zcxg.xsnr);
                     return true;
-                } else if (!TextUtils.isEmpty(zcbg.val.get())) {
-                    if (zcbg.colName.equals("领用单位号"))
-                        jsonObj.put(zcbg.colName, lydw == null ? zcbg.val.get() : lydw.dwId);
-                    else if (zcbg.colName.equals("使用方向"))
-                        jsonObj.put(zcbg.colName, syfx == null ? zcbg.val.get() : syfx.校编号);
-                    else if (zcbg.colName.equals("分类名称"))
-                        jsonObj.put("字符字段7", zcbg.val.get().trim());
+                } else if (!TextUtils.isEmpty(zcxg.val.get())) {
+                    if (zcxg.colName.equals("领用单位号"))
+                        jsonObj.put(zcxg.colName, lydw == null ? zcxg.val.get() : lydw.dwId);
+                    else if (zcxg.colName.equals("使用方向"))
+                        jsonObj.put(zcxg.colName, syfx == null ? zcxg.val.get() : syfx.校编号);
+                    else if (zcxg.colName.equals("分类名称"))
+                        jsonObj.put("字符字段7", zcxg.val.get().trim());
                     else
-                        jsonObj.put(zcbg.colName, zcbg.val.get().trim());
+                        jsonObj.put(zcxg.colName, zcxg.val.get().trim());
                 }
             }
 
@@ -170,18 +170,18 @@ public class ZcgbEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
         }
     }
 
-    public ZcbgEditBean.Zcbg getZcbg(String colName, String value) {
-        ZcbgEditBean.Zcbg zcbg = new ZcbgEditBean.Zcbg();
-        zcbg.colName = colName;
-        zcbg.isNull = "1";
-        zcbg.isEdit = "0";
-        zcbg.isQz = "0";
-        zcbg.val.set(value);
-        zcbg.xsnr = colName;
-        return zcbg;
+    public ZcxgEditBean.Zcxg getZcbg(String colName, String value) {
+        ZcxgEditBean.Zcxg zcxg = new ZcxgEditBean.Zcxg();
+        zcxg.colName = colName;
+        zcxg.isNull = "1";
+        zcxg.isEdit = "0";
+        zcxg.isQz = "0";
+        zcxg.val.set(value);
+        zcxg.xsnr = colName;
+        return zcxg;
     }
 
-    private void initTimePicker(String title, ZcbgEditBean.Zcbg zcbg) {
+    private void initTimePicker(String title, ZcxgEditBean.Zcxg zcxg) {
         TimePickerView mTimePickerView = new TimePickerView(App.getAppContext(), TimePickerView.Type.YEAR_MONTH_DAY);
         mTimePickerView.setCyclic(false);
         mTimePickerView.setTitle(title);
@@ -189,7 +189,7 @@ public class ZcgbEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
         mTimePickerView.show();
         mTimePickerView.setOnTimeSelectListener(date -> {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            zcbg.val.set(sdf.format(date));
+            zcxg.val.set(sdf.format(date));
         });
     }
 }

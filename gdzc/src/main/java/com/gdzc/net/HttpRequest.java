@@ -6,8 +6,8 @@ import com.gdzc.login.model.LoginBean;
 import com.gdzc.lydw.model.LydwBean;
 import com.gdzc.syfx.model.SyfxBean;
 import com.gdzc.utils.BaseLog;
-import com.gdzc.zcbg.model.ZcbgBean;
-import com.gdzc.zcbg.model.ZcbgEditBean;
+import com.gdzc.zcdj.model.ZcxgBean;
+import com.gdzc.zcdj.model.ZcxgEditBean;
 import com.gdzc.zcdj.model.ZcdjBean;
 
 import java.util.Map;
@@ -149,7 +149,7 @@ public class HttpRequest {
      * @param params
      * @return
      */
-    public static Observable<ZcbgBean> SearchMyData(Map<String, String> params) {
+    public static Observable<ZcxgBean> SearchMyData(Map<String, String> params) {
         printParam(params);
         return getInstance().create(RequestApi.class).SearchMyData(params)
                 .subscribeOn(Schedulers.io())
@@ -160,7 +160,7 @@ public class HttpRequest {
      * @param params
      * @return
      */
-    public static Observable<ZcbgEditBean> SearchZJById(Map<String, String> params) {
+    public static Observable<ZcxgEditBean> SearchZJById(Map<String, String> params) {
         printParam(params);
         return getInstance().create(RequestApi.class).SearchZJById(params)
                 .subscribeOn(Schedulers.io())

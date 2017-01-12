@@ -14,72 +14,25 @@
             layout="@layout/app_bar"
             app:appbar="@{appbar}"/>
 
-        <android.support.v4.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/layout_appbar"
-            app:ptrMode="disabled">
-            <LinearLayout
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_below="@id/layout_appbar"
+                      android:orientation="vertical">
+            <com.magicindicator.MagicIndicator
+                android:id="@+id/magic_indicator"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-                <LinearLayout android:layout_width="match_parent"
-                              android:layout_height="wrap_content"
-                              android:background="@color/white"
-                              android:orientation="vertical"
-                              app:layout_scrollFlags="scroll|enterAlways">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/margin_horizontal">
-                        <TextView style="@style/CommonText"
-                                  android:text="分    类"/>
-                        <TextView
-                            android:id="@+id/tv_flh"
-                            style="@style/CommonText"
-                            android:layout_marginLeft="@dimen/dimen_10"
-                            android:layout_weight="1"
-                            android:drawableRight="@mipmap/icon_details"
-                            android:hint="请选择分类"/>
-                    </LinearLayout>
-                    <View style="@style/line_cell_light_h"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/margin_horizontal">
-                        <TextView style="@style/CommonText"
-                                  android:text="单    价"/>
-                        <EditText android:id="@+id/tv_dj"
-                                  style="@style/CommonText"
-                                  android:layout_marginLeft="@dimen/dimen_10"
-                                  android:layout_weight="1"
-                                  android:hint="请输入单价"
-                                  android:inputType="numberDecimal"/>
-                    </LinearLayout>
-                    <View style="@style/line_cell_light_h"/>
-                    <android.support.v7.widget.AppCompatButton
-                        android:id="@+id/bt_create"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dimen_10"
-                        android:text="生成资产登记表单"
-                        android:textColor="@color/white"/>
-                </LinearLayout>
+                android:layout_height="44dp"
+                android:background="@color/white"/>
 
-                <View style="@style/line_cell_light_h"/>
+            <View style="@style/line_cell_light_h"/>
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_zcdj"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-
-                <include android:id="@+id/img_layout"
-                         layout="@layout/adapter_zcdj_img_item"
-                         android:visibility="gone"/>
-            </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
-
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="#ffffff"
+            />
+        </LinearLayout>
     </RelativeLayout>
 </layout>

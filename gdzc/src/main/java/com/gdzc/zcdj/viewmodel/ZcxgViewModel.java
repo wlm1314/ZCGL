@@ -1,13 +1,12 @@
-package com.gdzc.zcbg.viewmodel;
+package com.gdzc.zcdj.viewmodel;
 
 import android.databinding.ObservableField;
 
 import com.binding.command.ReplyCommand;
-import com.gdzc.base.App;
 import com.gdzc.net.HttpPostParams;
 import com.gdzc.net.HttpRequest;
 import com.gdzc.net.RetrofitSubscriber;
-import com.gdzc.zcbg.view.ZcbgActivity;
+import com.gdzc.zcdj.view.ZcxgFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,7 +15,13 @@ import org.json.JSONObject;
  * Created by 王少岩 on 2017/1/5.
  */
 
-public class ZcbgViewModel {
+public class ZcxgViewModel {
+    private ZcxgFragment mFragment;
+
+    public ZcxgViewModel(ZcxgFragment fragment) {
+        mFragment = fragment;
+    }
+
     public final ObservableField<String> zcmc = new ObservableField<>();
     public final ObservableField<String> xh = new ObservableField<>();
     public final ObservableField<String> gg = new ObservableField<>();
@@ -37,14 +42,12 @@ public class ZcbgViewModel {
             e.printStackTrace();
         }
         searchJson = json.toString();
-        ((ZcbgActivity) App.getAppContext().getCurrentActivity()).setPageNo(1);
+        mFragment.setPageNo(1);
         getData(1);
     });
 
     public void getData(int pageNum) {
         HttpRequest.SearchMyData(HttpPostParams.paramSearchMyData(pageNum + "", searchJson))
-                .subscribe(new RetrofitSubscriber<>(zcbgBean -> {
-                    ((ZcbgActivity) App.getAppContext().getCurrentActivity()).setData(zcbgBean.data);
-                }));
+                .subscribe(new RetrofitSubscriber<>(zcbgBean -> mFragment.setData(zcbgBean.data)));
     }
 }

@@ -10,7 +10,7 @@ import com.gdzc.net.HttpRequest;
 import com.gdzc.net.RetrofitSubscriber;
 import com.gdzc.utils.Utils;
 import com.gdzc.zcdj.model.ZcdjBean;
-import com.gdzc.zcdj.view.ZcdjActivity;
+import com.gdzc.zcdj.view.ZcdjFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,6 +22,10 @@ import java.util.List;
  */
 
 public class ZcdjViewModel {
+    private ZcdjFragment mFragment;
+    public ZcdjViewModel(ZcdjFragment fragment) {
+        mFragment = fragment;
+    }
 
     //生成表单
     public void getTsxx(String flh, String dj) {
@@ -34,9 +38,7 @@ public class ZcdjViewModel {
             return;
         }
         HttpRequest.GetTsxx(HttpPostParams.paramGetTsxx(flh, dj))
-                .subscribe(zcdjBean -> {
-                    ((ZcdjActivity) App.getAppContext().getCurrentActivity()).setData(zcdjBean);
-                });
+                .subscribe(new RetrofitSubscriber<>(zcdjBean -> mFragment.setData(zcdjBean)));
     }
 
     //保存表单
@@ -50,7 +52,7 @@ public class ZcdjViewModel {
     }
 
     public void initTimePicker(String title, ZcdjBean.Zcdj zcdj) {
-        TimePickerView mTimePickerView = new TimePickerView(App.getAppContext(), TimePickerView.Type.YEAR_MONTH_DAY);
+        TimePickerView mTimePickerView = new TimePickerView(App.getAppContext().getCurrentActivity(), TimePickerView.Type.YEAR_MONTH_DAY);
         mTimePickerView.setCyclic(false);
         mTimePickerView.setTitle(title);
         mTimePickerView.setTime(new Date());

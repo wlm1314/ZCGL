@@ -53,4 +53,5 @@ dependencies {
     compile 'com.github.rahatarmanahmed:circularprogressview:2.4.0'
     compile project(':pulltofresh')
     compile project(':pickerview')
+    compile project(':magicindicator')
 }

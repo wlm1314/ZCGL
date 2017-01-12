@@ -32,15 +32,16 @@ public class BindingViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setItemClickLister(ItemClickLister itemClickLister, int... viewId) {
-        if (viewId.length > 0)
-            for (int id : viewId) {
-                View view = binding.getRoot().findViewById(id);
-                if (view != null)
-                    view.setOnClickListener(v -> {
-                        if (itemClickLister != null)
-                            itemClickLister.onItemClick(binding.getRoot(), getLayoutPosition());
-                    });
-            }
+        if (viewId != null)
+            if (viewId.length > 0)
+                for (int id : viewId) {
+                    View view = binding.getRoot().findViewById(id);
+                    if (view != null)
+                        view.setOnClickListener(v -> {
+                            if (itemClickLister != null)
+                                itemClickLister.onItemClick(binding.getRoot(), getLayoutPosition());
+                        });
+                }
     }
 
     public void addTextChangeListener(TextChangeListener listener, int... viewId) {

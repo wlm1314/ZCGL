@@ -13,6 +13,7 @@
         <item name="colorButtonNormal">@color/colorPrimaryDark</item>
         <item name="android:actionMenuTextColor">@color/white</item> <!--  敲定颜色-->
         <item name="android:textSize">@dimen/body</item> <!--  搞掂字体大小-->
+        <item name="actionMenuTextColor">#ffffff</item>
     </style>
 
     <style name="AppTheme.AppComEdit">
