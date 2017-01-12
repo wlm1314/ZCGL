@@ -47,7 +47,7 @@ public class ZcdjViewModel {
                 .subscribe(new RetrofitSubscriber<>(baseBean -> {
                     Utils.showToast(baseBean.status.msg);
                     if (baseBean.status.isSuccess())
-                        App.getAppContext().getCurrentActivity().finish();
+                        mFragment.reset();
                 }));
     }
 

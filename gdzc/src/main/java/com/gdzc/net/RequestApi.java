@@ -5,6 +5,7 @@ import com.gdzc.flh.model.FlhBean;
 import com.gdzc.login.model.LoginBean;
 import com.gdzc.lydw.model.LydwBean;
 import com.gdzc.syfx.model.SyfxBean;
+import com.gdzc.zcdj.model.CchBean;
 import com.gdzc.zcdj.model.ZcxgBean;
 import com.gdzc.zcdj.model.ZcxgEditBean;
 import com.gdzc.zcdj.model.ZcdjBean;
@@ -82,5 +83,10 @@ public interface RequestApi {
     @FormUrlEncoded
     @POST(HttpPath.selectZjByIdUrl)
     Observable<ZcxgEditBean> SearchZJById(@FieldMap Map<String, String> params);
+
+    //查询cch
+    @FormUrlEncoded
+    @POST(HttpPath.selectCchByYqbhUrl)
+    Observable<CchBean> SelectCchByYqbh(@FieldMap Map<String, String> params);
 
 }

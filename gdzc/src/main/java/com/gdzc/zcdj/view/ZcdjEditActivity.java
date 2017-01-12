@@ -1,11 +1,13 @@
 package com.gdzc.zcdj.view;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.bigkoo.pickerview.TimePickerView;
 import com.gdzc.BR;
@@ -46,6 +48,7 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
     private List<ZcxgEditBean.Zcxg> mList = new ArrayList<>();
     private BindingAdapter<ZcxgEditBean.Zcxg> mAdapter;
     private ZcxgBean.ListBean zcbg;
+    private String yqbh = "";
 
     @Override
     protected int getLayoutId() {
@@ -55,7 +58,7 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
     @Override
     protected void setViewModel() {
         setSupportActionBar((Toolbar) mBinding.layoutAppbar.getRoot().findViewById(R.id.toolbar));
-        mBinding.setAppbar(new AppBar("资产变更", true));
+        mBinding.setAppbar(new AppBar("整机", true));
     }
 
     @Override
@@ -86,6 +89,12 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
                     break;
             }
         }, R.id.select_layout);
+
+        mBinding.tvCch.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("yqbh", yqbh);
+            NavigateUtils.startActivity(this, ZcdjCchEditActivity.class, bundle);
+        });
     }
 
     private void getData() {
@@ -97,11 +106,13 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
                     mList.add(getZcbg("国标分类号", zcbg.国标分类号));
                     mList.add(getZcbg("国标分类名", zcbg.国标分类名));
                     mList.add(getZcbg("单价", zcbg.单价));
-                    mList.add(getZcbg("批量", zcbg.批量));
+                    mList.add(getZcbg("成批条数", zcbg.批量));
                     mList.add(getZcbg("数量", zcbg.数量));
                     mList.add(getZcbg("金额", zcbg.金额));
                     Observable.from(zcbgEditBean.data).subscribe(dataBean -> mList.add(ZcxgEditBean.Zcxg.castToZcxb(dataBean)));
+                    Observable.from(zcbgEditBean.data).filter(dataBean -> dataBean.字段名.equals("资产编号")).subscribe(dataBean -> yqbh = dataBean.值);
                     mAdapter.notifyDataSetChanged();
+                    if (!zcbg.批量.equals("1")) mBinding.tvCch.setVisibility(View.VISIBLE);
                 }));
     }
 
@@ -128,6 +139,8 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
                         jsonObj.put(zcxg.colName, syfx == null ? zcxg.val.get() : syfx.校编号);
                     else if (zcxg.colName.equals("分类名称"))
                         jsonObj.put("字符字段7", zcxg.val.get().trim());
+                    else if (zcxg.colName.equals("成批条数"))
+                        jsonObj.put("批量", zcxg.val.get().trim());
                     else
                         jsonObj.put(zcxg.colName, zcxg.val.get().trim());
                 }

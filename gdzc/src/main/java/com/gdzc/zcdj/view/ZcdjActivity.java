@@ -18,6 +18,7 @@ import java.util.List;
 
 /**
  * Created by 王少岩 on 2016/12/20.
+ * 容器类，包含登记、修改
  */
 
 public class ZcdjActivity extends BaseActivity<ActivityZcdjBinding> {

@@ -125,8 +125,8 @@ public class Utils {
 
         // 设置显示位置
         dialog.onWindowAttributesChanged(wl);// 设置点击外围解散
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.setCancelable(true);
         dialog.show();
         return dialog;
     }

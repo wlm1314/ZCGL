@@ -108,7 +108,7 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
         mList.clear();
         mList.addAll(mViewModel.getZcdjByFlh(mFlh));
         mList.add(mViewModel.getZcdj("单价", mBinding.tvDj.getText().toString(), "1"));
-        mList.add(mViewModel.getZcdj("批量", "1", zcdjBean.containsSQR() ? "1" : "0"));
+        mList.add(mViewModel.getZcdj("成批条数", "1", zcdjBean.containsSQR() ? "1" : "0"));
         mList.add(mViewModel.getZcdj("数量", "1", zcdjBean.containsDJ() ? "1" : "0"));
         mList.add(mViewModel.getZcdj("金额", mBinding.tvDj.getText().toString(), "1"));
         Observable.from(zcdjBean.data.list).subscribe(bean -> mList.add(ZcdjBean.Zcdj.castToZcdj(bean)));
@@ -128,11 +128,13 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
             } else if (!TextUtils.isEmpty(zcdj.editText.get())) {
                 try {
                     if (zcdj.columEng.equals("lydwh"))
-                        jsonObj.put(zcdj.columName, lydw.dwId);
+                        jsonObj.put(zcdj.columName, lydw.dwId.trim());
                     else if (zcdj.columEng.equals("syfx"))
-                        jsonObj.put(zcdj.columName, syfx.校编号);
+                        jsonObj.put(zcdj.columName, syfx.校编号.trim());
                     else if (zcdj.columName.equals("分类名称"))
                         jsonObj.put("字符字段7", zcdj.editText.get().trim());
+                    else if (zcdj.columName.equals("成批条数"))
+                        jsonObj.put("批量", zcdj.editText.get().trim());
                     else
                         jsonObj.put(zcdj.columName, zcdj.editText.get().trim());
                 } catch (JSONException e) {
@@ -171,7 +173,7 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
                     ZcdjBean.Zcdj zcdj = (ZcdjBean.Zcdj) o;
                     int num;
                     switch (zcdj.columName) {
-                        case "批量":
+                        case "成批条数":
                             num = Integer.valueOf(s);
                             if (num > 1) {
                                 mList.get(position + 2).editText.set(num * dj + "");
@@ -318,5 +320,16 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
                 }
                 break;
         }
+    }
+
+    public void reset(){
+        mList.clear();
+        mAdapter.notifyDataSetChanged();
+        mBinding.imgLayout.getRoot().setVisibility(View.GONE);
+        mBinding.btConfirm.setVisibility(View.GONE);
+        mBinding.formLayout.setVisibility(View.VISIBLE);
+        mFlh = null;
+        mBinding.tvFlh.setText("");
+        mBinding.tvDj.setText("");
     }
 }

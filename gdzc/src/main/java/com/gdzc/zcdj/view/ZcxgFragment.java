@@ -30,6 +30,7 @@ public class ZcxgFragment extends BaseFragment<FragmentZcxgBinding> {
     private List<ZcxgBean.ListBean> mList = new ArrayList<>();
     private ZcxgViewModel mViewModel;
     private int pageNo = 1;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_zcxg;
@@ -67,10 +68,15 @@ public class ZcxgFragment extends BaseFragment<FragmentZcxgBinding> {
             }
         });
         mAdapter.setItemClickLister((view, position) -> {
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("zcbg", mList.get(position));
-            NavigateUtils.startActivityForResult(getActivity(), ZcdjEditActivity.class, 1000, bundle);
+            ZcxgBean.ListBean bean = mList.get(position);
+                startZcdjEditActivity(bean);
         });
+    }
+
+    private void startZcdjEditActivity(ZcxgBean.ListBean bean){
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("zcbg", bean);
+        NavigateUtils.startActivityForResult(getActivity(), ZcdjEditActivity.class, 1000, bundle);
     }
 
     public void setData(ZcxgBean.DataBean data) {

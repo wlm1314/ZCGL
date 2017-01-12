@@ -117,5 +117,11 @@ public class HttpPostParams {
         return map;
     }
 
+    public static Map<String, String> paramselectCchByYqbh(String yqbh) {
+        Map<String, String> map = BaseParams();
+        map.put("yqbh", yqbh);
+        return map;
+    }
+
 
 }

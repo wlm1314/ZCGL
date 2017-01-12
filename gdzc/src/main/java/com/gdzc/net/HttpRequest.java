@@ -6,6 +6,7 @@ import com.gdzc.login.model.LoginBean;
 import com.gdzc.lydw.model.LydwBean;
 import com.gdzc.syfx.model.SyfxBean;
 import com.gdzc.utils.BaseLog;
+import com.gdzc.zcdj.model.CchBean;
 import com.gdzc.zcdj.model.ZcxgBean;
 import com.gdzc.zcdj.model.ZcxgEditBean;
 import com.gdzc.zcdj.model.ZcdjBean;
@@ -163,6 +164,17 @@ public class HttpRequest {
     public static Observable<ZcxgEditBean> SearchZJById(Map<String, String> params) {
         printParam(params);
         return getInstance().create(RequestApi.class).SearchZJById(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * @param params
+     * @return
+     */
+    public static Observable<CchBean> SelectCchByYqbh(Map<String, String> params) {
+        printParam(params);
+        return getInstance().create(RequestApi.class).SelectCchByYqbh(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
