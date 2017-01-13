@@ -123,5 +123,9 @@ public class HttpPostParams {
         return map;
     }
 
-
+    public static Map<String, String> paramselectUpdateCchById(String updatecchstr) {
+        Map<String, String> map = BaseParams();
+        map.put("updatecchstr", updatecchstr);
+        return map;
+    }
 }

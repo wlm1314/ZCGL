@@ -93,7 +93,7 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
         mBinding.tvCch.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putString("yqbh", yqbh);
-            NavigateUtils.startActivity(this, ZcdjCchEditActivity.class, bundle);
+            NavigateUtils.startActivity(this, ZcdjCchActivity.class, bundle);
         });
     }
 

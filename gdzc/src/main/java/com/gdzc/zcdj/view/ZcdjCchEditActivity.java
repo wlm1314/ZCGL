@@ -1,10 +1,7 @@
 package com.gdzc.zcdj.view;
 
-import android.content.Intent;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 
-import com.gdzc.BR;
 import com.gdzc.R;
 import com.gdzc.base.AppBar;
 import com.gdzc.base.BaseActivity;
@@ -12,24 +9,18 @@ import com.gdzc.databinding.ActivityZcdjCchEditBinding;
 import com.gdzc.net.HttpPostParams;
 import com.gdzc.net.HttpRequest;
 import com.gdzc.net.RetrofitSubscriber;
-import com.gdzc.widget.recycleview.BindingAdapter;
-import com.gdzc.widget.recycleview.BindingTool;
+import com.gdzc.utils.Utils;
 import com.gdzc.zcdj.model.CchBean;
-import com.gdzc.zcdj.model.ZcxgBean;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import rx.Observable;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
- * Created by 王少岩 on 2017/1/5.
+ * Created by 王少岩 on 2017/1/13.
  */
 
 public class ZcdjCchEditActivity extends BaseActivity<ActivityZcdjCchEditBinding> {
-    private List<CchBean.Cch> mList = new ArrayList<>();
-    private BindingAdapter<CchBean.Cch> mAdapter;
-    private ZcxgBean.ListBean zcbg;
+    private CchBean.Cch cch;
 
     @Override
     protected int getLayoutId() {
@@ -38,39 +29,53 @@ public class ZcdjCchEditActivity extends BaseActivity<ActivityZcdjCchEditBinding
 
     @Override
     protected void setViewModel() {
-        setSupportActionBar((Toolbar) mBinding.layoutAppbar.getRoot().findViewById(R.id.toolbar));
         mBinding.setAppbar(new AppBar("出厂号", true));
     }
 
     @Override
     protected void init() {
-        initView();
-        getData();
-        setListener();
+        cch = (CchBean.Cch) getIntent().getExtras().getSerializable("Cch");
+        mBinding.setData(cch);
+        mBinding.btConfirm.setOnClickListener(v -> updateCchById());
     }
 
-    private void initView() {
-        mBinding.rvCch.setLayoutManager(new LinearLayoutManager(this));
-        mBinding.rvCch.setHasFixedSize(true);
-        mAdapter = new BindingAdapter<>(new BindingTool(R.layout.adapter_cch_item, BR.data), mList);
-        mBinding.rvCch.setAdapter(mAdapter);
-    }
-
-    private void setListener() {
-    }
-
-    private void getData() {
-        String yqbh = getIntent().getExtras().getString("yqbh");
-        HttpRequest.SelectCchByYqbh(HttpPostParams.paramselectCchByYqbh(yqbh))
-                .subscribe(new RetrofitSubscriber<>(cchBean -> {
-                    Observable.from(cchBean.data.list).subscribe(listBean -> mList.add(CchBean.Cch.castToCch(listBean)));
-                    mAdapter.notifyDataSetChanged();
-                }));
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != RESULT_OK) return;
+    private void updateCchById() {
+        if (TextUtils.isEmpty(cch.of_cch.get())) {
+            Utils.showToast("请输入出厂号");
+            return;
+        }
+        if (TextUtils.isEmpty(cch.of_lyr.get())) {
+            Utils.showToast("请输入领用人");
+            return;
+        }
+        if (TextUtils.isEmpty(cch.of_rybh.get())) {
+            Utils.showToast("请输入人员编号");
+            return;
+        }
+        if (TextUtils.isEmpty(cch.of_cfdbh.get())) {
+            Utils.showToast("请输入存放地编号");
+            return;
+        }
+        if (TextUtils.isEmpty(cch.of_cfdmc.get())) {
+            Utils.showToast("请输入存放地名称");
+            return;
+        }
+        JSONObject json = new JSONObject();
+        try {
+            json.put("id", cch.id);
+            json.put("出厂号", cch.of_cch.get());
+            json.put("领用人", cch.of_lyr.get());
+            json.put("人员编号", cch.of_rybh.get());
+            json.put("存放地编号", cch.of_cfdbh.get());
+            json.put("存放地名称", cch.of_cfdmc.get());
+            HttpRequest.UpdateCchById(HttpPostParams.paramselectUpdateCchById(json.toString()))
+                    .subscribe(new RetrofitSubscriber<>(baseBean -> {
+                        Utils.showToast("修改成功");
+                        setResult(RESULT_OK);
+                        finish();
+                    }));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

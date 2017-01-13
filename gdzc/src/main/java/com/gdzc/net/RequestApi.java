@@ -89,4 +89,9 @@ public interface RequestApi {
     @POST(HttpPath.selectCchByYqbhUrl)
     Observable<CchBean> SelectCchByYqbh(@FieldMap Map<String, String> params);
 
+    //修改cch
+    @FormUrlEncoded
+    @POST(HttpPath.updateCchByIdUrl)
+    Observable<BaseBean> UpdateCchById(@FieldMap Map<String, String> params);
+
 }

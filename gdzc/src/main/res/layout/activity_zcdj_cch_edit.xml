@@ -4,6 +4,7 @@
 
     <data>
         <variable name="appbar" type="com.gdzc.base.AppBar"/>
+        <variable name="data" type="com.gdzc.zcdj.model.CchBean.Cch"/>
     </data>
 
     <RelativeLayout android:layout_width="wrap_content"
@@ -13,11 +14,153 @@
             layout="@layout/app_bar"
             app:appbar="@{appbar}"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_cch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/layout_appbar"/>
+        <ScrollView android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/layout_appbar">
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical">
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:padding="12dp">
+                    <TextView style="@style/CommonText"
+                              android:text="资产编号："/>
+                    <TextView style="@style/CommonText"
+                              android:layout_weight="1"
+                              android:gravity="right"
+                              android:paddingLeft="@dimen/dimen_10"
+                              android:text="@{data.zcbh}"/>
+                </LinearLayout>
+                <View style="@style/line_cell_light_h"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:padding="12dp">
+                    <TextView style="@style/CommonText"
+                              android:text="单据号："/>
+                    <TextView style="@style/CommonText"
+                              android:layout_weight="1"
+                              android:gravity="right"
+                              android:paddingLeft="@dimen/dimen_10"
+                              android:text="@{data.djh}"/>
+                </LinearLayout>
+                <View style="@style/line_cell_light_h"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:padding="12dp">
+                    <TextView style="@style/CommonText"
+                              android:text="标识："/>
+                    <TextView style="@style/CommonText"
+                              android:layout_weight="1"
+                              android:gravity="right"
+                              android:paddingLeft="@dimen/dimen_10"
+                              android:text="@{data.bs}"/>
+                </LinearLayout>
+                <View style="@style/line_cell_light_h"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:padding="12dp">
+                    <TextView style="@style/CommonText"
+                              android:text="输入人："/>
+                    <TextView style="@style/CommonText"
+                              android:layout_weight="1"
+                              android:gravity="right"
+                              android:paddingLeft="@dimen/dimen_10"
+                              android:text="@{data.srr}"/>
+                </LinearLayout>
+                <View style="@style/line_cell_light_h"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:padding="12dp">
+                    <TextView style="@style/CommonText"
+                              android:text="领用单位号："/>
+                    <TextView style="@style/CommonText"
+                              android:layout_weight="1"
+                              android:gravity="right"
+                              android:paddingLeft="@dimen/dimen_10"
+                              android:text="@{data.lydwh}"/>
+                </LinearLayout>
+                <View style="@style/line_cell_light_h"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:padding="12dp">
+                    <TextView style="@style/CommonText"
+                              android:text="出厂号："/>
+                    <EditText style="@style/CommonEdit"
+                              android:layout_weight="1"
+                              android:gravity="right"
+                              android:padding="0dp"
+                              android:hint="请输入出厂号"
+                              android:paddingLeft="@dimen/dimen_10"
+                              android:text="@={data.of_cch}"/>
+                </LinearLayout>
+                <View style="@style/line_cell_light_h"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:padding="12dp">
+                    <TextView style="@style/CommonText"
+                              android:text="领用人："/>
+                    <EditText style="@style/CommonEdit"
+                              android:layout_weight="1"
+                              android:gravity="right"
+                              android:padding="0dp"
+                              android:hint="请输入领用人"
+                              android:paddingLeft="@dimen/dimen_10"
+                              android:text="@={data.of_lyr}"/>
+                </LinearLayout>
+                <View style="@style/line_cell_light_h"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:padding="12dp">
+                    <TextView style="@style/CommonText"
+                              android:text="人员编号："/>
+                    <EditText style="@style/CommonEdit"
+                              android:layout_weight="1"
+                              android:gravity="right"
+                              android:hint="请输入人员编号"
+                              android:padding="0dp"
+                              android:paddingLeft="@dimen/dimen_10"
+                              android:text="@={data.of_rybh}"/>
+                </LinearLayout>
+                <View style="@style/line_cell_light_h"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:padding="12dp">
+                    <TextView style="@style/CommonText"
+                              android:text="存放地编号："/>
+                    <EditText style="@style/CommonEdit"
+                              android:layout_weight="1"
+                              android:gravity="right"
+                              android:padding="0dp"
+                              android:hint="请输入存放地编号"
+                              android:paddingLeft="@dimen/dimen_10"
+                              android:text="@={data.of_cfdbh}"/>
+                </LinearLayout>
+                <View style="@style/line_cell_light_h"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:padding="12dp">
+                    <TextView style="@style/CommonText"
+                              android:text="存放地名称："/>
+                    <EditText style="@style/CommonEdit"
+                              android:layout_weight="1"
+                              android:gravity="right"
+                              android:hint="请输入存放地名称"
+                              android:padding="0dp"
+                              android:paddingLeft="@dimen/dimen_10"
+                              android:text="@={data.of_cfdmc}"/>
+                </LinearLayout>
+                <View style="@style/line_cell_light_h"/>
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/bt_confirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_10"
+                    android:text="确定"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+        </ScrollView>
+
 
     </RelativeLayout>
 </layout>
