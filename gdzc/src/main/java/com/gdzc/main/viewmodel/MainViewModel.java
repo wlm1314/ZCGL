@@ -8,6 +8,7 @@ import com.gdzc.login.view.LoginActivity;
 import com.gdzc.utils.NavigateUtils;
 import com.gdzc.utils.SPUtils;
 import com.gdzc.zcdj.view.ZcdjActivity;
+import com.gdzc.zctj.view.ZctjActivity;
 
 /**
  * Created by 王少岩 on 2016/12/20.
@@ -19,6 +20,7 @@ public class MainViewModel {
     public ReplyCommand zccxCommon = new ReplyCommand(() -> {});
     public ReplyCommand zcbgCommon = new ReplyCommand(() -> {});
     public ReplyCommand zcqcCommon = new ReplyCommand(() -> {});
+    public ReplyCommand zctjCommon = new ReplyCommand(() -> {NavigateUtils.startActivity(App.getAppContext().getCurrentActivity(), ZctjActivity.class);});
     public ReplyCommand logoutCommon = new ReplyCommand(() -> {
         SPUtils.onLoginOut();
         NavigateUtils.startActivity(App.getAppContext().getCurrentActivity(), LoginActivity.class);

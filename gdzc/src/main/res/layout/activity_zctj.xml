@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="appbar" type="com.gdzc.base.AppBar"/>
+        <variable name="viewModel" type="com.gdzc.zctj.viewmodel.ZctjViewModel"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <include layout="@layout/app_bar"
+                 app:appbar="@{appbar}"/>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content">
+            <TextView style="@style/CommonText"
+                      android:padding="@dimen/dimen_10"
+                      android:text="入库时间："/>
+
+            <TextView style="@style/CommonText"
+                      android:layout_weight="1"
+                      android:gravity="center"
+                      android:hint="开始时间"
+                      android:padding="@dimen/dimen_10"
+                      android:text="@={viewModel.startTime}"
+                      app:clickCommand="@{viewModel.startCommand}"/>
+
+            <TextView style="@style/CommonText"
+                      android:hint="~"/>
+            <TextView style="@style/CommonText"
+                      android:layout_weight="1"
+                      android:gravity="center"
+                      android:hint="结束时间"
+                      android:padding="@dimen/dimen_10"
+                      android:text="@={viewModel.endTime}"
+                      app:clickCommand="@{viewModel.endCommand}"/>
+        </LinearLayout>
+
+        <View style="@style/line_cell_light_h"/>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:padding="@dimen/dimen_10"
+                      app:clickCommand="@{viewModel.tjTypeCommand}">
+
+            <TextView style="@style/CommonText"
+                      android:text="统计类型："/>
+
+            <TextView style="@style/CommonText"
+                      android:layout_weight="1"
+                      android:drawablePadding="@dimen/dimen_10"
+                      android:drawableRight="@mipmap/icon_details"
+                      android:gravity="right"
+                      android:text="@={viewModel.tjType}"/>
+
+        </LinearLayout>
+
+        <View style="@style/line_cell_light_h"/>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:padding="@dimen/dimen_10"
+                      app:clickCommand="@{viewModel.chartCommand}">
+
+            <TextView style="@style/CommonText"
+                      android:text="展示类型："/>
+
+            <TextView style="@style/CommonText"
+                      android:layout_weight="1"
+                      android:drawablePadding="@dimen/dimen_10"
+                      android:drawableRight="@mipmap/icon_details"
+                      android:gravity="right"
+                      android:text="@={viewModel.chartType}"/>
+
+        </LinearLayout>
+
+        <View style="@style/line_cell_light_h"/>
+
+        <android.support.v7.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_10"
+            app:clickCommand="@{viewModel.createChart}"
+            android:text="生成图表"
+            android:textColor="@color/white"/>
+
+        <View style="@style/line_cell_light_h"/>
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/chart_pie"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/chart_bar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+</layout>

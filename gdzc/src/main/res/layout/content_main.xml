@@ -5,11 +5,10 @@
     <data>
         <variable name="viewModel" type="com.gdzc.main.viewmodel.MainViewModel"/>
     </data>
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical">
+        android:background="@color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,10 +29,10 @@
                         android:id="@+id/llayout_sbdj"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        app:clickCommand="@{viewModel.zcdjCommon}"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        app:clickCommand="@{viewModel.zcdjCommon}">
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -59,10 +58,10 @@
                         android:id="@+id/llayout_sbsh"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        app:clickCommand="@{viewModel.zccxCommon}"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        app:clickCommand="@{viewModel.zccxCommon}">
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -93,10 +92,10 @@
                         android:id="@+id/llayout_zmxg"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        app:clickCommand="@{viewModel.zcbgCommon}"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        app:clickCommand="@{viewModel.zcbgCommon}">
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -121,10 +120,10 @@
                         android:id="@+id/llayout_zccx"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        app:clickCommand="@{viewModel.zcqcCommon}"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        app:clickCommand="@{viewModel.zcqcCommon}">
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -137,7 +136,32 @@
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
             </LinearLayout>
-
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_160"
+                android:layout_margin="@dimen/dimen_10"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardCornerRadius="2dp">
+                <LinearLayout
+                    android:id="@+id/llayout_zctj"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:clickCommand="@{viewModel.zctjCommon}">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/dimen_10"
+                        android:src="@mipmap/icon_tongji"/>
+                    <TextView
+                        style="@style/CommonText"
+                        android:gravity="center"
+                        android:text="@string/main_zctj"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 </layout>

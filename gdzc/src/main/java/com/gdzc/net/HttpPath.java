@@ -23,4 +23,5 @@ public class HttpPath {
     public static final String selectCchByYqbhUrl = "AndroidInterface-0.0.1-SNAPSHOT/zj/selectCchByYqbh";//2.2.8	查询cch库数据(根据zj资产编号)
     public static final String updateCchByIdUrl = "AndroidInterface-0.0.1-SNAPSHOT/zj/updateCchById";//2.2.9	根据cch表id修改cch数据
     public static final String deleteZjByIdUrl = "AndroidInterface-0.0.1-SNAPSHOT/zj/deleteZjById";//2.2.11	删除zj数据
+    public static final String selectMyDataTotalByCategoryUrl = "AndroidInterface-0.0.1-SNAPSHOT/search/selectMyDataTotalByCategory";//统计
 }

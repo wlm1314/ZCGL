@@ -129,9 +129,17 @@ public class HttpPostParams {
         return map;
     }
 
-    public static Map<String, String> paramDeleteZjById(String Id) {
+    public static Map<String, String> paramDeleteZjById(String id) {
         Map<String, String> map = BaseParams();
-        map.put("Id", Id);
+        map.put("id", id);
+        return map;
+    }
+
+    public static Map<String, String> paramSelectMyDataTotalByCategory(String category, String rksjstart, String rksjend) {
+        Map<String, String> map = BaseParams();
+        map.put("category", category);
+        map.put("rksjstart", rksjstart);
+        map.put("rksjend", rksjend);
         return map;
     }
 }

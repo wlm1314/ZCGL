@@ -9,6 +9,7 @@ import com.gdzc.zcdj.model.CchBean;
 import com.gdzc.zcdj.model.ZcxgBean;
 import com.gdzc.zcdj.model.ZcxgEditBean;
 import com.gdzc.zcdj.model.ZcdjBean;
+import com.gdzc.zctj.model.ZctjBean;
 
 import java.util.Map;
 
@@ -98,5 +99,10 @@ public interface RequestApi {
     @FormUrlEncoded
     @POST(HttpPath.deleteZjByIdUrl)
     Observable<BaseBean> DeleteZjById(@FieldMap Map<String, String> params);
+
+    //统计
+    @FormUrlEncoded
+    @POST(HttpPath.selectMyDataTotalByCategoryUrl)
+    Observable<ZctjBean> SelectMyDataTotalByCategory(@FieldMap Map<String, String> params);
 
 }
