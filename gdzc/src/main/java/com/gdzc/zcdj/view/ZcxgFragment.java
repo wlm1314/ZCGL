@@ -4,17 +4,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 
-import com.gdzc.BR;
 import com.gdzc.R;
 import com.gdzc.base.BaseFragment;
 import com.gdzc.databinding.FragmentZcxgBinding;
+import com.gdzc.net.HttpPostParams;
+import com.gdzc.net.HttpRequest;
+import com.gdzc.net.RetrofitSubscriber;
 import com.gdzc.utils.NavigateUtils;
-import com.gdzc.widget.recycleview.BindingTool;
-import com.gdzc.zcdj.adapter.ZcbgAdapter;
+import com.gdzc.utils.Utils;
+import com.gdzc.widget.MessageDialog;
+import com.gdzc.zcdj.adapter.ZcxgAdapter;
 import com.gdzc.zcdj.model.ZcxgBean;
 import com.gdzc.zcdj.viewmodel.ZcxgViewModel;
 import com.pulltofresh.PullToRefreshBase;
 import com.pulltofresh.extras.CustomNestedScrollView;
+import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
+import com.yanzhenjie.recyclerview.swipe.SwipeMenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +31,27 @@ import static android.app.Activity.RESULT_OK;
  */
 
 public class ZcxgFragment extends BaseFragment<FragmentZcxgBinding> {
-    private ZcbgAdapter mAdapter;
-    private List<ZcxgBean.ListBean> mList = new ArrayList<>();
+    private ZcxgAdapter mAdapter;
+    private List<ZcxgBean.Zcxg> mList = new ArrayList<>();
     private ZcxgViewModel mViewModel;
     private int pageNo = 1;
+
+    /**
+     * 菜单创建器。在Item要创建菜单的时候调用。
+     */
+    private SwipeMenuCreator swipeMenuCreator = (swipeLeftMenu, swipeRightMenu, viewType) -> {
+
+        SwipeMenuItem deleteItem = new SwipeMenuItem(getContext())
+                .setImage(R.mipmap.icon_delete) // 图标。
+                .setText("删除") // 文字。
+                .setTextColor(getResources().getColor(R.color.blue_primary)) // 文字颜色。
+                .setTextSize(14) // 文字大小。
+                .setWidth(200)
+                .setHeight(Utils.dip2px(160));
+        swipeRightMenu.addMenuItem(deleteItem);// 添加一个按钮到右侧侧菜单。.
+
+        // 上面的菜单哪边不要菜单就不要添加。
+    };
 
     @Override
     protected int getLayoutId() {
@@ -49,10 +71,41 @@ public class ZcxgFragment extends BaseFragment<FragmentZcxgBinding> {
     }
 
     private void initView() {
-        mBinding.rvZcbg.setLayoutManager(new LinearLayoutManager(getContext()));
-        mBinding.rvZcbg.setHasFixedSize(true);
-        mAdapter = new ZcbgAdapter(new BindingTool(R.layout.adapter_zcxg_item, BR.data), mList);
-        mBinding.rvZcbg.setAdapter(mAdapter);
+        mBinding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mBinding.recyclerView.setHasFixedSize(true);
+        // 设置菜单创建器。
+        mBinding.recyclerView.setSwipeMenuCreator(swipeMenuCreator);
+        // 设置菜单Item点击监听。
+        mBinding.recyclerView.setSwipeMenuItemClickListener((closeable, adapterPosition, menuPosition, direction) -> {
+            // TODO 如果是删除：推荐调用Adapter.notifyItemRemoved(position)，不推荐Adapter.notifyDataSetChanged();
+            if (menuPosition == 0) {// 删除按钮被点击。
+                MessageDialog messageDialog = new MessageDialog(getActivity(), "确认删除吗？");
+                messageDialog.setTitle("提示");
+                messageDialog.setDialogFinishListener(new MessageDialog.OnDialogFinishListener() {
+                    @Override
+                    public void onFinish() {
+                        HttpRequest.DeleteZjById(HttpPostParams.paramDeleteZjById(mList.get(adapterPosition).id))
+                                .subscribe(new RetrofitSubscriber<>(baseBean -> {
+                                    if (baseBean.status.isSuccess()) {
+                                        messageDialog.dismiss();
+                                        Utils.showToast("删除成功");
+                                        mList.remove(adapterPosition);
+                                        mAdapter.notifyItemRemoved(adapterPosition);
+                                    }
+                                }));
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        messageDialog.dismiss();
+                    }
+                });
+                messageDialog.show();
+            }
+        });
+        mAdapter = new ZcxgAdapter(mList);
+        mAdapter.setOnItemClickListener(position -> startZcdjEditActivity(mList.get(position)));
+        mBinding.recyclerView.setAdapter(mAdapter);
     }
 
     private void setListener() {
@@ -67,15 +120,11 @@ public class ZcxgFragment extends BaseFragment<FragmentZcxgBinding> {
                 mViewModel.getData(pageNo++);
             }
         });
-        mAdapter.setItemClickLister((view, position) -> {
-            ZcxgBean.ListBean bean = mList.get(position);
-                startZcdjEditActivity(bean);
-        });
     }
 
-    private void startZcdjEditActivity(ZcxgBean.ListBean bean){
+    private void startZcdjEditActivity(ZcxgBean.Zcxg zcxg) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable("zcbg", bean);
+        bundle.putSerializable("zcxg", zcxg);
         NavigateUtils.startActivityForResult(getActivity(), ZcdjEditActivity.class, 1000, bundle);
     }
 

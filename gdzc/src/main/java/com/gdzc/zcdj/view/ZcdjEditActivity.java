@@ -47,7 +47,7 @@ import rx.Observable;
 public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
     private List<ZcxgEditBean.Zcxg> mList = new ArrayList<>();
     private BindingAdapter<ZcxgEditBean.Zcxg> mAdapter;
-    private ZcxgBean.ListBean zcbg;
+    private ZcxgBean.Zcxg zcxg;
     private String yqbh = "";
 
     @Override
@@ -98,21 +98,21 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
     }
 
     private void getData() {
-        zcbg = (ZcxgBean.ListBean) getIntent().getExtras().getSerializable("zcbg");
-        HttpRequest.SearchZJById(HttpPostParams.paramselectZjById(zcbg.id))
+        zcxg = (ZcxgBean.Zcxg) getIntent().getExtras().getSerializable("zcxg");
+        HttpRequest.SearchZJById(HttpPostParams.paramselectZjById(zcxg.id))
                 .subscribe(new RetrofitSubscriber<>(zcbgEditBean -> {
-                    mList.add(getZcbg("分类号", zcbg.分类号));
-                    mList.add(getZcbg("分类名称", zcbg.字符字段7));
-                    mList.add(getZcbg("国标分类号", zcbg.国标分类号));
-                    mList.add(getZcbg("国标分类名", zcbg.国标分类名));
-                    mList.add(getZcbg("单价", zcbg.单价));
-                    mList.add(getZcbg("成批条数", zcbg.批量));
-                    mList.add(getZcbg("数量", zcbg.数量));
-                    mList.add(getZcbg("金额", zcbg.金额));
+                    mList.add(getZcbg("分类号", zcxg.分类号));
+                    mList.add(getZcbg("分类名称", zcxg.字符字段7));
+                    mList.add(getZcbg("国标分类号", zcxg.国标分类号));
+                    mList.add(getZcbg("国标分类名", zcxg.国标分类名));
+                    mList.add(getZcbg("单价", zcxg.单价));
+                    mList.add(getZcbg("成批条数", zcxg.批量));
+                    mList.add(getZcbg("数量", zcxg.数量));
+                    mList.add(getZcbg("金额", zcxg.金额));
                     Observable.from(zcbgEditBean.data).subscribe(dataBean -> mList.add(ZcxgEditBean.Zcxg.castToZcxb(dataBean)));
                     Observable.from(zcbgEditBean.data).filter(dataBean -> dataBean.字段名.equals("资产编号")).subscribe(dataBean -> yqbh = dataBean.值);
                     mAdapter.notifyDataSetChanged();
-                    if (!zcbg.批量.equals("1")) mBinding.tvCch.setVisibility(View.VISIBLE);
+                    if (!zcxg.批量.equals("1")) mBinding.tvCch.setVisibility(View.VISIBLE);
                 }));
     }
 
@@ -127,7 +127,7 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
     public boolean onOptionsItemSelected(MenuItem item) {
         JSONObject jsonObj = new JSONObject();
         try {
-            jsonObj.put("id", zcbg.id);
+            jsonObj.put("id", zcxg.id);
             for (ZcxgEditBean.Zcxg zcxg : mList) {
                 if (zcxg.isNull.equals("1") && TextUtils.isEmpty(zcxg.val.get())) {
                     Utils.showToast(zcxg.xsnr);

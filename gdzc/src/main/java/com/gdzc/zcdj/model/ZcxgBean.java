@@ -23,10 +23,10 @@ public class ZcxgBean extends BaseBean {
     public static class DataBean {
         public boolean isFirstPage;
         public boolean isLastPage;
-        public List<ListBean> list;
+        public List<Zcxg> list;
     }
 
-    public static class ListBean implements Serializable {
+    public static class Zcxg implements Serializable {
         public String id;
         public String 领用单位号;
         public String 资产编号;
@@ -174,4 +174,5 @@ public class ZcxgBean extends BaseBean {
         public String 材质类型;
         public String 残缺情况;
     }
+
 }

@@ -32,40 +32,40 @@ public final class R {
 		public static final int pickerview_wheelview_textcolor_out = 0x7f060007;
 	}
 	public static final class dimen {
-		public static final int pickerview_textsize = 0x7f080000;
-		public static final int pickerview_topbar_btn_textsize = 0x7f080001;
-		public static final int pickerview_topbar_height = 0x7f080002;
-		public static final int pickerview_topbar_paddingleft = 0x7f080003;
-		public static final int pickerview_topbar_paddingright = 0x7f080004;
-		public static final int pickerview_topbar_title_textsize = 0x7f080005;
+		public static final int pickerview_textsize = 0x7f070000;
+		public static final int pickerview_topbar_btn_textsize = 0x7f070001;
+		public static final int pickerview_topbar_height = 0x7f070002;
+		public static final int pickerview_topbar_paddingleft = 0x7f070003;
+		public static final int pickerview_topbar_paddingright = 0x7f070004;
+		public static final int pickerview_topbar_title_textsize = 0x7f070005;
 	}
 	public static final class drawable {
 		public static final int ic_login_close = 0x7f020000;
 		public static final int selector_pickerview_btn = 0x7f020001;
 	}
 	public static final class id {
-		public static final int btnCancel = 0x7f070004;
-		public static final int btnSubmit = 0x7f070006;
-		public static final int center = 0x7f070000;
-		public static final int content_container = 0x7f070008;
-		public static final int day = 0x7f070010;
-		public static final int fl_cancel = 0x7f070003;
-		public static final int hour = 0x7f070011;
-		public static final int left = 0x7f070001;
-		public static final int min = 0x7f070012;
-		public static final int month = 0x7f07000f;
-		public static final int options1 = 0x7f07000a;
-		public static final int options2 = 0x7f07000b;
-		public static final int options3 = 0x7f07000c;
-		public static final int optionspicker = 0x7f070009;
-		public static final int outmost_container = 0x7f070007;
-		public static final int right = 0x7f070002;
-		public static final int timepicker = 0x7f07000d;
-		public static final int tvTitle = 0x7f070005;
-		public static final int year = 0x7f07000e;
+		public static final int btnCancel = 0x7f0a0004;
+		public static final int btnSubmit = 0x7f0a0006;
+		public static final int center = 0x7f0a0000;
+		public static final int content_container = 0x7f0a0008;
+		public static final int day = 0x7f0a0010;
+		public static final int fl_cancel = 0x7f0a0003;
+		public static final int hour = 0x7f0a0011;
+		public static final int left = 0x7f0a0001;
+		public static final int min = 0x7f0a0012;
+		public static final int month = 0x7f0a000f;
+		public static final int options1 = 0x7f0a000a;
+		public static final int options2 = 0x7f0a000b;
+		public static final int options3 = 0x7f0a000c;
+		public static final int optionspicker = 0x7f0a0009;
+		public static final int outmost_container = 0x7f0a0007;
+		public static final int right = 0x7f0a0002;
+		public static final int timepicker = 0x7f0a000d;
+		public static final int tvTitle = 0x7f0a0005;
+		public static final int year = 0x7f0a000e;
 	}
 	public static final class integer {
-		public static final int animation_default_duration = 0x7f090000;
+		public static final int animation_default_duration = 0x7f080000;
 	}
 	public static final class layout {
 		public static final int include_pickerview_topbar = 0x7f030000;
@@ -74,14 +74,14 @@ public final class R {
 		public static final int pickerview_time = 0x7f030003;
 	}
 	public static final class string {
-		public static final int pickerview_cancel = 0x7f0a0000;
-		public static final int pickerview_day = 0x7f0a0001;
-		public static final int pickerview_hours = 0x7f0a0002;
-		public static final int pickerview_minutes = 0x7f0a0003;
-		public static final int pickerview_month = 0x7f0a0004;
-		public static final int pickerview_seconds = 0x7f0a0005;
-		public static final int pickerview_submit = 0x7f0a0006;
-		public static final int pickerview_year = 0x7f0a0007;
+		public static final int pickerview_cancel = 0x7f090000;
+		public static final int pickerview_day = 0x7f090001;
+		public static final int pickerview_hours = 0x7f090002;
+		public static final int pickerview_minutes = 0x7f090003;
+		public static final int pickerview_month = 0x7f090004;
+		public static final int pickerview_seconds = 0x7f090005;
+		public static final int pickerview_submit = 0x7f090006;
+		public static final int pickerview_year = 0x7f090007;
 	}
 	public static final class styleable {
 		public static final int[] wheelview = { 0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003, 0x7f010004 };

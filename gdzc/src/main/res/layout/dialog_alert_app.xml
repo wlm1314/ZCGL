@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="@dimen/dimen_10"
-        android:textSize="@dimen/subheading"
         android:textColor="@color/text_sub"
+        android:textSize="@dimen/body"
         android:visibility="visible"/>
 
     <TextView
@@ -20,11 +20,11 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/dimen_10"
         android:gravity="center"
         android:padding="@dimen/dimen_10"
         android:singleLine="false"
         android:textColor="@color/text_sub"
-        android:layout_marginBottom="@dimen/dimen_10"
         android:textSize="@dimen/body"/>
 
     <View
@@ -44,7 +44,9 @@
             style="@style/CommonButton"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:text="取消"/>
+            android:background="@color/clear"
+            android:text="取消"
+            android:textColor="@color/blue_primary"/>
 
         <View
             android:id="@+id/line_h"
@@ -57,7 +59,9 @@
             style="@style/CommonButton"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:background="@color/clear"
             android:text="确定"
+            android:textColor="@color/blue_primary"
         />
 
     </LinearLayout>

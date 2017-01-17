@@ -128,4 +128,10 @@ public class HttpPostParams {
         map.put("updatecchstr", updatecchstr);
         return map;
     }
+
+    public static Map<String, String> paramDeleteZjById(String Id) {
+        Map<String, String> map = BaseParams();
+        map.put("Id", Id);
+        return map;
+    }
 }

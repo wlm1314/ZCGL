@@ -191,6 +191,17 @@ public class HttpRequest {
     }
 
     /**
+     * @param params
+     * @return
+     */
+    public static Observable<BaseBean> DeleteZjById(Map<String, String> params) {
+        printParam(params);
+        return getInstance().create(RequestApi.class).DeleteZjById(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
      * 打印请求参数
      *
      * @param params

@@ -147,7 +147,7 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
 
     private void setListener() {
         mBinding.tvFlh.setOnClickListener(v -> NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), FlhActivity.class, 1000));
-        mBinding.btCreate.setOnClickListener(v -> mViewModel.getTsxx(mFlh.flh, mBinding.tvDj.getText().toString()));
+        mBinding.btCreate.setOnClickListener(v -> mViewModel.getTsxx(mFlh == null ? "" : mFlh.flh, mBinding.tvDj.getText().toString()));
         mBinding.imgLayout.getRoot().findViewById(R.id.iv_zc).setOnClickListener(v -> initPhotoView((ImageView) v));
         mBinding.imgLayout.getRoot().findViewById(R.id.iv_fp).setOnClickListener(v -> initPhotoView((ImageView) v));
         mBinding.btConfirm.setOnClickListener(v -> save());
@@ -322,7 +322,7 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
         }
     }
 
-    public void reset(){
+    public void reset() {
         mList.clear();
         mAdapter.notifyDataSetChanged();
         mBinding.imgLayout.getRoot().setVisibility(View.GONE);

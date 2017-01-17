@@ -94,4 +94,9 @@ public interface RequestApi {
     @POST(HttpPath.updateCchByIdUrl)
     Observable<BaseBean> UpdateCchById(@FieldMap Map<String, String> params);
 
+    //删除zj
+    @FormUrlEncoded
+    @POST(HttpPath.deleteZjByIdUrl)
+    Observable<BaseBean> DeleteZjById(@FieldMap Map<String, String> params);
+
 }
