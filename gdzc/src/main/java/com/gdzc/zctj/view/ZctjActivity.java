@@ -23,7 +23,6 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
-import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
@@ -58,27 +57,40 @@ public class ZctjActivity extends BaseActivity<ActivityZctjBinding> {
 
     private void initPieChart() {
         mPieChart = mBinding.chartPie;
-        mPieChart.setUsePercentValues(true);
+        //是否使用百分比
+        mPieChart.setUsePercentValues(false);
         mPieChart.getDescription().setEnabled(false);
-        mPieChart.setExtraOffsets(5, 10, 5, 5);
+
+        //圆环距离屏幕上下上下左右的距离
+        mPieChart.setExtraOffsets(5, 10, 25, 5);
 
         mPieChart.setDragDecelerationFrictionCoef(0.95f);
 
+        //是否显示圆环中间的洞
         mPieChart.setDrawHoleEnabled(true);
+        //设置中间洞的颜色
         mPieChart.setHoleColor(Color.WHITE);
+        //是否显示洞中间文本
+        mPieChart.setDrawCenterText(true);
+        //设置环中间的文字
+        mPieChart.setCenterText("数量统计（台件）");
 
+        //设置圆环透明度及半径
         mPieChart.setTransparentCircleColor(Color.WHITE);
         mPieChart.setTransparentCircleAlpha(110);
-
-        mPieChart.setHoleRadius(58f);
         mPieChart.setTransparentCircleRadius(61f);
 
-        mPieChart.setDrawCenterText(true);
+        //设置圆环中间洞的半径
+        mPieChart.setHoleRadius(58f);
 
+        //触摸是否可以旋转以及松手后旋转的度数
         mPieChart.setRotationAngle(0);
-        // enable rotation of the chart by touch
         mPieChart.setRotationEnabled(true);
+
         mPieChart.setHighlightPerTapEnabled(true);
+
+        //只显示比例
+        mPieChart.setDrawEntryLabels(false);
 
         mPieChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
 
@@ -86,7 +98,7 @@ public class ZctjActivity extends BaseActivity<ActivityZctjBinding> {
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
         l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
         l.setOrientation(Legend.LegendOrientation.VERTICAL);
-        l.setDrawInside(false);
+        l.setDrawInside(true);
         l.setXEntrySpace(7f);
         l.setYEntrySpace(0f);
         l.setYOffset(0f);
@@ -107,7 +119,6 @@ public class ZctjActivity extends BaseActivity<ActivityZctjBinding> {
         mBarChart.setMaxVisibleValueCount(60);
         mBarChart.setPinchZoom(false);
         mBarChart.setDrawGridBackground(false);
-
 
         XAxis xAxis = mBarChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -171,7 +182,6 @@ public class ZctjActivity extends BaseActivity<ActivityZctjBinding> {
         dataSet.setColors(colors);
 
         PieData data = new PieData(dataSet);
-        data.setValueFormatter(new PercentFormatter());
         data.setValueTextSize(11f);
         data.setValueTextColor(Color.WHITE);
         mPieChart.setData(data);
@@ -181,7 +191,8 @@ public class ZctjActivity extends BaseActivity<ActivityZctjBinding> {
         mPieChart.invalidate();
     }
 
-    int i=1;
+    int i = 1;
+
     public void setBarData(ZctjBean zctjBean) {
         i = 0;
         final List<Data> data = new ArrayList<>();
@@ -190,10 +201,21 @@ public class ZctjActivity extends BaseActivity<ActivityZctjBinding> {
         mBarChart.getXAxis().setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
-                return data.get(Math.min(Math.max((int) value, 0), data.size()-1)).xAxisValue;
+                return data.get(Math.min(Math.max((int) value, 0), data.size() - 1)).xAxisValue;
             }
         });
-
+        mBarChart.getAxisRight().setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return (int) value + "台件";
+            }
+        });
+        mBarChart.getAxisLeft().setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return (int) value + "台件";
+            }
+        });
         setData(data);
     }
 
@@ -227,7 +249,7 @@ public class ZctjActivity extends BaseActivity<ActivityZctjBinding> {
 
         if (mBarChart.getData() != null &&
                 mBarChart.getData().getDataSetCount() > 0) {
-            set = (BarDataSet)mBarChart.getData().getDataSetByIndex(0);
+            set = (BarDataSet) mBarChart.getData().getDataSetByIndex(0);
             set.setValues(values);
             mBarChart.getData().notifyDataChanged();
             mBarChart.notifyDataSetChanged();
@@ -259,13 +281,13 @@ public class ZctjActivity extends BaseActivity<ActivityZctjBinding> {
         }
     }
 
-    public void showPieChart(){
+    public void showPieChart() {
         mBarChart.setVisibility(View.GONE);
         mPieChart.setVisibility(View.VISIBLE);
         mPieChart.animateX(1400, Easing.EasingOption.EaseInOutQuad);
     }
 
-    public void showBarChart(){
+    public void showBarChart() {
         mBarChart.setVisibility(View.VISIBLE);
         mPieChart.setVisibility(View.GONE);
         mBarChart.animateX(1400, Easing.EasingOption.EaseInOutQuad);
