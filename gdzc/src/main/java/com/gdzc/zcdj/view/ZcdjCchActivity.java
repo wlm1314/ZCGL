@@ -60,7 +60,7 @@ public class ZcdjCchActivity extends BaseActivity<ActivityZcdjCchBinding> {
         mAdapter.setItemClickLister((view, position) -> {
             Bundle bundle = new Bundle();
             bundle.putSerializable("Cch", mList.get(position));
-            NavigateUtils.startActivity(ZcdjCchActivity.this, ZcdjCchEditActivity.class, bundle);
+            NavigateUtils.startActivityForResult(ZcdjCchActivity.this, ZcdjCchEditActivity.class, 1000, bundle);
         });
 
     }

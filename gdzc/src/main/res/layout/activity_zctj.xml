@@ -86,9 +86,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dimen_10"
-            app:clickCommand="@{viewModel.createChart}"
             android:text="生成图表"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            app:clickCommand="@{viewModel.createChart}"/>
 
         <View style="@style/line_cell_light_h"/>
 
@@ -100,7 +100,8 @@
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/chart_bar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
 
     </LinearLayout>
 

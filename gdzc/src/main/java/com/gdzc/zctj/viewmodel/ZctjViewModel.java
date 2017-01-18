@@ -55,6 +55,7 @@ public class ZctjViewModel {
                 break;
             case "chart":
                 chartType.set(type1.get());
+                ((ZctjActivity)App.getAppContext().getCurrentActivity()).showPieChart();
                 break;
         }
     });
@@ -67,6 +68,7 @@ public class ZctjViewModel {
                 break;
             case "chart":
                 chartType.set(type2.get());
+                ((ZctjActivity)App.getAppContext().getCurrentActivity()).showBarChart();
                 break;
         }
     });
@@ -104,6 +106,9 @@ public class ZctjViewModel {
 
     public void createChart(){
         HttpRequest.SelectMyDataTotalByCategory(HttpPostParams.paramSelectMyDataTotalByCategory(category, startTime.get(), endTime.get()))
-                .subscribe(new RetrofitSubscriber<>(zctjBean -> ((ZctjActivity) App.getAppContext().getCurrentActivity()).setData(zctjBean)));
+                .subscribe(new RetrofitSubscriber<>(zctjBean -> {
+                    ((ZctjActivity) App.getAppContext().getCurrentActivity()).setPieData(zctjBean);
+                    ((ZctjActivity) App.getAppContext().getCurrentActivity()).setBarData(zctjBean);
+                }));
     }
 }
