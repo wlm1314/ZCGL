@@ -21,7 +21,10 @@
                 android:checked="@{data.checked==null?false:data.checked}"/>
             <TextView style="@style/CommonText"
                       android:padding="@dimen/dimen_10"
-                      android:text="@{Syfx.getMC(data)}"/>
+                      android:text="@{Syfx.getBH(data).trim()}"/>
+            <TextView style="@style/CommonText"
+                      android:padding="@dimen/dimen_10"
+                      android:text="@{Syfx.getMC(data).trim()}"/>
         </LinearLayout>
         <View style="@style/line_cell_light_h"/>
     </LinearLayout>

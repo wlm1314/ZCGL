@@ -20,7 +20,10 @@
                 android:checked="@{data.checked==null?false:data.checked}"/>
             <TextView style="@style/CommonText"
                       android:padding="@dimen/dimen_10"
-                      android:text="@{data.dwName}"/>
+                      android:text="@{data.dwId.trim()}"/>
+            <TextView style="@style/CommonText"
+                      android:padding="@dimen/dimen_10"
+                      android:text="@{data.dwName.trim()}"/>
         </LinearLayout>
         <View style="@style/line_cell_light_h"/>
     </LinearLayout>

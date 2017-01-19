@@ -36,6 +36,10 @@ public class SyfxBean extends BaseBean {
             return syfx.校名称;
         }
 
+        public static String getBH(Syfx syfx) {
+            return syfx.校编号;
+        }
+
         public final ObservableField<Boolean> checked = new ObservableField<>();
     }
 
