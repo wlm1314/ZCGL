@@ -142,4 +142,41 @@ public class HttpPostParams {
         map.put("rksjend", rksjend);
         return map;
     }
+
+    public static Map<String, String> paramSelectMyAllData(String zcbh, String zcmc, String cfdmc, String cfdbh, String gzrqstart, String gzrqend, String rksjstart, String rksjend, String pageNum) {
+        Map<String, String> map = BaseParams();
+        map.put("zcbh", zcbh);
+        map.put("zcmc", zcmc);
+        map.put("cfdmc", cfdmc);
+        map.put("cfdbh", cfdbh);
+        map.put("gzrqstart", gzrqstart);
+        map.put("gzrqend", gzrqend);
+        map.put("rksjstart", rksjstart);
+        map.put("rksjend", rksjend);
+        map.put("pageNum", pageNum);
+        map.put("pageSize", "10");
+        return map;
+    }
+
+    public static Map<String, String> paramSelectMySonData(String zcbh, String zcmc, String cfdmc, String cfdbh, String gzrqstart, String gzrqend, String rksjstart, String rksjend, String pageNum, String son) {
+        Map<String, String> map = BaseParams();
+        map.put("zcbh", zcbh);
+        map.put("zcmc", zcmc);
+        map.put("cfdmc", cfdmc);
+        map.put("cfdbh", cfdbh);
+        map.put("gzrqstart", gzrqstart);
+        map.put("gzrqend", gzrqend);
+        map.put("rksjstart", rksjstart);
+        map.put("rksjend", rksjend);
+        map.put("pageNum", pageNum);
+        map.put("pageSize", "10");
+        map.put("son", son);
+        return map;
+    }
+
+    public static Map<String, String> paramSelectPoolById(String id) {
+        Map<String, String> map = BaseParams();
+        map.put("id", id);
+        return map;
+    }
 }

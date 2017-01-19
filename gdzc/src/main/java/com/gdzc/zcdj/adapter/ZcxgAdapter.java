@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.gdzc.R;
@@ -19,6 +20,11 @@ import java.util.List;
 public class ZcxgAdapter extends SwipeMenuAdapter<ZcxgAdapter.DefaultViewHolder> {
     private OnItemClickListener mOnItemClickListener;
     private List<ZcxgBean.Zcxg> datas;
+    private String dataType = "zcxg";
+
+    public void setDataType(String dataType) {
+        this.dataType = dataType;
+    }
 
     public void setOnItemClickListener(OnItemClickListener mOnItemClickListener) {
         this.mOnItemClickListener = mOnItemClickListener;
@@ -45,17 +51,21 @@ public class ZcxgAdapter extends SwipeMenuAdapter<ZcxgAdapter.DefaultViewHolder>
 
     @Override
     public void onBindViewHolder(ZcxgAdapter.DefaultViewHolder holder, int position) {
-        holder.setData(datas.get(position));
+        holder.setData(datas.get(position), dataType);
         holder.setOnItemClickListener(mOnItemClickListener);
     }
 
     static class DefaultViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        LinearLayout llZcxg, llZccx;
         TextView tvZcmc, tvFlmc, tvDj, tvSl, tvPl, tvJe, tvXh, tvGg, tvCj, tvCch;
+        TextView tvZcmcCx, tvLydwCx, tvGgCx, tvXhCx, tvCjCx, tvLyrCx;
         OnItemClickListener mOnItemClickListener;
 
         public DefaultViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
+            llZcxg = (LinearLayout) itemView.findViewById(R.id.layout_zcxg);
+            llZccx = (LinearLayout) itemView.findViewById(R.id.layout_zccx);
             tvZcmc = (TextView) itemView.findViewById(R.id.tv_zcmc);
             tvFlmc = (TextView) itemView.findViewById(R.id.tv_flmc);
             tvDj = (TextView) itemView.findViewById(R.id.tv_dj);
@@ -66,13 +76,27 @@ public class ZcxgAdapter extends SwipeMenuAdapter<ZcxgAdapter.DefaultViewHolder>
             tvGg = (TextView) itemView.findViewById(R.id.tv_gg);
             tvCj = (TextView) itemView.findViewById(R.id.tv_cj);
             tvCch = (TextView) itemView.findViewById(R.id.tv_cch);
+
+            tvZcmcCx = (TextView) itemView.findViewById(R.id.tv_zcmc_cx);
+            tvLydwCx = (TextView) itemView.findViewById(R.id.tv_lydw_cx);
+            tvGgCx = (TextView) itemView.findViewById(R.id.tv_gg_cx);
+            tvXhCx = (TextView) itemView.findViewById(R.id.tv_xh_cx);
+            tvCjCx = (TextView) itemView.findViewById(R.id.tv_cj_cx);
+            tvLyrCx = (TextView) itemView.findViewById(R.id.tv_lyr_cx);
         }
 
         public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
             this.mOnItemClickListener = onItemClickListener;
         }
 
-        public void setData(ZcxgBean.Zcxg zcxg) {
+        public void setData(ZcxgBean.Zcxg zcxg, String dataType) {
+            if (dataType.equals("zcxg")) {
+                llZcxg.setVisibility(View.VISIBLE);
+                llZccx.setVisibility(View.GONE);
+            }else {
+                llZcxg.setVisibility(View.GONE);
+                llZccx.setVisibility(View.VISIBLE);
+            }
             tvZcmc.setText(zcxg.资产名称);
             tvFlmc.setText(zcxg.字符字段7);
             tvDj.setText(zcxg.单价);
@@ -83,6 +107,13 @@ public class ZcxgAdapter extends SwipeMenuAdapter<ZcxgAdapter.DefaultViewHolder>
             tvGg.setText(zcxg.规格);
             tvCj.setText(zcxg.厂家);
             tvCch.setText(zcxg.出厂号);
+
+            tvZcmcCx.setText(zcxg.资产名称);
+            tvLydwCx.setText(zcxg.领用单位号);
+            tvXhCx.setText(zcxg.型号);
+            tvGgCx.setText(zcxg.规格);
+            tvCjCx.setText(zcxg.厂家);
+            tvLyrCx.setText(zcxg.领用人);
         }
 
         @Override

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <import type="com.gdzc.zccx.model.ZccxBean.ZccxDetail"/>
+        <variable name="data" type="ZccxDetail"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/margin_horizontal"
+        android:paddingRight="@dimen/margin_horizontal"
+        android:paddingTop="@dimen/dimen_5">
+
+        <TextView
+            style="@style/CommonText"
+            android:layout_width="wrap_content"
+            android:paddingBottom="@dimen/dimen_10"
+            android:paddingRight="@dimen/dimen_10"
+            android:paddingTop="@dimen/dimen_10"
+            android:text="@{data.xsnr+`:`}"/>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_weight="1"
+                      android:orientation="vertical">
+            <TextView
+                style="@style/CommonText"
+                android:layout_width="match_parent"
+                android:maxLines="1"
+                android:text="@={data.val}"
+                app:colorControlActivated="@color/colorPrimary"/>
+            <View style="@style/line_cell_light_h"
+                  android:layout_height="1dp"
+                  android:background="@color/gray"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</layout>

@@ -75,6 +75,23 @@ public class ZcxgFragment extends BaseFragment<FragmentZcxgBinding> {
         mBinding.recyclerView.setHasFixedSize(true);
         // 设置菜单创建器。
         mBinding.recyclerView.setSwipeMenuCreator(swipeMenuCreator);
+        mAdapter = new ZcxgAdapter(mList);
+        mAdapter.setDataType("zcxg");
+        mBinding.recyclerView.setAdapter(mAdapter);
+    }
+
+    private void setListener() {
+        mBinding.pullView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<CustomNestedScrollView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<CustomNestedScrollView> refreshView) {
+
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<CustomNestedScrollView> refreshView) {
+                mViewModel.getData(pageNo++);
+            }
+        });
         // 设置菜单Item点击监听。
         mBinding.recyclerView.setSwipeMenuItemClickListener((closeable, adapterPosition, menuPosition, direction) -> {
             // TODO 如果是删除：推荐调用Adapter.notifyItemRemoved(position)，不推荐Adapter.notifyDataSetChanged();
@@ -103,23 +120,7 @@ public class ZcxgFragment extends BaseFragment<FragmentZcxgBinding> {
                 messageDialog.show();
             }
         });
-        mAdapter = new ZcxgAdapter(mList);
         mAdapter.setOnItemClickListener(position -> startZcdjEditActivity(mList.get(position)));
-        mBinding.recyclerView.setAdapter(mAdapter);
-    }
-
-    private void setListener() {
-        mBinding.pullView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<CustomNestedScrollView>() {
-            @Override
-            public void onPullDownToRefresh(PullToRefreshBase<CustomNestedScrollView> refreshView) {
-
-            }
-
-            @Override
-            public void onPullUpToRefresh(PullToRefreshBase<CustomNestedScrollView> refreshView) {
-                mViewModel.getData(pageNo++);
-            }
-        });
     }
 
     private void startZcdjEditActivity(ZcxgBean.Zcxg zcxg) {

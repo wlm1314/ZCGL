@@ -5,10 +5,11 @@ import com.gdzc.flh.model.FlhBean;
 import com.gdzc.login.model.LoginBean;
 import com.gdzc.lydw.model.LydwBean;
 import com.gdzc.syfx.model.SyfxBean;
+import com.gdzc.zccx.model.ZccxBean;
 import com.gdzc.zcdj.model.CchBean;
+import com.gdzc.zcdj.model.ZcdjBean;
 import com.gdzc.zcdj.model.ZcxgBean;
 import com.gdzc.zcdj.model.ZcxgEditBean;
-import com.gdzc.zcdj.model.ZcdjBean;
 import com.gdzc.zctj.model.ZctjBean;
 
 import java.util.Map;
@@ -104,5 +105,20 @@ public interface RequestApi {
     @FormUrlEncoded
     @POST(HttpPath.selectMyDataTotalByCategoryUrl)
     Observable<ZctjBean> SelectMyDataTotalByCategory(@FieldMap Map<String, String> params);
+
+    //查询已审核的数据
+    @FormUrlEncoded
+    @POST(HttpPath.selectMyAllDataUrl)
+    Observable<ZcxgBean> SelectMyAllData(@FieldMap Map<String, String> params);
+
+    //查询已审核的数据
+    @FormUrlEncoded
+    @POST(HttpPath.selectPoolByIdUrl)
+    Observable<ZccxBean> SelectPoolById(@FieldMap Map<String, String> params);
+
+    //查询已审核的数据
+    @FormUrlEncoded
+    @POST(HttpPath.selectMySonData3Url)
+    Observable<ZcxgBean> selectMySonData(@FieldMap Map<String, String> params);
 
 }

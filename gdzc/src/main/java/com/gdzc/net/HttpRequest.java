@@ -6,10 +6,11 @@ import com.gdzc.login.model.LoginBean;
 import com.gdzc.lydw.model.LydwBean;
 import com.gdzc.syfx.model.SyfxBean;
 import com.gdzc.utils.BaseLog;
+import com.gdzc.zccx.model.ZccxBean;
 import com.gdzc.zcdj.model.CchBean;
+import com.gdzc.zcdj.model.ZcdjBean;
 import com.gdzc.zcdj.model.ZcxgBean;
 import com.gdzc.zcdj.model.ZcxgEditBean;
-import com.gdzc.zcdj.model.ZcdjBean;
 import com.gdzc.zctj.model.ZctjBean;
 
 import java.util.Map;
@@ -209,6 +210,39 @@ public class HttpRequest {
     public static Observable<ZctjBean> SelectMyDataTotalByCategory(Map<String, String> params) {
         printParam(params);
         return getInstance().create(RequestApi.class).SelectMyDataTotalByCategory(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * @param params
+     * @return
+     */
+    public static Observable<ZcxgBean> SelectMyAllData(Map<String, String> params) {
+        printParam(params);
+        return getInstance().create(RequestApi.class).SelectMyAllData(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * @param params
+     * @return
+     */
+    public static Observable<ZccxBean> SelectPoolById(Map<String, String> params) {
+        printParam(params);
+        return getInstance().create(RequestApi.class).SelectPoolById(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * @param params
+     * @return
+     */
+    public static Observable<ZcxgBean> selectMySonData(Map<String, String> params) {
+        printParam(params);
+        return getInstance().create(RequestApi.class).selectMySonData(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

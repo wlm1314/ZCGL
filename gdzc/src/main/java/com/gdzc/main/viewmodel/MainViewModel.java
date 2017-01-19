@@ -7,6 +7,7 @@ import com.gdzc.base.App;
 import com.gdzc.login.view.LoginActivity;
 import com.gdzc.utils.NavigateUtils;
 import com.gdzc.utils.SPUtils;
+import com.gdzc.zccx.view.ZccxActivity;
 import com.gdzc.zcdj.view.ZcdjActivity;
 import com.gdzc.zctj.view.ZctjActivity;
 
@@ -17,7 +18,7 @@ import com.gdzc.zctj.view.ZctjActivity;
 public class MainViewModel {
     public final ObservableField<String> username = new ObservableField<>();
     public ReplyCommand zcdjCommon = new ReplyCommand(() -> NavigateUtils.startActivity(App.getAppContext().getCurrentActivity(), ZcdjActivity.class));
-    public ReplyCommand zccxCommon = new ReplyCommand(() -> {});
+    public ReplyCommand zccxCommon = new ReplyCommand(() -> NavigateUtils.startActivity(App.getAppContext().getCurrentActivity(), ZccxActivity.class));
     public ReplyCommand zcbgCommon = new ReplyCommand(() -> {});
     public ReplyCommand zcqcCommon = new ReplyCommand(() -> {});
     public ReplyCommand zctjCommon = new ReplyCommand(() -> {NavigateUtils.startActivity(App.getAppContext().getCurrentActivity(), ZctjActivity.class);});

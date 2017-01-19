@@ -4,7 +4,6 @@
 
     <data>
         <variable name="appbar" type="com.gdzc.base.AppBar"/>
-        <variable name="viewModel" type="com.gdzc.zcdj.viewmodel.ZcdjViewModel"/>
     </data>
 
     <RelativeLayout android:layout_width="wrap_content"

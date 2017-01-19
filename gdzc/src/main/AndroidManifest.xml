@@ -53,6 +53,14 @@
                   android:screenOrientation="portrait"
                   android:theme="@style/AppTheme.AppComEdit"
                   android:windowSoftInputMode="stateHidden|adjustUnspecified"/>
+        <activity android:name=".zccx.view.ZccxActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme.AppComEdit"
+                  android:windowSoftInputMode="stateHidden|adjustUnspecified"/>
+        <activity android:name=".zccx.view.ZccxDetailActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme.AppComEdit"
+                  android:windowSoftInputMode="stateHidden|adjustUnspecified"/>
     </application>
 
 </manifest>
