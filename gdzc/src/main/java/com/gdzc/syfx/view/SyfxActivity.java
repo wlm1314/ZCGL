@@ -34,6 +34,7 @@ public class SyfxActivity extends BaseActivity<ActivityCustomBinding> {
     private BindingAdapter mAdapter;
     private List<SyfxBean.Syfx> mList = new ArrayList<>();
     private SyfxBean.Syfx mSyfx;
+    private String title;
 
     @Override
     protected int getLayoutId() {
@@ -42,8 +43,9 @@ public class SyfxActivity extends BaseActivity<ActivityCustomBinding> {
 
     @Override
     protected void setViewModel() {
+        title = getIntent().getExtras().getString("title");
         setSupportActionBar((Toolbar) mBinding.layoutAppbar.getRoot().findViewById(R.id.toolbar));
-        mBinding.setAppbar(new AppBar("使用方向", true));
+        mBinding.setAppbar(new AppBar(title, true));
     }
 
     @Override
@@ -80,7 +82,7 @@ public class SyfxActivity extends BaseActivity<ActivityCustomBinding> {
     }
 
     private void getSyfx() {
-        HttpRequest.GetMkList(HttpPostParams.paramGetMkList("使用方向", "1"))
+        HttpRequest.GetMkList(HttpPostParams.paramGetMkList(title, "1"))
                 .subscribe(new RetrofitSubscriber<>(syfxBean -> {
                     mBinding.ptrRv.onRefreshComplete();
                     mList.clear();
@@ -99,7 +101,7 @@ public class SyfxActivity extends BaseActivity<ActivityCustomBinding> {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (mSyfx == null)
-            Utils.showToast("请选择使用方向");
+            Utils.showToast("请选择" + title);
         else {
             Intent data = new Intent();
             data.putExtra("Syfx", mSyfx);

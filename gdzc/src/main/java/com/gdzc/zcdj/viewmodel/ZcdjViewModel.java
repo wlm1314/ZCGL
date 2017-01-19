@@ -75,9 +75,10 @@ public class ZcdjViewModel {
     public ZcdjBean.Zcdj getZcdj(String colName, String value, String isQz) {
         ZcdjBean.Zcdj zcdj = new ZcdjBean.Zcdj();
         zcdj.columName = colName;
+        zcdj.xsnr = colName;
         zcdj.editText.set(value);
         zcdj.isSelected = false;
-        zcdj.isNull = "1";
+        zcdj.djbt = "0";
         zcdj.isQz = isQz;
         return zcdj;
     }

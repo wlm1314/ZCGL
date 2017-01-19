@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:paddingBottom="@dimen/dimen_10"
             android:paddingTop="@dimen/dimen_10"
-            android:text="@{data.columName}"/>
+            android:text="@{data.xsnr}"/>
 
         <TextView
             style="@style/CommonText"
@@ -32,7 +32,7 @@
             android:paddingTop="@dimen/dimen_10"
             android:text="*"
             android:textColor="@color/red"
-            android:visibility="@{data.isNull.equals(`1`)?View.VISIBLE:View.GONE}"/>
+            android:visibility="@{data.djbt.equals(`1`)?View.VISIBLE:View.GONE}"/>
 
         <EditText
             android:id="@+id/et_text"

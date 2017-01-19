@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
@@ -107,10 +108,10 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
         dj = Integer.valueOf(mBinding.tvDj.getText().toString());
         mList.clear();
         mList.addAll(mViewModel.getZcdjByFlh(mFlh));
-        mList.add(mViewModel.getZcdj("单价", mBinding.tvDj.getText().toString(), "1"));
+        mList.add(mViewModel.getZcdj("单价(元)", mBinding.tvDj.getText().toString(), "1"));
         mList.add(mViewModel.getZcdj("成批条数", "1", zcdjBean.containsSQR() ? "0" : "1"));
         mList.add(mViewModel.getZcdj("数量", "1", zcdjBean.containsDJ() ? "0" : "1"));
-        mList.add(mViewModel.getZcdj("金额", mBinding.tvDj.getText().toString(), "1"));
+        mList.add(mViewModel.getZcdj("金额(元)", mBinding.tvDj.getText().toString(), "1"));
         Observable.from(zcdjBean.data.list).subscribe(bean -> mList.add(ZcdjBean.Zcdj.castToZcdj(bean)));
         mAdapter.notifyDataSetChanged();
         mBinding.imgLayout.getRoot().setVisibility(View.VISIBLE);
@@ -122,7 +123,7 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
     private void save() {
         JSONObject jsonObj = new JSONObject();
         for (ZcdjBean.Zcdj zcdj : mList) {
-            if (zcdj.isNull.equals("1") && TextUtils.isEmpty(zcdj.editText.get())) {
+            if (zcdj.djbt.equals("1") && TextUtils.isEmpty(zcdj.editText.get())) {
                 Utils.showToast(zcdj.tsnr);
                 return;
             } else if (!TextUtils.isEmpty(zcdj.editText.get())) {
@@ -130,7 +131,13 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
                     if (zcdj.columEng.equals("lydwh"))
                         jsonObj.put(zcdj.columName, lydw.dwId.trim());
                     else if (zcdj.columEng.equals("syfx"))
-                        jsonObj.put(zcdj.columName, syfx.校编号.trim());
+                        jsonObj.put(zcdj.columName, syfx.nr.substring(0, 1));
+                    else if (zcdj.columEng.equals("jfkem"))
+                        jsonObj.put(zcdj.columName, jfkm.nr.substring(0, 1));
+                    else if (zcdj.columEng.equals("xz"))
+                        jsonObj.put(zcdj.columName, xz.nr.substring(0, 1));
+                    else if (zcdj.columEng.equals("zcly"))
+                        jsonObj.put(zcdj.columName, zcly.nr.substring(0, 1));
                     else if (zcdj.columName.equals("分类名称"))
                         jsonObj.put("字符字段7", zcdj.editText.get().trim());
                     else if (zcdj.columName.equals("成批条数"))
@@ -158,7 +165,16 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
                     NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), LydwActivity.class, 1001);
                     break;
                 case "syfx":
-                    NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), SyfxActivity.class, 1002);
+                    startSyfxActivity("使用方向", 1002);
+                    break;
+                case "jfkem":
+                    startSyfxActivity("经费科目", 1005);
+                    break;
+                case "xz":
+                    startSyfxActivity("现状", 1006);
+                    break;
+                case "zcly":
+                    startSyfxActivity("资产来源", 1007);
                     break;
                 case "gzrq":
                     mViewModel.initTimePicker("购置日期", zcdj);
@@ -189,6 +205,12 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
                 }
             }
         }, R.id.et_text);
+    }
+
+    private void startSyfxActivity(String title, int reqCode) {
+        Bundle bundle = new Bundle();
+        bundle.putString("title", title);
+        NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), SyfxActivity.class, reqCode, bundle);
     }
 
     private void initPhotoView(ImageView view) {
@@ -269,7 +291,7 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
     };
 
     private LydwBean.Lydw lydw;
-    private SyfxBean.Syfx syfx;
+    private SyfxBean.Syfx syfx, jfkm, xz, zcly;
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -289,7 +311,25 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
                 syfx = (SyfxBean.Syfx) data.getExtras().getSerializable("Syfx");
                 Observable.from(mList)
                         .filter(zcdj -> zcdj.columEng != null && zcdj.columEng.equals("syfx"))
-                        .subscribe(zcdj -> zcdj.editText.set(syfx.校名称));
+                        .subscribe(zcdj -> zcdj.editText.set(syfx.nr.substring(2, syfx.nr.length())));
+                break;
+            case 1005:
+                jfkm = (SyfxBean.Syfx) data.getExtras().getSerializable("Syfx");
+                Observable.from(mList)
+                        .filter(zcdj -> zcdj.columEng != null && zcdj.columEng.equals("jfkem"))
+                        .subscribe(zcdj -> zcdj.editText.set(jfkm.nr.substring(2, jfkm.nr.length())));
+                break;
+            case 1006:
+                xz = (SyfxBean.Syfx) data.getExtras().getSerializable("Syfx");
+                Observable.from(mList)
+                        .filter(zcdj -> zcdj.columEng != null && zcdj.columEng.equals("xz"))
+                        .subscribe(zcdj -> zcdj.editText.set(xz.nr.substring(2, xz.nr.length())));
+                break;
+            case 1007:
+                zcly = (SyfxBean.Syfx) data.getExtras().getSerializable("Syfx");
+                Observable.from(mList)
+                        .filter(zcdj -> zcdj.columEng != null && zcdj.columEng.equals("zcly"))
+                        .subscribe(zcdj -> zcdj.editText.set(zcly.nr.substring(2, zcly.nr.length())));
                 break;
             case 1003:
                 if (RESULT_OK == resultCode && tempFile != null && tempFile.exists()) {

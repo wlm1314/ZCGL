@@ -27,6 +27,7 @@
                 android:layout_marginLeft="@dimen/dimen_10"
                 android:layout_marginRight="@dimen/dimen_10"
                 android:maxWidth="100dp"
+                android:background="@drawable/bottom_border"
                 android:minWidth="80dp"
                 android:padding="0dp"
                 android:singleLine="true"/>
@@ -37,6 +38,7 @@
                 style="@style/CommonText"
                 android:layout_marginLeft="@dimen/dimen_10"
                 android:maxWidth="100dp"
+                android:background="@drawable/bottom_border"
                 android:minWidth="80dp"
                 android:singleLine="true"/>
         </LinearLayout>
@@ -51,6 +53,7 @@
                 android:id="@+id/tv_dj"
                 style="@style/CommonText"
                 android:layout_marginLeft="@dimen/dimen_10"
+                android:background="@drawable/bottom_border"
                 android:layout_marginRight="@dimen/dimen_10"
                 android:maxWidth="100dp"
                 android:minWidth="80dp"
@@ -62,6 +65,7 @@
                 style="@style/CommonText"
                 android:layout_marginLeft="@dimen/dimen_10"
                 android:maxWidth="100dp"
+                android:background="@drawable/bottom_border"
                 android:minWidth="80dp"
                 android:singleLine="true"/>
         </LinearLayout>
@@ -79,6 +83,7 @@
                 android:layout_marginLeft="@dimen/dimen_10"
                 android:layout_marginRight="@dimen/dimen_10"
                 android:maxWidth="100dp"
+                android:background="@drawable/bottom_border"
                 android:minWidth="80dp"
                 android:singleLine="true"/>
             <TextView style="@style/CommonText"
@@ -87,6 +92,7 @@
                 android:id="@+id/tv_je"
                 style="@style/CommonText"
                 android:layout_marginLeft="@dimen/dimen_10"
+                android:background="@drawable/bottom_border"
                 android:maxWidth="100dp"
                 android:minWidth="80dp"
                 android:singleLine="true"/>
@@ -104,6 +110,7 @@
                 style="@style/CommonText"
                 android:layout_marginLeft="@dimen/dimen_10"
                 android:layout_marginRight="@dimen/dimen_10"
+                android:background="@drawable/bottom_border"
                 android:maxWidth="100dp"
                 android:minWidth="80dp"
                 android:singleLine="true"
@@ -114,6 +121,7 @@
                 android:id="@+id/tv_gg"
                 style="@style/CommonText"
                 android:layout_marginLeft="@dimen/dimen_10"
+                android:background="@drawable/bottom_border"
                 android:maxWidth="100dp"
                 android:minWidth="80dp"
                 android:singleLine="true"/>
@@ -131,6 +139,7 @@
                 style="@style/CommonText"
                 android:layout_marginLeft="@dimen/dimen_10"
                 android:layout_marginRight="@dimen/dimen_10"
+                android:background="@drawable/bottom_border"
                 android:maxWidth="100dp"
                 android:minWidth="80dp"
                 android:singleLine="true"/>
@@ -141,6 +150,7 @@
                 style="@style/CommonText"
                 android:layout_marginLeft="@dimen/dimen_10"
                 android:maxWidth="100dp"
+                android:background="@drawable/bottom_border"
                 android:minWidth="80dp"
                 android:singleLine="true"/>
         </LinearLayout>
@@ -166,6 +176,7 @@
             <TextView
                 android:id="@+id/tv_zcmc_cx"
                 style="@style/CommonText"
+                android:background="@drawable/bottom_border"
                 android:layout_marginLeft="@dimen/dimen_10"
                 android:layout_marginRight="@dimen/dimen_10"
                 android:maxWidth="100dp"
@@ -178,6 +189,7 @@
                 android:id="@+id/tv_lydw_cx"
                 style="@style/CommonText"
                 android:layout_marginLeft="@dimen/dimen_10"
+                android:background="@drawable/bottom_border"
                 android:maxWidth="100dp"
                 android:minWidth="80dp"
                 android:singleLine="true"/>
@@ -196,6 +208,7 @@
                 style="@style/CommonText"
                 android:layout_marginLeft="@dimen/dimen_10"
                 android:layout_marginRight="@dimen/dimen_10"
+                android:background="@drawable/bottom_border"
                 android:maxWidth="100dp"
                 android:minWidth="80dp"
                 android:singleLine="true"
@@ -207,6 +220,7 @@
                 style="@style/CommonText"
                 android:layout_marginLeft="@dimen/dimen_10"
                 android:maxWidth="100dp"
+                android:background="@drawable/bottom_border"
                 android:minWidth="80dp"
                 android:singleLine="true"/>
         </LinearLayout>
@@ -223,6 +237,7 @@
                 style="@style/CommonText"
                 android:layout_marginLeft="@dimen/dimen_10"
                 android:layout_marginRight="@dimen/dimen_10"
+                android:background="@drawable/bottom_border"
                 android:maxWidth="100dp"
                 android:minWidth="80dp"
                 android:singleLine="true"/>
@@ -232,6 +247,7 @@
                 android:id="@+id/tv_lyr_cx"
                 style="@style/CommonText"
                 android:layout_marginLeft="@dimen/dimen_10"
+                android:background="@drawable/bottom_border"
                 android:maxWidth="100dp"
                 android:minWidth="80dp"
                 android:singleLine="true"/>

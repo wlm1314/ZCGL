@@ -33,11 +33,11 @@ public class SyfxBean extends BaseBean {
         public String 校名称;
 
         public static String getMC(Syfx syfx) {
-            return syfx.校名称;
+            return syfx.nr.substring(2,syfx.nr.length());
         }
 
         public static String getBH(Syfx syfx) {
-            return syfx.校编号;
+            return syfx.nr.substring(0,1);
         }
 
         public final ObservableField<Boolean> checked = new ObservableField<>();
