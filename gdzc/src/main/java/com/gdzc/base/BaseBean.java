@@ -42,7 +42,7 @@ public class BaseBean {
     }
 
     public boolean containsSQR(){
-        return "SQR".contains(whatsystem);
+        return "SQRW".contains(whatsystem);
     }
 
 

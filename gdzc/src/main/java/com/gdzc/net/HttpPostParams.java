@@ -40,15 +40,14 @@ public class HttpPostParams {
      * @param flh
      * @param mc
      * @param pageNum
-     * @param pageSize
      * @return
      */
-    public static Map<String, String> paramGetFlh(String flh, String mc, String pageNum, String pageSize) {
+    public static Map<String, String> paramGetFlh(String flh, String mc, String pageNum) {
         Map<String, String> map = BaseParams();
         map.put("flh", flh);
         map.put("mc", mc);
         map.put("pageNum", pageNum);
-        map.put("pageSize", pageSize);
+        map.put("pageSize", "20");
         return map;
     }
 
@@ -107,7 +106,7 @@ public class HttpPostParams {
         Map<String, String> map = BaseParams();
         map.put("pageNum", pageNum);
         map.put("searchzjstr", searchzjstr);
-        map.put("pageSize", "10");
+        map.put("pageSize", "20");
         return map;
     }
 
@@ -154,7 +153,7 @@ public class HttpPostParams {
         map.put("rksjstart", rksjstart);
         map.put("rksjend", rksjend);
         map.put("pageNum", pageNum);
-        map.put("pageSize", "10");
+        map.put("pageSize", "20");
         return map;
     }
 
@@ -169,7 +168,7 @@ public class HttpPostParams {
         map.put("rksjstart", rksjstart);
         map.put("rksjend", rksjend);
         map.put("pageNum", pageNum);
-        map.put("pageSize", "10");
+        map.put("pageSize", "20");
         map.put("son", son);
         return map;
     }

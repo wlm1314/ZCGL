@@ -108,8 +108,8 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
         mList.clear();
         mList.addAll(mViewModel.getZcdjByFlh(mFlh));
         mList.add(mViewModel.getZcdj("单价", mBinding.tvDj.getText().toString(), "1"));
-        mList.add(mViewModel.getZcdj("成批条数", "1", zcdjBean.containsSQR() ? "1" : "0"));
-        mList.add(mViewModel.getZcdj("数量", "1", zcdjBean.containsDJ() ? "1" : "0"));
+        mList.add(mViewModel.getZcdj("成批条数", "1", zcdjBean.containsSQR() ? "0" : "1"));
+        mList.add(mViewModel.getZcdj("数量", "1", zcdjBean.containsDJ() ? "0" : "1"));
         mList.add(mViewModel.getZcdj("金额", mBinding.tvDj.getText().toString(), "1"));
         Observable.from(zcdjBean.data.list).subscribe(bean -> mList.add(ZcdjBean.Zcdj.castToZcdj(bean)));
         mAdapter.notifyDataSetChanged();

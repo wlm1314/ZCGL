@@ -88,7 +88,7 @@ public class FlhActivity extends BaseActivity<ActivityFlhBinding> {
 
 
     public void getFlh(int pageNo) {
-        HttpRequest.GetFlh(HttpPostParams.paramGetFlh(mBinding.etFlh.getText().toString(), "", pageNo + "", "10"))
+        HttpRequest.GetFlh(HttpPostParams.paramGetFlh(mBinding.etFlh.getText().toString(), "", pageNo + ""))
                 .subscribe(new RetrofitSubscriber<>(
                         flhBean -> {
                             mBinding.ptrRv.onRefreshComplete();
@@ -100,7 +100,7 @@ public class FlhActivity extends BaseActivity<ActivityFlhBinding> {
                                 mFlhList.clear();
                             mFlhList.addAll(flhBean.data.list);
                             mAdapter.notifyDataSetChanged();
-                        }
+                        },throwable -> mBinding.ptrRv.onRefreshComplete()
                 ));
     }
 
