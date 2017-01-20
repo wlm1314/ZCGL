@@ -49,30 +49,19 @@ public class ZcdjViewModel {
     private String whatsystem = "";
     private List<ZcdjBean.Zcdj> mList = new ArrayList<>();
 
+    private ZcdjBean.Zcdj mZcdj;
     public String zcImg, fpImg;
 
     public LydwBean.Lydw lydw;
-    public SyfxBean.Syfx syfx, jfkm, xz, zcly;
+    public SyfxBean.Syfx syfx;
     public CfdBean.Cfd cfd;
     public RyBean.Ry ry;
 
     public BindingViewHolder.ItemClickLister mItemClickLister = (view, position) -> {
-        ZcdjBean.Zcdj zcdj = mList.get(position);
-        switch (zcdj.columEng) {
+        mZcdj = mList.get(position);
+        switch (mZcdj.columEng) {
             case "lydwh":
                 NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), LydwActivity.class, 1001);
-                break;
-            case "syfx":
-                startSyfxActivity("使用方向", 1002);
-                break;
-            case "jfkem":
-                startSyfxActivity("经费科目", 1005);
-                break;
-            case "xz":
-                startSyfxActivity("现状", 1006);
-                break;
-            case "zcly":
-                startSyfxActivity("资产来源", 1007);
                 break;
             case "lyr":
             case "rybh": {
@@ -103,7 +92,10 @@ public class ZcdjViewModel {
                 break;
             }
             case "gzrq":
-                showTimePicker("购置日期", zcdj);
+                showTimePicker("购置日期", mZcdj);
+                break;
+            default:
+                startSyfxActivity(mZcdj.columName, 1002);
                 break;
         }
     };
@@ -155,20 +147,10 @@ public class ZcdjViewModel {
                     Utils.showToast(zcdj.columName + "有误");
                     return;
                 } else if (!TextUtils.isEmpty(zcdj.editText.get())) {
-                    if (zcdj.columEng.equals("lydwh"))
-                        jsonObj.put(zcdj.columName, lydw.dwId.trim());
-                    else if (zcdj.columEng.equals("syfx"))
-                        jsonObj.put(zcdj.columName, syfx.nr.substring(0, 1));
-                    else if (zcdj.columEng.equals("jfkem"))
-                        jsonObj.put(zcdj.columName, jfkm.nr.substring(0, 1));
-                    else if (zcdj.columEng.equals("xz"))
-                        jsonObj.put(zcdj.columName, xz.nr.substring(0, 1));
-                    else if (zcdj.columEng.equals("zcly"))
-                        jsonObj.put(zcdj.columName, zcly.nr.substring(0, 1));
-                    else if (zcdj.columName.equals("分类名称"))
+                    if (zcdj.columName.equals("分类名称"))
                         jsonObj.put("字符字段7", zcdj.editText.get().trim());
                     else
-                        jsonObj.put(zcdj.columName, zcdj.editText.get().trim());
+                        jsonObj.put(zcdj.columName, TextUtils.isEmpty(zcdj.code) ? zcdj.editText.get().trim() : zcdj.code);
                 }
             }
             if (!TextUtils.isEmpty(zcImg))
@@ -273,33 +255,13 @@ public class ZcdjViewModel {
                 break;
             case 1001:
                 lydw = (LydwBean.Lydw) data.getExtras().getSerializable("Lydw");
-                Observable.from(mList)
-                        .filter(zcdj -> zcdj.columEng != null && zcdj.columEng.equals("lydwh"))
-                        .subscribe(zcdj -> zcdj.editText.set(lydw.dwName));
+                mZcdj.editText.set(lydw.dwName);
+                mZcdj.code = lydw.dwId;
                 break;
             case 1002:
                 syfx = (SyfxBean.Syfx) data.getExtras().getSerializable("Syfx");
-                Observable.from(mList)
-                        .filter(zcdj -> zcdj.columEng != null && zcdj.columEng.equals("syfx"))
-                        .subscribe(zcdj -> zcdj.editText.set(syfx.nr.substring(2, syfx.nr.length())));
-                break;
-            case 1005:
-                jfkm = (SyfxBean.Syfx) data.getExtras().getSerializable("Syfx");
-                Observable.from(mList)
-                        .filter(zcdj -> zcdj.columEng != null && zcdj.columEng.equals("jfkem"))
-                        .subscribe(zcdj -> zcdj.editText.set(jfkm.nr.substring(2, jfkm.nr.length())));
-                break;
-            case 1006:
-                xz = (SyfxBean.Syfx) data.getExtras().getSerializable("Syfx");
-                Observable.from(mList)
-                        .filter(zcdj -> zcdj.columEng != null && zcdj.columEng.equals("xz"))
-                        .subscribe(zcdj -> zcdj.editText.set(xz.nr.substring(2, xz.nr.length())));
-                break;
-            case 1007:
-                zcly = (SyfxBean.Syfx) data.getExtras().getSerializable("Syfx");
-                Observable.from(mList)
-                        .filter(zcdj -> zcdj.columEng != null && zcdj.columEng.equals("zcly"))
-                        .subscribe(zcdj -> zcdj.editText.set(zcly.nr.substring(2, zcly.nr.length())));
+                mZcdj.editText.set(syfx.nr.substring(2, syfx.nr.length()));
+                mZcdj.code = syfx.nr.substring(0, 1);
                 break;
             case 1008:
                 ry = (RyBean.Ry) data.getExtras().getSerializable("data");

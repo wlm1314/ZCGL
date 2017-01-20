@@ -70,6 +70,8 @@ public class ZcdjBean extends BaseBean {
 
         public ObservableField<String> editText = new ObservableField<>();
 
+        public String code;
+
         public static Zcdj castToZcdj(ServerBean bean) {
             Zcdj zcdj = new Zcdj();
             zcdj.id = bean.id;
