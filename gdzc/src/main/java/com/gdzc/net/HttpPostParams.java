@@ -178,4 +178,20 @@ public class HttpPostParams {
         map.put("id", id);
         return map;
     }
+
+    public static Map<String, String> paramgetCfdd(String dwid, String cfdbh, String cfdmc) {
+        Map<String, String> map = BaseParams();
+        map.put("dwid", dwid);
+        map.put("cfdbh", cfdbh);
+        map.put("cfdmc", cfdmc);
+        return map;
+    }
+
+    public static Map<String, String> paramgetRyk(String dwid, String realName, String rybh) {
+        Map<String, String> map = BaseParams();
+        map.put("dwid", dwid);
+        map.put("realName", realName);
+        map.put("rybh", rybh);
+        return map;
+    }
 }

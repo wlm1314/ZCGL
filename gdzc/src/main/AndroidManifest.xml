@@ -61,6 +61,14 @@
                   android:screenOrientation="portrait"
                   android:theme="@style/AppTheme.AppComEdit"
                   android:windowSoftInputMode="stateHidden|adjustUnspecified"/>
+        <activity android:name=".cfd.view.CfdActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme.AppComEdit"
+                  android:windowSoftInputMode="stateHidden|adjustUnspecified"/>
+        <activity android:name=".ry.view.RyActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/AppTheme.AppComEdit"
+                  android:windowSoftInputMode="stateHidden|adjustUnspecified"/>
     </application>
 
 </manifest>

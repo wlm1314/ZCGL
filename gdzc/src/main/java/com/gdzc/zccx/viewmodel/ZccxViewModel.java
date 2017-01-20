@@ -67,7 +67,7 @@ public class ZccxViewModel {
                     ((ZccxActivity) App.getAppContext().getCurrentActivity()).complete();
                     if (pageNo == 1)
                         ((ZccxActivity) App.getAppContext().getCurrentActivity()).setPageNo(1);
-                    ((ZccxActivity) App.getAppContext().getCurrentActivity()).setData(zcxgBean.data);
+                    ((ZccxActivity) App.getAppContext().getCurrentActivity()).setData(zcxgBean);
                 }, throwable -> ((ZccxActivity) App.getAppContext().getCurrentActivity()).complete()));
     }
 
@@ -77,7 +77,7 @@ public class ZccxViewModel {
                     ((ZccxActivity) App.getAppContext().getCurrentActivity()).complete();
                     if (pageNo == 1)
                         ((ZccxActivity) App.getAppContext().getCurrentActivity()).setPageNo(1);
-                    ((ZccxActivity) App.getAppContext().getCurrentActivity()).setData(zcxgBean.data);
+                    ((ZccxActivity) App.getAppContext().getCurrentActivity()).setData(zcxgBean);
                 }, throwable -> ((ZccxActivity) App.getAppContext().getCurrentActivity()).complete()));
     }
 

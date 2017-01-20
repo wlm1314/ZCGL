@@ -107,8 +107,8 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:hint="开始时间"
-                            app:clickCommand="@{viewModel.gzStartCommand}"
-                            android:text="@={viewModel.gz_start}"/>
+                            android:text="@={viewModel.gz_start}"
+                            app:clickCommand="@{viewModel.gzStartCommand}"/>
                         <TextView style="@style/CommonText"
                                   android:text="~"/>
                         <TextView
@@ -117,8 +117,8 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:hint="结束时间"
-                            app:clickCommand="@{viewModel.gzEndCommand}"
-                            android:text="@={viewModel.gz_end}"/>
+                            android:text="@={viewModel.gz_end}"
+                            app:clickCommand="@{viewModel.gzEndCommand}"/>
                     </LinearLayout>
                     <View style="@style/line_cell_light_h"/>
                     <LinearLayout
@@ -135,8 +135,8 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:hint="开始时间"
-                            app:clickCommand="@{viewModel.rkStartCommand}"
-                            android:text="@={viewModel.rk_start}"/>
+                            android:text="@={viewModel.rk_start}"
+                            app:clickCommand="@{viewModel.rkStartCommand}"/>
                         <TextView style="@style/CommonText"
                                   android:text="~"/>
                         <TextView
@@ -145,8 +145,8 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:hint="结束时间"
-                            app:clickCommand="@{viewModel.rkEndCommand}"
-                            android:text="@={viewModel.rk_end}"/>
+                            android:text="@={viewModel.rk_end}"
+                            app:clickCommand="@{viewModel.rkEndCommand}"/>
                     </LinearLayout>
                     <View style="@style/line_cell_light_h"/>
                     <LinearLayout
@@ -163,8 +163,8 @@
                             android:layout_weight="1"
                             android:drawableRight="@mipmap/icon_details"
                             android:gravity="right"
-                            app:clickCommand="@{viewModel.childCommand}"
-                            android:text="@={viewModel.child}"/>
+                            android:text="@={viewModel.child}"
+                            app:clickCommand="@{viewModel.childCommand}"/>
                     </LinearLayout>
                     <View style="@style/line_cell_light_h"/>
                     <android.support.v7.widget.AppCompatButton
@@ -178,6 +178,12 @@
                 </LinearLayout>
 
                 <View style="@style/line_cell_light_h"/>
+
+                <TextView android:id="@+id/tv_msg"
+                          android:textColor="@color/blue_primary"
+                          style="@style/CommonText"
+                          android:padding="@dimen/dimen_10"
+                          android:visibility="gone"/>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_view"

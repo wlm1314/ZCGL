@@ -1,9 +1,11 @@
 package com.gdzc.net;
 
 import com.gdzc.base.BaseBean;
+import com.gdzc.cfd.model.CfdBean;
 import com.gdzc.flh.model.FlhBean;
 import com.gdzc.login.model.LoginBean;
 import com.gdzc.lydw.model.LydwBean;
+import com.gdzc.ry.model.RyBean;
 import com.gdzc.syfx.model.SyfxBean;
 import com.gdzc.zccx.model.ZccxBean;
 import com.gdzc.zcdj.model.CchBean;
@@ -120,5 +122,15 @@ public interface RequestApi {
     @FormUrlEncoded
     @POST(HttpPath.selectMySonData3Url)
     Observable<ZcxgBean> selectMySonData(@FieldMap Map<String, String> params);
+
+    //查询存放地
+    @FormUrlEncoded
+    @POST(HttpPath.getCfddUrl)
+    Observable<CfdBean> GetCfd(@FieldMap Map<String, String> params);
+
+    //查询人员
+    @FormUrlEncoded
+    @POST(HttpPath.getRykUrl)
+    Observable<RyBean> GetRy(@FieldMap Map<String, String> params);
 
 }

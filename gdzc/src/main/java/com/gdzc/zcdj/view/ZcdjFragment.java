@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -16,7 +15,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.gdzc.R;
 import com.gdzc.base.App;
-import com.gdzc.base.BaseBean;
 import com.gdzc.base.BaseFragment;
 import com.gdzc.databinding.FragmentZcdjBinding;
 import com.gdzc.databinding.LayoutPhotoBinding;
@@ -25,6 +23,7 @@ import com.gdzc.utils.UploadFile;
 import com.gdzc.utils.Utils;
 import com.gdzc.widget.recycleview.BindingAdapter;
 import com.gdzc.widget.recycleview.BindingTool;
+import com.gdzc.zcdj.model.UploadImageBean;
 import com.gdzc.zcdj.model.ZcdjBean;
 import com.gdzc.zcdj.viewmodel.ZcdjViewModel;
 
@@ -48,6 +47,8 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
     private ImageView tempIv;
     private BindingAdapter mAdapter;
 
+    private String imgType;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_zcdj;
@@ -65,7 +66,7 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
         setListener();
     }
 
-    private void initView(){
+    private void initView() {
         mAdapter = new BindingAdapter(new BindingTool(R.layout.adapter_zcdj_item, com.gdzc.BR.data), mList);
         mBinding.rvZcdj.setAdapter(mAdapter);
     }
@@ -79,36 +80,15 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
     }
 
     private void setListener() {
-        mBinding.imgLayout.getRoot().findViewById(R.id.iv_zc).setOnClickListener(v -> initPhotoView((ImageView) v));
-        mBinding.imgLayout.getRoot().findViewById(R.id.iv_fp).setOnClickListener(v -> initPhotoView((ImageView) v));
-        mAdapter.setTextChangeListener((view, position, s) -> {
-            int dj = Integer.valueOf(mViewModel.dj.get());
-            if (!TextUtils.isEmpty(s)) {
-                Object o = mList.get(position);
-                if (o instanceof ZcdjBean.Zcdj) {
-                    ZcdjBean.Zcdj zcdj = (ZcdjBean.Zcdj) o;
-                    int num;
-                    switch (zcdj.columName) {
-                        case "成批条数":
-                            num = Integer.valueOf(s);
-                            if (num > 1) {
-                                mList.get(position + 2).editText.set(num * dj + "");
-                            }
-                            break;
-                        case "数量":
-                            num = Integer.valueOf(s);
-                            if (num > 1) {
-                                mList.get(position + 1).editText.set(num * dj + "");
-                            }
-                            break;
-                    }
-                }
-            }
-        }, R.id.et_text);
+        mBinding.imgLayout.getRoot().findViewById(R.id.iv_zc).setOnClickListener(v -> initPhotoView((ImageView) v, "zc"));
+        mBinding.imgLayout.getRoot().findViewById(R.id.iv_fp).setOnClickListener(v -> initPhotoView((ImageView) v, "fp"));
+        mAdapter.setOnViewClickListener(mViewModel.mItemClickLister, R.id.select_layout);
+        mAdapter.setTextChangeListener(mViewModel.mTextChangeListener, R.id.et_text);
     }
 
-    private void initPhotoView(ImageView view) {
-        tempIv = view;
+    private void initPhotoView(ImageView view, String imgType) {
+        this.imgType = imgType;
+        this.tempIv = view;
         LayoutPhotoBinding choiceBinding = DataBindingUtil.inflate(getActivity().getLayoutInflater(), R.layout.layout_photo, null, false);
         Dialog dialog = Utils.showBottomDialog(App.getAppContext().getCurrentActivity(), choiceBinding.getRoot());
         choiceBinding.takePhote.setOnClickListener(v -> {
@@ -135,10 +115,13 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
             @Override
             public void run() {
                 try {
-                    BaseBean baseBean = UploadFile.post("http://www.bjprd.com.cn:8080/AndroidInterface-0.0.1-SNAPSHOT/zj/imageUpload", HttpPostParams.BaseParams(), files);
-                    if (baseBean.status.isSuccess())
-                        mHandler.sendEmptyMessage(0);
-                    else
+                    UploadImageBean baseBean = UploadFile.post("http://www.bjprd.com.cn:8080/AndroidInterface-0.0.1-SNAPSHOT/zj/imageUpload", HttpPostParams.BaseParams(), files);
+                    if (baseBean.status.isSuccess()) {
+                        Message msg = Message.obtain();
+                        msg.obj = baseBean.data;
+                        msg.what = 0;
+                        mHandler.sendMessage(msg);
+                    } else
                         mHandler.sendEmptyMessage(1);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -153,6 +136,14 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 0:
+                    switch (imgType) {
+                        case "zc":
+                            mViewModel.zcImg = (String) msg.obj;
+                            break;
+                        case "fp":
+                            mViewModel.fpImg = (String) msg.obj;
+                            break;
+                    }
                     Glide.with(getContext()).load(tempFile).into(tempIv);
                     Utils.showToast("上传成功");
                     Utils.hideLoading();
@@ -207,5 +198,8 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
         mBinding.imgLayout.getRoot().setVisibility(View.GONE);
         mBinding.btConfirm.setVisibility(View.GONE);
         mBinding.formLayout.setVisibility(View.VISIBLE);
+        mViewModel.flh.set("");
+        mViewModel.flmc.set("");
+        mViewModel.dj.set("");
     }
 }

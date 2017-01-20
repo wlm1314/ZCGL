@@ -1,9 +1,11 @@
 package com.gdzc.net;
 
 import com.gdzc.base.BaseBean;
+import com.gdzc.cfd.model.CfdBean;
 import com.gdzc.flh.model.FlhBean;
 import com.gdzc.login.model.LoginBean;
 import com.gdzc.lydw.model.LydwBean;
+import com.gdzc.ry.model.RyBean;
 import com.gdzc.syfx.model.SyfxBean;
 import com.gdzc.utils.BaseLog;
 import com.gdzc.zccx.model.ZccxBean;
@@ -243,6 +245,28 @@ public class HttpRequest {
     public static Observable<ZcxgBean> selectMySonData(Map<String, String> params) {
         printParam(params);
         return getInstance().create(RequestApi.class).selectMySonData(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * @param params
+     * @return
+     */
+    public static Observable<CfdBean> GetCfd(Map<String, String> params) {
+        printParam(params);
+        return getInstance().create(RequestApi.class).GetCfd(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * @param params
+     * @return
+     */
+    public static Observable<RyBean> GetRy(Map<String, String> params) {
+        printParam(params);
+        return getInstance().create(RequestApi.class).GetRy(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

@@ -25,7 +25,6 @@ public final class ViewBindingAdapter {
             imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
         } else {
             editText.setEnabled(false);
-            editText.setEnabled(true);
         }
 
     }

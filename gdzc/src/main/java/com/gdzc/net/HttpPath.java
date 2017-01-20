@@ -27,4 +27,6 @@ public class HttpPath {
     public static final String selectMyAllDataUrl = "AndroidInterface-0.0.1-SNAPSHOT/search/selectMyAllData";//查询已审核数据
     public static final String selectPoolByIdUrl = "AndroidInterface-0.0.1-SNAPSHOT/search/selectPoolById";//查询已审核数据
     public static final String selectMySonData3Url = "AndroidInterface-0.0.1-SNAPSHOT/search/selectMySonData3";//查询已审核数据
+    public static final String getCfddUrl = "AndroidInterface-0.0.1-SNAPSHOT/common/getCfdd";//查询存放地
+    public static final String getRykUrl = "AndroidInterface-0.0.1-SNAPSHOT/common/getRyk";//查询人员
 }

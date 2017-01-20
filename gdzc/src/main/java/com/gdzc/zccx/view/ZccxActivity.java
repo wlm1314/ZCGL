@@ -2,6 +2,7 @@ package com.gdzc.zccx.view;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 
 import com.gdzc.R;
 import com.gdzc.base.AppBar;
@@ -73,22 +74,24 @@ public class ZccxActivity extends BaseActivity<ActivityZccxBinding> {
         });
     }
 
-    public void setData(ZcxgBean.DataBean data) {
-        if (data.isFirstPage)
+    public void setData(ZcxgBean data) {
+        if (data.data.isFirstPage)
             mList.clear();
-        if (data.isLastPage)
+        if (data.data.isLastPage)
             mBinding.ptrRv.setMode(PullToRefreshBase.Mode.DISABLED);
         else
             mBinding.ptrRv.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
-        mList.addAll(data.list);
+        mList.addAll(data.data.list);
         mAdapter.notifyDataSetChanged();
+        mBinding.tvMsg.setText("台件：" + data.total.totalCount + "      条数：" + data.total.totalRow + "     金额（元）：" + data.total.totalMoney);
+        mBinding.tvMsg.setVisibility(View.VISIBLE);
     }
 
     public void setPageNo(int pageNo) {
         this.pageNo = pageNo;
     }
 
-    public void complete(){
+    public void complete() {
         mBinding.ptrRv.onRefreshComplete();
     }
 }

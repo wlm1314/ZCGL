@@ -46,37 +46,18 @@
             android:paddingBottom="@dimen/dimen_10"
             android:paddingTop="@dimen/dimen_10"
             android:text="@={data.editText}"
-            android:visibility="@{!data.isQz.equals(`1`)?View.VISIBLE:View.GONE}"
+            app:requestFocus="@{!data.isQz.equals(`1`)}"
             app:colorControlActivated="@color/colorPrimary"/>
 
         <LinearLayout
             android:id="@+id/select_layout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dimen_10"
             android:gravity="center_vertical"
             android:paddingBottom="@dimen/dimen_10"
             android:paddingTop="@dimen/dimen_10"
-            android:visibility="@{data.isQz.equals(`1`)?View.VISIBLE:View.GONE}"
-            app:clickCommand="@{data.clickCommand}"
-            app:param="@{data}">
-
-            <LinearLayout android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:layout_weight="1"
-                          android:orientation="vertical">
-                <TextView
-                    style="@style/CommonText"
-                    android:layout_width="match_parent"
-                    android:hint="@{data.tsnr}"
-                    android:maxLines="1"
-                    android:text="@={data.editText}"
-                    android:textColor="@color/text_sub"
-                    app:colorControlActivated="@color/colorPrimary"/>
-                <View style="@style/line_cell_light_h"
-                      android:layout_height="1dp"
-                      android:background="@color/gray"/>
-            </LinearLayout>
+            android:visibility="@{data.isQz.equals(`1`)?View.VISIBLE:View.GONE}">
 
             <ImageView
                 android:layout_width="wrap_content"

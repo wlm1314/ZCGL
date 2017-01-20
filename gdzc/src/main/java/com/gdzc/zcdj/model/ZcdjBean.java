@@ -1,18 +1,9 @@
 package com.gdzc.zcdj.model;
 
 import android.databinding.ObservableField;
-import android.os.Bundle;
 
-import com.bigkoo.pickerview.TimePickerView;
-import com.binding.command.ReplyCommand;
-import com.gdzc.base.App;
 import com.gdzc.base.BaseBean;
-import com.gdzc.lydw.view.LydwActivity;
-import com.gdzc.syfx.view.SyfxActivity;
-import com.gdzc.utils.NavigateUtils;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -99,47 +90,6 @@ public class ZcdjBean extends BaseBean {
             zcdj.djbt = bean.登记必填;
             zcdj.kpxs = bean.卡片显示;
             return zcdj;
-        }
-
-        public ReplyCommand clickCommand = new ReplyCommand<Zcdj>(zcdj -> {
-            switch (zcdj.columEng) {
-                case "lydwh":
-                    NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), LydwActivity.class, 1001);
-                    break;
-                case "syfx":
-                    startSyfxActivity("使用方向", 1002);
-                    break;
-                case "jfkem":
-                    startSyfxActivity("经费科目", 1005);
-                    break;
-                case "xz":
-                    startSyfxActivity("现状", 1006);
-                    break;
-                case "zcly":
-                    startSyfxActivity("资产来源", 1007);
-                    break;
-                case "gzrq":
-                    showTimePicker("购置日期", zcdj);
-                    break;
-            }
-        });
-
-        private void startSyfxActivity(String title, int reqCode) {
-            Bundle bundle = new Bundle();
-            bundle.putString("title", title);
-            NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), SyfxActivity.class, reqCode, bundle);
-        }
-
-        public void showTimePicker(String title, ZcdjBean.Zcdj zcdj) {
-            TimePickerView mTimePickerView = new TimePickerView(App.getAppContext().getCurrentActivity(), TimePickerView.Type.YEAR_MONTH_DAY);
-            mTimePickerView.setCyclic(false);
-            mTimePickerView.setTitle(title);
-            mTimePickerView.setTime(new Date());
-            mTimePickerView.show();
-            mTimePickerView.setOnTimeSelectListener(date -> {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                zcdj.editText.set(sdf.format(date));
-            });
         }
     }
 }
