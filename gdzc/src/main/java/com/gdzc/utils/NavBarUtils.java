@@ -40,7 +40,7 @@ public class NavBarUtils {
             @Override
             public IPagerTitleView getTitleView(Context context, final int index) {
                 ColorTransitionPagerTitleView colorTransitionPagerTitleView = new ColorTransitionPagerTitleView(context);
-                colorTransitionPagerTitleView.setNormalColor(App.getAppContext().getResources().getColor(R.color.text_nomal));
+                colorTransitionPagerTitleView.setNormalColor(App.getAppContext().getResources().getColor(R.color.text_normal));
                 colorTransitionPagerTitleView.setTextSize(TypedValue.COMPLEX_UNIT_PX, App.getAppContext().getResources().getDimension(resId));
                 colorTransitionPagerTitleView.setSelectedColor(App.getAppContext().getResources().getColor(R.color.blue_primary_dark));
                 colorTransitionPagerTitleView.setText(tabTitles.get(index));

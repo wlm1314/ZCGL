@@ -14,10 +14,12 @@
     <color name="yellow">#FFBB34</color>
     <color name="orange">#FF8903</color>
 
-    <color name="app_bg">#f6f6f6</color>
-    <color name="text_nomal">#343434</color>
-    <color name="text_sub">#585858</color>
+    <color name="text_important">#333333</color><!-- 用于重要级段落文字信息、标题信息，如导航名称、大板块标题、类目名称等 -->
+    <color name="text_normal">#666666</color><!-- 用于普通段落文字、引导词，如商品列表及详情段落标题信息 -->
+    <color name="text_sub">#999999</color>
     <color name="text_hint">#bebebe</color>
+
+    <color name="app_bg">#f6f6f6</color>
     <color name="lines_border">#f0f0f0</color>
 
     <color name="blue_primary">#2196F3</color>

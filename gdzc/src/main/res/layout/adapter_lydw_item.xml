@@ -19,10 +19,18 @@
                 android:layout_height="wrap_content"
                 android:checked="@{data.checked==null?false:data.checked}"/>
             <TextView style="@style/CommonText"
-                      android:padding="@dimen/dimen_10"
+                      android:paddingTop="@dimen/dimen_10"
+                      android:paddingBottom="@dimen/dimen_10"
+                      android:paddingLeft="@dimen/dimen_5"
+                      android:paddingRight="@dimen/dimen_5"
                       android:text="@{data.dwId.trim()}"/>
             <TextView style="@style/CommonText"
-                      android:padding="@dimen/dimen_10"
+                      android:text=":"/>
+            <TextView style="@style/CommonText"
+                      android:paddingTop="@dimen/dimen_10"
+                      android:paddingBottom="@dimen/dimen_10"
+                      android:paddingLeft="@dimen/dimen_5"
+                      android:paddingRight="@dimen/dimen_5"
                       android:text="@{data.dwName.trim()}"/>
         </LinearLayout>
         <View style="@style/line_cell_light_h"/>

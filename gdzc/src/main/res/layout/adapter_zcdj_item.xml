@@ -57,7 +57,9 @@
             android:gravity="center_vertical"
             android:paddingBottom="@dimen/dimen_10"
             android:paddingTop="@dimen/dimen_10"
-            android:visibility="@{data.isQz.equals(`1`)?View.VISIBLE:View.GONE}">
+            android:visibility="@{data.isQz.equals(`1`)?View.VISIBLE:View.GONE}"
+            app:clickCommand="@{data.clickCommand}"
+            app:param="@{data}">
 
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="wrap_content"
@@ -69,6 +71,7 @@
                     android:hint="@{data.tsnr}"
                     android:maxLines="1"
                     android:text="@={data.editText}"
+                    android:textColor="@color/text_sub"
                     app:colorControlActivated="@color/colorPrimary"/>
                 <View style="@style/line_cell_light_h"
                       android:layout_height="1dp"

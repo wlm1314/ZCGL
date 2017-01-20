@@ -41,7 +41,7 @@ public class BaseBean {
         return null;
     }
 
-    public boolean containsSQR(){
+    public boolean containsSQRW(){
         return "SQRW".contains(whatsystem);
     }
 

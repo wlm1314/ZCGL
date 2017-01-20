@@ -5,12 +5,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
-import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
-import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,14 +20,7 @@ import com.gdzc.base.BaseBean;
 import com.gdzc.base.BaseFragment;
 import com.gdzc.databinding.FragmentZcdjBinding;
 import com.gdzc.databinding.LayoutPhotoBinding;
-import com.gdzc.flh.model.FlhBean;
-import com.gdzc.flh.view.FlhActivity;
-import com.gdzc.lydw.model.LydwBean;
-import com.gdzc.lydw.view.LydwActivity;
 import com.gdzc.net.HttpPostParams;
-import com.gdzc.syfx.model.SyfxBean;
-import com.gdzc.syfx.view.SyfxActivity;
-import com.gdzc.utils.NavigateUtils;
 import com.gdzc.utils.UploadFile;
 import com.gdzc.utils.Utils;
 import com.gdzc.widget.recycleview.BindingAdapter;
@@ -38,17 +28,12 @@ import com.gdzc.widget.recycleview.BindingTool;
 import com.gdzc.zcdj.model.ZcdjBean;
 import com.gdzc.zcdj.viewmodel.ZcdjViewModel;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import rx.Observable;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -59,21 +44,9 @@ import static android.app.Activity.RESULT_OK;
 public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
     private ZcdjViewModel mViewModel;
     private List<ZcdjBean.Zcdj> mList = new ArrayList<>();
-    private BindingAdapter mAdapter;
-    private FlhBean.Flh mFlh;
-    private int dj = 1;
-    private String whatsystem = "";
-    /**
-     * SD卡中自己拍照照片的存储路径
-     */
-    public static final File SD_CAMERA_DIR = new File(Environment.getExternalStorageDirectory(), "DCIM/Camera");
-    /**
-     * SD卡中用于缓存路径
-     */
-    public static final File CACHE_DIR = App.getAppContext().getCacheDir();
-    public static final String PATH_IMAGE_CAMERA = "Camera";
     private File tempFile;
     private ImageView tempIv;
+    private BindingAdapter mAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -92,97 +65,24 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
         setListener();
     }
 
-    private void initView() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        layoutManager.setSmoothScrollbarEnabled(true);
-        layoutManager.setAutoMeasureEnabled(true);
-        mBinding.rvZcdj.setLayoutManager(layoutManager);
-        mBinding.rvZcdj.setHasFixedSize(true);
-        mBinding.rvZcdj.setNestedScrollingEnabled(false);
+    private void initView(){
         mAdapter = new BindingAdapter(new BindingTool(R.layout.adapter_zcdj_item, com.gdzc.BR.data), mList);
         mBinding.rvZcdj.setAdapter(mAdapter);
     }
 
-    public void setData(ZcdjBean zcdjBean) {
-        whatsystem = zcdjBean.whatsystem;
-        dj = Integer.valueOf(mBinding.tvDj.getText().toString());
-        mList.clear();
-        mList.addAll(mViewModel.getZcdjByFlh(mFlh));
-        mList.add(mViewModel.getZcdj("单价(元)", mBinding.tvDj.getText().toString(), "1"));
-        mList.add(mViewModel.getZcdj("成批条数", "1", zcdjBean.containsSQR() ? "0" : "1"));
-        mList.add(mViewModel.getZcdj("数量", "1", zcdjBean.containsDJ() ? "0" : "1"));
-        mList.add(mViewModel.getZcdj("金额(元)", mBinding.tvDj.getText().toString(), "1"));
-        Observable.from(zcdjBean.data.list).subscribe(bean -> mList.add(ZcdjBean.Zcdj.castToZcdj(bean)));
+    public void setData(List<ZcdjBean.Zcdj> list) {
+        mList.addAll(list);
         mAdapter.notifyDataSetChanged();
         mBinding.imgLayout.getRoot().setVisibility(View.VISIBLE);
         mBinding.btConfirm.setVisibility(View.VISIBLE);
         mBinding.formLayout.setVisibility(View.GONE);
     }
 
-    //保存
-    private void save() {
-        JSONObject jsonObj = new JSONObject();
-        for (ZcdjBean.Zcdj zcdj : mList) {
-            if (zcdj.djbt.equals("1") && TextUtils.isEmpty(zcdj.editText.get())) {
-                Utils.showToast(zcdj.tsnr);
-                return;
-            } else if (!TextUtils.isEmpty(zcdj.editText.get())) {
-                try {
-                    if (zcdj.columEng.equals("lydwh"))
-                        jsonObj.put(zcdj.columName, lydw.dwId.trim());
-                    else if (zcdj.columEng.equals("syfx"))
-                        jsonObj.put(zcdj.columName, syfx.nr.substring(0, 1));
-                    else if (zcdj.columEng.equals("jfkem"))
-                        jsonObj.put(zcdj.columName, jfkm.nr.substring(0, 1));
-                    else if (zcdj.columEng.equals("xz"))
-                        jsonObj.put(zcdj.columName, xz.nr.substring(0, 1));
-                    else if (zcdj.columEng.equals("zcly"))
-                        jsonObj.put(zcdj.columName, zcly.nr.substring(0, 1));
-                    else if (zcdj.columName.equals("分类名称"))
-                        jsonObj.put("字符字段7", zcdj.editText.get().trim());
-                    else if (zcdj.columName.equals("成批条数"))
-                        jsonObj.put("批量", zcdj.editText.get().trim());
-                    else
-                        jsonObj.put(zcdj.columName, zcdj.editText.get().trim());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        mViewModel.createZcdj(whatsystem, jsonObj.toString());
-    }
-
     private void setListener() {
-        mBinding.tvFlh.setOnClickListener(v -> NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), FlhActivity.class, 1000));
-        mBinding.btCreate.setOnClickListener(v -> mViewModel.getTsxx(mFlh == null ? "" : mFlh.flh, mBinding.tvDj.getText().toString()));
         mBinding.imgLayout.getRoot().findViewById(R.id.iv_zc).setOnClickListener(v -> initPhotoView((ImageView) v));
         mBinding.imgLayout.getRoot().findViewById(R.id.iv_fp).setOnClickListener(v -> initPhotoView((ImageView) v));
-        mBinding.btConfirm.setOnClickListener(v -> save());
-        mAdapter.setOnViewClickListener((view, position) -> {
-            ZcdjBean.Zcdj zcdj = mList.get(position);
-            switch (zcdj.columEng) {
-                case "lydwh":
-                    NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), LydwActivity.class, 1001);
-                    break;
-                case "syfx":
-                    startSyfxActivity("使用方向", 1002);
-                    break;
-                case "jfkem":
-                    startSyfxActivity("经费科目", 1005);
-                    break;
-                case "xz":
-                    startSyfxActivity("现状", 1006);
-                    break;
-                case "zcly":
-                    startSyfxActivity("资产来源", 1007);
-                    break;
-                case "gzrq":
-                    mViewModel.initTimePicker("购置日期", zcdj);
-                    break;
-            }
-        }, R.id.select_layout);
-
         mAdapter.setTextChangeListener((view, position, s) -> {
+            int dj = Integer.valueOf(mViewModel.dj.get());
             if (!TextUtils.isEmpty(s)) {
                 Object o = mList.get(position);
                 if (o instanceof ZcdjBean.Zcdj) {
@@ -207,18 +107,12 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
         }, R.id.et_text);
     }
 
-    private void startSyfxActivity(String title, int reqCode) {
-        Bundle bundle = new Bundle();
-        bundle.putString("title", title);
-        NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), SyfxActivity.class, reqCode, bundle);
-    }
-
     private void initPhotoView(ImageView view) {
         tempIv = view;
         LayoutPhotoBinding choiceBinding = DataBindingUtil.inflate(getActivity().getLayoutInflater(), R.layout.layout_photo, null, false);
         Dialog dialog = Utils.showBottomDialog(App.getAppContext().getCurrentActivity(), choiceBinding.getRoot());
         choiceBinding.takePhote.setOnClickListener(v -> {
-            tempFile = getCameraFile();
+            tempFile = mViewModel.getCameraFile();
             Intent intentCamera = new Intent("android.media.action.IMAGE_CAPTURE");
             intentCamera.putExtra("output", Uri.fromFile(tempFile));
             startActivityForResult(intentCamera, 1003);
@@ -231,23 +125,6 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
             dialog.dismiss();
         });
         choiceBinding.tvCancel.setOnClickListener(v -> dialog.dismiss());
-    }
-
-    /**
-     * 获取拍摄照片的存储路径
-     */
-    private File getCameraFile() {
-        File filePath;
-        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            filePath = SD_CAMERA_DIR;
-        } else {
-            filePath = new File(CACHE_DIR, PATH_IMAGE_CAMERA);
-        }
-        if (!filePath.exists()) {
-            filePath.mkdirs();
-        }
-        String tempFileName = System.currentTimeMillis() + ".jpg";
-        return new File(filePath, tempFileName);
     }
 
     private void uploadImg() {
@@ -290,47 +167,10 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
         }
     };
 
-    private LydwBean.Lydw lydw;
-    private SyfxBean.Syfx syfx, jfkm, xz, zcly;
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        mViewModel.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
-            case 1000:
-                FlhBean.Flh flh = (FlhBean.Flh) data.getExtras().getSerializable("Flh");
-                mFlh = flh;
-                mBinding.tvFlh.setText(mFlh.mc);
-                break;
-            case 1001:
-                lydw = (LydwBean.Lydw) data.getExtras().getSerializable("Lydw");
-                Observable.from(mList)
-                        .filter(zcdj -> zcdj.columEng != null && zcdj.columEng.equals("lydwh"))
-                        .subscribe(zcdj -> zcdj.editText.set(lydw.dwName));
-                break;
-            case 1002:
-                syfx = (SyfxBean.Syfx) data.getExtras().getSerializable("Syfx");
-                Observable.from(mList)
-                        .filter(zcdj -> zcdj.columEng != null && zcdj.columEng.equals("syfx"))
-                        .subscribe(zcdj -> zcdj.editText.set(syfx.nr.substring(2, syfx.nr.length())));
-                break;
-            case 1005:
-                jfkm = (SyfxBean.Syfx) data.getExtras().getSerializable("Syfx");
-                Observable.from(mList)
-                        .filter(zcdj -> zcdj.columEng != null && zcdj.columEng.equals("jfkem"))
-                        .subscribe(zcdj -> zcdj.editText.set(jfkm.nr.substring(2, jfkm.nr.length())));
-                break;
-            case 1006:
-                xz = (SyfxBean.Syfx) data.getExtras().getSerializable("Syfx");
-                Observable.from(mList)
-                        .filter(zcdj -> zcdj.columEng != null && zcdj.columEng.equals("xz"))
-                        .subscribe(zcdj -> zcdj.editText.set(xz.nr.substring(2, xz.nr.length())));
-                break;
-            case 1007:
-                zcly = (SyfxBean.Syfx) data.getExtras().getSerializable("Syfx");
-                Observable.from(mList)
-                        .filter(zcdj -> zcdj.columEng != null && zcdj.columEng.equals("zcly"))
-                        .subscribe(zcdj -> zcdj.editText.set(zcly.nr.substring(2, zcly.nr.length())));
-                break;
             case 1003:
                 if (RESULT_OK == resultCode && tempFile != null && tempFile.exists()) {
                     uploadImg();
@@ -364,12 +204,8 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
 
     public void reset() {
         mList.clear();
-        mAdapter.notifyDataSetChanged();
         mBinding.imgLayout.getRoot().setVisibility(View.GONE);
         mBinding.btConfirm.setVisibility(View.GONE);
         mBinding.formLayout.setVisibility(View.VISIBLE);
-        mFlh = null;
-        mBinding.tvFlh.setText("");
-        mBinding.tvDj.setText("");
     }
 }

@@ -4,12 +4,13 @@
 
     <data>
         <variable name="viewModel" type="com.gdzc.zcdj.viewmodel.ZcdjViewModel"/>
+        <import type="me.tatarka.bindingcollectionadapter.LayoutManagers"/>
     </data>
 
     <RelativeLayout android:layout_width="wrap_content"
                     android:layout_height="match_parent">
 
-        <android.support.v4.widget.NestedScrollView
+        <com.pulltofresh.PullToRefreshNestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
@@ -22,35 +23,69 @@
                               android:layout_width="match_parent"
                               android:layout_height="wrap_content"
                               android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/margin_horizontal">
-                        <TextView style="@style/CommonText"
-                                  android:text="分    类"/>
-                        <TextView
-                            android:id="@+id/tv_flh"
-                            style="@style/CommonText"
-                            android:layout_marginLeft="@dimen/dimen_10"
-                            android:layout_weight="1"
-                            android:drawableRight="@mipmap/icon_details"
-                            android:hint="请选择分类"/>
+                    <LinearLayout android:id="@+id/layout_fl"
+                                  android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:gravity="center_vertical"
+                                  android:orientation="horizontal"
+                                  app:clickCommand="@{viewModel.flCommand}">
+                        <LinearLayout android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:layout_weight="1"
+                                      android:orientation="vertical">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:paddingLeft="@dimen/margin_horizontal"
+                                android:paddingRight="@dimen/margin_horizontal">
+                                <TextView style="@style/CommonText"
+                                          android:text="分  类  号"/>
+                                <TextView
+                                    style="@style/CommonEdit"
+                                    android:layout_marginLeft="@dimen/dimen_10"
+                                    android:layout_weight="1"
+                                    android:hint="请选择分类"
+                                    android:text="@{viewModel.flh}"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:paddingLeft="@dimen/margin_horizontal"
+                                android:paddingRight="@dimen/margin_horizontal">
+                                <TextView style="@style/CommonText"
+                                          android:text="分类名称"/>
+                                <TextView
+                                    style="@style/CommonEdit"
+                                    android:layout_marginLeft="@dimen/dimen_10"
+                                    android:layout_weight="1"
+                                    android:hint="请选择分类名称"
+                                    android:text="@{viewModel.flmc}"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                        <ImageView android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:layout_margin="@dimen/margin_horizontal"
+                                   android:src="@mipmap/icon_details"/>
                     </LinearLayout>
+
+
                     <View style="@style/line_cell_light_h"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="@dimen/margin_horizontal">
+                        android:paddingLeft="@dimen/margin_horizontal"
+                        android:paddingRight="@dimen/margin_horizontal">
                         <TextView style="@style/CommonText"
-                                  android:text="单    价"/>
-                        <EditText android:id="@+id/tv_dj"
-                                  style="@style/CommonText"
+                                  android:text="单        价"/>
+                        <EditText style="@style/CommonEdit"
                                   android:layout_marginLeft="@dimen/dimen_10"
                                   android:layout_weight="1"
                                   android:hint="请输入单价"
-                                  android:inputType="numberDecimal"/>
+                                  android:inputType="numberDecimal"
+                                  android:text="@={viewModel.dj}"/>
                     </LinearLayout>
                     <View style="@style/line_cell_light_h"/>
                     <android.support.v7.widget.AppCompatButton
@@ -59,7 +94,8 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen_10"
                         android:text="生成资产登记表单"
-                        android:textColor="@color/white"/>
+                        android:textColor="@color/white"
+                        app:clickCommand="@{viewModel.createCommand}"/>
 
                     <View style="@style/line_cell_light_h"/>
                 </LinearLayout>
@@ -67,7 +103,8 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_zcdj"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    app:layoutManager="@{LayoutManagers.linear()}"/>
 
                 <include android:id="@+id/img_layout"
                          layout="@layout/adapter_zcdj_img_item"
@@ -78,11 +115,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_10"
-                    android:visibility="gone"
                     android:text="保存"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/white"
+                    android:visibility="gone"
+                    app:clickCommand="@{viewModel.saveCommand}"/>
             </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
+        </com.pulltofresh.PullToRefreshNestedScrollView>
 
     </RelativeLayout>
 </layout>

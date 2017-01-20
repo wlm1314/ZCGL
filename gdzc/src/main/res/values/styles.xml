@@ -46,13 +46,13 @@
     </style>
 
     <style name="CommonText" parent="CommonBase">
-        <item name="android:textColor">@color/text_nomal</item>
+        <item name="android:textColor">@color/text_normal</item>
         <item name="android:textColorHint">@color/text_hint</item>
     </style>
 
     <style name="CommonEdit" parent="CommonBase">
         <item name="android:padding">@dimen/dimen_10</item>
-        <item name="android:textColor">@color/text_nomal</item>
+        <item name="android:textColor">@color/text_normal</item>
         <item name="android:textColorHint">@color/text_hint</item>
         <item name="android:background">@color/clear</item>
     </style>
