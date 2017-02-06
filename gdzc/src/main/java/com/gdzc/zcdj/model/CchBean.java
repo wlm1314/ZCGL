@@ -2,8 +2,6 @@ package com.gdzc.zcdj.model;
 
 import android.databinding.ObservableField;
 
-import com.gdzc.base.BaseBean;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -11,14 +9,11 @@ import java.util.List;
  * Created by 王少岩 on 2017/1/12.
  */
 
-public class CchBean extends BaseBean {
-    public DataBean data;
+public class CchBean {
+    public boolean isFirstPage;
+    public boolean isLastPage;
+    public List<ListBean> list;
 
-    public static class DataBean {
-        public boolean isFirstPage;
-        public boolean isLastPage;
-        public List<ListBean> list;
-    }
 
     public static class ListBean {
         public String id;

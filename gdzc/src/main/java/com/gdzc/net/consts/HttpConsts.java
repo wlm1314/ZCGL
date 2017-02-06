@@ -1,12 +1,12 @@
-package com.gdzc.net;
+package com.gdzc.net.consts;
 
 import android.content.SharedPreferences;
 
 import com.gdzc.BuildConfig;
 import com.gdzc.base.App;
 
-import static com.gdzc.net.HttpPath.SERVER;
-import static com.gdzc.net.HttpPath.SERVER_TEXT;
+import static com.gdzc.net.consts.HttpPath.SERVER;
+import static com.gdzc.net.consts.HttpPath.SERVER_TEXT;
 
 
 /**

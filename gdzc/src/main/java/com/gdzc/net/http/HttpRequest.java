@@ -1,10 +1,12 @@
-package com.gdzc.net;
+package com.gdzc.net.http;
 
 import com.gdzc.base.BaseBean;
 import com.gdzc.cfd.model.CfdBean;
 import com.gdzc.flh.model.FlhBean;
 import com.gdzc.login.model.LoginBean;
 import com.gdzc.lydw.model.LydwBean;
+import com.gdzc.net.consts.HttpConsts;
+import com.gdzc.net.entity.HttpResult;
 import com.gdzc.ry.model.RyBean;
 import com.gdzc.syfx.model.SyfxBean;
 import com.gdzc.utils.BaseLog;
@@ -24,6 +26,7 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -58,6 +61,22 @@ public class HttpRequest {
     }
 
     /**
+     * 用来统一处理Http的resultCode,并将HttpResult的Data部分剥离出来返回给subscriber
+     *
+     * @param <T>   Subscriber真正需要的数据类型，也就是Data部分的数据类型
+     */
+    private static class HttpResultFunc<T> implements Func1<HttpResult<T>, T> {
+
+        @Override
+        public T call(HttpResult<T> httpResult) {
+            if (!httpResult.getStatus().isSuccess()) {
+                throw new ApiException(httpResult.getStatus().code, httpResult.getStatus().msg);
+            }
+            return httpResult.getData();
+        }
+    }
+
+    /**
      * 登录
      *
      * @param params 登录参数
@@ -66,6 +85,7 @@ public class HttpRequest {
     public static Observable<LoginBean> Login(Map<String, String> params) {
         printParam(params);
         return getInstance().create(RequestApi.class).Login(params)
+                .map(new HttpResultFunc<>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
@@ -89,7 +109,7 @@ public class HttpRequest {
      * @param params
      * @return
      */
-    public static Observable<ZcdjBean> GetTsxx(Map<String, String> params) {
+    public static Observable<HttpResult<ZcdjBean>> GetTsxx(Map<String, String> params) {
         printParam(params);
         return getInstance().create(RequestApi.class).GetTsxx(params)
                 .subscribeOn(Schedulers.io())
@@ -179,6 +199,7 @@ public class HttpRequest {
     public static Observable<CchBean> SelectCchByYqbh(Map<String, String> params) {
         printParam(params);
         return getInstance().create(RequestApi.class).SelectCchByYqbh(params)
+                .map(new HttpResultFunc<>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

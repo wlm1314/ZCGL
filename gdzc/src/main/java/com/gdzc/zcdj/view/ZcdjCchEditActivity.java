@@ -6,9 +6,9 @@ import com.gdzc.R;
 import com.gdzc.base.AppBar;
 import com.gdzc.base.BaseActivity;
 import com.gdzc.databinding.ActivityZcdjCchEditBinding;
-import com.gdzc.net.HttpPostParams;
-import com.gdzc.net.HttpRequest;
-import com.gdzc.net.RetrofitSubscriber;
+import com.gdzc.net.http.HttpPostParams;
+import com.gdzc.net.http.HttpRequest;
+import com.gdzc.net.subscribers.RetrofitSubscriber;
 import com.gdzc.utils.Utils;
 import com.gdzc.zcdj.model.CchBean;
 

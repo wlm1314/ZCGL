@@ -2,6 +2,7 @@ package com.gdzc.utils;
 
 import android.util.Log;
 
+import com.gdzc.net.entity.HttpResult;
 import com.gdzc.zcdj.model.UploadImageBean;
 import com.google.gson.Gson;
 
@@ -114,7 +115,7 @@ public class UploadFile {
      * @return String result of Service response
      * @throws IOException
      */
-    public static UploadImageBean post(String url, Map<String, String> params, Map<String, File> files)
+    public static HttpResult<UploadImageBean> post(String url, Map<String, String> params, Map<String, File> files)
             throws IOException {
         String BOUNDARY = java.util.UUID.randomUUID().toString();
         String PREFIX = "--", LINEND = "\r\n";
@@ -183,7 +184,7 @@ public class UploadFile {
         outStream.close();
         conn.disconnect();
         Gson gson = new Gson();
-        UploadImageBean baseBean = gson.fromJson(sb2.toString(), UploadImageBean.class);
+        HttpResult<UploadImageBean> baseBean = gson.fromJson(sb2.toString(), HttpResult.class);
         return baseBean;
     }
 }

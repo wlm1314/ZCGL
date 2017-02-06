@@ -1,10 +1,12 @@
-package com.gdzc.net;
+package com.gdzc.net.http;
 
 import com.gdzc.base.BaseBean;
 import com.gdzc.cfd.model.CfdBean;
 import com.gdzc.flh.model.FlhBean;
 import com.gdzc.login.model.LoginBean;
 import com.gdzc.lydw.model.LydwBean;
+import com.gdzc.net.consts.HttpPath;
+import com.gdzc.net.entity.HttpResult;
 import com.gdzc.ry.model.RyBean;
 import com.gdzc.syfx.model.SyfxBean;
 import com.gdzc.zccx.model.ZccxBean;
@@ -41,7 +43,7 @@ public interface RequestApi {
     //登录
     @FormUrlEncoded
     @POST(HttpPath.loginUrl)
-    Observable<LoginBean> Login(@FieldMap Map<String, String> params);
+    Observable<HttpResult<LoginBean>> Login(@FieldMap Map<String, String> params);
 
     //获取分类号
     @FormUrlEncoded
@@ -51,7 +53,7 @@ public interface RequestApi {
     //资产登记页面
     @FormUrlEncoded
     @POST(HttpPath.getTsxxUrl)
-    Observable<ZcdjBean> GetTsxx(@FieldMap Map<String, String> params);
+    Observable<HttpResult<ZcdjBean>> GetTsxx(@FieldMap Map<String, String> params);
 
     //获取单位列表
     @FormUrlEncoded
@@ -91,7 +93,7 @@ public interface RequestApi {
     //查询cch
     @FormUrlEncoded
     @POST(HttpPath.selectCchByYqbhUrl)
-    Observable<CchBean> SelectCchByYqbh(@FieldMap Map<String, String> params);
+    Observable<HttpResult<CchBean>> SelectCchByYqbh(@FieldMap Map<String, String> params);
 
     //修改cch
     @FormUrlEncoded

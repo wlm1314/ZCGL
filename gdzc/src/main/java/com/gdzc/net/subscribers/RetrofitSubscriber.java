@@ -1,7 +1,9 @@
-package com.gdzc.net;
+package com.gdzc.net.subscribers;
 
 import com.gdzc.base.App;
 import com.gdzc.base.BaseBean;
+import com.gdzc.net.progress.ProgressCancelListener;
+import com.gdzc.net.progress.ProgressDialogHandler;
 import com.gdzc.utils.BaseLog;
 import com.gdzc.utils.NetStateUtils;
 import com.gdzc.utils.Utils;
@@ -21,7 +23,7 @@ import rx.functions.Action1;
  *
  * @param <T>
  */
-public class RetrofitSubscriber<T extends BaseBean> extends Subscriber<T> implements ProgressCancelListener{
+public class RetrofitSubscriber<T extends BaseBean> extends Subscriber<T> implements ProgressCancelListener {
     final Action1<? super T> onNext;//接口成功返回处理动作
     final Action1<Throwable> onError;//接口失败返回处理动作
 
@@ -31,13 +33,13 @@ public class RetrofitSubscriber<T extends BaseBean> extends Subscriber<T> implem
         this.onNext = onNext;
         this.onError = onError;
 
-        mProgressDialogHandler = new ProgressDialogHandler(App.getAppContext().getCurrentActivity(), this, true);
+        mProgressDialogHandler = new ProgressDialogHandler(this, true);
     }
 
     public RetrofitSubscriber(Action1<? super T> onNext) {
         this.onNext = onNext;
         this.onError = null;
-        mProgressDialogHandler = new ProgressDialogHandler(App.getAppContext().getCurrentActivity(), this, true);
+        mProgressDialogHandler = new ProgressDialogHandler(this, true);
     }
 
     private void showProgressDialog(){

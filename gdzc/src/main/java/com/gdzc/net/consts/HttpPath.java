@@ -1,4 +1,4 @@
-package com.gdzc.net;
+package com.gdzc.net.consts;
 
 /**
  * Created by 王少岩 on 2016/9/19.

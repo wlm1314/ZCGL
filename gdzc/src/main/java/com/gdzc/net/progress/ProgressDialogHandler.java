@@ -1,11 +1,11 @@
-package com.gdzc.net;
+package com.gdzc.net.progress;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 
 import com.gdzc.R;
+import com.gdzc.base.App;
 
 /**
  * Created by 王少岩 on 2017/1/19.
@@ -17,20 +17,18 @@ public class ProgressDialogHandler extends Handler {
 
     private ProgressDialog pd;
 
-    private Context context;
     private boolean cancelable;
     private ProgressCancelListener mProgressCancelListener;
 
-    public ProgressDialogHandler(Context context, ProgressCancelListener mProgressCancelListener, boolean cancelable) {
+    public ProgressDialogHandler(ProgressCancelListener mProgressCancelListener, boolean cancelable) {
         super();
-        this.context = context;
         this.mProgressCancelListener = mProgressCancelListener;
         this.cancelable = cancelable;
     }
 
     private void initProgressDialog() {
         if (pd == null) {
-            pd = new ProgressDialog(context, R.style.AppTheme_Dark_Dialog);
+            pd = new ProgressDialog(App.getAppContext().getCurrentActivity(), R.style.AppTheme_Dark_Dialog);
             pd.setIndeterminate(true);
             pd.setCanceledOnTouchOutside(false);
             pd.setMessage("加载中");

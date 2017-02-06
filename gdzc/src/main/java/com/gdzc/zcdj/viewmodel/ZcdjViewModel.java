@@ -15,9 +15,11 @@ import com.gdzc.flh.model.FlhBean;
 import com.gdzc.flh.view.FlhActivity;
 import com.gdzc.lydw.model.LydwBean;
 import com.gdzc.lydw.view.LydwActivity;
-import com.gdzc.net.HttpPostParams;
-import com.gdzc.net.HttpRequest;
-import com.gdzc.net.RetrofitSubscriber;
+import com.gdzc.net.entity.HttpResult;
+import com.gdzc.net.http.HttpPostParams;
+import com.gdzc.net.http.HttpRequest;
+import com.gdzc.net.subscribers.ProgressSubscriber;
+import com.gdzc.net.subscribers.RetrofitSubscriber;
 import com.gdzc.ry.model.RyBean;
 import com.gdzc.ry.view.RyActivity;
 import com.gdzc.syfx.model.SyfxBean;
@@ -174,26 +176,30 @@ public class ZcdjViewModel {
             return;
         }
         HttpRequest.GetTsxx(HttpPostParams.paramGetTsxx(flh, dj))
-                .subscribe(new RetrofitSubscriber<>(zcdjBean -> {
-                    whatsystem = zcdjBean.whatsystem;
-                    mList.clear();
-                    mList.addAll(getZcdjByFlh(mFlh));
-                    mList.add(getZcdj("单价", "单价(元)", dj, "1"));
-                    if (zcdjBean.containsSQRW()) {
-                        mList.add(getZcdj("批量", "成批条数", "1", "0"));
-                        mList.add(getZcdj("金额", "金额(元)", dj, "1"));
-                        Observable.from(zcdjBean.data.list)
-                                .filter(bean -> !bean.字段名.equals("出厂号"))
-                                .subscribe(bean -> mList.add(ZcdjBean.Zcdj.castToZcdj(bean)));
+                .subscribe(new ProgressSubscriber<HttpResult<ZcdjBean>>() {
+                    @Override
+                    public void onNext(HttpResult<ZcdjBean> zcdjBeanHttpResult) {
+                        ZcdjBean zcdjBean = zcdjBeanHttpResult.getData();
+                        whatsystem = zcdjBeanHttpResult.getWhatsystem();
+                        mList.clear();
+                        mList.addAll(getZcdjByFlh(mFlh));
+                        mList.add(getZcdj("单价", "单价(元)", dj, "1"));
+                        if (zcdjBeanHttpResult.containsSQRW()) {
+                            mList.add(getZcdj("批量", "成批条数", "1", "0"));
+                            mList.add(getZcdj("金额", "金额(元)", dj, "1"));
+                            Observable.from(zcdjBean.list)
+                                    .filter(bean -> !bean.字段名.equals("出厂号"))
+                                    .subscribe(bean -> mList.add(ZcdjBean.Zcdj.castToZcdj(bean)));
+                        }
+                        if (zcdjBeanHttpResult.containsDJ()) {
+                            mList.add(getZcdj("数量", "数量", "1", "0"));
+                            mList.add(getZcdj("金额", "金额(元)", dj, "1"));
+                            Observable.from(zcdjBean.list)
+                                    .subscribe(bean -> mList.add(ZcdjBean.Zcdj.castToZcdj(bean)));
+                        }
+                        mFragment.setData(mList);
                     }
-                    if (zcdjBean.containsDJ()) {
-                        mList.add(getZcdj("数量", "数量", "1", "0"));
-                        mList.add(getZcdj("金额", "金额(元)", dj, "1"));
-                        Observable.from(zcdjBean.data.list)
-                                .subscribe(bean -> mList.add(ZcdjBean.Zcdj.castToZcdj(bean)));
-                    }
-                    mFragment.setData(mList);
-                }));
+                });
     }
 
     //保存表单

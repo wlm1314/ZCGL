@@ -3,9 +3,9 @@ package com.gdzc.zcdj.viewmodel;
 import android.databinding.ObservableField;
 
 import com.binding.command.ReplyCommand;
-import com.gdzc.net.HttpPostParams;
-import com.gdzc.net.HttpRequest;
-import com.gdzc.net.RetrofitSubscriber;
+import com.gdzc.net.http.HttpPostParams;
+import com.gdzc.net.http.HttpRequest;
+import com.gdzc.net.subscribers.RetrofitSubscriber;
 import com.gdzc.zcdj.view.ZcxgFragment;
 
 import org.json.JSONException;

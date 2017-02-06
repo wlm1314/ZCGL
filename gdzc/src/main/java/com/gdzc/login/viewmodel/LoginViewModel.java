@@ -5,10 +5,11 @@ import android.text.TextUtils;
 
 import com.binding.command.ReplyCommand;
 import com.gdzc.base.App;
+import com.gdzc.login.model.LoginBean;
 import com.gdzc.main.view.MainActivity;
-import com.gdzc.net.HttpPostParams;
-import com.gdzc.net.HttpRequest;
-import com.gdzc.net.RetrofitSubscriber;
+import com.gdzc.net.http.HttpPostParams;
+import com.gdzc.net.http.HttpRequest;
+import com.gdzc.net.subscribers.ProgressSubscriber;
 import com.gdzc.utils.NavigateUtils;
 import com.gdzc.utils.SPUtils;
 import com.gdzc.utils.Utils;
@@ -32,11 +33,14 @@ public class LoginViewModel {
         }
 
         HttpRequest.Login(HttpPostParams.login(username.get(), password.get()))
-                .subscribe(new RetrofitSubscriber<>(loginBean -> {
-                    SPUtils.onLogin(username.get(), loginBean.data.dwbh);
-                    Utils.showToast("登录成功");
-                    NavigateUtils.startActivity(App.getAppContext().getCurrentActivity(), MainActivity.class);
-                    App.getAppContext().getCurrentActivity().finish();
-                }));
+                .subscribe(new ProgressSubscriber<LoginBean>() {
+                    @Override
+                    public void onNext(LoginBean loginBean) {
+                        SPUtils.onLogin(username.get(), loginBean.dwbh);
+                        Utils.showToast("登录成功");
+                        NavigateUtils.startActivity(App.getAppContext().getCurrentActivity(), MainActivity.class);
+                        App.getAppContext().getCurrentActivity().finish();
+                    }
+                });
     });
 }

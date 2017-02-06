@@ -2,20 +2,14 @@ package com.gdzc.zcdj.model;
 
 import android.databinding.ObservableField;
 
-import com.gdzc.base.BaseBean;
-
 import java.util.List;
 
 /**
  * Created by 王少岩 on 2016/12/20.
  */
 
-public class ZcdjBean extends BaseBean {
-    public DataBean data;
-
-    public static class DataBean {
-        public List<ServerBean> list;
-    }
+public class ZcdjBean {
+    public List<ServerBean> list;
 
     public static class ServerBean {
         public String id;
@@ -41,7 +35,7 @@ public class ZcdjBean extends BaseBean {
         public String id;
         public String num;
         public String columName;
-        public String columEng="";
+        public String columEng = "";
         public String isEdit;
         public String isNull;
         public String tsnr;
@@ -62,7 +56,7 @@ public class ZcdjBean extends BaseBean {
             return isQz;
         }
 
-        public static boolean contains(String str){
+        public static boolean contains(String str) {
             return "批量数量".contains(str);
         }
 

@@ -18,7 +18,8 @@ import com.gdzc.base.App;
 import com.gdzc.base.BaseFragment;
 import com.gdzc.databinding.FragmentZcdjBinding;
 import com.gdzc.databinding.LayoutPhotoBinding;
-import com.gdzc.net.HttpPostParams;
+import com.gdzc.net.entity.HttpResult;
+import com.gdzc.net.http.HttpPostParams;
 import com.gdzc.utils.UploadFile;
 import com.gdzc.utils.Utils;
 import com.gdzc.widget.recycleview.BindingAdapter;
@@ -115,10 +116,10 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
             @Override
             public void run() {
                 try {
-                    UploadImageBean baseBean = UploadFile.post("http://www.bjprd.com.cn:8080/AndroidInterface-0.0.1-SNAPSHOT/zj/imageUpload", HttpPostParams.BaseParams(), files);
-                    if (baseBean.status.isSuccess()) {
+                    HttpResult<UploadImageBean> baseBean = UploadFile.post("http://www.bjprd.com.cn:8080/AndroidInterface-0.0.1-SNAPSHOT/zj/imageUpload", HttpPostParams.BaseParams(), files);
+                    if (baseBean.getStatus().isSuccess()) {
                         Message msg = Message.obtain();
-                        msg.obj = baseBean.data;
+                        msg.obj = baseBean.getData();
                         msg.what = 0;
                         mHandler.sendMessage(msg);
                     } else

@@ -1,6 +1,7 @@
-package com.gdzc.net;
+package com.gdzc.net.http;
 
 
+import com.gdzc.net.consts.MD5Tools;
 import com.gdzc.utils.SPUtils;
 
 import java.util.HashMap;

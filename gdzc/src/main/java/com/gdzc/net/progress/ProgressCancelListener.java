@@ -1,4 +1,4 @@
-package com.gdzc.net;
+package com.gdzc.net.progress;
 
 /**
  * Created by 王少岩 on 2017/1/19.

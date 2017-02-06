@@ -10,9 +10,9 @@ import com.gdzc.R;
 import com.gdzc.base.AppBar;
 import com.gdzc.base.BaseActivity;
 import com.gdzc.databinding.ActivityZcdjCchBinding;
-import com.gdzc.net.HttpPostParams;
-import com.gdzc.net.HttpRequest;
-import com.gdzc.net.RetrofitSubscriber;
+import com.gdzc.net.http.HttpPostParams;
+import com.gdzc.net.http.HttpRequest;
+import com.gdzc.net.subscribers.ProgressSubscriber;
 import com.gdzc.utils.NavigateUtils;
 import com.gdzc.widget.recycleview.BindingAdapter;
 import com.gdzc.widget.recycleview.BindingTool;
@@ -68,10 +68,13 @@ public class ZcdjCchActivity extends BaseActivity<ActivityZcdjCchBinding> {
     private void getData() {
         String yqbh = getIntent().getExtras().getString("yqbh");
         HttpRequest.SelectCchByYqbh(HttpPostParams.paramselectCchByYqbh(yqbh))
-                .subscribe(new RetrofitSubscriber<>(cchBean -> {
-                    Observable.from(cchBean.data.list).subscribe(listBean -> mList.add(CchBean.Cch.castToCch(listBean)));
-                    mAdapter.notifyDataSetChanged();
-                }));
+                .subscribe(new ProgressSubscriber<CchBean>() {
+                    @Override
+                    public void onNext(CchBean cchBean) {
+                        Observable.from(cchBean.list).subscribe(listBean -> mList.add(CchBean.Cch.castToCch(listBean)));
+                        mAdapter.notifyDataSetChanged();
+                    }
+                });
     }
 
     @Override

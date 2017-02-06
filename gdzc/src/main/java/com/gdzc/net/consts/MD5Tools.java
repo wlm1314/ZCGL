@@ -1,4 +1,4 @@
-package com.gdzc.net;
+package com.gdzc.net.consts;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

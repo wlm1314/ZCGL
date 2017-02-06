@@ -1,4 +1,4 @@
-package com.gdzc.net;
+package com.gdzc.net.http;
 
 import com.gdzc.utils.BaseLog;
 
