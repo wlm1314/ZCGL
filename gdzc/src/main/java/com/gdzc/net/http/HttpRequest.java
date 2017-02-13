@@ -1,5 +1,6 @@
 package com.gdzc.net.http;
 
+import com.gdzc.BuildConfig;
 import com.gdzc.base.BaseBean;
 import com.gdzc.cfd.model.CfdBean;
 import com.gdzc.flh.model.FlhBean;
@@ -12,7 +13,7 @@ import com.gdzc.syfx.model.SyfxBean;
 import com.gdzc.utils.BaseLog;
 import com.gdzc.zccx.model.ZccxBean;
 import com.gdzc.zcdj.model.CchBean;
-import com.gdzc.zcdj.model.ZcdjBean;
+import com.gdzc.zcdj.model.TsxxBean;
 import com.gdzc.zcdj.model.ZcxgBean;
 import com.gdzc.zcdj.model.ZcxgEditBean;
 import com.gdzc.zctj.model.ZctjBean;
@@ -21,6 +22,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -49,6 +51,13 @@ public class HttpRequest {
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
             builder.addInterceptor(new BaseInterceptor());
             builder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+
+            if (BuildConfig.DEBUG) {
+                //新建log拦截器
+                HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(message -> BaseLog.i(message));
+                loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+                builder.addInterceptor(loggingInterceptor);
+            }
 
             retrofit = new Retrofit.Builder()
                     .client(builder.build())
@@ -83,11 +92,9 @@ public class HttpRequest {
      * @return
      */
     public static Observable<LoginBean> Login(Map<String, String> params) {
-        printParam(params);
         return getInstance().create(RequestApi.class).Login(params)
                 .map(new HttpResultFunc<>())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(applySchedulers());
     }
 
     /**
@@ -97,10 +104,8 @@ public class HttpRequest {
      * @return
      */
     public static Observable<FlhBean> GetFlh(Map<String, String> params) {
-        printParam(params);
         return getInstance().create(RequestApi.class).GetFlh(params)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(applySchedulers());
     }
 
     /**
@@ -109,11 +114,9 @@ public class HttpRequest {
      * @param params
      * @return
      */
-    public static Observable<HttpResult<ZcdjBean>> GetTsxx(Map<String, String> params) {
-        printParam(params);
+    public static Observable<HttpResult<TsxxBean>> GetTsxx(Map<String, String> params) {
         return getInstance().create(RequestApi.class).GetTsxx(params)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(applySchedulers());
     }
 
     /**
@@ -123,10 +126,8 @@ public class HttpRequest {
      * @return
      */
     public static Observable<LydwBean> GetDwList(Map<String, String> params) {
-        printParam(params);
         return getInstance().create(RequestApi.class).GetDwList(params)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(applySchedulers());
     }
 
     /**
@@ -136,10 +137,8 @@ public class HttpRequest {
      * @return
      */
     public static Observable<SyfxBean> GetMkList(Map<String, String> params) {
-        printParam(params);
         return getInstance().create(RequestApi.class).GetMkList(params)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(applySchedulers());
     }
 
     /**
@@ -149,10 +148,8 @@ public class HttpRequest {
      * @return
      */
     public static Observable<BaseBean> AddNew(Map<String, String> params) {
-        printParam(params);
         return getInstance().create(RequestApi.class).AddNew(params)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(applySchedulers());
     }
 
     /**
@@ -162,10 +159,8 @@ public class HttpRequest {
      * @return
      */
     public static Observable<BaseBean> UpdateZj(Map<String, String> params) {
-        printParam(params);
         return getInstance().create(RequestApi.class).UpdateZj(params)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(applySchedulers());
     }
 
     /**
@@ -175,10 +170,8 @@ public class HttpRequest {
      * @return
      */
     public static Observable<ZcxgBean> SearchMyData(Map<String, String> params) {
-        printParam(params);
         return getInstance().create(RequestApi.class).SearchMyData(params)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(applySchedulers());
     }
 
     /**
@@ -186,10 +179,8 @@ public class HttpRequest {
      * @return
      */
     public static Observable<ZcxgEditBean> SearchZJById(Map<String, String> params) {
-        printParam(params);
         return getInstance().create(RequestApi.class).SearchZJById(params)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(applySchedulers());
     }
 
     /**
@@ -197,11 +188,9 @@ public class HttpRequest {
      * @return
      */
     public static Observable<CchBean> SelectCchByYqbh(Map<String, String> params) {
-        printParam(params);
         return getInstance().create(RequestApi.class).SelectCchByYqbh(params)
                 .map(new HttpResultFunc<>())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(applySchedulers());
     }
 
     /**
@@ -209,10 +198,8 @@ public class HttpRequest {
      * @return
      */
     public static Observable<BaseBean> UpdateCchById(Map<String, String> params) {
-        printParam(params);
         return getInstance().create(RequestApi.class).UpdateCchById(params)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(applySchedulers());
     }
 
     /**
@@ -220,10 +207,8 @@ public class HttpRequest {
      * @return
      */
     public static Observable<BaseBean> DeleteZjById(Map<String, String> params) {
-        printParam(params);
         return getInstance().create(RequestApi.class).DeleteZjById(params)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(applySchedulers());
     }
 
     /**
@@ -231,10 +216,8 @@ public class HttpRequest {
      * @return
      */
     public static Observable<ZctjBean> SelectMyDataTotalByCategory(Map<String, String> params) {
-        printParam(params);
         return getInstance().create(RequestApi.class).SelectMyDataTotalByCategory(params)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(applySchedulers());
     }
 
     /**
@@ -242,10 +225,8 @@ public class HttpRequest {
      * @return
      */
     public static Observable<ZcxgBean> SelectMyAllData(Map<String, String> params) {
-        printParam(params);
         return getInstance().create(RequestApi.class).SelectMyAllData(params)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(applySchedulers());
     }
 
     /**
@@ -253,10 +234,8 @@ public class HttpRequest {
      * @return
      */
     public static Observable<ZccxBean> SelectPoolById(Map<String, String> params) {
-        printParam(params);
         return getInstance().create(RequestApi.class).SelectPoolById(params)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(applySchedulers());
     }
 
     /**
@@ -264,10 +243,8 @@ public class HttpRequest {
      * @return
      */
     public static Observable<ZcxgBean> selectMySonData(Map<String, String> params) {
-        printParam(params);
         return getInstance().create(RequestApi.class).selectMySonData(params)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(applySchedulers());
     }
 
     /**
@@ -275,10 +252,8 @@ public class HttpRequest {
      * @return
      */
     public static Observable<CfdBean> GetCfd(Map<String, String> params) {
-        printParam(params);
         return getInstance().create(RequestApi.class).GetCfd(params)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(applySchedulers());
     }
 
     /**
@@ -286,29 +261,13 @@ public class HttpRequest {
      * @return
      */
     public static Observable<RyBean> GetRy(Map<String, String> params) {
-        printParam(params);
         return getInstance().create(RequestApi.class).GetRy(params)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .compose(applySchedulers());
     }
 
-    /**
-     * 打印请求参数
-     *
-     * @param params
-     */
-    private static void printParam(Map<String, String> params) {
-        StringBuilder sb = new StringBuilder();
-        String param = "";
-        for (Map.Entry<String, String> entry : params.entrySet()) {
-            System.out.println(entry.getKey() + "--->" + entry.getValue());
-            sb.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
-        }
-        if (sb.length() > 0)
-            param = sb.toString().substring(0, sb.length() - 1);
-        else
-            param = sb.toString();
-        BaseLog.i("RequestParam---------->>>" + "&" + param);
+    public static <T> Observable.Transformer<T, T> applySchedulers() {
+        return observable -> observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
 }

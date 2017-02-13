@@ -5,67 +5,59 @@
     <data>
         <import type="android.view.View"/>
         <import type="android.text.InputType"/>
-        <import type="com.gdzc.zcdj.model.ZcdjBean.Zcdj"/>
-        <variable name="data" type="Zcdj"/>
+        <import type="com.gdzc.zcdj.viewmodel.TsxxViewModel"/>
+        <variable name="viewModel" type="TsxxViewModel"/>
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/margin_horizontal"
-        android:paddingRight="@dimen/margin_horizontal"
-        android:paddingTop="@dimen/dimen_5">
+        android:paddingLeft="@dimen/dimen_15"
+        android:paddingRight="@dimen/dimen_15">
 
         <TextView
             style="@style/CommonText"
             android:layout_width="wrap_content"
             android:paddingBottom="@dimen/dimen_10"
+            android:paddingRight="@dimen/dimen_10"
             android:paddingTop="@dimen/dimen_10"
-            android:text="@{data.xsnr}"/>
+            android:text="@{viewModel.xsnr}"/>
 
         <TextView
             style="@style/CommonText"
             android:layout_width="wrap_content"
-            android:paddingBottom="@dimen/dimen_10"
-            android:paddingLeft="@dimen/dimen_5"
-            android:paddingTop="@dimen/dimen_10"
+            android:paddingRight="@dimen/dimen_10"
             android:text="*"
             android:textColor="@color/red"
-            android:visibility="@{data.djbt.equals(`1`)?View.VISIBLE:View.GONE}"/>
+            android:visibility="@{viewModel.djbt.equals(`1`)?View.VISIBLE:View.GONE}"/>
 
         <EditText
-            android:id="@+id/et_text"
+            android:id="@+id/et"
+            style="@style/CommonText"
+            android:layout_weight="1"
+            android:background="@drawable/bottom_border"
+            android:hint="@{viewModel.tsnr}"
+            android:maxLines="1"
+            android:text="@={viewModel.content}"
+            android:visibility="@{viewModel.isEditAble?View.VISIBLE:View.GONE}"/>
+
+        <TextView
             style="@style/CommonText"
             android:layout_width="0dp"
-            android:layout_marginLeft="@dimen/dimen_10"
             android:layout_weight="1"
-            android:hint="@{data.tsnr}"
-            android:inputType="@{Zcdj.contains(data.columName)?InputType.TYPE_CLASS_NUMBER:InputType.TYPE_CLASS_TEXT}"
+            android:background="@drawable/bottom_border"
+            android:hint="@{viewModel.tsnr}"
             android:maxLines="1"
-            android:paddingBottom="@dimen/dimen_10"
-            android:paddingTop="@dimen/dimen_10"
-            android:text="@={data.editText}"
-            app:requestFocus="@{!data.isQz.equals(`1`)}"
-            app:colorControlActivated="@color/colorPrimary"/>
+            android:text="@={viewModel.content}"
+            android:visibility="@{!viewModel.isEditAble?View.VISIBLE:View.GONE}"/>
 
-        <LinearLayout
-            android:id="@+id/select_layout"
+        <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_10"
-            android:gravity="center_vertical"
-            android:paddingBottom="@dimen/dimen_10"
-            android:paddingTop="@dimen/dimen_10"
-            android:visibility="@{data.isQz.equals(`1`)?View.VISIBLE:View.GONE}">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@mipmap/icon_right_gray"
-                android:visibility="@{data.isSelected?View.VISIBLE:View.GONE}"/>
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:src="@mipmap/icon_right_gray"
+            android:visibility="@{viewModel.isQz?View.VISIBLE:View.GONE}"/>
 
     </LinearLayout>
 

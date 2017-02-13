@@ -27,6 +27,8 @@ import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class Utils {
@@ -36,6 +38,15 @@ public class Utils {
     // 土司
     public static void showToast(String text) {
         Toast.makeText(App.getAppContext(), text, Toast.LENGTH_SHORT).show();
+    }
+
+    public static boolean isNumeric(String str) {
+        Pattern pattern = Pattern.compile("[0-9]*");
+        Matcher isNum = pattern.matcher(str);
+        if (!isNum.matches()) {
+            return false;
+        }
+        return true;
     }
 
     //显示loading

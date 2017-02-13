@@ -1,7 +1,9 @@
 package com.gdzc.utils;
 
+import android.os.Environment;
 import android.util.Log;
 
+import com.gdzc.base.App;
 import com.gdzc.net.entity.HttpResult;
 import com.gdzc.zcdj.model.UploadImageBean;
 import com.google.gson.Gson;
@@ -186,5 +188,32 @@ public class UploadFile {
         Gson gson = new Gson();
         HttpResult<UploadImageBean> baseBean = gson.fromJson(sb2.toString(), HttpResult.class);
         return baseBean;
+    }
+
+    /**
+     * SD卡中自己拍照照片的存储路径
+     */
+    private static final File SD_CAMERA_DIR = new File(Environment.getExternalStorageDirectory(), "DCIM/Camera");
+    /**
+     * SD卡中用于缓存路径
+     */
+    private static final File CACHE_DIR = App.getAppContext().getCacheDir();
+    private static final String PATH_IMAGE_CAMERA = "Camera";
+
+    /**
+     * 获取拍摄照片的存储路径
+     */
+    public static File getCameraFile() {
+        File filePath;
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            filePath = SD_CAMERA_DIR;
+        } else {
+            filePath = new File(CACHE_DIR, PATH_IMAGE_CAMERA);
+        }
+        if (!filePath.exists()) {
+            filePath.mkdirs();
+        }
+        String tempFileName = System.currentTimeMillis() + ".jpg";
+        return new File(filePath, tempFileName);
     }
 }

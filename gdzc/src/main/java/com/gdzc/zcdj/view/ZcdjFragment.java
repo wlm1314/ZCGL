@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.gdzc.BR;
 import com.gdzc.R;
 import com.gdzc.base.App;
 import com.gdzc.base.BaseFragment;
@@ -25,7 +26,7 @@ import com.gdzc.utils.Utils;
 import com.gdzc.widget.recycleview.BindingAdapter;
 import com.gdzc.widget.recycleview.BindingTool;
 import com.gdzc.zcdj.model.UploadImageBean;
-import com.gdzc.zcdj.model.ZcdjBean;
+import com.gdzc.zcdj.viewmodel.TsxxViewModel;
 import com.gdzc.zcdj.viewmodel.ZcdjViewModel;
 
 import java.io.File;
@@ -43,7 +44,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
     private ZcdjViewModel mViewModel;
-    private List<ZcdjBean.Zcdj> mList = new ArrayList<>();
+    private List<TsxxViewModel> mList = new ArrayList<>();
     private File tempFile;
     private ImageView tempIv;
     private BindingAdapter mAdapter;
@@ -68,11 +69,11 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
     }
 
     private void initView() {
-        mAdapter = new BindingAdapter(new BindingTool(R.layout.adapter_zcdj_item, com.gdzc.BR.data), mList);
+        mAdapter = new BindingAdapter(new BindingTool(R.layout.adapter_zcdj_item, BR.viewModel), mList);
         mBinding.rvZcdj.setAdapter(mAdapter);
     }
 
-    public void setData(List<ZcdjBean.Zcdj> list) {
+    public void setData(List<TsxxViewModel> list) {
         mList.addAll(list);
         mAdapter.notifyDataSetChanged();
         mBinding.imgLayout.getRoot().setVisibility(View.VISIBLE);
@@ -83,8 +84,8 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
     private void setListener() {
         mBinding.imgLayout.getRoot().findViewById(R.id.iv_zc).setOnClickListener(v -> initPhotoView((ImageView) v, "zc"));
         mBinding.imgLayout.getRoot().findViewById(R.id.iv_fp).setOnClickListener(v -> initPhotoView((ImageView) v, "fp"));
-        mAdapter.setOnViewClickListener(mViewModel.mItemClickLister, R.id.select_layout);
-        mAdapter.setTextChangeListener(mViewModel.mTextChangeListener, R.id.et_text);
+        mAdapter.setItemClickLister(mViewModel.mItemClickLister);
+        mAdapter.setTextChangeListener(mViewModel.mTextChangeListener, R.id.et);
     }
 
     private void initPhotoView(ImageView view, String imgType) {
@@ -93,7 +94,7 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
         LayoutPhotoBinding choiceBinding = DataBindingUtil.inflate(getActivity().getLayoutInflater(), R.layout.layout_photo, null, false);
         Dialog dialog = Utils.showBottomDialog(App.getAppContext().getCurrentActivity(), choiceBinding.getRoot());
         choiceBinding.takePhote.setOnClickListener(v -> {
-            tempFile = mViewModel.getCameraFile();
+            tempFile = UploadFile.getCameraFile();
             Intent intentCamera = new Intent("android.media.action.IMAGE_CAPTURE");
             intentCamera.putExtra("output", Uri.fromFile(tempFile));
             startActivityForResult(intentCamera, 1003);

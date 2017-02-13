@@ -11,7 +11,7 @@ import com.gdzc.ry.model.RyBean;
 import com.gdzc.syfx.model.SyfxBean;
 import com.gdzc.zccx.model.ZccxBean;
 import com.gdzc.zcdj.model.CchBean;
-import com.gdzc.zcdj.model.ZcdjBean;
+import com.gdzc.zcdj.model.TsxxBean;
 import com.gdzc.zcdj.model.ZcxgBean;
 import com.gdzc.zcdj.model.ZcxgEditBean;
 import com.gdzc.zctj.model.ZctjBean;
@@ -53,7 +53,7 @@ public interface RequestApi {
     //资产登记页面
     @FormUrlEncoded
     @POST(HttpPath.getTsxxUrl)
-    Observable<HttpResult<ZcdjBean>> GetTsxx(@FieldMap Map<String, String> params);
+    Observable<HttpResult<TsxxBean>> GetTsxx(@FieldMap Map<String, String> params);
 
     //获取单位列表
     @FormUrlEncoded
