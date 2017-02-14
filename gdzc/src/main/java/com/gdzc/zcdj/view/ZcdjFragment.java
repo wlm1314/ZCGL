@@ -197,6 +197,7 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
 
     public void reset() {
         mList.clear();
+        mAdapter.notifyDataSetChanged();
         mBinding.imgLayout.getRoot().setVisibility(View.GONE);
         mBinding.btConfirm.setVisibility(View.GONE);
         mBinding.formLayout.setVisibility(View.VISIBLE);
