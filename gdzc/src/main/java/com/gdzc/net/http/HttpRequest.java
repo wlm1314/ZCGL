@@ -147,7 +147,7 @@ public class HttpRequest {
      * @param params
      * @return
      */
-    public static Observable<BaseBean> AddNew(Map<String, String> params) {
+    public static Observable<HttpResult> AddNew(Map<String, String> params) {
         return getInstance().create(RequestApi.class).AddNew(params)
                 .compose(applySchedulers());
     }

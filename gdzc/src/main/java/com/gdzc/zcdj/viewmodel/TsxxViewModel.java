@@ -22,6 +22,7 @@ public class TsxxViewModel {
     public final ObservableField<Boolean> isQz = new ObservableField<>();
     public final ObservableField<String> content = new ObservableField<>();
     public final ObservableField<Boolean> isEditAble = new ObservableField<>();
+    public final ObservableField<Boolean> isNum = new ObservableField<>();
 
     public TsxxBean.Tsxx mTsxx;
 
@@ -34,6 +35,8 @@ public class TsxxViewModel {
         tsnr.set(tsxx.tsnr.trim());
         isQz.set(tsxx.isQz.equals("1") || tsxx.isQz.equals("2"));
         isEditAble.set((tsxx.isQz.equals("0") || tsxx.isQz.equals("2")) && !tsxx.columType.equals("日期型"));
+        content.set("");
+        isNum.set(false);
     }
 
     public TsxxViewModel(String colum, String xsnr, String djbt, String isQz, String content) {
@@ -44,6 +47,7 @@ public class TsxxViewModel {
         this.isQz.set(isQz.equals("1") || isQz.equals("2"));
         this.content.set(content);
         isEditAble.set(isQz.equals("0") || isQz.equals("2"));
+        isNum.set("数量单价金额批量".contains(colum));
     }
 
     public static List<TsxxViewModel> getTsxxViewModelByFlh(FlhBean.Flh flh) {

@@ -68,7 +68,7 @@ public interface RequestApi {
     //新增数据
     @FormUrlEncoded
     @POST(HttpPath.addnewUrl)
-    Observable<BaseBean> AddNew(@FieldMap Map<String, String> params);
+    Observable<HttpResult> AddNew(@FieldMap Map<String, String> params);
 
     //上传图片
     @POST(HttpPath.imageUploadUrl)

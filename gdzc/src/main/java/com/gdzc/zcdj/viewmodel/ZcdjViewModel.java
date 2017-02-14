@@ -18,7 +18,6 @@ import com.gdzc.net.entity.HttpResult;
 import com.gdzc.net.http.HttpPostParams;
 import com.gdzc.net.http.HttpRequest;
 import com.gdzc.net.subscribers.ProgressSubscriber;
-import com.gdzc.net.subscribers.RetrofitSubscriber;
 import com.gdzc.ry.model.RyBean;
 import com.gdzc.ry.view.RyActivity;
 import com.gdzc.syfx.model.SyfxBean;
@@ -33,6 +32,7 @@ import com.gdzc.zcdj.view.ZcdjFragment;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -60,7 +60,6 @@ public class ZcdjViewModel {
 
     public BindingViewHolder.ItemClickLister mItemClickLister = (view, position) -> {
         mTsxxViewModel = mList.get(position);
-        if (mTsxxViewModel.isEditAble.get()) return;
         if (mTsxxViewModel.columType.get().equals("日期型"))
             showTimePicker(mTsxxViewModel.colum.get());
         else if (mTsxxViewModel.isQz.get()) {
@@ -107,9 +106,9 @@ public class ZcdjViewModel {
     int sl = 1, pl = 1;
 
     public BindingViewHolder.TextChangeListener mTextChangeListener = (view, position, s) -> {
-        if ("TDJ".contains(whatsystem)) {
-            TsxxViewModel temp = mList.get(position);
-            if (!TextUtils.isEmpty(s) && Utils.isNumeric(s)) {
+        TsxxViewModel temp = mList.get(position);
+        if ("TDJ".contains(whatsystem) && "数量单价金额批量".contains(temp.colum.get())) {
+            if (!TextUtils.isEmpty(s)) {
                 if (temp.colum.get().equals("数量")) {//数量大于1，批量等于1
                     int num = Integer.valueOf(s);
                     if (num >= 1) {
@@ -118,6 +117,12 @@ public class ZcdjViewModel {
                                 .subscribe(tsxxViewModel -> tsxxViewModel.content.set("1"));
                         sl = num;
                         pl = 1;
+                        Observable.from(mList)
+                                .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("金额"))
+                                .subscribe(tsxxViewModel -> tsxxViewModel.content.set("0"));
+                        Observable.from(mList)
+                                .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("单价"))
+                                .subscribe(tsxxViewModel -> tsxxViewModel.content.set("0"));
                     }
                 } else if (temp.colum.get().equals("批量")) {//批量大于1，数量等于1
                     int num = Integer.valueOf(s);
@@ -125,6 +130,12 @@ public class ZcdjViewModel {
                         Observable.from(mList)
                                 .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("数量"))
                                 .subscribe(tsxxViewModel -> tsxxViewModel.content.set("1"));
+                        Observable.from(mList)
+                                .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("金额"))
+                                .subscribe(tsxxViewModel -> tsxxViewModel.content.set("0"));
+                        Observable.from(mList)
+                                .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("单价"))
+                                .subscribe(tsxxViewModel -> tsxxViewModel.content.set("0"));
                         pl = num;
                         sl = 1;
                     }
@@ -132,21 +143,22 @@ public class ZcdjViewModel {
                     if (pl > 1) {//批量大于1时，可以输入单价，计算金额
                         dj = Double.valueOf(s);
                         je = dj * pl;
+                        Observable.from(mList)
+                                .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("金额"))
+                                .subscribe(tsxxViewModel -> tsxxViewModel.content.set(je + ""));
                     }
                 } else if (temp.colum.get().equals("金额")) {
                     if (sl > 1) {//数量大于1时，可以输入金额，计算单价
                         je = Double.valueOf(s);
                         dj = je / sl;
+                        NumberFormat nf = NumberFormat.getNumberInstance();
+                        nf.setMaximumFractionDigits(2);
+                        Observable.from(mList)
+                                .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("单价"))
+                                .subscribe(tsxxViewModel -> tsxxViewModel.content.set(nf.format(dj) + ""));
                     }
                 }
-                Observable.from(mList)
-                        .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("金额"))
-                        .subscribe(tsxxViewModel -> tsxxViewModel.content.set(je + ""));
-                Observable.from(mList)
-                        .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("单价"))
-                        .subscribe(tsxxViewModel -> tsxxViewModel.content.set(dj + ""));
-            } else
-                Utils.showToast("请输入数字类型");
+            }
         }
     };
 
@@ -173,11 +185,11 @@ public class ZcdjViewModel {
                 if (tsxxViewModel.djbt.get().equals("1") && TextUtils.isEmpty(tsxxViewModel.content.get())) {
                     Utils.showToast(tsxxViewModel.colum.get() + "有误");
                     return;
-                } else if (!TextUtils.isEmpty(tsxxViewModel.content.get())) {
+                } else if (!TextUtils.isEmpty(tsxxViewModel.content.get().trim())) {
                     if (tsxxViewModel.colum.get().equals("分类名称"))
-                        jsonObj.put("字符字段7", tsxxViewModel.content.get());
+                        jsonObj.put("字符字段7", tsxxViewModel.content.get().trim());
                     else
-                        jsonObj.put(tsxxViewModel.colum.get(), TextUtils.isEmpty(tsxxViewModel.content.get()) ? tsxxViewModel.id.get() : tsxxViewModel.content.get());
+                        jsonObj.put(tsxxViewModel.colum.get(), TextUtils.isEmpty(tsxxViewModel.content.get().trim()) ? tsxxViewModel.id.get().trim() : tsxxViewModel.content.get().trim());
                 }
             }
             if (!TextUtils.isEmpty(zcImg))
@@ -207,13 +219,14 @@ public class ZcdjViewModel {
                         TsxxBean tsxxBean = zcdjBeanHttpResult.getData();
                         whatsystem = zcdjBeanHttpResult.getWhatsystem();
                         mList.addAll(TsxxViewModel.getTsxxViewModelByFlh(mFlh));
-                        mList.add(new TsxxViewModel("单价", "单价(元)", "1", "0", dj));
                         if (zcdjBeanHttpResult.containsSQRW()) {
                             mList.add(new TsxxViewModel("批量", "成批条数", "1", "0", "1"));
+                            mList.add(new TsxxViewModel("单价", "单价(元)", "1", "0", dj));
                         }
                         if (zcdjBeanHttpResult.containsTDJ()) {
                             mList.add(new TsxxViewModel("批量", "成批条数", "1", "0", "1"));
                             mList.add(new TsxxViewModel("数量", "数量", "1", "0", "0"));
+                            mList.add(new TsxxViewModel("单价", "单价(元)", "1", "0", dj));
                             mList.add(new TsxxViewModel("金额", "金额(元)", "1", "0", dj));
                         }
                         Observable.from(tsxxBean.list)
@@ -235,14 +248,17 @@ public class ZcdjViewModel {
     //保存表单
     public void createZcdj(String whatsystem, String addnewstr) {
         HttpRequest.AddNew(HttpPostParams.paramAddNew(whatsystem, addnewstr))
-                .subscribe(new RetrofitSubscriber<>(baseBean -> {
-                    Utils.showToast(baseBean.status.msg);
-                    if (baseBean.status.isSuccess()) {
-                        mFragment.reset();
-                        zcImg = "";
-                        fpImg = "";
+                .subscribe(new ProgressSubscriber<HttpResult>() {
+                    @Override
+                    public void onNext(HttpResult httpResult) {
+                        Utils.showToast(httpResult.getStatus().msg);
+                        if (httpResult.getStatus().isSuccess()) {
+                            mFragment.reset();
+                            zcImg = "";
+                            fpImg = "";
+                        }
                     }
-                }));
+                });
     }
 
     public void showTimePicker(String title) {
