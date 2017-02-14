@@ -29,6 +29,6 @@ public class MainViewModel {
     });
 
     public MainViewModel() {
-        username.set(SPUtils.getString(SPUtils.kUser_username, ""));
+        username.set(SPUtils.getString(SPUtils.kUser_nickname, ""));
     }
 }

@@ -36,7 +36,7 @@ public class LoginViewModel {
                 .subscribe(new ProgressSubscriber<LoginBean>() {
                     @Override
                     public void onNext(LoginBean loginBean) {
-                        SPUtils.onLogin(username.get(), loginBean.dwbh);
+                        SPUtils.onLogin(loginBean.id, loginBean.username, loginBean.xingming, loginBean.dwbh);
                         Utils.showToast("登录成功");
                         NavigateUtils.startActivity(App.getAppContext().getCurrentActivity(), MainActivity.class);
                         App.getAppContext().getCurrentActivity().finish();

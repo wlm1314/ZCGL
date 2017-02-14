@@ -51,7 +51,7 @@ public class HttpResult<T> {
     }
 
 
-    public boolean containsDJ() {
-        return "DJ".contains(whatsystem);
+    public boolean containsTDJ() {
+        return "TDJ".contains(whatsystem);
     }
 }

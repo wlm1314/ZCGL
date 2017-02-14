@@ -2,10 +2,10 @@ package com.gdzc.syfx.view;
 
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.gdzc.BR;
 import com.gdzc.R;
@@ -20,6 +20,7 @@ import com.gdzc.utils.Utils;
 import com.gdzc.widget.recycleview.BindingAdapter;
 import com.gdzc.widget.recycleview.BindingTool;
 import com.pulltofresh.PullToRefreshBase;
+import com.pulltofresh.extras.RecyclerViewEmptySupport;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,14 +64,14 @@ public class SyfxActivity extends BaseActivity<ActivityCustomBinding> {
     }
 
     private void setListener() {
-        mBinding.ptrRv.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<RecyclerView>() {
+        mBinding.ptrRv.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<RecyclerViewEmptySupport>() {
             @Override
-            public void onPullDownToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
+            public void onPullDownToRefresh(PullToRefreshBase<RecyclerViewEmptySupport> refreshView) {
                 getSyfx();
             }
 
             @Override
-            public void onPullUpToRefresh(PullToRefreshBase<RecyclerView> refreshView) {
+            public void onPullUpToRefresh(PullToRefreshBase<RecyclerViewEmptySupport> refreshView) {
 
             }
         });
@@ -88,6 +89,10 @@ public class SyfxActivity extends BaseActivity<ActivityCustomBinding> {
                     mList.clear();
                     mList.addAll(syfxBean.data.list);
                     mAdapter.notifyDataSetChanged();
+                    if (mList.size()>0)
+                        mBinding.emptyView.setVisibility(View.GONE);
+                    else
+                        mBinding.emptyView.setVisibility(View.VISIBLE);
                 }));
     }
 

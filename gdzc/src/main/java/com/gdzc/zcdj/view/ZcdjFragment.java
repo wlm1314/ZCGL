@@ -202,6 +202,5 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
         mBinding.formLayout.setVisibility(View.VISIBLE);
         mViewModel.flh.set("");
         mViewModel.flmc.set("");
-        mViewModel.dj.set("");
     }
 }

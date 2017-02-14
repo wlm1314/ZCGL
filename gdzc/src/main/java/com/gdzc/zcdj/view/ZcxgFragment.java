@@ -130,6 +130,7 @@ public class ZcxgFragment extends BaseFragment<FragmentZcxgBinding> {
     }
 
     public void setData(ZcxgBean.DataBean data) {
+        mBinding.pullView.onRefreshComplete();
         if (data.isFirstPage)
             mList.clear();
         if (data.isLastPage)

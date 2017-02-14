@@ -15,12 +15,25 @@
             layout="@layout/app_bar"
             app:appbar="@{appbar}"/>
 
-        <com.pulltofresh.PullToRefreshRecyclerView
-            android:id="@+id/ptr_rv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/layout_appbar"
-            app:ptrMode="pullFromStart"/>
+
+        <FrameLayout android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:layout_below="@id/layout_appbar">
+            <TextView
+                android:id="@+id/empty_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawablePadding="@dimen/dimen_5"
+                android:drawableTop="@mipmap/empty"
+                android:gravity="center"
+                android:text="暂无内容"/>
+            <com.pulltofresh.PullToRefreshRecyclerViewEmptySupport
+                android:id="@+id/ptr_rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:ptrMode="pullFromStart"/>
+        </FrameLayout>
 
     </RelativeLayout>
 

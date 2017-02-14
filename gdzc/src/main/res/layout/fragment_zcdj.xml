@@ -70,24 +70,8 @@
                                    android:src="@mipmap/icon_details"/>
                     </LinearLayout>
 
+                    <View style="@style/line_cell_light_h"/>
 
-                    <View style="@style/line_cell_light_h"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingLeft="@dimen/margin_horizontal"
-                        android:paddingRight="@dimen/margin_horizontal">
-                        <TextView style="@style/CommonText"
-                                  android:text="单        价"/>
-                        <EditText style="@style/CommonEdit"
-                                  android:layout_marginLeft="@dimen/dimen_10"
-                                  android:layout_weight="1"
-                                  android:hint="请输入单价"
-                                  android:inputType="numberDecimal"
-                                  android:text="@={viewModel.dj}"/>
-                    </LinearLayout>
-                    <View style="@style/line_cell_light_h"/>
                     <android.support.v7.widget.AppCompatButton
                         android:id="@+id/bt_create"
                         android:layout_width="match_parent"

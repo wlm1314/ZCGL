@@ -24,6 +24,7 @@ import com.gdzc.ry.view.RyActivity;
 import com.gdzc.syfx.model.SyfxBean;
 import com.gdzc.syfx.view.SyfxActivity;
 import com.gdzc.utils.NavigateUtils;
+import com.gdzc.utils.SPUtils;
 import com.gdzc.utils.Utils;
 import com.gdzc.widget.recycleview.BindingViewHolder;
 import com.gdzc.zcdj.model.TsxxBean;
@@ -102,17 +103,48 @@ public class ZcdjViewModel {
         }
     };
 
+    double dj = 1, je = 1;
+    int sl = 1, pl = 1;
+
     public BindingViewHolder.TextChangeListener mTextChangeListener = (view, position, s) -> {
-        TsxxViewModel temp = mList.get(position);
-        if (temp.colum.get().equals("数量") || temp.colum.get().equals("批量")) {
-            int dj = Integer.valueOf(this.dj.get());
+        if ("TDJ".contains(whatsystem)) {
+            TsxxViewModel temp = mList.get(position);
             if (!TextUtils.isEmpty(s) && Utils.isNumeric(s)) {
-                int num = Integer.valueOf(s);
-                if (num >= 1) {
-                    Observable.from(mList)
-                            .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("金额"))
-                            .subscribe(tsxxViewModel -> tsxxViewModel.content.set(num * dj + ""));
+                if (temp.colum.get().equals("数量")) {//数量大于1，批量等于1
+                    int num = Integer.valueOf(s);
+                    if (num >= 1) {
+                        Observable.from(mList)
+                                .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("批量"))
+                                .subscribe(tsxxViewModel -> tsxxViewModel.content.set("1"));
+                        sl = num;
+                        pl = 1;
+                    }
+                } else if (temp.colum.get().equals("批量")) {//批量大于1，数量等于1
+                    int num = Integer.valueOf(s);
+                    if (num >= 1) {
+                        Observable.from(mList)
+                                .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("数量"))
+                                .subscribe(tsxxViewModel -> tsxxViewModel.content.set("1"));
+                        pl = num;
+                        sl = 1;
+                    }
+                } else if (temp.colum.get().equals("单价")) {
+                    if (pl > 1) {//批量大于1时，可以输入单价，计算金额
+                        dj = Double.valueOf(s);
+                        je = dj * pl;
+                    }
+                } else if (temp.colum.get().equals("金额")) {
+                    if (sl > 1) {//数量大于1时，可以输入金额，计算单价
+                        je = Double.valueOf(s);
+                        dj = je / sl;
+                    }
                 }
+                Observable.from(mList)
+                        .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("金额"))
+                        .subscribe(tsxxViewModel -> tsxxViewModel.content.set(je + ""));
+                Observable.from(mList)
+                        .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("单价"))
+                        .subscribe(tsxxViewModel -> tsxxViewModel.content.set(dj + ""));
             } else
                 Utils.showToast("请输入数字类型");
         }
@@ -130,10 +162,9 @@ public class ZcdjViewModel {
 
     public final ObservableField<String> flh = new ObservableField<>();
     public final ObservableField<String> flmc = new ObservableField<>();
-    public final ObservableField<String> dj = new ObservableField<>();
 
     public ReplyCommand flCommand = new ReplyCommand(() -> NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), FlhActivity.class, 1000));
-    public ReplyCommand createCommand = new ReplyCommand(() -> getTsxx(flh.get(), dj.get()));
+    public ReplyCommand createCommand = new ReplyCommand(() -> getTsxx(flh.get(), "1"));
 
     public ReplyCommand saveCommand = new ReplyCommand(() -> {
         JSONObject jsonObj = new JSONObject();
@@ -176,25 +207,26 @@ public class ZcdjViewModel {
                         TsxxBean tsxxBean = zcdjBeanHttpResult.getData();
                         whatsystem = zcdjBeanHttpResult.getWhatsystem();
                         mList.addAll(TsxxViewModel.getTsxxViewModelByFlh(mFlh));
-                        mList.add(new TsxxViewModel("单价", "单价(元)", "1", "3", dj));
+                        mList.add(new TsxxViewModel("单价", "单价(元)", "1", "0", dj));
                         if (zcdjBeanHttpResult.containsSQRW()) {
                             mList.add(new TsxxViewModel("批量", "成批条数", "1", "0", "1"));
-                            mList.add(new TsxxViewModel("金额", "金额(元)", "1", "3", dj));
-                            Observable.from(tsxxBean.list)
-                                    .filter(server -> !server.字段名.equals("出厂号") && server.登记否.equals("1"))
-                                    .subscribe(server -> {
-                                        mList.add(new TsxxViewModel(TsxxBean.Tsxx.castToTsxx(server)));
-                                    });
                         }
-                        if (zcdjBeanHttpResult.containsDJ()) {
-                            mList.add(new TsxxViewModel("数量", "数量", "1", "0", "1"));
-                            mList.add(new TsxxViewModel("金额", "金额(元)", "1", "3", dj));
-                            Observable.from(tsxxBean.list)
-                                    .filter(server -> server.登记否.equals("1"))
-                                    .subscribe(server -> {
-                                        mList.add(new TsxxViewModel(TsxxBean.Tsxx.castToTsxx(server)));
-                                    });
+                        if (zcdjBeanHttpResult.containsTDJ()) {
+                            mList.add(new TsxxViewModel("批量", "成批条数", "1", "0", "1"));
+                            mList.add(new TsxxViewModel("数量", "数量", "1", "0", "0"));
+                            mList.add(new TsxxViewModel("金额", "金额(元)", "1", "0", dj));
                         }
+                        Observable.from(tsxxBean.list)
+                                .filter(server -> server.登记否.equals("1"))
+                                .subscribe(server -> {
+                                    mList.add(new TsxxViewModel(TsxxBean.Tsxx.castToTsxx(server)));
+                                });
+                        Observable.from(mList)
+                                .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("领用人"))
+                                .subscribe(tsxxViewModel -> tsxxViewModel.content.set(SPUtils.getString(SPUtils.kUser_nickname, "")));
+                        Observable.from(mList)
+                                .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("人员编号"))
+                                .subscribe(tsxxViewModel -> tsxxViewModel.content.set(SPUtils.getString(SPUtils.kUser_userId, "")));
                         mFragment.setData(mList);
                     }
                 });
