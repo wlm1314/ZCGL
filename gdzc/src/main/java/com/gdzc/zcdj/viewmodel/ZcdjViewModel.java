@@ -54,9 +54,6 @@ public class ZcdjViewModel {
     public String zcImg, fpImg;
 
     public LydwBean.Lydw lydw;
-    public SyfxBean.Syfx syfx;
-    public CfdBean.Cfd cfd;
-    public RyBean.Ry ry;
 
     public BindingViewHolder.ItemClickLister mItemClickLister = (view, position) -> {
         mTsxxViewModel = mList.get(position);
@@ -109,14 +106,15 @@ public class ZcdjViewModel {
         TsxxViewModel temp = mList.get(position);
         if ("TDJ".contains(whatsystem) && "数量单价金额批量".contains(temp.colum.get())) {
             if (!TextUtils.isEmpty(s)) {
-                if (temp.colum.get().equals("数量")) {//数量大于1，批量等于1
+                if (temp.colum.get().equals("数量")) {
                     int num = Integer.valueOf(s);
+                    if (pl > 1) {
+                        Utils.showToast("数量和批量不能同时大于1");
+                        temp.content.set("1");
+                        return;
+                    }
                     if (num >= 1) {
-                        Observable.from(mList)
-                                .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("批量"))
-                                .subscribe(tsxxViewModel -> tsxxViewModel.content.set("1"));
                         sl = num;
-                        pl = 1;
                         Observable.from(mList)
                                 .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("金额"))
                                 .subscribe(tsxxViewModel -> tsxxViewModel.content.set("0"));
@@ -124,12 +122,14 @@ public class ZcdjViewModel {
                                 .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("单价"))
                                 .subscribe(tsxxViewModel -> tsxxViewModel.content.set("0"));
                     }
-                } else if (temp.colum.get().equals("批量")) {//批量大于1，数量等于1
+                } else if (temp.colum.get().equals("批量")) {
                     int num = Integer.valueOf(s);
+                    if (sl > 1) {
+                        Utils.showToast("数量和批量不能同时大于1");
+                        temp.content.set("1");
+                        return;
+                    }
                     if (num >= 1) {
-                        Observable.from(mList)
-                                .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("数量"))
-                                .subscribe(tsxxViewModel -> tsxxViewModel.content.set("1"));
                         Observable.from(mList)
                                 .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("金额"))
                                 .subscribe(tsxxViewModel -> tsxxViewModel.content.set("0"));
@@ -137,10 +137,13 @@ public class ZcdjViewModel {
                                 .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("单价"))
                                 .subscribe(tsxxViewModel -> tsxxViewModel.content.set("0"));
                         pl = num;
-                        sl = 1;
                     }
                 } else if (temp.colum.get().equals("单价")) {
-                    if (pl > 1) {//批量大于1时，可以输入单价，计算金额
+                    if (sl > 1) {
+                        temp.content.set(dj + "");
+                        return;
+                    }
+                    if (pl >= 1) {//批量大于1时，可以输入单价，计算金额
                         dj = Double.valueOf(s);
                         je = dj * pl;
                         Observable.from(mList)
@@ -148,7 +151,11 @@ public class ZcdjViewModel {
                                 .subscribe(tsxxViewModel -> tsxxViewModel.content.set(je + ""));
                     }
                 } else if (temp.colum.get().equals("金额")) {
-                    if (sl > 1) {//数量大于1时，可以输入金额，计算单价
+                    if (pl > 1) {
+                        temp.content.set(je + "");
+                        return;
+                    }
+                    if (sl >= 1) {//数量大于1时，可以输入金额，计算单价
                         je = Double.valueOf(s);
                         dj = je / sl;
                         NumberFormat nf = NumberFormat.getNumberInstance();
@@ -186,10 +193,7 @@ public class ZcdjViewModel {
                     Utils.showToast(tsxxViewModel.colum.get() + "有误");
                     return;
                 } else if (!TextUtils.isEmpty(tsxxViewModel.content.get().trim())) {
-                    if (tsxxViewModel.colum.get().equals("分类名称"))
-                        jsonObj.put("字符字段7", tsxxViewModel.content.get().trim());
-                    else
-                        jsonObj.put(tsxxViewModel.colum.get(), TextUtils.isEmpty(tsxxViewModel.content.get().trim()) ? tsxxViewModel.id.get().trim() : tsxxViewModel.content.get().trim());
+                    jsonObj.put(tsxxViewModel.colum.get(), TextUtils.isEmpty(tsxxViewModel.id.get().trim()) ? tsxxViewModel.content.get().trim() : tsxxViewModel.id.get().trim());
                 }
             }
             if (!TextUtils.isEmpty(zcImg))
@@ -218,6 +222,7 @@ public class ZcdjViewModel {
                     public void onNext(HttpResult<TsxxBean> zcdjBeanHttpResult) {
                         TsxxBean tsxxBean = zcdjBeanHttpResult.getData();
                         whatsystem = zcdjBeanHttpResult.getWhatsystem();
+                        mList.clear();
                         mList.addAll(TsxxViewModel.getTsxxViewModelByFlh(mFlh));
                         if (zcdjBeanHttpResult.containsSQRW()) {
                             mList.add(new TsxxViewModel("批量", "成批条数", "1", "0", "1"));
@@ -239,7 +244,7 @@ public class ZcdjViewModel {
                                 .subscribe(tsxxViewModel -> tsxxViewModel.content.set(SPUtils.getString(SPUtils.kUser_nickname, "")));
                         Observable.from(mList)
                                 .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("人员编号"))
-                                .subscribe(tsxxViewModel -> tsxxViewModel.content.set(SPUtils.getString(SPUtils.kUser_userId, "")));
+                                .subscribe(tsxxViewModel -> tsxxViewModel.content.set(SPUtils.getString(SPUtils.kUser_username, "")));
                         mFragment.setData(mList);
                     }
                 });
@@ -289,14 +294,26 @@ public class ZcdjViewModel {
                 lydw = (LydwBean.Lydw) data.getExtras().getSerializable("Lydw");
                 mTsxxViewModel.content.set(lydw.dwName);
                 mTsxxViewModel.id.set(lydw.dwId);
+                Observable.from(mList)
+                        .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("领用人"))
+                        .subscribe(tsxxViewModel -> tsxxViewModel.content.set(""));
+                Observable.from(mList)
+                        .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("人员编号"))
+                        .subscribe(tsxxViewModel -> tsxxViewModel.content.set(""));
+                Observable.from(mList)
+                        .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("存放地名称"))
+                        .subscribe(tsxxViewModel -> tsxxViewModel.content.set(""));
+                Observable.from(mList)
+                        .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("存放地编号"))
+                        .subscribe(tsxxViewModel -> tsxxViewModel.content.set(""));
                 break;
             case 1002:
-                syfx = (SyfxBean.Syfx) data.getExtras().getSerializable("Syfx");
+                SyfxBean.Syfx syfx = (SyfxBean.Syfx) data.getExtras().getSerializable("Syfx");
                 mTsxxViewModel.content.set(syfx.nr.substring(2, syfx.nr.length()));
                 mTsxxViewModel.id.set(syfx.nr.substring(0, 1));
                 break;
             case 1008:
-                ry = (RyBean.Ry) data.getExtras().getSerializable("data");
+                RyBean.Ry ry = (RyBean.Ry) data.getExtras().getSerializable("data");
                 Observable.from(mList)
                         .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("领用人"))
                         .subscribe(tsxxViewModel -> tsxxViewModel.content.set(ry.人员名));
@@ -305,7 +322,7 @@ public class ZcdjViewModel {
                         .subscribe(tsxxViewModel -> tsxxViewModel.content.set(ry.人员编号));
                 break;
             case 1009:
-                cfd = (CfdBean.Cfd) data.getExtras().getSerializable("data");
+                CfdBean.Cfd cfd = (CfdBean.Cfd) data.getExtras().getSerializable("data");
                 Observable.from(mList)
                         .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("存放地名称"))
                         .subscribe(tsxxViewModel -> tsxxViewModel.content.set(cfd.单位名称));

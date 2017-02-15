@@ -16,6 +16,7 @@ import com.gdzc.zcdj.model.ZcxgBean;
 import com.gdzc.zcdj.model.ZcxgEditBean;
 import com.gdzc.zctj.model.ZctjBean;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import okhttp3.RequestBody;
@@ -88,7 +89,7 @@ public interface RequestApi {
     //根据Id查询zj
     @FormUrlEncoded
     @POST(HttpPath.selectZjByIdUrl)
-    Observable<ZcxgEditBean> SearchZJById(@FieldMap Map<String, String> params);
+    Observable<HttpResult<ArrayList<ZcxgEditBean>>> SearchZJById(@FieldMap Map<String, String> params);
 
     //查询cch
     @FormUrlEncoded

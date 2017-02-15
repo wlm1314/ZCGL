@@ -15,12 +15,17 @@ import com.gdzc.R;
 import com.gdzc.base.App;
 import com.gdzc.base.AppBar;
 import com.gdzc.base.BaseActivity;
+import com.gdzc.cfd.model.CfdBean;
+import com.gdzc.cfd.view.CfdActivity;
 import com.gdzc.databinding.ActivityZcdjEditBinding;
 import com.gdzc.lydw.model.LydwBean;
 import com.gdzc.lydw.view.LydwActivity;
 import com.gdzc.net.http.HttpPostParams;
 import com.gdzc.net.http.HttpRequest;
+import com.gdzc.net.subscribers.ProgressSubscriber;
 import com.gdzc.net.subscribers.RetrofitSubscriber;
+import com.gdzc.ry.model.RyBean;
+import com.gdzc.ry.view.RyActivity;
 import com.gdzc.syfx.model.SyfxBean;
 import com.gdzc.syfx.view.SyfxActivity;
 import com.gdzc.utils.NavigateUtils;
@@ -29,6 +34,7 @@ import com.gdzc.widget.recycleview.BindingAdapter;
 import com.gdzc.widget.recycleview.BindingTool;
 import com.gdzc.zcdj.model.ZcxgBean;
 import com.gdzc.zcdj.model.ZcxgEditBean;
+import com.gdzc.zcdj.viewmodel.TsxxViewModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,10 +51,11 @@ import rx.Observable;
  */
 
 public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
-    private List<ZcxgEditBean.Zcxg> mList = new ArrayList<>();
-    private BindingAdapter<ZcxgEditBean.Zcxg> mAdapter;
+    private List<TsxxViewModel> mList = new ArrayList<>();
+    private BindingAdapter<TsxxViewModel> mAdapter;
     private ZcxgBean.Zcxg zcxg;
     private String yqbh = "";
+    private TsxxViewModel mTsxxViewModel;
 
     @Override
     protected int getLayoutId() {
@@ -71,24 +78,57 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
     private void initView() {
         mBinding.rvZcbg.setLayoutManager(new LinearLayoutManager(this));
         mBinding.rvZcbg.setHasFixedSize(true);
-        mAdapter = new BindingAdapter<>(new BindingTool(R.layout.adapter_zcxg_edit_item, BR.data), mList);
+        mAdapter = new BindingAdapter<>(new BindingTool(R.layout.adapter_zcdj_item, BR.viewModel), mList);
         mBinding.rvZcbg.setAdapter(mAdapter);
     }
 
     private void setListener() {
-        mAdapter.setOnViewClickListener((view, position) -> {
-            switch (mList.get(position).colName) {
-                case "领用单位号":
-                    NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), LydwActivity.class, 1001);
-                    break;
-                case "使用方向":
-                    NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), SyfxActivity.class, 1002);
-                    break;
-                case "购置日期":
-                    initTimePicker("购置日期", mList.get(position));
-                    break;
+        mAdapter.setItemClickLister((view, position) -> {
+            mTsxxViewModel = mList.get(position);
+            mTsxxViewModel = mList.get(position);
+            if (mTsxxViewModel.columType.get().equals("日期型"))
+                showTimePicker(mTsxxViewModel.colum.get());
+            else if (mTsxxViewModel.isQz.get()) {
+                switch (mTsxxViewModel.colum.get()) {
+                    case "领用单位号":
+                        NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), LydwActivity.class, 1001);
+                        break;
+                    case "领用人":
+                    case "人员编号": {
+                        if (lydw == null) {
+                            Utils.showToast("请选择领用单位");
+                            return;
+                        }
+                        Bundle bundle = new Bundle();
+                        bundle.putString("title", "人员");
+                        bundle.putString("dwid", lydw.dwId);
+                        bundle.putString("realName", "");
+                        bundle.putString("rybh", "");
+                        NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), RyActivity.class, 1008, bundle);
+                        break;
+                    }
+                    case "存放地名称":
+                    case "存放地编号": {
+                        if (lydw == null) {
+                            Utils.showToast("请选择领用单位");
+                            return;
+                        }
+                        Bundle bundle = new Bundle();
+                        bundle.putString("title", "存放地");
+                        bundle.putString("dwid", lydw.dwId);
+                        bundle.putString("cfdbh", "");
+                        bundle.putString("cfdmc", "");
+                        NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), CfdActivity.class, 1009, bundle);
+                        break;
+                    }
+                    default:
+                        Bundle bundle = new Bundle();
+                        bundle.putString("title", mTsxxViewModel.colum.get());
+                        NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), SyfxActivity.class, 1002, bundle);
+                        break;
+                }
             }
-        }, R.id.select_layout);
+        });
 
         mBinding.tvCch.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
@@ -100,20 +140,23 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
     private void getData() {
         zcxg = (ZcxgBean.Zcxg) getIntent().getExtras().getSerializable("zcxg");
         HttpRequest.SearchZJById(HttpPostParams.paramselectZjById(zcxg.id))
-                .subscribe(new RetrofitSubscriber<>(zcbgEditBean -> {
-                    mList.add(getZcbg("分类号", zcxg.分类号));
-                    mList.add(getZcbg("分类名称", zcxg.字符字段7));
-                    mList.add(getZcbg("国标分类号", zcxg.国标分类号));
-                    mList.add(getZcbg("国标分类名", zcxg.国标分类名));
-                    mList.add(getZcbg("单价", zcxg.单价));
-                    mList.add(getZcbg("成批条数", zcxg.批量));
-                    mList.add(getZcbg("数量", zcxg.数量));
-                    mList.add(getZcbg("金额", zcxg.金额));
-                    Observable.from(zcbgEditBean.data).subscribe(dataBean -> mList.add(ZcxgEditBean.Zcxg.castToZcxb(dataBean)));
-                    Observable.from(zcbgEditBean.data).filter(dataBean -> dataBean.字段名.equals("资产编号")).subscribe(dataBean -> yqbh = dataBean.值);
-                    mAdapter.notifyDataSetChanged();
-                    if (!zcxg.批量.equals("1")) mBinding.tvCch.setVisibility(View.VISIBLE);
-                }));
+                .subscribe(new ProgressSubscriber<ArrayList<ZcxgEditBean>>() {
+                    @Override
+                    public void onNext(ArrayList<ZcxgEditBean> zcxgEditBeen) {
+                        mList.add(new TsxxViewModel("分类号", "分类号", "1", "3", zcxg.分类号));
+                        mList.add(new TsxxViewModel("分类名称", "分类名称", "1", "3", zcxg.字符字段7));
+                        mList.add(new TsxxViewModel("国标分类号", "国标分类号", "1", "3", zcxg.国标分类号));
+                        mList.add(new TsxxViewModel("国标分类名", "国标分类名", "1", "3", zcxg.国标分类名));
+                        mList.add(new TsxxViewModel("批量", "成批条数", "1", "3", zcxg.批量));
+                        mList.add(new TsxxViewModel("数量", "数量", "1", "3", zcxg.数量));
+                        mList.add(new TsxxViewModel("单价", "单价(元)", "1", "3", zcxg.单价));
+                        mList.add(new TsxxViewModel("金额", "金额(元)", "1", "3", zcxg.金额));
+                        Observable.from(zcxgEditBeen).subscribe(dataBean -> mList.add(new TsxxViewModel(dataBean)));
+                        Observable.from(zcxgEditBeen).filter(dataBean -> dataBean.字段名.equals("资产编号")).subscribe(dataBean -> yqbh = dataBean.值);
+                        mAdapter.notifyDataSetChanged();
+                        if (!zcxg.批量.equals("1")) mBinding.tvCch.setVisibility(View.VISIBLE);
+                    }
+                });
     }
 
     @Override
@@ -128,21 +171,12 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
         JSONObject jsonObj = new JSONObject();
         try {
             jsonObj.put("id", zcxg.id);
-            for (ZcxgEditBean.Zcxg zcxg : mList) {
-                if (zcxg.isNull.equals("1") && TextUtils.isEmpty(zcxg.val.get())) {
-                    Utils.showToast(zcxg.xsnr);
+            for (TsxxViewModel tsxxViewModel : mList) {
+                if (tsxxViewModel.djbt.get().equals("1") && TextUtils.isEmpty(tsxxViewModel.content.get())) {
+                    Utils.showToast(tsxxViewModel.colum.get() + "有误");
                     return true;
-                } else if (!TextUtils.isEmpty(zcxg.val.get())) {
-                    if (zcxg.colName.equals("领用单位号"))
-                        jsonObj.put(zcxg.colName, lydw == null ? zcxg.val.get() : lydw.dwId);
-                    else if (zcxg.colName.equals("使用方向"))
-                        jsonObj.put(zcxg.colName, syfx == null ? zcxg.val.get() : syfx.校编号);
-                    else if (zcxg.colName.equals("分类名称"))
-                        jsonObj.put("字符字段7", zcxg.val.get().trim());
-                    else if (zcxg.colName.equals("成批条数"))
-                        jsonObj.put("批量", zcxg.val.get().trim());
-                    else
-                        jsonObj.put(zcxg.colName, zcxg.val.get().trim());
+                } else if (!TextUtils.isEmpty(tsxxViewModel.content.get())) {
+                    jsonObj.put(tsxxViewModel.colum.get(), TextUtils.isEmpty(tsxxViewModel.id.get().trim()) ? tsxxViewModel.content.get().trim() : tsxxViewModel.id.get().trim());
                 }
             }
 
@@ -170,31 +204,47 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
         switch (requestCode) {
             case 1001:
                 lydw = (LydwBean.Lydw) data.getExtras().getSerializable("Lydw");
+                mTsxxViewModel.content.set(lydw.dwName);
+                mTsxxViewModel.id.set(lydw.dwId);
                 Observable.from(mList)
-                        .filter(zcbg -> zcbg.colName.equals("领用单位号"))
-                        .subscribe(zcbg -> zcbg.val.set(lydw.dwName));
+                        .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("领用人"))
+                        .subscribe(tsxxViewModel -> tsxxViewModel.content.set(""));
+                Observable.from(mList)
+                        .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("人员编号"))
+                        .subscribe(tsxxViewModel -> tsxxViewModel.content.set(""));
+                Observable.from(mList)
+                        .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("存放地名称"))
+                        .subscribe(tsxxViewModel -> tsxxViewModel.content.set(""));
+                Observable.from(mList)
+                        .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("存放地编号"))
+                        .subscribe(tsxxViewModel -> tsxxViewModel.content.set(""));
                 break;
             case 1002:
                 syfx = (SyfxBean.Syfx) data.getExtras().getSerializable("Syfx");
+                mTsxxViewModel.content.set(syfx.nr.substring(2, syfx.nr.length()));
+                mTsxxViewModel.id.set(syfx.nr.substring(0, 1));
+                break;case 1008:
+                RyBean.Ry ry = (RyBean.Ry) data.getExtras().getSerializable("data");
                 Observable.from(mList)
-                        .filter(zcbg -> zcbg.colName.equals("使用方向"))
-                        .subscribe(zcbg -> zcbg.val.set(syfx.校名称));
+                        .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("领用人"))
+                        .subscribe(tsxxViewModel -> tsxxViewModel.content.set(ry.人员名));
+                Observable.from(mList)
+                        .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("人员编号"))
+                        .subscribe(tsxxViewModel -> tsxxViewModel.content.set(ry.人员编号));
+                break;
+            case 1009:
+                CfdBean.Cfd cfd = (CfdBean.Cfd) data.getExtras().getSerializable("data");
+                Observable.from(mList)
+                        .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("存放地名称"))
+                        .subscribe(tsxxViewModel -> tsxxViewModel.content.set(cfd.单位名称));
+                Observable.from(mList)
+                        .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("存放地编号"))
+                        .subscribe(tsxxViewModel -> tsxxViewModel.content.set(cfd.单位编号));
                 break;
         }
     }
 
-    public ZcxgEditBean.Zcxg getZcbg(String colName, String value) {
-        ZcxgEditBean.Zcxg zcxg = new ZcxgEditBean.Zcxg();
-        zcxg.colName = colName;
-        zcxg.isNull = "1";
-        zcxg.isEdit = "0";
-        zcxg.isQz = "0";
-        zcxg.val.set(value);
-        zcxg.xsnr = colName;
-        return zcxg;
-    }
-
-    private void initTimePicker(String title, ZcxgEditBean.Zcxg zcxg) {
+    private void showTimePicker(String title) {
         TimePickerView mTimePickerView = new TimePickerView(App.getAppContext(), TimePickerView.Type.YEAR_MONTH_DAY);
         mTimePickerView.setCyclic(false);
         mTimePickerView.setTitle(title);
@@ -202,7 +252,7 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
         mTimePickerView.show();
         mTimePickerView.setOnTimeSelectListener(date -> {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            zcxg.val.set(sdf.format(date));
+            mTsxxViewModel.content.set(sdf.format(date));
         });
     }
 }

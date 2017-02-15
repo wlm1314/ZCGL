@@ -18,6 +18,7 @@ import com.gdzc.zcdj.model.ZcxgBean;
 import com.gdzc.zcdj.model.ZcxgEditBean;
 import com.gdzc.zctj.model.ZctjBean;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -178,8 +179,9 @@ public class HttpRequest {
      * @param params
      * @return
      */
-    public static Observable<ZcxgEditBean> SearchZJById(Map<String, String> params) {
+    public static Observable<ArrayList<ZcxgEditBean>> SearchZJById(Map<String, String> params) {
         return getInstance().create(RequestApi.class).SearchZJById(params)
+                .map(new HttpResultFunc<>())
                 .compose(applySchedulers());
     }
 
