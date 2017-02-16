@@ -173,7 +173,7 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
             jsonObj.put("id", zcxg.id);
             for (TsxxViewModel tsxxViewModel : mList) {
                 if (tsxxViewModel.djbt.get().equals("1") && TextUtils.isEmpty(tsxxViewModel.content.get())) {
-                    Utils.showToast(tsxxViewModel.colum.get() + "有误");
+                    Utils.showToast(tsxxViewModel.xsnr.get() + "有误");
                     return true;
                 } else if (!TextUtils.isEmpty(tsxxViewModel.content.get())) {
                     jsonObj.put(tsxxViewModel.colum.get(), TextUtils.isEmpty(tsxxViewModel.id.get().trim()) ? tsxxViewModel.content.get().trim() : tsxxViewModel.id.get().trim());

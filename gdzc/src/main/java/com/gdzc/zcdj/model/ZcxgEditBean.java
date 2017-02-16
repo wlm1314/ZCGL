@@ -24,6 +24,7 @@ public class ZcxgEditBean {
     public String 代码取值否;
     public String 字段类型;
     public String 值;
+    public String 汉字取值;
 
     public String get值() {
         SimpleDateFormat sdf1 = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.US);
