@@ -1,7 +1,6 @@
 package com.gdzc.zcdj.viewmodel;
 
 import android.databinding.ObservableField;
-import android.text.TextUtils;
 
 import com.gdzc.flh.model.FlhBean;
 import com.gdzc.zcdj.model.TsxxBean;
@@ -47,8 +46,8 @@ public class TsxxViewModel {
         tsnr.set(zcxgBean.显示内容.trim());
         isQz.set(zcxgBean.代码取值否.equals("1") || zcxgBean.代码取值否.equals("2"));
         isEditAble.set((zcxgBean.代码取值否.equals("0") || zcxgBean.代码取值否.equals("2")) && !zcxgBean.字段类型.equals("日期型"));
-        content.set(!TextUtils.isEmpty(zcxgBean.汉字取值) ? zcxgBean.汉字取值 : zcxgBean.get值());
-        id.set(!TextUtils.isEmpty(zcxgBean.汉字取值) ? zcxgBean.get值() : "");
+        content.set(zcxgBean.汉字取值.equals(zcxgBean.值) ? zcxgBean.get值() : zcxgBean.汉字取值.equals("未找到!") ? zcxgBean.get值() : zcxgBean.汉字取值);
+        id.set(zcxgBean.get值());
         isNum.set(false);
     }
 
