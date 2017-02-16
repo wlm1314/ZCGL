@@ -151,16 +151,18 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
                 .subscribe(new ProgressSubscriber<ArrayList<ZcxgEditBean>>() {
                     @Override
                     public void onNext(ArrayList<ZcxgEditBean> zcxgEditBeen) {
-                        mList.add(new TsxxViewModel("分类号", "分类号", "1", "3", zcxg.分类号));
-                        mList.add(new TsxxViewModel("分类名称", "分类名称", "1", "3", zcxg.字符字段7));
-                        mList.add(new TsxxViewModel("国标分类号", "国标分类号", "1", "3", zcxg.国标分类号));
-                        mList.add(new TsxxViewModel("国标分类名", "国标分类名", "1", "3", zcxg.国标分类名));
-                        mList.add(new TsxxViewModel("批量", "成批条数", "1", "3", zcxg.批量));
-                        mList.add(new TsxxViewModel("数量", "数量", "1", "3", zcxg.数量));
-                        mList.add(new TsxxViewModel("单价", "单价(元)", "1", "3", zcxg.单价));
-                        mList.add(new TsxxViewModel("金额", "金额(元)", "1", "3", zcxg.金额));
+                        mList.addAll(TsxxViewModel.getTsxxViewModelByZcxg(zcxg));
                         Observable.from(zcxgEditBeen).subscribe(dataBean -> mList.add(new TsxxViewModel(dataBean)));
                         Observable.from(zcxgEditBeen).filter(dataBean -> dataBean.字段名.equals("资产编号")).subscribe(dataBean -> yqbh = dataBean.值);
+                        Observable.from(mList)
+                                .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("资产编号"))
+                                .subscribe(tsxxViewModel -> tsxxViewModel.isEditAble.set(false));
+                        Observable.from(mList)
+                                .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("领用单位号"))
+                                .subscribe(tsxxViewModel -> {
+                                    tsxxViewModel.isEditAble.set(false);
+                                    tsxxViewModel.isQz.set(false);
+                                });
                         mAdapter.notifyDataSetChanged();
                         if (!zcxg.批量.equals("1")) mBinding.tvCch.setVisibility(View.VISIBLE);
                     }
@@ -253,7 +255,7 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
     }
 
     private void showTimePicker(String title) {
-        TimePickerView mTimePickerView = new TimePickerView(App.getAppContext(), TimePickerView.Type.YEAR_MONTH_DAY);
+        TimePickerView mTimePickerView = new TimePickerView(App.getAppContext().getCurrentActivity(), TimePickerView.Type.YEAR_MONTH_DAY);
         mTimePickerView.setCyclic(false);
         mTimePickerView.setTitle(title);
         mTimePickerView.setTime(new Date());
