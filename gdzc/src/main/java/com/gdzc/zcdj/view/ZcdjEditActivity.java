@@ -82,6 +82,8 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
         mBinding.rvZcbg.setAdapter(mAdapter);
     }
 
+    String dwId = "";
+
     private void setListener() {
         mAdapter.setItemClickLister((view, position) -> {
             mTsxxViewModel = mList.get(position);
@@ -95,13 +97,16 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
                         break;
                     case "领用人":
                     case "人员编号": {
-                        if (lydw == null) {
-                            Utils.showToast("请选择领用单位");
-                            return;
-                        }
+                        Observable.from(mList)
+                                .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("领用单位号"))
+                                .subscribe(tsxxViewModel -> {
+                                    dwId = tsxxViewModel.id.get();
+                                    if (TextUtils.isEmpty(dwId))
+                                        Utils.showToast("请选择领用单位");
+                                });
                         Bundle bundle = new Bundle();
                         bundle.putString("title", "人员");
-                        bundle.putString("dwid", lydw.dwId);
+                        bundle.putString("dwid", dwId);
                         bundle.putString("realName", "");
                         bundle.putString("rybh", "");
                         NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), RyActivity.class, 1008, bundle);
@@ -109,13 +114,16 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
                     }
                     case "存放地名称":
                     case "存放地编号": {
-                        if (lydw == null) {
-                            Utils.showToast("请选择领用单位");
-                            return;
-                        }
+                        Observable.from(mList)
+                                .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("领用单位号"))
+                                .subscribe(tsxxViewModel -> {
+                                    dwId = tsxxViewModel.id.get();
+                                    if (TextUtils.isEmpty(dwId))
+                                        Utils.showToast("请选择领用单位");
+                                });
                         Bundle bundle = new Bundle();
                         bundle.putString("title", "存放地");
-                        bundle.putString("dwid", lydw.dwId);
+                        bundle.putString("dwid", dwId);
                         bundle.putString("cfdbh", "");
                         bundle.putString("cfdmc", "");
                         NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), CfdActivity.class, 1009, bundle);
@@ -194,7 +202,6 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
         return super.onOptionsItemSelected(item);
     }
 
-    private LydwBean.Lydw lydw;
     private SyfxBean.Syfx syfx;
 
     @Override
@@ -203,7 +210,7 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
         if (resultCode != RESULT_OK) return;
         switch (requestCode) {
             case 1001:
-                lydw = (LydwBean.Lydw) data.getExtras().getSerializable("Lydw");
+                LydwBean.Lydw lydw = (LydwBean.Lydw) data.getExtras().getSerializable("Lydw");
                 mTsxxViewModel.content.set(lydw.dwName);
                 mTsxxViewModel.id.set(lydw.dwId);
                 Observable.from(mList)
@@ -223,7 +230,8 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
                 syfx = (SyfxBean.Syfx) data.getExtras().getSerializable("Syfx");
                 mTsxxViewModel.content.set(syfx.nr.substring(2, syfx.nr.length()));
                 mTsxxViewModel.id.set(syfx.nr.substring(0, 1));
-                break;case 1008:
+                break;
+            case 1008:
                 RyBean.Ry ry = (RyBean.Ry) data.getExtras().getSerializable("data");
                 Observable.from(mList)
                         .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("领用人"))
