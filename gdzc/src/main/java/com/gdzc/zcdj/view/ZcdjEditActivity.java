@@ -20,10 +20,10 @@ import com.gdzc.cfd.view.CfdActivity;
 import com.gdzc.databinding.ActivityZcdjEditBinding;
 import com.gdzc.lydw.model.LydwBean;
 import com.gdzc.lydw.view.LydwActivity;
+import com.gdzc.net.entity.HttpResult;
 import com.gdzc.net.http.HttpPostParams;
 import com.gdzc.net.http.HttpRequest;
 import com.gdzc.net.subscribers.ProgressSubscriber;
-import com.gdzc.net.subscribers.RetrofitSubscriber;
 import com.gdzc.ry.model.RyBean;
 import com.gdzc.ry.view.RyActivity;
 import com.gdzc.syfx.model.SyfxBean;
@@ -152,17 +152,10 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
                     @Override
                     public void onNext(ArrayList<ZcxgEditBean> zcxgEditBeen) {
                         mList.addAll(TsxxViewModel.getTsxxViewModelByZcxg(zcxg));
-                        Observable.from(zcxgEditBeen).subscribe(dataBean -> mList.add(new TsxxViewModel(dataBean)));
+                        Observable.from(zcxgEditBeen)
+                                .filter(zcxgEditBean -> zcxgEditBean.修改否.equals("1"))
+                                .subscribe(dataBean -> mList.add(new TsxxViewModel(dataBean)));
                         Observable.from(zcxgEditBeen).filter(dataBean -> dataBean.字段名.equals("资产编号")).subscribe(dataBean -> yqbh = dataBean.值);
-                        Observable.from(mList)
-                                .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("资产编号"))
-                                .subscribe(tsxxViewModel -> tsxxViewModel.isEditAble.set(false));
-                        Observable.from(mList)
-                                .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("领用单位号"))
-                                .subscribe(tsxxViewModel -> {
-                                    tsxxViewModel.isEditAble.set(false);
-                                    tsxxViewModel.isQz.set(false);
-                                });
                         mAdapter.notifyDataSetChanged();
                         if (!zcxg.批量.equals("1")) mBinding.tvCch.setVisibility(View.VISIBLE);
                     }
@@ -191,13 +184,16 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
             }
 
             HttpRequest.UpdateZj(HttpPostParams.paramUpdateZj(jsonObj.toString()))
-                    .subscribe(new RetrofitSubscriber<>(baseBean -> {
-                        Utils.showToast("修改成功");
-                        Intent data = new Intent();
-                        data.putExtra("update", true);
-                        setResult(RESULT_OK, data);
-                        finish();
-                    }));
+                    .subscribe(new ProgressSubscriber<HttpResult>() {
+                        @Override
+                        public void onNext(HttpResult httpResult) {
+                            Utils.showToast("修改成功");
+                            Intent data = new Intent();
+                            data.putExtra("update", true);
+                            setResult(RESULT_OK, data);
+                            finish();
+                        }
+                    });
         } catch (JSONException e) {
             e.printStackTrace();
         }

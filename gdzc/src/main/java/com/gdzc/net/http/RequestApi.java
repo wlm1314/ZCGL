@@ -79,7 +79,7 @@ public interface RequestApi {
     //更新数据
     @FormUrlEncoded
     @POST(HttpPath.updateZjUrl)
-    Observable<BaseBean> UpdateZj(@FieldMap Map<String, String> params);
+    Observable<HttpResult> UpdateZj(@FieldMap Map<String, String> params);
 
     //新增数据
     @FormUrlEncoded

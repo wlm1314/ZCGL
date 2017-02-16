@@ -45,11 +45,11 @@ public class TsxxViewModel {
         xsnr.set(zcxgBean.显示内容.trim());
         columType.set(zcxgBean.字段类型);
         djbt.set(zcxgBean.必填否);
-        tsnr.set(zcxgBean.显示内容.trim());
+        tsnr.set(zcxgBean.提示内容.trim());
         isQz.set(zcxgBean.代码取值否.equals("1") || zcxgBean.代码取值否.equals("2"));
         isEditAble.set((zcxgBean.代码取值否.equals("0") || zcxgBean.代码取值否.equals("2")) && !zcxgBean.字段类型.equals("日期型"));
-        content.set(zcxgBean.汉字取值.equals(zcxgBean.值) ? zcxgBean.get值() : zcxgBean.汉字取值.equals("未找到!") ? zcxgBean.get值() : zcxgBean.汉字取值);
-        id.set(zcxgBean.get值());
+        content.set(zcxgBean.get汉字取值());
+        id.set(zcxgBean.汉字取值.equals(zcxgBean.值) ?"":zcxgBean.汉字取值.equals("未找到!") ? "" : zcxgBean.get值());
         isNum.set(false);
     }
 

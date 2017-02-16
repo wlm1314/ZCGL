@@ -25,6 +25,7 @@ public class ZcxgEditBean {
     public String 字段类型;
     public String 值;
     public String 汉字取值;
+    public String 提示内容;
 
     public String get值() {
         SimpleDateFormat sdf1 = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.US);
@@ -33,6 +34,16 @@ public class ZcxgEditBean {
             return sdf.format(sdf1.parse(值));
         } catch (ParseException e) {
             return 值.equals("null") ? "" : 值;
+        }
+    }
+
+    public String get汉字取值() {
+        SimpleDateFormat sdf1 = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.US);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            return sdf.format(sdf1.parse(汉字取值));
+        } catch (ParseException e) {
+            return 汉字取值.equals("null") ? "" : 汉字取值;
         }
     }
 }

@@ -159,7 +159,7 @@ public class HttpRequest {
      * @param params
      * @return
      */
-    public static Observable<BaseBean> UpdateZj(Map<String, String> params) {
+    public static Observable<HttpResult> UpdateZj(Map<String, String> params) {
         return getInstance().create(RequestApi.class).UpdateZj(params)
                 .compose(applySchedulers());
     }
