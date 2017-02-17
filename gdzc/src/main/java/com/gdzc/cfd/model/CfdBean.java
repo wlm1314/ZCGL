@@ -33,11 +33,11 @@ public class CfdBean extends BaseBean {
         public String 校单位名称;
 
         public static String getBH(Cfd cfd){
-            return cfd.单位编号;
+            return cfd.存放地号;
         }
 
         public static String getMC(Cfd cfd){
-            return cfd.单位名称;
+            return cfd.存放地名;
         }
 
         public final ObservableField<Boolean> checked = new ObservableField<>();

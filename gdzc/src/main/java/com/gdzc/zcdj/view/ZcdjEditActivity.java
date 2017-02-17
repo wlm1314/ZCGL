@@ -242,10 +242,10 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
                 CfdBean.Cfd cfd = (CfdBean.Cfd) data.getExtras().getSerializable("data");
                 Observable.from(mList)
                         .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("存放地名称"))
-                        .subscribe(tsxxViewModel -> tsxxViewModel.content.set(cfd.单位名称));
+                        .subscribe(tsxxViewModel -> tsxxViewModel.content.set(cfd.存放地名));
                 Observable.from(mList)
                         .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("存放地编号"))
-                        .subscribe(tsxxViewModel -> tsxxViewModel.content.set(cfd.单位编号));
+                        .subscribe(tsxxViewModel -> tsxxViewModel.content.set(cfd.存放地号));
                 break;
         }
     }
