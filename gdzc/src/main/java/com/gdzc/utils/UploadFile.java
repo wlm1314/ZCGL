@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.gdzc.base.App;
 import com.gdzc.net.entity.HttpResult;
-import com.gdzc.zcdj.model.UploadImageBean;
+import com.gdzc.zcdj.zcdj.model.UploadImageBean;
 import com.google.gson.Gson;
 
 import java.io.DataOutputStream;

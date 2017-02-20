@@ -9,7 +9,7 @@ import com.binding.command.ReplyCommand;
 import com.gdzc.R;
 import com.gdzc.base.App;
 import com.gdzc.databinding.LayoutTypeBinding;
-import com.gdzc.net.http.HttpPostParams;
+import com.gdzc.net.http.HttpParams;
 import com.gdzc.net.http.HttpRequest;
 import com.gdzc.net.subscribers.RetrofitSubscriber;
 import com.gdzc.utils.Utils;
@@ -105,7 +105,7 @@ public class ZctjViewModel {
     }
 
     public void createChart(){
-        HttpRequest.SelectMyDataTotalByCategory(HttpPostParams.paramSelectMyDataTotalByCategory(category, startTime.get(), endTime.get()))
+        HttpRequest.SelectMyDataTotalByCategory(HttpParams.paramSelectMyDataTotalByCategory(category, startTime.get(), endTime.get()))
                 .subscribe(new RetrofitSubscriber<>(zctjBean -> {
                     ((ZctjActivity) App.getAppContext().getCurrentActivity()).setPieData(zctjBean);
                     ((ZctjActivity) App.getAppContext().getCurrentActivity()).setBarData(zctjBean);

@@ -3,7 +3,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="viewModel" type="com.gdzc.zcdj.viewmodel.ZcxgViewModel"/>
+        <variable name="viewModel" type="com.gdzc.zcdj.zcdj.viewmodel.ZcxgViewModel"/>
     </data>
 
     <com.pulltofresh.PullToRefreshNestedScrollView

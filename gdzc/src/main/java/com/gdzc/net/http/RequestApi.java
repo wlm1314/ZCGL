@@ -1,19 +1,19 @@
 package com.gdzc.net.http;
 
 import com.gdzc.base.BaseBean;
-import com.gdzc.cfd.model.CfdBean;
-import com.gdzc.flh.model.FlhBean;
 import com.gdzc.login.model.LoginBean;
-import com.gdzc.lydw.model.LydwBean;
 import com.gdzc.net.consts.HttpPath;
 import com.gdzc.net.entity.HttpResult;
-import com.gdzc.ry.model.RyBean;
-import com.gdzc.syfx.model.SyfxBean;
 import com.gdzc.zccx.model.ZccxBean;
-import com.gdzc.zcdj.model.CchBean;
-import com.gdzc.zcdj.model.TsxxBean;
-import com.gdzc.zcdj.model.ZcxgBean;
-import com.gdzc.zcdj.model.ZcxgEditBean;
+import com.gdzc.zcdj.flh.model.FlhBean;
+import com.gdzc.zcdj.mk.model.CfdBean;
+import com.gdzc.zcdj.mk.model.DwBean;
+import com.gdzc.zcdj.mk.model.MKBean;
+import com.gdzc.zcdj.mk.model.RyBean;
+import com.gdzc.zcdj.zcdj.model.CchBean;
+import com.gdzc.zcdj.zcdj.model.TsxxBean;
+import com.gdzc.zcdj.zcdj.model.ZcxgBean;
+import com.gdzc.zcdj.zcdj.model.ZcxgEditBean;
 import com.gdzc.zctj.model.ZctjBean;
 
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public interface RequestApi {
     //获取分类号
     @FormUrlEncoded
     @POST(HttpPath.getFlhUrl)
-    Observable<FlhBean> GetFlh(@FieldMap Map<String, String> params);
+    Observable<HttpResult<FlhBean>> GetFlh(@FieldMap Map<String, String> params);
 
     //资产登记页面
     @FormUrlEncoded
@@ -59,12 +59,22 @@ public interface RequestApi {
     //获取单位列表
     @FormUrlEncoded
     @POST(HttpPath.getDwUrl)
-    Observable<LydwBean> GetDwList(@FieldMap Map<String, String> params);
+    Observable<HttpResult<DwBean>> GetDwList(@FieldMap Map<String, String> params);
 
     //获取使用方向
     @FormUrlEncoded
     @POST(HttpPath.getMkUrl)
-    Observable<SyfxBean> GetMkList(@FieldMap Map<String, String> params);
+    Observable<HttpResult<MKBean>> GetMkList(@FieldMap Map<String, String> params);
+
+    //获取人员
+    @FormUrlEncoded
+    @POST(HttpPath.getRykUrl)
+    Observable<HttpResult<RyBean>> GetRyList(@FieldMap Map<String, String> params);
+
+    //获取存放地
+    @FormUrlEncoded
+    @POST(HttpPath.getCfddUrl)
+    Observable<HttpResult<CfdBean>> GetCfdList(@FieldMap Map<String, String> params);
 
     //新增数据
     @FormUrlEncoded
@@ -125,15 +135,5 @@ public interface RequestApi {
     @FormUrlEncoded
     @POST(HttpPath.selectMySonData3Url)
     Observable<ZcxgBean> selectMySonData(@FieldMap Map<String, String> params);
-
-    //查询存放地
-    @FormUrlEncoded
-    @POST(HttpPath.getCfddUrl)
-    Observable<CfdBean> GetCfd(@FieldMap Map<String, String> params);
-
-    //查询人员
-    @FormUrlEncoded
-    @POST(HttpPath.getRykUrl)
-    Observable<RyBean> GetRy(@FieldMap Map<String, String> params);
 
 }

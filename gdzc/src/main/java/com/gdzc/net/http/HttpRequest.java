@@ -2,20 +2,20 @@ package com.gdzc.net.http;
 
 import com.gdzc.BuildConfig;
 import com.gdzc.base.BaseBean;
-import com.gdzc.cfd.model.CfdBean;
-import com.gdzc.flh.model.FlhBean;
 import com.gdzc.login.model.LoginBean;
-import com.gdzc.lydw.model.LydwBean;
 import com.gdzc.net.consts.HttpConsts;
 import com.gdzc.net.entity.HttpResult;
-import com.gdzc.ry.model.RyBean;
-import com.gdzc.syfx.model.SyfxBean;
 import com.gdzc.utils.BaseLog;
 import com.gdzc.zccx.model.ZccxBean;
-import com.gdzc.zcdj.model.CchBean;
-import com.gdzc.zcdj.model.TsxxBean;
-import com.gdzc.zcdj.model.ZcxgBean;
-import com.gdzc.zcdj.model.ZcxgEditBean;
+import com.gdzc.zcdj.flh.model.FlhBean;
+import com.gdzc.zcdj.mk.model.CfdBean;
+import com.gdzc.zcdj.mk.model.DwBean;
+import com.gdzc.zcdj.mk.model.MKBean;
+import com.gdzc.zcdj.mk.model.RyBean;
+import com.gdzc.zcdj.zcdj.model.CchBean;
+import com.gdzc.zcdj.zcdj.model.TsxxBean;
+import com.gdzc.zcdj.zcdj.model.ZcxgBean;
+import com.gdzc.zcdj.zcdj.model.ZcxgEditBean;
 import com.gdzc.zctj.model.ZctjBean;
 
 import java.util.ArrayList;
@@ -106,6 +106,7 @@ public class HttpRequest {
      */
     public static Observable<FlhBean> GetFlh(Map<String, String> params) {
         return getInstance().create(RequestApi.class).GetFlh(params)
+                .map(new HttpResultFunc<>())
                 .compose(applySchedulers());
     }
 
@@ -126,8 +127,9 @@ public class HttpRequest {
      * @param params
      * @return
      */
-    public static Observable<LydwBean> GetDwList(Map<String, String> params) {
+    public static Observable<DwBean> GetDwList(Map<String, String> params) {
         return getInstance().create(RequestApi.class).GetDwList(params)
+                .map(new HttpResultFunc<>())
                 .compose(applySchedulers());
     }
 
@@ -137,8 +139,33 @@ public class HttpRequest {
      * @param params
      * @return
      */
-    public static Observable<SyfxBean> GetMkList(Map<String, String> params) {
+    public static Observable<MKBean> GetMkList(Map<String, String> params) {
         return getInstance().create(RequestApi.class).GetMkList(params)
+                .map(new HttpResultFunc<>())
+                .compose(applySchedulers());
+    }
+
+    /**
+     * 获取人员
+     *
+     * @param params
+     * @return
+     */
+    public static Observable<RyBean> GetRyList(Map<String, String> params) {
+        return getInstance().create(RequestApi.class).GetRyList(params)
+                .map(new HttpResultFunc<>())
+                .compose(applySchedulers());
+    }
+
+    /**
+     * 获取存放地
+     *
+     * @param params
+     * @return
+     */
+    public static Observable<CfdBean> GetCfdList(Map<String, String> params) {
+        return getInstance().create(RequestApi.class).GetCfdList(params)
+                .map(new HttpResultFunc<>())
                 .compose(applySchedulers());
     }
 
@@ -246,24 +273,6 @@ public class HttpRequest {
      */
     public static Observable<ZcxgBean> selectMySonData(Map<String, String> params) {
         return getInstance().create(RequestApi.class).selectMySonData(params)
-                .compose(applySchedulers());
-    }
-
-    /**
-     * @param params
-     * @return
-     */
-    public static Observable<CfdBean> GetCfd(Map<String, String> params) {
-        return getInstance().create(RequestApi.class).GetCfd(params)
-                .compose(applySchedulers());
-    }
-
-    /**
-     * @param params
-     * @return
-     */
-    public static Observable<RyBean> GetRy(Map<String, String> params) {
-        return getInstance().create(RequestApi.class).GetRy(params)
                 .compose(applySchedulers());
     }
 

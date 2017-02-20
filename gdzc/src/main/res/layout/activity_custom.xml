@@ -3,7 +3,9 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View"/>
         <variable name="appbar" type="com.gdzc.base.AppBar"/>
+        <variable name="viewModel" type="com.gdzc.common.viewmodel.ViewModel"/>
     </data>
 
     <RelativeLayout
@@ -15,21 +17,20 @@
             layout="@layout/app_bar"
             app:appbar="@{appbar}"/>
 
-
         <FrameLayout android:layout_width="match_parent"
                      android:layout_height="match_parent"
                      android:layout_below="@id/layout_appbar">
             <TextView
-                android:id="@+id/empty_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:drawablePadding="@dimen/dimen_5"
                 android:drawableTop="@mipmap/empty"
                 android:gravity="center"
-                android:text="暂无内容"/>
+                android:text="暂无内容"
+                android:visibility="@{viewModel.isEmpty?View.VISIBLE:View.GONE}"/>
             <com.pulltofresh.PullToRefreshRecyclerViewEmptySupport
-                android:id="@+id/ptr_rv"
+                android:id="@+id/pull_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:ptrMode="pullFromStart"/>

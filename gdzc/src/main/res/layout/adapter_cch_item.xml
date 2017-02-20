@@ -3,7 +3,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="data" type="com.gdzc.zcdj.model.CchBean.Cch"/>
+        <variable name="data" type="com.gdzc.zcdj.zcdj.model.CchBean.Cch"/>
     </data>
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"

@@ -3,7 +3,9 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View"/>
         <variable name="appbar" type="com.gdzc.base.AppBar"/>
+        <variable name="viewmodel" type="com.gdzc.zcdj.flh.viewmodel.FlhViewModel"/>
     </data>
 
     <RelativeLayout
@@ -13,45 +15,55 @@
         <include
             android:id="@+id/layout_appbar"
             layout="@layout/app_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             app:appbar="@{appbar}"/>
 
 
         <LinearLayout android:layout_width="match_parent"
                       android:layout_height="match_parent"
-                      android:background="@color/white"
                       android:layout_below="@id/layout_appbar"
+                      android:background="@color/white"
                       android:orientation="vertical">
 
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="wrap_content"
+                          android:focusable="true"
+                          android:focusableInTouchMode="true"
                           android:padding="@dimen/dimen_10">
 
                 <EditText
-                    android:id="@+id/et_flh"
                     style="@style/CommonText"
                     android:layout_weight="1"
                     android:hint="请输入分类号/分类名称"
                     android:inputType="text"
                     android:padding="@dimen/dimen_10"
-                    android:singleLine="true"/>
-                <TextView android:id="@+id/tv_search"
-                          style="@style/CommonText"
+                    android:singleLine="true"
+                    android:text="@={viewmodel.fltext}"/>
+                <TextView style="@style/CommonText"
                           android:layout_marginLeft="@dimen/dimen_10"
                           android:background="@drawable/rect_radius_blue"
                           android:padding="@dimen/dimen_10"
                           android:text="搜索"
-                          android:textColor="@color/white"/>
+                          android:textColor="@color/white"
+                          app:clickCommand="@{viewmodel.searchCommand}"/>
             </LinearLayout>
 
             <View style="@style/line_cell_light_h"/>
-            <com.pulltofresh.PullToRefreshRecyclerView
-                android:id="@+id/ptr_rv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:ptrMode="pullFromStart"/>
+            <FrameLayout android:layout_width="match_parent"
+                         android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawablePadding="@dimen/dimen_5"
+                    android:drawableTop="@mipmap/empty"
+                    android:gravity="center"
+                    android:text="暂无内容"
+                    android:visibility="@{viewmodel.isEmpty?View.VISIBLE:View.GONE}"/>
+                <com.pulltofresh.PullToRefreshRecyclerViewEmptySupport
+                    android:id="@+id/pull_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </FrameLayout>
         </LinearLayout>
 
     </RelativeLayout>

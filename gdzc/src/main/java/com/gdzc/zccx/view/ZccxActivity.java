@@ -10,8 +10,8 @@ import com.gdzc.base.BaseActivity;
 import com.gdzc.databinding.ActivityZccxBinding;
 import com.gdzc.utils.NavigateUtils;
 import com.gdzc.zccx.viewmodel.ZccxViewModel;
-import com.gdzc.zcdj.adapter.ZcxgAdapter;
-import com.gdzc.zcdj.model.ZcxgBean;
+import com.gdzc.zcdj.zcdj.adapter.ZcxgAdapter;
+import com.gdzc.zcdj.zcdj.model.ZcxgBean;
 import com.pulltofresh.PullToRefreshBase;
 import com.pulltofresh.extras.CustomNestedScrollView;
 

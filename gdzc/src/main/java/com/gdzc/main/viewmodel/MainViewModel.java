@@ -8,7 +8,7 @@ import com.gdzc.login.view.LoginActivity;
 import com.gdzc.utils.NavigateUtils;
 import com.gdzc.utils.SPUtils;
 import com.gdzc.zccx.view.ZccxActivity;
-import com.gdzc.zcdj.view.ZcdjActivity;
+import com.gdzc.zcdj.zcdj.view.ZcdjActivity;
 import com.gdzc.zctj.view.ZctjActivity;
 
 /**

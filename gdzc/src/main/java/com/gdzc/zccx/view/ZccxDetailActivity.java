@@ -8,13 +8,13 @@ import com.gdzc.R;
 import com.gdzc.base.AppBar;
 import com.gdzc.base.BaseActivity;
 import com.gdzc.databinding.ActivityZcdjEditBinding;
-import com.gdzc.net.http.HttpPostParams;
+import com.gdzc.net.http.HttpParams;
 import com.gdzc.net.http.HttpRequest;
 import com.gdzc.net.subscribers.RetrofitSubscriber;
 import com.gdzc.widget.recycleview.BindingAdapter;
 import com.gdzc.widget.recycleview.BindingTool;
 import com.gdzc.zccx.model.ZccxBean;
-import com.gdzc.zcdj.model.ZcxgBean;
+import com.gdzc.zcdj.zcdj.model.ZcxgBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +56,7 @@ public class ZccxDetailActivity extends BaseActivity<ActivityZcdjEditBinding> {
 
     private void getData() {
         zcxg = (ZcxgBean.Zcxg) getIntent().getExtras().getSerializable("zcxg");
-        HttpRequest.SelectPoolById(HttpPostParams.paramSelectPoolById(zcxg.id))
+        HttpRequest.SelectPoolById(HttpParams.paramSelectPoolById(zcxg.id))
                 .subscribe(new RetrofitSubscriber<>(zccxBean -> {
                     Observable.from(zccxBean.data.list).subscribe(dataBean -> mList.add(ZccxBean.ZccxDetail.castToZccx(dataBean)));
                     mAdapter.notifyDataSetChanged();

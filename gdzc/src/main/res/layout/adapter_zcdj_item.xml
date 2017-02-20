@@ -5,7 +5,7 @@
     <data>
         <import type="android.view.View"/>
         <import type="android.text.InputType"/>
-        <import type="com.gdzc.zcdj.viewmodel.TsxxViewModel"/>
+        <import type="com.gdzc.zcdj.zcdj.viewmodel.TsxxViewModel"/>
         <variable name="viewModel" type="TsxxViewModel"/>
     </data>
 

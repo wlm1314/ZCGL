@@ -7,7 +7,7 @@ import com.binding.command.ReplyCommand;
 import com.gdzc.base.App;
 import com.gdzc.login.model.LoginBean;
 import com.gdzc.main.view.MainActivity;
-import com.gdzc.net.http.HttpPostParams;
+import com.gdzc.net.http.HttpParams;
 import com.gdzc.net.http.HttpRequest;
 import com.gdzc.net.subscribers.ProgressSubscriber;
 import com.gdzc.utils.NavigateUtils;
@@ -32,7 +32,7 @@ public class LoginViewModel {
             return;
         }
 
-        HttpRequest.Login(HttpPostParams.login(username.get(), password.get()))
+        HttpRequest.Login(HttpParams.login(username.get(), password.get()))
                 .subscribe(new ProgressSubscriber<LoginBean>() {
                     @Override
                     public void onNext(LoginBean loginBean) {

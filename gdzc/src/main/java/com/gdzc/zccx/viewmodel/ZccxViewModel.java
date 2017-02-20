@@ -9,7 +9,7 @@ import com.bigkoo.pickerview.TimePickerView;
 import com.binding.command.ReplyCommand;
 import com.gdzc.R;
 import com.gdzc.base.App;
-import com.gdzc.net.http.HttpPostParams;
+import com.gdzc.net.http.HttpParams;
 import com.gdzc.net.http.HttpRequest;
 import com.gdzc.net.subscribers.RetrofitSubscriber;
 import com.gdzc.utils.Utils;
@@ -62,7 +62,7 @@ public class ZccxViewModel {
     });
 
     public void getData(int pageNo) {
-        HttpRequest.SelectMyAllData(HttpPostParams.paramSelectMyAllData(zcbh.get(), zcmc.get(), cfdmc.get(), cfdbh.get(), gz_start.get(), gz_end.get(), rk_start.get(), rk_end.get(), pageNo + ""))
+        HttpRequest.SelectMyAllData(HttpParams.paramSelectMyAllData(zcbh.get(), zcmc.get(), cfdmc.get(), cfdbh.get(), gz_start.get(), gz_end.get(), rk_start.get(), rk_end.get(), pageNo + ""))
                 .subscribe(new RetrofitSubscriber<>(zcxgBean -> {
                     ((ZccxActivity) App.getAppContext().getCurrentActivity()).complete();
                     if (pageNo == 1)
@@ -72,7 +72,7 @@ public class ZccxViewModel {
     }
 
     public void getChildData(int pageNo) {
-        HttpRequest.selectMySonData(HttpPostParams.paramSelectMySonData(zcbh.get(), zcmc.get(), cfdmc.get(), cfdbh.get(), gz_start.get(), gz_end.get(), rk_start.get(), rk_end.get(), pageNo + "", son))
+        HttpRequest.selectMySonData(HttpParams.paramSelectMySonData(zcbh.get(), zcmc.get(), cfdmc.get(), cfdbh.get(), gz_start.get(), gz_end.get(), rk_start.get(), rk_end.get(), pageNo + "", son))
                 .subscribe(new RetrofitSubscriber<>(zcxgBean -> {
                     ((ZccxActivity) App.getAppContext().getCurrentActivity()).complete();
                     if (pageNo == 1)
