@@ -1,21 +1,37 @@
 package com.gdzc.zcdj.zcdj.viewmodel;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.database.Cursor;
+import android.databinding.DataBindingUtil;
 import android.databinding.ObservableField;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.bigkoo.pickerview.TimePickerView;
 import com.binding.command.ReplyCommand;
+import com.bumptech.glide.Glide;
+import com.gdzc.BR;
+import com.gdzc.R;
 import com.gdzc.base.App;
+import com.gdzc.common.recyclerview.CommonAdapter;
+import com.gdzc.databinding.LayoutPhotoBinding;
+import com.gdzc.net.consts.HttpPath;
 import com.gdzc.net.entity.HttpResult;
 import com.gdzc.net.http.HttpParams;
 import com.gdzc.net.http.HttpRequest;
 import com.gdzc.net.subscribers.ProgressSubscriber;
 import com.gdzc.utils.NavigateUtils;
 import com.gdzc.utils.SPUtils;
+import com.gdzc.utils.UploadFile;
 import com.gdzc.utils.Utils;
-import com.gdzc.widget.recycleview.BindingViewHolder;
 import com.gdzc.zcdj.flh.model.FlhBean;
 import com.gdzc.zcdj.flh.view.FlhActivity;
 import com.gdzc.zcdj.mk.model.CfdBean;
@@ -24,16 +40,19 @@ import com.gdzc.zcdj.mk.model.MKBean;
 import com.gdzc.zcdj.mk.model.RyBean;
 import com.gdzc.zcdj.mk.view.MKActivity;
 import com.gdzc.zcdj.zcdj.model.TsxxBean;
-import com.gdzc.zcdj.zcdj.view.ZcdjFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import rx.Observable;
 
@@ -42,119 +61,132 @@ import rx.Observable;
  */
 
 public class ZcdjViewModel {
-    private ZcdjFragment mFragment;
     private FlhBean.Flh mFlh;
-    private String whatsystem = "";
-    private List<TsxxViewModel> mList = new ArrayList<>();
-
-    private TsxxViewModel mTsxxViewModel;
-    public String zcImg, fpImg;
-
     public DwBean.Dw mDw;
+    private String whatsystem = "";
 
-    public BindingViewHolder.ItemClickLister mItemClickLister = (view, position) -> {
-        mTsxxViewModel = mList.get(position);
-        if (mTsxxViewModel.columType.get().equals("日期型"))
-            showTimePicker(mTsxxViewModel.colum.get());
-        else if (mTsxxViewModel.isQz.get()) {
-            switch (mTsxxViewModel.colum.get()) {
-                case "领用单位号":
-                    startMKActivity("领用单位", 1001);
-                    break;
-                case "领用人":
-                case "人员编号": {
-                    if (mDw == null) {
-                        Utils.showToast("请选择领用单位");
-                        return;
-                    }
-                    startMKActivity("领用人", 1008);
-                    break;
-                }
-                case "存放地名称":
-                case "存放地编号": {
-                    if (mDw == null) {
-                        Utils.showToast("请选择领用单位");
-                        return;
-                    }
-                    startMKActivity("存放地", 1009);
-                    break;
-                }
-                default:
-                    startMKActivity(mTsxxViewModel.colum.get(), 1002);
-                    break;
-            }
-        }
-    };
+    public CommonAdapter<TsxxViewModel> mAdapter;
+    private List<TsxxViewModel> mList = new ArrayList<>();
+    private TsxxViewModel mTsxxViewModel;
+
+    private File tempFile;
+    private ImageView tempIv;
+    public String zcImg, fpImg, imageType;
+
+    public final ObservableField<String> flh = new ObservableField<>();
+    public final ObservableField<String> flmc = new ObservableField<>();
+    public final ObservableField<Boolean> isShow = new ObservableField<>();
+
+    public ReplyCommand flCommand = new ReplyCommand(() -> NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), FlhActivity.class, 1000));
+    public ReplyCommand createCommand = new ReplyCommand(() -> getTsxx());
+    public ReplyCommand saveCommand = new ReplyCommand(() -> save());
 
     double dj = 1, je = 1;
     int sl = 1, pl = 1;
 
-    public BindingViewHolder.TextChangeListener mTextChangeListener = (view, position, s) -> {
-        TsxxViewModel temp = mList.get(position);
-        if ("TDJ".contains(whatsystem) && "数量单价金额批量".contains(temp.colum.get())) {
-            if (!TextUtils.isEmpty(s)) {
-                if (temp.colum.get().equals("数量")) {
-                    int num = Integer.valueOf(s);
-                    if (pl > 1) {
-                        Utils.showToast("数量和批量不能同时大于1");
-                        temp.content.set("1");
-                        return;
+    public ZcdjViewModel() {
+        isShow.set(false);
+        mAdapter = new CommonAdapter<>(mList, R.layout.adapter_zcdj_item, BR.viewModel);
+        mAdapter.setItemClickLister(position -> {
+            mTsxxViewModel = mList.get(position);
+            if (mTsxxViewModel.columType.get().equals("日期型"))
+                showTimePicker(mTsxxViewModel.colum.get());
+            else if (mTsxxViewModel.isQz.get()) {
+                switch (mTsxxViewModel.colum.get()) {
+                    case "领用单位号":
+                        startMKActivity("领用单位", 1001);
+                        break;
+                    case "领用人":
+                    case "人员编号": {
+                        if (mDw == null) {
+                            Utils.showToast("请选择领用单位");
+                            return;
+                        }
+                        startMKActivity("领用人", 1003);
+                        break;
                     }
-                    if (num >= 1) {
-                        sl = num;
-                        Observable.from(mList)
-                                .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("金额"))
-                                .subscribe(tsxxViewModel -> tsxxViewModel.content.set("0"));
-                        Observable.from(mList)
-                                .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("单价"))
-                                .subscribe(tsxxViewModel -> tsxxViewModel.content.set("0"));
+                    case "存放地名称":
+                    case "存放地编号": {
+                        if (mDw == null) {
+                            Utils.showToast("请选择领用单位");
+                            return;
+                        }
+                        startMKActivity("存放地", 1004);
+                        break;
                     }
-                } else if (temp.colum.get().equals("批量")) {
-                    int num = Integer.valueOf(s);
-                    if (sl > 1) {
-                        Utils.showToast("数量和批量不能同时大于1");
-                        temp.content.set("1");
-                        return;
-                    }
-                    if (num >= 1) {
-                        Observable.from(mList)
-                                .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("金额"))
-                                .subscribe(tsxxViewModel -> tsxxViewModel.content.set("0"));
-                        Observable.from(mList)
-                                .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("单价"))
-                                .subscribe(tsxxViewModel -> tsxxViewModel.content.set("0"));
-                        pl = num;
-                    }
-                } else if (temp.colum.get().equals("单价")) {
-                    if (sl > 1) {
-                        temp.content.set(dj + "");
-                        return;
-                    }
-                    if (pl >= 1) {//批量大于1时，可以输入单价，计算金额
-                        dj = Double.valueOf(s);
-                        je = dj * pl;
-                        Observable.from(mList)
-                                .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("金额"))
-                                .subscribe(tsxxViewModel -> tsxxViewModel.content.set(je + ""));
-                    }
-                } else if (temp.colum.get().equals("金额")) {
-                    if (pl > 1) {
-                        temp.content.set(je + "");
-                        return;
-                    }
-                    if (sl >= 1) {//数量大于1时，可以输入金额，计算单价
-                        je = Double.valueOf(s);
-                        dj = je / sl;
-                        NumberFormat nf = NumberFormat.getNumberInstance();
-                        nf.setMaximumFractionDigits(2);
-                        Observable.from(mList)
-                                .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("单价"))
-                                .subscribe(tsxxViewModel -> tsxxViewModel.content.set(nf.format(dj) + ""));
-                    }
+                    default:
+                        startMKActivity(mTsxxViewModel.colum.get(), 1002);
+                        break;
                 }
             }
-        }
-    };
+        });
+
+        mAdapter.setTextChangeListener((position, s) -> {
+            TsxxViewModel temp = mList.get(position);
+            if ("TDJ".contains(whatsystem) && "数量单价金额批量".contains(temp.colum.get())) {
+                if (!TextUtils.isEmpty(s)) {
+                    if (temp.colum.get().equals("数量")) {
+                        int num = Integer.valueOf(s);
+                        if (pl > 1) {
+                            Utils.showToast("数量和批量不能同时大于1");
+                            temp.content.set("1");
+                            return;
+                        }
+                        if (num >= 1) {
+                            sl = num;
+                            Observable.from(mList)
+                                    .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("金额"))
+                                    .subscribe(tsxxViewModel -> tsxxViewModel.content.set("0"));
+                            Observable.from(mList)
+                                    .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("单价"))
+                                    .subscribe(tsxxViewModel -> tsxxViewModel.content.set("0"));
+                        }
+                    } else if (temp.colum.get().equals("批量")) {
+                        int num = Integer.valueOf(s);
+                        if (sl > 1) {
+                            Utils.showToast("数量和批量不能同时大于1");
+                            temp.content.set("1");
+                            return;
+                        }
+                        if (num >= 1) {
+                            Observable.from(mList)
+                                    .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("金额"))
+                                    .subscribe(tsxxViewModel -> tsxxViewModel.content.set("0"));
+                            Observable.from(mList)
+                                    .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("单价"))
+                                    .subscribe(tsxxViewModel -> tsxxViewModel.content.set("0"));
+                            pl = num;
+                        }
+                    } else if (temp.colum.get().equals("单价")) {
+                        if (sl > 1) {
+                            temp.content.set(dj + "");
+                            return;
+                        }
+                        if (pl >= 1) {//批量大于1时，可以输入单价，计算金额
+                            dj = Double.valueOf(s);
+                            je = dj * pl;
+                            Observable.from(mList)
+                                    .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("金额"))
+                                    .subscribe(tsxxViewModel -> tsxxViewModel.content.set(je + ""));
+                        }
+                    } else if (temp.colum.get().equals("金额")) {
+                        if (pl > 1) {
+                            temp.content.set(je + "");
+                            return;
+                        }
+                        if (sl >= 1) {//数量大于1时，可以输入金额，计算单价
+                            je = Double.valueOf(s);
+                            dj = je / sl;
+                            NumberFormat nf = NumberFormat.getNumberInstance();
+                            nf.setMaximumFractionDigits(2);
+                            Observable.from(mList)
+                                    .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("单价"))
+                                    .subscribe(tsxxViewModel -> tsxxViewModel.content.set(nf.format(dj) + ""));
+                        }
+                    }
+                }
+            }}, R.id.et);
+    }
 
     private void startMKActivity(String title, int reqCode) {
         Bundle bundle = new Bundle();
@@ -163,17 +195,7 @@ public class ZcdjViewModel {
         NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), MKActivity.class, reqCode, bundle);
     }
 
-    public ZcdjViewModel(ZcdjFragment fragment) {
-        mFragment = fragment;
-    }
-
-    public final ObservableField<String> flh = new ObservableField<>();
-    public final ObservableField<String> flmc = new ObservableField<>();
-
-    public ReplyCommand flCommand = new ReplyCommand(() -> NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), FlhActivity.class, 1000));
-    public ReplyCommand createCommand = new ReplyCommand(() -> getTsxx(flh.get(), "1"));
-
-    public ReplyCommand saveCommand = new ReplyCommand(() -> {
+    private void save(){
         JSONObject jsonObj = new JSONObject();
         try {
             for (TsxxViewModel tsxxViewModel : mList) {
@@ -188,26 +210,51 @@ public class ZcdjViewModel {
                 jsonObj.put("图片文件", zcImg);
             if (!TextUtils.isEmpty(fpImg))
                 jsonObj.put("图片文件1", fpImg);
-            createZcdj(whatsystem, jsonObj.toString());
+            HttpRequest.AddNew(HttpParams.paramAddNew(whatsystem, jsonObj.toString()))
+                    .subscribe(new ProgressSubscriber<HttpResult>() {
+                        @Override
+                        public void onNext(HttpResult httpResult) {
+                            Utils.showToast("保存成功");
+                            if (httpResult.getStatus().isSuccess()) {
+                                reset();
+                            }
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            super.onError(e);
+                            Utils.showToast("保存失败");
+                        }
+                    });
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    });
+    }
+
+    //页面重置
+    private void reset() {
+        isShow.set(false);
+        mList.clear();
+        mAdapter.notifyDataSetChanged();
+        zcImg = "";
+        fpImg = "";
+        mFlh = null;
+        flh.set("");
+        flmc.set("");
+    }
 
     //生成表单
-    public void getTsxx(String flh, String dj) {
-        if (TextUtils.isEmpty(flh)) {
+    public void getTsxx() {
+        String dj = "1";
+        if (TextUtils.isEmpty(flh.get())) {
             Utils.showToast("请选择分类号");
             return;
         }
-        if (TextUtils.isEmpty(dj)) {
-            Utils.showToast("请输入单价");
-            return;
-        }
-        HttpRequest.GetTsxx(HttpParams.paramGetTsxx(flh, dj))
+        HttpRequest.GetTsxx(HttpParams.paramGetTsxx(flh.get(), dj))
                 .subscribe(new ProgressSubscriber<HttpResult<TsxxBean>>() {
                     @Override
                     public void onNext(HttpResult<TsxxBean> zcdjBeanHttpResult) {
+                        isShow.set(true);
                         TsxxBean tsxxBean = zcdjBeanHttpResult.getData();
                         whatsystem = zcdjBeanHttpResult.getWhatsystem();
                         mList.clear();
@@ -233,27 +280,12 @@ public class ZcdjViewModel {
                         Observable.from(mList)
                                 .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("人员编号"))
                                 .subscribe(tsxxViewModel -> tsxxViewModel.content.set(SPUtils.getString(SPUtils.kUser_username, "")));
-                        mFragment.setData(mList);
+                        mAdapter.notifyDataSetChanged();
                     }
                 });
     }
 
-    //保存表单
-    public void createZcdj(String whatsystem, String addnewstr) {
-        HttpRequest.AddNew(HttpParams.paramAddNew(whatsystem, addnewstr))
-                .subscribe(new ProgressSubscriber<HttpResult>() {
-                    @Override
-                    public void onNext(HttpResult httpResult) {
-                        Utils.showToast(httpResult.getStatus().msg);
-                        if (httpResult.getStatus().isSuccess()) {
-                            mFragment.reset();
-                            zcImg = "";
-                            fpImg = "";
-                        }
-                    }
-                });
-    }
-
+    //日期控件
     public void showTimePicker(String title) {
         Date now = new Date();
         TimePickerView mTimePickerView = new TimePickerView(App.getAppContext().getCurrentActivity(), TimePickerView.Type.YEAR_MONTH_DAY);
@@ -269,6 +301,35 @@ public class ZcdjViewModel {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             mTsxxViewModel.content.set(sdf.format(date));
         });
+    }
+
+    public final void imageUploadZc(View view) {
+        uploadImage(view, "zc");
+    }
+
+    public final void imageUploadFp(View view) {
+        uploadImage(view, "fp");
+    }
+
+    private void uploadImage(View view, String type) {
+        this.tempIv = (ImageView) view;
+        this.imageType = type;
+        LayoutPhotoBinding choiceBinding = DataBindingUtil.inflate(App.getAppContext().getCurrentActivity().getLayoutInflater(), R.layout.layout_photo, null, false);
+        Dialog dialog = Utils.showBottomDialog(App.getAppContext().getCurrentActivity(), choiceBinding.getRoot());
+        choiceBinding.takePhote.setOnClickListener(v -> {
+            tempFile = Utils.getCameraFile();
+            Intent intentCamera = new Intent("android.media.action.IMAGE_CAPTURE");
+            intentCamera.putExtra("output", Uri.fromFile(tempFile));
+            App.getAppContext().getCurrentActivity().startActivityForResult(intentCamera, 1005);
+            dialog.dismiss();
+        });
+        choiceBinding.selectPhoto.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_PICK, null);
+            intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+            App.getAppContext().getCurrentActivity().startActivityForResult(intent, 1006);
+            dialog.dismiss();
+        });
+        choiceBinding.tvCancel.setOnClickListener(v -> dialog.dismiss());
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -300,7 +361,7 @@ public class ZcdjViewModel {
                 mTsxxViewModel.content.set(mk.nr.substring(2, mk.nr.length()));
                 mTsxxViewModel.id.set(mk.nr.substring(0, 1));
                 break;
-            case 1008:
+            case 1003:
                 RyBean.Ry ry = (RyBean.Ry) data.getExtras().getSerializable("Mk");
                 Observable.from(mList)
                         .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("领用人"))
@@ -309,7 +370,7 @@ public class ZcdjViewModel {
                         .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("人员编号"))
                         .subscribe(tsxxViewModel -> tsxxViewModel.content.set(ry.人员编号));
                 break;
-            case 1009:
+            case 1004:
                 CfdBean.Cfd cfd = (CfdBean.Cfd) data.getExtras().getSerializable("Mk");
                 Observable.from(mList)
                         .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("存放地名称"))
@@ -318,6 +379,78 @@ public class ZcdjViewModel {
                         .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("存放地编号"))
                         .subscribe(tsxxViewModel -> tsxxViewModel.content.set(cfd.存放地号));
                 break;
+            case 1005:
+                Glide.with(App.getAppContext()).load(tempFile).into(tempIv);
+                uploadImage();
+                break;
+            case 1006:
+                String filePath = null;
+                Uri selectedImage = data.getData();
+                if (null != selectedImage) {
+                    String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+                    Cursor cursor = App.getAppContext().getCurrentActivity().getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+                    if (cursor.moveToFirst()) {
+                        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                        filePath = cursor.getString(columnIndex);
+                        cursor.close();
+                        if (filePath == null) {
+                            Utils.showToast("不支持网络图片,请从本地选择!");
+                        }
+                    }
+                } else {
+                    filePath = data.getAction().replace("file://", "");
+                }
+                if (null != filePath) {
+                    tempFile = new File(filePath);
+                    Glide.with(App.getAppContext()).load(tempFile).into(tempIv);
+                    uploadImage();
+                }
+                break;
         }
     }
+
+    private void uploadImage() {
+        Utils.showLoading(App.getAppContext().getCurrentActivity());
+        new Thread() {
+            @Override
+            public void run() {
+                Map<String, File> files = new HashMap<>();
+                files.put("uploadfile", tempFile);
+                try {
+                    HttpResult<String> httpResult = UploadFile.post(HttpPath.SERVER + HttpPath.imageUploadUrl, HttpParams.BaseParams(), files);
+                    Message message = Message.obtain();
+                    message.what = 1;
+                    message.obj = httpResult.getData();
+                    mHandler.sendMessage(message);
+                } catch (IOException e) {
+                    mHandler.sendEmptyMessage(0);
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+
+    private Handler mHandler = new Handler(Looper.getMainLooper()){
+        @Override
+        public void handleMessage(Message msg) {
+            Utils.hideLoading();
+            switch (msg.what){
+                case 0:
+                    Utils.showToast("上传失败,请重试");
+                    break;
+                case 1:
+                    Utils.showToast("上传成功");
+                    String img = (String) msg.obj;
+                    if (imageType.equals("zc"))
+                        zcImg = img;
+                    else
+                        fpImg = img;
+
+                    break;
+            }
+        }
+
+    };
+
 }

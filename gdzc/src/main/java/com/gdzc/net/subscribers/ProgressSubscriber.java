@@ -70,7 +70,7 @@ public abstract class ProgressSubscriber<T> extends Subscriber<T> implements Pro
             Utils.showToast("数据解析错误");
             BaseLog.e("数据解析错误:::" + e.getMessage());
         } else {
-            Utils.showToast(e.getMessage());
+            BaseLog.e(e.getMessage());
         }
         dismissProgressDialog();
     }
