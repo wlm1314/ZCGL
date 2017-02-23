@@ -47,7 +47,6 @@
             style="@style/CommonText"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:background="@drawable/bottom_border"
             android:hint="@{viewModel.tsnr}"
             android:maxLines="1"
             android:text="@={viewModel.content}"

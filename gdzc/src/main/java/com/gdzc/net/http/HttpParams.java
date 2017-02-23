@@ -4,8 +4,12 @@ package com.gdzc.net.http;
 import com.gdzc.net.consts.MD5Tools;
 import com.gdzc.utils.SPUtils;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 
 /**
@@ -207,4 +211,20 @@ public class HttpParams {
         map.put("rybh", "");
         return map;
     }
+
+    public static Map<String, RequestBody> paramImageUpload(File imgFile){
+        RequestBody username = RequestBody.create(MediaType.parse("text/plain"), SPUtils.getString(SPUtils.kUser_username, ""));
+        RequestBody md5 = RequestBody.create(MediaType.parse("text/plain"), MD5Tools.getMd5(SPUtils.getString(SPUtils.kUser_username, "")));
+        Map<String, RequestBody> map = new HashMap<>();
+        map.put("username", username);
+        map.put("md5", md5);
+
+        if (imgFile != null) {
+            RequestBody fileBody =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), imgFile);
+            map.put("file\"; filename=\""+imgFile.getName()+"", fileBody);
+        }
+        return map;
+    }
+
 }

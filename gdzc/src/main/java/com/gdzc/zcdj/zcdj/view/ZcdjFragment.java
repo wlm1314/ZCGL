@@ -28,7 +28,7 @@ public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {
 
     @Override
     protected void init() {
-        InitRecyclerView.initLinearLayoutWithoutDivid(getActivity(), mBinding.rvZcdj);
+        InitRecyclerView.initLinearLayoutVERTICAL(getActivity(), mBinding.rvZcdj);
         mBinding.rvZcdj.setAdapter(mViewModel.mAdapter);
     }
 

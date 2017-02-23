@@ -2,7 +2,6 @@ package com.gdzc.zcdj.zcdj.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -15,6 +14,7 @@ import com.gdzc.R;
 import com.gdzc.base.App;
 import com.gdzc.base.AppBar;
 import com.gdzc.base.BaseActivity;
+import com.gdzc.common.recyclerview.InitRecyclerView;
 import com.gdzc.databinding.ActivityZcdjEditBinding;
 import com.gdzc.net.entity.HttpResult;
 import com.gdzc.net.http.HttpParams;
@@ -24,6 +24,7 @@ import com.gdzc.utils.NavigateUtils;
 import com.gdzc.utils.Utils;
 import com.gdzc.widget.recycleview.BindingAdapter;
 import com.gdzc.widget.recycleview.BindingTool;
+import com.gdzc.zcdj.cch.view.ZcdjCchActivity;
 import com.gdzc.zcdj.mk.model.CfdBean;
 import com.gdzc.zcdj.mk.model.DwBean;
 import com.gdzc.zcdj.mk.model.MKBean;
@@ -73,8 +74,7 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
     }
 
     private void initView() {
-        mBinding.rvZcbg.setLayoutManager(new LinearLayoutManager(this));
-        mBinding.rvZcbg.setHasFixedSize(true);
+        InitRecyclerView.initLinearLayoutVERTICAL(this, mBinding.rvZcbg);
         mAdapter = new BindingAdapter<>(new BindingTool(R.layout.adapter_zcdj_item, BR.viewModel), mList);
         mBinding.rvZcbg.setAdapter(mAdapter);
     }
@@ -90,7 +90,7 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
             else if (mTsxxViewModel.isQz.get()) {
                 switch (mTsxxViewModel.colum.get()) {
                     case "领用单位号":
-                        NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), MKActivity.class, 1001);
+                        startMKActivity("领用单位", 1001);
                         break;
                     case "领用人":
                     case "人员编号": {
@@ -101,6 +101,7 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
                                     if (TextUtils.isEmpty(dwId))
                                         Utils.showToast("请选择领用单位");
                                 });
+                        startMKActivity("领用人", 1008);
                         break;
                     }
                     case "存放地名称":
@@ -112,12 +113,11 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
                                     if (TextUtils.isEmpty(dwId))
                                         Utils.showToast("请选择领用单位");
                                 });
+                        startMKActivity("存放地", 1009);
                         break;
                     }
                     default:
-                        Bundle bundle = new Bundle();
-                        bundle.putString("title", mTsxxViewModel.colum.get());
-                        NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), MKActivity.class, 1002, bundle);
+                        startMKActivity(mTsxxViewModel.colum.get(), 1002);
                         break;
                 }
             }
@@ -128,6 +128,13 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
             bundle.putString("yqbh", yqbh);
             NavigateUtils.startActivity(this, ZcdjCchActivity.class, bundle);
         });
+    }
+
+    private void startMKActivity(String title, int reqCode) {
+        Bundle bundle = new Bundle();
+        bundle.putString("columName", title);
+        bundle.putString("dwId", dwId != null ? dwId : "");
+        NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), MKActivity.class, reqCode, bundle);
     }
 
     private void getData() {
@@ -191,7 +198,7 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
         if (resultCode != RESULT_OK) return;
         switch (requestCode) {
             case 1001:
-                DwBean.Dw dw = (DwBean.Dw) data.getExtras().getSerializable("Lydw");
+                DwBean.Dw dw = (DwBean.Dw) data.getExtras().getSerializable("Mk");
                 mTsxxViewModel.content.set(dw.dwName);
                 mTsxxViewModel.id.set(dw.dwId);
                 Observable.from(mList)
@@ -208,12 +215,12 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
                         .subscribe(tsxxViewModel -> tsxxViewModel.content.set(""));
                 break;
             case 1002:
-                MKBean.Mk mk = (MKBean.Mk) data.getExtras().getSerializable("Syfx");
+                MKBean.Mk mk = (MKBean.Mk) data.getExtras().getSerializable("Mk");
                 mTsxxViewModel.content.set(mk.nr.substring(2, mk.nr.length()));
                 mTsxxViewModel.id.set(mk.nr.substring(0, 1));
                 break;
             case 1008:
-                RyBean.Ry ry = (RyBean.Ry) data.getExtras().getSerializable("data");
+                RyBean.Ry ry = (RyBean.Ry) data.getExtras().getSerializable("Mk");
                 Observable.from(mList)
                         .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("领用人"))
                         .subscribe(tsxxViewModel -> tsxxViewModel.content.set(ry.人员名));
@@ -222,7 +229,7 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
                         .subscribe(tsxxViewModel -> tsxxViewModel.content.set(ry.人员编号));
                 break;
             case 1009:
-                CfdBean.Cfd cfd = (CfdBean.Cfd) data.getExtras().getSerializable("data");
+                CfdBean.Cfd cfd = (CfdBean.Cfd) data.getExtras().getSerializable("Mk");
                 Observable.from(mList)
                         .filter(tsxxViewModel -> tsxxViewModel.colum.get().equals("存放地名称"))
                         .subscribe(tsxxViewModel -> tsxxViewModel.content.set(cfd.存放地名));

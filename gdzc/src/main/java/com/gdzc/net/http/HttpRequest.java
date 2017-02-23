@@ -12,7 +12,7 @@ import com.gdzc.zcdj.mk.model.CfdBean;
 import com.gdzc.zcdj.mk.model.DwBean;
 import com.gdzc.zcdj.mk.model.MKBean;
 import com.gdzc.zcdj.mk.model.RyBean;
-import com.gdzc.zcdj.zcdj.model.CchBean;
+import com.gdzc.zcdj.cch.model.CchBean;
 import com.gdzc.zcdj.zcdj.model.TsxxBean;
 import com.gdzc.zcdj.zcdj.model.ZcxgBean;
 import com.gdzc.zcdj.zcdj.model.ZcxgEditBean;
@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -273,6 +274,16 @@ public class HttpRequest {
      */
     public static Observable<ZcxgBean> selectMySonData(Map<String, String> params) {
         return getInstance().create(RequestApi.class).selectMySonData(params)
+                .compose(applySchedulers());
+    }
+
+    /**
+     * @param
+     * @return
+     */
+    public static Observable<String> ImageUpload(Map<String, RequestBody> params) {
+        return getInstance().create(RequestApi.class).ImageUpload(params)
+                .map(new HttpResultFunc<>())
                 .compose(applySchedulers());
     }
 

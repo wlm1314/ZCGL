@@ -3,7 +3,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="data" type="com.gdzc.zcdj.zcdj.model.CchBean.Cch"/>
+        <variable name="data" type="com.gdzc.zcdj.cch.model.CchBean.Cch"/>
     </data>
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -34,7 +34,7 @@
                     android:singleLine="true"
                     android:text="@{data.zcbh}"/>
                 <TextView style="@style/CommonText"
-                          android:text="出  厂  号："/>
+                          android:text="出    厂    号："/>
                 <TextView
                     style="@style/CommonText"
                     android:layout_marginLeft="@dimen/dimen_10"

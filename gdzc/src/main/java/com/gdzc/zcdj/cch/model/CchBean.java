@@ -1,4 +1,4 @@
-package com.gdzc.zcdj.zcdj.model;
+package com.gdzc.zcdj.cch.model;
 
 import android.databinding.ObservableField;
 

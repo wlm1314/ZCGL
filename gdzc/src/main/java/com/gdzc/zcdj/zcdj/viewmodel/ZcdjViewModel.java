@@ -7,9 +7,6 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ObservableField;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
@@ -23,14 +20,12 @@ import com.gdzc.R;
 import com.gdzc.base.App;
 import com.gdzc.common.recyclerview.CommonAdapter;
 import com.gdzc.databinding.LayoutPhotoBinding;
-import com.gdzc.net.consts.HttpPath;
 import com.gdzc.net.entity.HttpResult;
 import com.gdzc.net.http.HttpParams;
 import com.gdzc.net.http.HttpRequest;
 import com.gdzc.net.subscribers.ProgressSubscriber;
 import com.gdzc.utils.NavigateUtils;
 import com.gdzc.utils.SPUtils;
-import com.gdzc.utils.UploadFile;
 import com.gdzc.utils.Utils;
 import com.gdzc.zcdj.flh.model.FlhBean;
 import com.gdzc.zcdj.flh.view.FlhActivity;
@@ -45,14 +40,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import rx.Observable;
 
@@ -185,7 +177,8 @@ public class ZcdjViewModel {
                         }
                     }
                 }
-            }}, R.id.et);
+            }
+        }, R.id.et);
     }
 
     private void startMKActivity(String title, int reqCode) {
@@ -195,7 +188,7 @@ public class ZcdjViewModel {
         NavigateUtils.startActivityForResult(App.getAppContext().getCurrentActivity(), MKActivity.class, reqCode, bundle);
     }
 
-    private void save(){
+    private void save() {
         JSONObject jsonObj = new JSONObject();
         try {
             for (TsxxViewModel tsxxViewModel : mList) {
@@ -410,47 +403,18 @@ public class ZcdjViewModel {
         }
     }
 
-    private void uploadImage() {
-        Utils.showLoading(App.getAppContext().getCurrentActivity());
-        new Thread() {
-            @Override
-            public void run() {
-                Map<String, File> files = new HashMap<>();
-                files.put("uploadfile", tempFile);
-                try {
-                    HttpResult<String> httpResult = UploadFile.post(HttpPath.SERVER + HttpPath.imageUploadUrl, HttpParams.BaseParams(), files);
-                    Message message = Message.obtain();
-                    message.what = 1;
-                    message.obj = httpResult.getData();
-                    mHandler.sendMessage(message);
-                } catch (IOException e) {
-                    mHandler.sendEmptyMessage(0);
-                    e.printStackTrace();
-                }
-            }
-        }.start();
+    private void uploadImage(){
+        HttpRequest.ImageUpload(HttpParams.paramImageUpload(tempFile))
+                .subscribe(new ProgressSubscriber<String>() {
+                    @Override
+                    public void onNext(String s) {
+                        Utils.showToast("上传成功");
+                        if (imageType.equals("zc"))
+                            zcImg = s;
+                        else
+                            fpImg = s;
+                    }
+                });
     }
-
-    private Handler mHandler = new Handler(Looper.getMainLooper()){
-        @Override
-        public void handleMessage(Message msg) {
-            Utils.hideLoading();
-            switch (msg.what){
-                case 0:
-                    Utils.showToast("上传失败,请重试");
-                    break;
-                case 1:
-                    Utils.showToast("上传成功");
-                    String img = (String) msg.obj;
-                    if (imageType.equals("zc"))
-                        zcImg = img;
-                    else
-                        fpImg = img;
-
-                    break;
-            }
-        }
-
-    };
 
 }

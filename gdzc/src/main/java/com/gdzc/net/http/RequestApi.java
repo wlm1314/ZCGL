@@ -10,7 +10,7 @@ import com.gdzc.zcdj.mk.model.CfdBean;
 import com.gdzc.zcdj.mk.model.DwBean;
 import com.gdzc.zcdj.mk.model.MKBean;
 import com.gdzc.zcdj.mk.model.RyBean;
-import com.gdzc.zcdj.zcdj.model.CchBean;
+import com.gdzc.zcdj.cch.model.CchBean;
 import com.gdzc.zcdj.zcdj.model.TsxxBean;
 import com.gdzc.zcdj.zcdj.model.ZcxgBean;
 import com.gdzc.zcdj.zcdj.model.ZcxgEditBean;
@@ -24,8 +24,7 @@ import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
-import retrofit2.http.QueryMap;
+import retrofit2.http.PartMap;
 import rx.Observable;
 
 /**
@@ -84,7 +83,7 @@ public interface RequestApi {
     //上传图片
     @POST(HttpPath.imageUploadUrl)
     @Multipart
-    Observable<BaseBean> ImageUpload(@Part("file\"; filename=\"test.jpg\"") RequestBody file, @QueryMap Map<String, String> params);
+    Observable<HttpResult<String>> ImageUpload(@PartMap Map<String, RequestBody> params);
 
     //更新数据
     @FormUrlEncoded

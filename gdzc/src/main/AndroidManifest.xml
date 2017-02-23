@@ -38,11 +38,11 @@
                   android:screenOrientation="portrait"
                   android:theme="@style/AppTheme.AppComEdit"
                   android:windowSoftInputMode="stateHidden|adjustUnspecified"/>
-        <activity android:name=".zcdj.zcdj.view.ZcdjCchActivity"
+        <activity android:name=".zcdj.cch.view.ZcdjCchActivity"
                   android:screenOrientation="portrait"
                   android:theme="@style/AppTheme.AppComEdit"
                   android:windowSoftInputMode="stateHidden|adjustUnspecified"/>
-        <activity android:name=".zcdj.zcdj.view.ZcdjCchEditActivity"
+        <activity android:name=".zcdj.cch.view.ZcdjCchEditActivity"
                   android:screenOrientation="portrait"
                   android:theme="@style/AppTheme.AppComEdit"
                   android:windowSoftInputMode="stateHidden|adjustUnspecified"/>

@@ -1,4 +1,4 @@
-package com.gdzc.zcdj.zcdj.view;
+package com.gdzc.zcdj.cch.view;
 
 import android.text.TextUtils;
 
@@ -10,7 +10,7 @@ import com.gdzc.net.http.HttpParams;
 import com.gdzc.net.http.HttpRequest;
 import com.gdzc.net.subscribers.RetrofitSubscriber;
 import com.gdzc.utils.Utils;
-import com.gdzc.zcdj.zcdj.model.CchBean;
+import com.gdzc.zcdj.cch.model.CchBean;
 
 import org.json.JSONException;
 import org.json.JSONObject;

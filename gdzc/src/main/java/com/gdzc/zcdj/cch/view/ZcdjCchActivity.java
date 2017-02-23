@@ -1,4 +1,4 @@
-package com.gdzc.zcdj.zcdj.view;
+package com.gdzc.zcdj.cch.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +16,7 @@ import com.gdzc.net.subscribers.ProgressSubscriber;
 import com.gdzc.utils.NavigateUtils;
 import com.gdzc.widget.recycleview.BindingAdapter;
 import com.gdzc.widget.recycleview.BindingTool;
-import com.gdzc.zcdj.zcdj.model.CchBean;
+import com.gdzc.zcdj.cch.model.CchBean;
 
 import java.util.ArrayList;
 import java.util.List;
