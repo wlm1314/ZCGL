@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "D:\\project\\ZCGL\\pickerview\\build\\intermediates\\res\\merged\\androidTest\\debug\\values\\values.xml",
+        "outputFile": "D:\\project\\ZCGL\\pickerview\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
         "map": [
             {
                 "to": {
@@ -175,96 +175,20 @@
             },
             {
                 "to": {
-                    "startLine": 12,
-                    "startColumn": 4,
-                    "startOffset": 954,
-                    "endColumn": 50,
-                    "endOffset": 1000
-                },
-                "from": {
-                    "file": "D:\\project\\ZCGL\\pickerview\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
-                    "position": {
-                        "startLine": 12,
-                        "startColumn": 4,
-                        "startOffset": 954,
-                        "endColumn": 50,
-                        "endOffset": 1000
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 13,
-                    "startColumn": 4,
-                    "startOffset": 1005,
-                    "endColumn": 61,
-                    "endOffset": 1062
-                },
-                "from": {
-                    "file": "D:\\project\\ZCGL\\pickerview\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
-                    "position": {
-                        "startLine": 13,
-                        "startColumn": 4,
-                        "startOffset": 1005,
-                        "endColumn": 61,
-                        "endOffset": 1062
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 14,
-                    "startColumn": 4,
-                    "startOffset": 1067,
-                    "endColumn": 55,
-                    "endOffset": 1118
-                },
-                "from": {
-                    "file": "D:\\project\\ZCGL\\pickerview\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
-                    "position": {
-                        "startLine": 14,
-                        "startColumn": 4,
-                        "startOffset": 1067,
-                        "endColumn": 55,
-                        "endOffset": 1118
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 15,
-                    "startColumn": 4,
-                    "startOffset": 1123,
-                    "endColumn": 60,
-                    "endOffset": 1179
-                },
-                "from": {
-                    "file": "D:\\project\\ZCGL\\pickerview\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
-                    "position": {
-                        "startLine": 15,
-                        "startColumn": 4,
-                        "startOffset": 1123,
-                        "endColumn": 60,
-                        "endOffset": 1179
-                    }
-                }
-            },
-            {
-                "to": {
                     "startLine": 16,
                     "startColumn": 4,
-                    "startOffset": 1184,
-                    "endColumn": 61,
-                    "endOffset": 1241
+                    "startOffset": 1002,
+                    "endColumn": 50,
+                    "endOffset": 1048
                 },
                 "from": {
                     "file": "D:\\project\\ZCGL\\pickerview\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
                     "position": {
                         "startLine": 16,
                         "startColumn": 4,
-                        "startOffset": 1184,
-                        "endColumn": 61,
-                        "endOffset": 1241
+                        "startOffset": 1002,
+                        "endColumn": 50,
+                        "endOffset": 1048
                     }
                 }
             },
@@ -272,18 +196,18 @@
                 "to": {
                     "startLine": 17,
                     "startColumn": 4,
-                    "startOffset": 1246,
-                    "endColumn": 63,
-                    "endOffset": 1305
+                    "startOffset": 1053,
+                    "endColumn": 61,
+                    "endOffset": 1110
                 },
                 "from": {
                     "file": "D:\\project\\ZCGL\\pickerview\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
                     "position": {
                         "startLine": 17,
                         "startColumn": 4,
-                        "startOffset": 1246,
-                        "endColumn": 63,
-                        "endOffset": 1305
+                        "startOffset": 1053,
+                        "endColumn": 61,
+                        "endOffset": 1110
                     }
                 }
             },
@@ -291,18 +215,18 @@
                 "to": {
                     "startLine": 18,
                     "startColumn": 4,
-                    "startOffset": 1310,
-                    "endColumn": 60,
-                    "endOffset": 1366
+                    "startOffset": 1115,
+                    "endColumn": 55,
+                    "endOffset": 1166
                 },
                 "from": {
                     "file": "D:\\project\\ZCGL\\pickerview\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
                     "position": {
                         "startLine": 18,
                         "startColumn": 4,
-                        "startOffset": 1310,
-                        "endColumn": 60,
-                        "endOffset": 1366
+                        "startOffset": 1115,
+                        "endColumn": 55,
+                        "endOffset": 1166
                     }
                 }
             },
@@ -310,18 +234,18 @@
                 "to": {
                     "startLine": 19,
                     "startColumn": 4,
-                    "startOffset": 1371,
-                    "endColumn": 48,
-                    "endOffset": 1415
+                    "startOffset": 1171,
+                    "endColumn": 60,
+                    "endOffset": 1227
                 },
                 "from": {
                     "file": "D:\\project\\ZCGL\\pickerview\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
                     "position": {
                         "startLine": 19,
                         "startColumn": 4,
-                        "startOffset": 1371,
-                        "endColumn": 48,
-                        "endOffset": 1415
+                        "startOffset": 1171,
+                        "endColumn": 60,
+                        "endOffset": 1227
                     }
                 }
             },
@@ -329,18 +253,18 @@
                 "to": {
                     "startLine": 20,
                     "startColumn": 4,
-                    "startOffset": 1420,
-                    "endColumn": 44,
-                    "endOffset": 1460
+                    "startOffset": 1232,
+                    "endColumn": 61,
+                    "endOffset": 1289
                 },
                 "from": {
                     "file": "D:\\project\\ZCGL\\pickerview\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
                     "position": {
                         "startLine": 20,
                         "startColumn": 4,
-                        "startOffset": 1420,
-                        "endColumn": 44,
-                        "endOffset": 1460
+                        "startOffset": 1232,
+                        "endColumn": 61,
+                        "endOffset": 1289
                     }
                 }
             },
@@ -348,18 +272,18 @@
                 "to": {
                     "startLine": 21,
                     "startColumn": 4,
-                    "startOffset": 1465,
-                    "endColumn": 46,
-                    "endOffset": 1507
+                    "startOffset": 1294,
+                    "endColumn": 63,
+                    "endOffset": 1353
                 },
                 "from": {
                     "file": "D:\\project\\ZCGL\\pickerview\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
                     "position": {
                         "startLine": 21,
                         "startColumn": 4,
-                        "startOffset": 1465,
-                        "endColumn": 46,
-                        "endOffset": 1507
+                        "startOffset": 1294,
+                        "endColumn": 63,
+                        "endOffset": 1353
                     }
                 }
             },
@@ -367,18 +291,18 @@
                 "to": {
                     "startLine": 22,
                     "startColumn": 4,
-                    "startOffset": 1512,
-                    "endColumn": 48,
-                    "endOffset": 1556
+                    "startOffset": 1358,
+                    "endColumn": 60,
+                    "endOffset": 1414
                 },
                 "from": {
                     "file": "D:\\project\\ZCGL\\pickerview\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
                     "position": {
                         "startLine": 22,
                         "startColumn": 4,
-                        "startOffset": 1512,
-                        "endColumn": 48,
-                        "endOffset": 1556
+                        "startOffset": 1358,
+                        "endColumn": 60,
+                        "endOffset": 1414
                     }
                 }
             },
@@ -386,18 +310,18 @@
                 "to": {
                     "startLine": 23,
                     "startColumn": 4,
-                    "startOffset": 1561,
-                    "endColumn": 46,
-                    "endOffset": 1603
+                    "startOffset": 1419,
+                    "endColumn": 48,
+                    "endOffset": 1463
                 },
                 "from": {
                     "file": "D:\\project\\ZCGL\\pickerview\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
                     "position": {
                         "startLine": 23,
                         "startColumn": 4,
-                        "startOffset": 1561,
-                        "endColumn": 46,
-                        "endOffset": 1603
+                        "startOffset": 1419,
+                        "endColumn": 48,
+                        "endOffset": 1463
                     }
                 }
             },
@@ -405,18 +329,18 @@
                 "to": {
                     "startLine": 24,
                     "startColumn": 4,
-                    "startOffset": 1608,
-                    "endColumn": 48,
-                    "endOffset": 1652
+                    "startOffset": 1468,
+                    "endColumn": 44,
+                    "endOffset": 1508
                 },
                 "from": {
                     "file": "D:\\project\\ZCGL\\pickerview\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
                     "position": {
                         "startLine": 24,
                         "startColumn": 4,
-                        "startOffset": 1608,
-                        "endColumn": 48,
-                        "endOffset": 1652
+                        "startOffset": 1468,
+                        "endColumn": 44,
+                        "endOffset": 1508
                     }
                 }
             },
@@ -424,18 +348,18 @@
                 "to": {
                     "startLine": 25,
                     "startColumn": 4,
-                    "startOffset": 1657,
-                    "endColumn": 48,
-                    "endOffset": 1701
+                    "startOffset": 1513,
+                    "endColumn": 46,
+                    "endOffset": 1555
                 },
                 "from": {
                     "file": "D:\\project\\ZCGL\\pickerview\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
                     "position": {
                         "startLine": 25,
                         "startColumn": 4,
-                        "startOffset": 1657,
-                        "endColumn": 48,
-                        "endOffset": 1701
+                        "startOffset": 1513,
+                        "endColumn": 46,
+                        "endOffset": 1555
                     }
                 }
             },
@@ -443,18 +367,94 @@
                 "to": {
                     "startLine": 26,
                     "startColumn": 4,
-                    "startOffset": 1706,
-                    "endColumn": 45,
-                    "endOffset": 1747
+                    "startOffset": 1560,
+                    "endColumn": 48,
+                    "endOffset": 1604
                 },
                 "from": {
                     "file": "D:\\project\\ZCGL\\pickerview\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
                     "position": {
                         "startLine": 26,
                         "startColumn": 4,
-                        "startOffset": 1706,
+                        "startOffset": 1560,
+                        "endColumn": 48,
+                        "endOffset": 1604
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 27,
+                    "startColumn": 4,
+                    "startOffset": 1609,
+                    "endColumn": 46,
+                    "endOffset": 1651
+                },
+                "from": {
+                    "file": "D:\\project\\ZCGL\\pickerview\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 27,
+                        "startColumn": 4,
+                        "startOffset": 1609,
+                        "endColumn": 46,
+                        "endOffset": 1651
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 28,
+                    "startColumn": 4,
+                    "startOffset": 1656,
+                    "endColumn": 48,
+                    "endOffset": 1700
+                },
+                "from": {
+                    "file": "D:\\project\\ZCGL\\pickerview\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 28,
+                        "startColumn": 4,
+                        "startOffset": 1656,
+                        "endColumn": 48,
+                        "endOffset": 1700
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 29,
+                    "startColumn": 4,
+                    "startOffset": 1705,
+                    "endColumn": 48,
+                    "endOffset": 1749
+                },
+                "from": {
+                    "file": "D:\\project\\ZCGL\\pickerview\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 29,
+                        "startColumn": 4,
+                        "startOffset": 1705,
+                        "endColumn": 48,
+                        "endOffset": 1749
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 30,
+                    "startColumn": 4,
+                    "startOffset": 1754,
+                    "endColumn": 45,
+                    "endOffset": 1795
+                },
+                "from": {
+                    "file": "D:\\project\\ZCGL\\pickerview\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 30,
+                        "startColumn": 4,
+                        "startOffset": 1754,
                         "endColumn": 45,
-                        "endOffset": 1747
+                        "endOffset": 1795
                     }
                 }
             }

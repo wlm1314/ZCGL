@@ -4,7 +4,7 @@ import android.databinding.ObservableField;
 import android.text.TextUtils;
 
 import com.binding.command.ReplyCommand;
-import com.gdzc.base.App;
+import com.gdzc.app.App;
 import com.gdzc.login.model.LoginBean;
 import com.gdzc.main.view.MainActivity;
 import com.gdzc.net.http.HttpParams;

@@ -5,7 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.gdzc.R;
-import com.gdzc.base.App;
+import com.gdzc.app.App;
 
 /**
  * Created by 王少岩 on 2017/1/19.

@@ -17,7 +17,7 @@ import com.binding.command.ReplyCommand;
 import com.bumptech.glide.Glide;
 import com.gdzc.BR;
 import com.gdzc.R;
-import com.gdzc.base.App;
+import com.gdzc.app.App;
 import com.gdzc.common.recyclerview.CommonAdapter;
 import com.gdzc.databinding.LayoutPhotoBinding;
 import com.gdzc.net.entity.HttpResult;

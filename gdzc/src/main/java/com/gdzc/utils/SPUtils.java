@@ -1,7 +1,7 @@
 package com.gdzc.utils;
 
 
-import com.gdzc.base.App;
+import com.gdzc.app.App;
 
 /**
  * Created by 王少岩 on 2016/8/22.

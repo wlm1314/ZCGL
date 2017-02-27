@@ -7,7 +7,7 @@ import com.binding.command.ReplyCommand;
 import com.binding.messenger.Messenger;
 import com.gdzc.BR;
 import com.gdzc.R;
-import com.gdzc.base.App;
+import com.gdzc.app.App;
 import com.gdzc.common.recyclerview.CommonAdapter;
 import com.gdzc.common.viewmodel.ItemViewModel;
 import com.gdzc.common.viewmodel.ViewModel;

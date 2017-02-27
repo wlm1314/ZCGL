@@ -1,6 +1,6 @@
 package com.gdzc.net.subscribers;
 
-import com.gdzc.base.App;
+import com.gdzc.app.App;
 import com.gdzc.base.BaseBean;
 import com.gdzc.net.progress.ProgressCancelListener;
 import com.gdzc.net.progress.ProgressDialogHandler;

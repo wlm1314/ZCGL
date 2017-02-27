@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 
+import com.gdzc.app.App;
 import com.gdzc.utils.Utils;
 
 /**
@@ -24,7 +25,6 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
         super.onCreate(savedInstanceState);
         App.getAppContext().setCurrentActivity(this);
         mBinding = DataBindingUtil.setContentView(this, getLayoutId());
-        App.getAppContext().setCurrentBinding(mBinding);
         setViewModel();
         init();
     }

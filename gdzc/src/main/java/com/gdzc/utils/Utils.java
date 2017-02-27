@@ -14,7 +14,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.gdzc.R;
-import com.gdzc.base.App;
+import com.gdzc.app.App;
 
 import java.io.File;
 

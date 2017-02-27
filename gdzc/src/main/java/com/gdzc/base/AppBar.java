@@ -4,6 +4,7 @@ import android.databinding.ObservableField;
 
 import com.binding.command.ReplyCommand;
 import com.gdzc.R;
+import com.gdzc.app.App;
 
 /**
  * Created by 王少岩 on 2016/12/20.

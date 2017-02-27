@@ -5,7 +5,7 @@ import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
 
 import com.gdzc.R;
-import com.gdzc.base.App;
+import com.gdzc.app.App;
 import com.magicindicator.MagicIndicator;
 import com.magicindicator.ViewPagerHelper;
 import com.magicindicator.buildins.circlenavigator.ScaleCircleNavigator;

@@ -8,7 +8,7 @@ import android.view.View;
 import com.bigkoo.pickerview.TimePickerView;
 import com.binding.command.ReplyCommand;
 import com.gdzc.R;
-import com.gdzc.base.App;
+import com.gdzc.app.App;
 import com.gdzc.net.http.HttpParams;
 import com.gdzc.net.http.HttpRequest;
 import com.gdzc.net.subscribers.RetrofitSubscriber;

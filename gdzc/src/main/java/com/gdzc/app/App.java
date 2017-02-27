@@ -1,10 +1,9 @@
-package com.gdzc.base;
+package com.gdzc.app;
 
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.databinding.ViewDataBinding;
 import android.preference.PreferenceManager;
 
 
@@ -16,7 +15,6 @@ public class App extends Application {
     private SharedPreferences mPreferences;
     private SharedPreferences mUserPreference;
     private Activity mCurrentActivity;
-    private ViewDataBinding mBinding;
 
     @Override
     public void onCreate() {
@@ -48,11 +46,4 @@ public class App extends Application {
         mCurrentActivity = currentActivity;
     }
 
-    public void setCurrentBinding(ViewDataBinding binding){
-        mBinding = binding;
-    }
-
-    public ViewDataBinding getCurrentBinding() {
-        return mBinding;
-    }
 }

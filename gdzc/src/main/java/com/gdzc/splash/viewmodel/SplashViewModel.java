@@ -3,7 +3,7 @@ package com.gdzc.splash.viewmodel;
 import android.os.CountDownTimer;
 
 import com.binding.base.ViewModel;
-import com.gdzc.base.App;
+import com.gdzc.app.App;
 import com.gdzc.login.view.LoginActivity;
 import com.gdzc.main.view.MainActivity;
 import com.gdzc.utils.NavigateUtils;

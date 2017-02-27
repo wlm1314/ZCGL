@@ -3,7 +3,7 @@ package com.gdzc.main.viewmodel;
 import android.databinding.ObservableField;
 
 import com.binding.command.ReplyCommand;
-import com.gdzc.base.App;
+import com.gdzc.app.App;
 import com.gdzc.login.view.LoginActivity;
 import com.gdzc.utils.NavigateUtils;
 import com.gdzc.utils.SPUtils;

@@ -11,7 +11,7 @@ import android.view.View;
 import com.bigkoo.pickerview.TimePickerView;
 import com.gdzc.BR;
 import com.gdzc.R;
-import com.gdzc.base.App;
+import com.gdzc.app.App;
 import com.gdzc.base.AppBar;
 import com.gdzc.base.BaseActivity;
 import com.gdzc.common.recyclerview.InitRecyclerView;

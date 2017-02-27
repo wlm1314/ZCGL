@@ -20,7 +20,6 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
-        App.getAppContext().setCurrentBinding(mBinding);
         setViewModel();
         init();
         return mBinding.getRoot();
@@ -29,7 +28,6 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        App.getAppContext().setCurrentBinding(mBinding);
     }
 
     /**
