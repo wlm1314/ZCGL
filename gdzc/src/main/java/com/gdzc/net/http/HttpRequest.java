@@ -5,14 +5,13 @@ import com.gdzc.base.BaseBean;
 import com.gdzc.login.model.LoginBean;
 import com.gdzc.net.consts.HttpConsts;
 import com.gdzc.net.entity.HttpResult;
-import com.gdzc.utils.BaseLog;
 import com.gdzc.zccx.model.ZccxBean;
+import com.gdzc.zcdj.cch.model.CchBean;
 import com.gdzc.zcdj.flh.model.FlhBean;
 import com.gdzc.zcdj.mk.model.CfdBean;
 import com.gdzc.zcdj.mk.model.DwBean;
 import com.gdzc.zcdj.mk.model.MKBean;
 import com.gdzc.zcdj.mk.model.RyBean;
-import com.gdzc.zcdj.cch.model.CchBean;
 import com.gdzc.zcdj.zcdj.model.TsxxBean;
 import com.gdzc.zcdj.zcdj.model.ZcxgBean;
 import com.gdzc.zcdj.zcdj.model.ZcxgEditBean;
@@ -24,7 +23,6 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -56,9 +54,7 @@ public class HttpRequest {
 
             if (BuildConfig.DEBUG) {
                 //新建log拦截器
-                HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(message -> BaseLog.i(message));
-                loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-                builder.addInterceptor(loggingInterceptor);
+                builder.addInterceptor(new LoggerInterceptor());
             }
 
             retrofit = new Retrofit.Builder()

@@ -16,7 +16,7 @@ public class ZcxgBean extends BaseBean {
 
     public static class TotalBean {
         public int totalCount;
-        public int totalMoney;
+        public double totalMoney;
         public int totalRow;
     }
 

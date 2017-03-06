@@ -1,6 +1,9 @@
 package com.gdzc.net.http;
 
-import com.gdzc.utils.BaseLog;
+import android.text.TextUtils;
+
+import com.gdzc.net.consts.MD5Tools;
+import com.gdzc.utils.SPUtils;
 
 import java.io.IOException;
 
@@ -24,13 +27,18 @@ public class BaseInterceptor implements Interceptor {
 
         Request original = chain.request();
         //添加通用请求参数
-        HttpUrl url = original.url().newBuilder()
-                .build();
+        HttpUrl url;
+        if (TextUtils.isEmpty(SPUtils.getString(SPUtils.kUser_username, "")))
+            url = original.url().newBuilder().build();
+        else
+            url = original.url().newBuilder()
+                    .addQueryParameter("username", SPUtils.getString(SPUtils.kUser_username, ""))
+                    .addQueryParameter("md5", MD5Tools.getMd5(SPUtils.getString(SPUtils.kUser_username, "")))
+                    .build();
 
         Request request = original.newBuilder()
                 .url(url)
                 .build();
-        BaseLog.i("BaseParam----------->>>" + url.toString());
         return chain.proceed(request);
     }
 }

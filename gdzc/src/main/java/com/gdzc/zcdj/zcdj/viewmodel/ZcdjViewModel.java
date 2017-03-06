@@ -27,6 +27,7 @@ import com.gdzc.net.subscribers.ProgressSubscriber;
 import com.gdzc.utils.NavigateUtils;
 import com.gdzc.utils.SPUtils;
 import com.gdzc.utils.Utils;
+import com.gdzc.widget.MessageDialog;
 import com.gdzc.zcdj.flh.model.FlhBean;
 import com.gdzc.zcdj.flh.view.FlhActivity;
 import com.gdzc.zcdj.mk.model.CfdBean;
@@ -207,7 +208,13 @@ public class ZcdjViewModel {
                     .subscribe(new ProgressSubscriber<HttpResult>() {
                         @Override
                         public void onNext(HttpResult httpResult) {
-                            Utils.showToast("保存成功");
+                            if (pl > 1){
+                                MessageDialog dialog = new MessageDialog(App.getAppContext().getCurrentActivity(), "可在《修改》中查看或修改《整机》信息并查看或修改《出厂号》");
+                                dialog.setTitle("保存成功");
+                                dialog.hideLeftBtn();
+                                dialog.show();
+                            }else
+                                Utils.showToast("保存成功");
                             if (httpResult.getStatus().isSuccess()) {
                                 reset();
                             }
@@ -403,7 +410,7 @@ public class ZcdjViewModel {
         }
     }
 
-    private void uploadImage(){
+    private void uploadImage() {
         HttpRequest.ImageUpload(HttpParams.paramImageUpload(tempFile))
                 .subscribe(new ProgressSubscriber<String>() {
                     @Override
