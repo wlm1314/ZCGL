@@ -40,6 +40,7 @@
             android:hint="@{viewModel.tsnr}"
             android:inputType="@{viewModel.isNum?InputType.TYPE_NUMBER_FLAG_DECIMAL|InputType.TYPE_CLASS_NUMBER:InputType.TYPE_CLASS_TEXT}"
             android:maxLines="1"
+            android:maxLength="20"
             android:text="@={viewModel.content}"
             android:visibility="@{viewModel.isEditAble?View.VISIBLE:View.GONE}"/>
 

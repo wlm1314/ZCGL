@@ -88,8 +88,8 @@ public class TsxxViewModel {
 
     public static List<TsxxViewModel> getTsxxViewModelByFlh(FlhBean.Flh flh) {
         List<TsxxViewModel> list = new ArrayList<>();
-        list.add(new TsxxViewModel("分类号", "分类号", "1", "3", flh.flh));
-        list.add(new TsxxViewModel("字符字段7", "分类名称", "1", "3", flh.mc));
+        list.add(new TsxxViewModel("分类号", "分    类    号", "1", "3", flh.flh));
+        list.add(new TsxxViewModel("字符字段7", "分 类  名 称", "1", "3", flh.mc));
         list.add(new TsxxViewModel("国标分类号", "国标分类号", "1", "3", flh.czh));
         list.add(new TsxxViewModel("国标分类名", "国标分类名", "1", "3", flh.czm));
         return list;

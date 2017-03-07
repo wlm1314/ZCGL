@@ -115,6 +115,10 @@ public class ZcdjViewModel {
         });
 
         mAdapter.setTextChangeListener((position, s) -> {
+            if(s.trim().length()==20){
+                Utils.showToast("最多输入20个字");
+                return;
+            }
             TsxxViewModel temp = mList.get(position);
             if ("TDJ".contains(whatsystem) && "数量单价金额批量".contains(temp.colum.get())) {
                 if (!TextUtils.isEmpty(s)) {
@@ -260,14 +264,14 @@ public class ZcdjViewModel {
                         mList.clear();
                         mList.addAll(TsxxViewModel.getTsxxViewModelByFlh(mFlh));
                         if (zcdjBeanHttpResult.containsSQRW()) {
-                            mList.add(new TsxxViewModel("批量", "成批条数", "1", "0", "1"));
-                            mList.add(new TsxxViewModel("单价", "单价(元)", "1", "0", dj));
+                            mList.add(new TsxxViewModel("批量", "成 批  条 数", "1", "0", "1"));
+                            mList.add(new TsxxViewModel("单价", "单   价  (元)", "1", "0", dj));
                         }
                         if (zcdjBeanHttpResult.containsTDJ()) {
-                            mList.add(new TsxxViewModel("批量", "成批条数", "1", "0", "1"));
-                            mList.add(new TsxxViewModel("数量", "数量", "1", "0", "0"));
-                            mList.add(new TsxxViewModel("单价", "单价(元)", "1", "0", dj));
-                            mList.add(new TsxxViewModel("金额", "金额(元)", "1", "0", dj));
+                            mList.add(new TsxxViewModel("批量", "成 批  条 数", "1", "0", "1"));
+                            mList.add(new TsxxViewModel("数量", "数        量", "1", "0", "0"));
+                            mList.add(new TsxxViewModel("单价", "单   价  (元)", "1", "0", dj));
+                            mList.add(new TsxxViewModel("金额", "金   额  (元)", "1", "0", dj));
                         }
                         Observable.from(tsxxBean.list)
                                 .filter(server -> server.登记否.equals("1"))
