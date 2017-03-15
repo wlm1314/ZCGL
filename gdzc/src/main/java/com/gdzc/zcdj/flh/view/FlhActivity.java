@@ -27,21 +27,22 @@ public class FlhActivity extends BaseActivity<ActivityFlhBinding> {
     }
 
     @Override
-    protected void setViewModel() {
-        mFlhViewModel = new FlhViewModel();
-        setSupportActionBar((Toolbar) mBinding.layoutAppbar.getRoot().findViewById(R.id.toolbar));
-        mBinding.setAppbar(new AppBar("分类号", true));
-        mBinding.setViewmodel(mFlhViewModel);
-    }
-
-    @Override
-    protected void init() {
+    protected void initViews() {
         initView();
         setListener();
         initMessenger();
     }
 
+    @Override
+    protected void updateViews(boolean isRefresh) {
+
+    }
+
     private void initView() {
+        mFlhViewModel = new FlhViewModel();
+        setSupportActionBar((Toolbar) mBinding.layoutAppbar.getRoot().findViewById(R.id.toolbar));
+        mBinding.setAppbar(new AppBar("分类号", true));
+        mBinding.setViewmodel(mFlhViewModel);
         InitRecyclerView.initLinearLayoutVERTICAL(this, mBinding.pullView.getRefreshableView());
         mBinding.pullView.getRefreshableView().setAdapter(mFlhViewModel.mAdapter);
     }

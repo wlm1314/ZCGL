@@ -44,15 +44,16 @@ public class ZctjActivity extends BaseActivity<ActivityZctjBinding> {
     }
 
     @Override
-    protected void setViewModel() {
+    protected void initViews() {
         mBinding.setAppbar(new AppBar("资产统计", true));
         mBinding.setViewModel(new ZctjViewModel());
+        initPieChart();
+        initBarChart();
     }
 
     @Override
-    protected void init() {
-        initPieChart();
-        initBarChart();
+    protected void updateViews(boolean isRefresh) {
+
     }
 
     private void initPieChart() {

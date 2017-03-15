@@ -4,7 +4,6 @@ import com.gdzc.app.App;
 import com.gdzc.base.BaseBean;
 import com.gdzc.net.progress.ProgressCancelListener;
 import com.gdzc.net.progress.ProgressDialogHandler;
-import com.gdzc.utils.BaseLog;
 import com.gdzc.utils.NetStateUtils;
 import com.gdzc.utils.Utils;
 import com.google.gson.JsonSyntaxException;
@@ -70,19 +69,17 @@ public class RetrofitSubscriber<T extends BaseBean> extends Subscriber<T> implem
 
     @Override
     public void onError(Throwable e) {
-        dismissProgressDialog();
         if (e instanceof SocketTimeoutException) {
             Utils.showToast("请求超时,请重试");
         } else if (e instanceof JsonSyntaxException) {
             Utils.showToast("数据解析错误");
-            BaseLog.e("数据解析错误:::" + e.getMessage());
         }
         if (onError != null) onError.call(e);
+        dismissProgressDialog();
     }
 
     @Override
     public void onNext(T t) {
-        BaseLog.i(t.toString());
         if (t.status.isSuccess())
             onNext.call(t);
         else

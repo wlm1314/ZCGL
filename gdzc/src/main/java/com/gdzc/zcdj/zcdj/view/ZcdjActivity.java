@@ -32,13 +32,9 @@ public class ZcdjActivity extends BaseActivity<ActivityZcdjBinding> {
     }
 
     @Override
-    protected void setViewModel() {
+    protected void initViews() {
         setSupportActionBar((Toolbar) mBinding.layoutAppbar.getRoot().findViewById(R.id.toolbar));
         mBinding.setAppbar(new AppBar("资产登记", true));
-    }
-
-    @Override
-    protected void init() {
         mZcdjFragment = new ZcdjFragment();
         mZcxgFragment = new ZcxgFragment();
         mFragments.add(mZcdjFragment);
@@ -48,6 +44,11 @@ public class ZcdjActivity extends BaseActivity<ActivityZcdjBinding> {
         list.add("登记");
         list.add("修改");
         NavBarUtils.setTabs(mBinding.magicIndicator, list, mBinding.viewPager);
+    }
+
+    @Override
+    protected void updateViews(boolean isRefresh) {
+
     }
 
     @Override

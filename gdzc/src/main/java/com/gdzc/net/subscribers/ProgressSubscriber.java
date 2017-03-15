@@ -1,9 +1,9 @@
 package com.gdzc.net.subscribers;
 
 
+import com.gdzc.net.http.ApiException;
 import com.gdzc.net.progress.ProgressCancelListener;
 import com.gdzc.net.progress.ProgressDialogHandler;
-import com.gdzc.utils.BaseLog;
 import com.gdzc.utils.Utils;
 import com.google.gson.JsonSyntaxException;
 
@@ -62,15 +62,12 @@ public abstract class ProgressSubscriber<T> extends Subscriber<T> implements Pro
      */
     @Override
     public void onError(Throwable e) {
-        if (e instanceof SocketTimeoutException) {
-            Utils.showToast("请求超时,请重试");
-        } else if (e instanceof ConnectException) {
+        if (e instanceof SocketTimeoutException || e instanceof ConnectException) {
             Utils.showToast("请求超时,请重试");
         } else if (e instanceof JsonSyntaxException) {
             Utils.showToast("数据解析错误");
-            BaseLog.e("数据解析错误:::" + e.getMessage());
-        } else {
-            BaseLog.e(e.getMessage());
+        } else if (e instanceof ApiException) {
+            Utils.showToast(e.getMessage());
         }
         dismissProgressDialog();
     }

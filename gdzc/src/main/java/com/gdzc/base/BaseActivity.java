@@ -4,18 +4,19 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 
 import com.gdzc.app.App;
 import com.gdzc.utils.Utils;
+import com.trello.rxlifecycle.LifecycleTransformer;
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 /**
  * Created by 王少岩 on 2016/11/9.
  */
 
-public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatActivity {
+public abstract class BaseActivity<T extends ViewDataBinding> extends RxAppCompatActivity {
     protected T mBinding;
     private long mClickTime = 0l;
     private static int EXIT_TIMEOUT = 2500;
@@ -25,14 +26,18 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
         super.onCreate(savedInstanceState);
         App.getAppContext().setCurrentActivity(this);
         mBinding = DataBindingUtil.setContentView(this, getLayoutId());
-        setViewModel();
-        init();
+        initViews();
+        updateViews(false);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         App.getAppContext().setCurrentActivity(this);
+    }
+
+    public <T> LifecycleTransformer<T> bindToLife() {
+        return this.bindToLifecycle();
     }
 
     /**
@@ -43,15 +48,14 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
     protected abstract int getLayoutId();
 
     /**
-     * 绑定ViewModel
+     * 初始化视图控件
      */
-    protected abstract void setViewModel();
+    protected abstract void initViews();
 
     /**
-     * 初始化view及data
+     * 更新视图控件
      */
-    protected void init() {
-    }
+    protected abstract void updateViews(boolean isRefresh);
 
     /**
      * Toast

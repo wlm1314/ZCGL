@@ -61,19 +61,20 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
     }
 
     @Override
-    protected void setViewModel() {
-        setSupportActionBar((Toolbar) mBinding.layoutAppbar.getRoot().findViewById(R.id.toolbar));
-        mBinding.setAppbar(new AppBar("整机", true));
-    }
-
-    @Override
-    protected void init() {
+    protected void initViews() {
         initView();
         getData();
         setListener();
     }
 
+    @Override
+    protected void updateViews(boolean isRefresh) {
+
+    }
+
     private void initView() {
+        setSupportActionBar((Toolbar) mBinding.layoutAppbar.getRoot().findViewById(R.id.toolbar));
+        mBinding.setAppbar(new AppBar("整机", true));
         InitRecyclerView.initLinearLayoutVERTICAL(this, mBinding.rvZcbg);
         mAdapter = new BindingAdapter<>(new BindingTool(R.layout.adapter_zcdj_item, BR.viewModel), mList);
         mBinding.rvZcbg.setAdapter(mAdapter);

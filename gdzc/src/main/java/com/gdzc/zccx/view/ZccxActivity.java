@@ -34,19 +34,20 @@ public class ZccxActivity extends BaseActivity<ActivityZccxBinding> {
     }
 
     @Override
-    protected void setViewModel() {
-        mBinding.setAppbar(new AppBar("资产查询", true));
-        mViewModel = new ZccxViewModel();
-        mBinding.setViewModel(mViewModel);
-    }
-
-    @Override
-    protected void init() {
+    protected void initViews() {
         initView();
         setListener();
     }
 
+    @Override
+    protected void updateViews(boolean isRefresh) {
+
+    }
+
     private void initView() {
+        mBinding.setAppbar(new AppBar("资产查询", true));
+        mViewModel = new ZccxViewModel();
+        mBinding.setViewModel(mViewModel);
         mBinding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mBinding.recyclerView.setHasFixedSize(true);
         mAdapter = new ZcxgAdapter(mList);

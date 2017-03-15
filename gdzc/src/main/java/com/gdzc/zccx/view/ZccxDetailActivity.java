@@ -36,18 +36,19 @@ public class ZccxDetailActivity extends BaseActivity<ActivityZcdjEditBinding> {
     }
 
     @Override
-    protected void setViewModel() {
-        setSupportActionBar((Toolbar) mBinding.layoutAppbar.getRoot().findViewById(R.id.toolbar));
-        mBinding.setAppbar(new AppBar("资产详情", true));
-    }
-
-    @Override
-    protected void init() {
+    protected void initViews() {
         initView();
         getData();
     }
 
+    @Override
+    protected void updateViews(boolean isRefresh) {
+
+    }
+
     private void initView() {
+        setSupportActionBar((Toolbar) mBinding.layoutAppbar.getRoot().findViewById(R.id.toolbar));
+        mBinding.setAppbar(new AppBar("资产详情", true));
         mBinding.rvZcbg.setLayoutManager(new LinearLayoutManager(this));
         mBinding.rvZcbg.setHasFixedSize(true);
         mAdapter = new BindingAdapter<>(new BindingTool(R.layout.adapter_zccx_detail_item, BR.data), mList);

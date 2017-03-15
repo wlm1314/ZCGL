@@ -28,23 +28,24 @@ public class MKActivity extends BaseActivity<ActivityCustomBinding> {
     }
 
     @Override
-    protected void setViewModel() {
+    protected void initViews() {
+        initView();
+        initMessenger();
+        setListener();
+    }
+
+    @Override
+    protected void updateViews(boolean isRefresh) {
+
+    }
+
+    private void initView() {
         columName = getIntent().getExtras().getString("columName");
         dwId = getIntent().getExtras().getString("dwId");
         mViewModel = new MKViewModel(columName, dwId);
         setSupportActionBar((Toolbar) mBinding.layoutAppbar.getRoot().findViewById(R.id.toolbar));
         mBinding.setAppbar(new AppBar(columName, true));
         mBinding.setViewModel(mViewModel);
-    }
-
-    @Override
-    protected void init() {
-        initView();
-        initMessenger();
-        setListener();
-    }
-
-    private void initView() {
         InitRecyclerView.initLinearLayoutVERTICAL(this, mBinding.pullView.getRefreshableView());
         mBinding.pullView.getRefreshableView().setAdapter(mViewModel.mAdapter);
     }

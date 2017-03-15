@@ -28,15 +28,16 @@ public class ZcdjCchEditActivity extends BaseActivity<ActivityZcdjCchEditBinding
     }
 
     @Override
-    protected void setViewModel() {
+    protected void initViews() {
         mBinding.setAppbar(new AppBar("出厂号", true));
-    }
-
-    @Override
-    protected void init() {
         cch = (CchBean.Cch) getIntent().getExtras().getSerializable("Cch");
         mBinding.setData(cch);
         mBinding.btConfirm.setOnClickListener(v -> updateCchById());
+    }
+
+    @Override
+    protected void updateViews(boolean isRefresh) {
+
     }
 
     private void updateCchById() {

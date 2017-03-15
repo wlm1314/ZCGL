@@ -6,6 +6,8 @@ import com.binding.command.ReplyCommand;
 import com.gdzc.R;
 import com.gdzc.app.App;
 
+import rx.functions.Action0;
+
 /**
  * Created by 王少岩 on 2016/12/20.
  */
@@ -24,6 +26,17 @@ public class AppBar {
     public AppBar(String title, boolean showLeft) {
         this.title.set(title);
         navigation.set(showLeft ? R.mipmap.icon_back : 0);
+    }
+
+    public AppBar(String title, int resId) {
+        this.title.set(title);
+        navigation.set(resId);
+    }
+
+    public AppBar(String title, int resId, Action0 command) {
+        this.title.set(title);
+        navigation.set(resId);
+        this.naviCommon = new ReplyCommand(command);
     }
 
     public void setTitle(String title) {

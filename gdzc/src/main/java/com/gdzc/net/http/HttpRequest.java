@@ -1,5 +1,7 @@
 package com.gdzc.net.http;
 
+import android.support.annotation.NonNull;
+
 import com.gdzc.BuildConfig;
 import com.gdzc.base.BaseBean;
 import com.gdzc.login.model.LoginBean;
@@ -16,13 +18,24 @@ import com.gdzc.zcdj.zcdj.model.TsxxBean;
 import com.gdzc.zcdj.zcdj.model.ZcxgBean;
 import com.gdzc.zcdj.zcdj.model.ZcxgEditBean;
 import com.gdzc.zctj.model.ZctjBean;
+import com.orhanobut.logger.Logger;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Interceptor;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
+import okio.Buffer;
+import okio.BufferedSource;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -54,7 +67,7 @@ public class HttpRequest {
 
             if (BuildConfig.DEBUG) {
                 //新建log拦截器
-                builder.addInterceptor(new LoggerInterceptor());
+                builder.addInterceptor(sLoggingInterceptor);
             }
 
             retrofit = new Retrofit.Builder()
@@ -65,6 +78,45 @@ public class HttpRequest {
                     .build();
         }
         return retrofit;
+    }
+
+    /**
+     * 打印返回的json数据拦截器
+     */
+    private static final Interceptor sLoggingInterceptor = chain -> {
+        final Request request = chain.request();
+        Buffer requestBuffer = new Buffer();
+        if (request.body() != null) {
+            request.body().writeTo(requestBuffer);
+        } else {
+            Logger.d("LogTAG", "request.body() == null");
+        }
+        //打印url信息
+        Logger.w(request.url() + (request.body() != null ? "?" + parseParams(request.body(), requestBuffer) : ""));
+        final Response response = chain.proceed(request);
+
+        //the response data
+        ResponseBody body = response.body();
+
+        BufferedSource source = body.source();
+        source.request(Long.MAX_VALUE); // Buffer the entire body.
+        Buffer buffer = source.buffer();
+        Charset charset = Charset.defaultCharset();
+        MediaType contentType = body.contentType();
+        if (contentType != null) {
+            charset = contentType.charset(charset);
+        }
+        String bodyString = buffer.clone().readString(charset);
+        Logger.i(bodyString);
+        return response;
+    };
+
+    @NonNull
+    private static String parseParams(RequestBody body, Buffer requestBuffer) throws UnsupportedEncodingException {
+        if (body.contentType() != null && !body.contentType().toString().contains("multipart")) {
+            return URLDecoder.decode(requestBuffer.readUtf8(), "UTF-8");
+        }
+        return "null";
     }
 
     /**

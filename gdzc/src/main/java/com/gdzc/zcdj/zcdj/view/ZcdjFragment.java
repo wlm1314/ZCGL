@@ -9,7 +9,7 @@ import com.gdzc.databinding.FragmentZcdjBinding;
 import com.gdzc.zcdj.zcdj.viewmodel.ZcdjViewModel;
 
 /**
- * Created by 王少岩 on 2017/1/12.
+ * 王少岩 在 2017/1/12 创建了它
  */
 
 public class ZcdjFragment extends BaseFragment<FragmentZcdjBinding> {

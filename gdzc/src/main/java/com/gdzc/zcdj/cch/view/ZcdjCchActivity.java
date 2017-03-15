@@ -36,20 +36,22 @@ public class ZcdjCchActivity extends BaseActivity<ActivityZcdjCchBinding> {
         return R.layout.activity_zcdj_cch;
     }
 
-    @Override
-    protected void setViewModel() {
-        setSupportActionBar((Toolbar) mBinding.layoutAppbar.getRoot().findViewById(R.id.toolbar));
-        mBinding.setAppbar(new AppBar("出厂号", true));
-    }
 
     @Override
-    protected void init() {
+    protected void initViews() {
         initView();
         getData();
         setListener();
     }
 
+    @Override
+    protected void updateViews(boolean isRefresh) {
+
+    }
+
     private void initView() {
+        setSupportActionBar((Toolbar) mBinding.layoutAppbar.getRoot().findViewById(R.id.toolbar));
+        mBinding.setAppbar(new AppBar("出厂号", true));
         mBinding.rvCch.setLayoutManager(new LinearLayoutManager(this));
         mBinding.rvCch.setHasFixedSize(true);
         mAdapter = new BindingAdapter<>(new BindingTool(R.layout.adapter_cch_item, BR.data), mList);
