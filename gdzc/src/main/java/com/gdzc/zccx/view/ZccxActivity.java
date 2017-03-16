@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.text.TextUtils;
 import android.view.View;
 
 import com.gdzc.R;
@@ -133,10 +132,10 @@ public class ZccxActivity extends BaseActivity<ActivityZccxBinding> {
                 }
                 if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
                     String result = bundle.getString(CodeUtils.RESULT_STRING);
-                    if (!TextUtils.isEmpty(result) && "SJRQD".contains(result.substring(result.length() - 1)))
+//                    if (!TextUtils.isEmpty(result) && "SJRQD".contains(result.substring(result.length() - 1)))
                         mViewModel.zcbh.set(result);
-                    else
-                        Utils.showToast("请扫描有效的条形码");
+//                    else
+//                        Utils.showToast("请扫描有效的条形码");
                 } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
                     Utils.showToast("解析失败");
                 }
