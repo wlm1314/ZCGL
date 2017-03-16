@@ -1,5 +1,7 @@
 package com.gdzc.zccx.view;
 
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
@@ -9,11 +11,13 @@ import com.gdzc.base.AppBar;
 import com.gdzc.base.BaseActivity;
 import com.gdzc.databinding.ActivityZccxBinding;
 import com.gdzc.utils.NavigateUtils;
+import com.gdzc.utils.Utils;
 import com.gdzc.zccx.viewmodel.ZccxViewModel;
 import com.gdzc.zcdj.zcdj.adapter.ZcxgAdapter;
 import com.gdzc.zcdj.zcdj.model.ZcxgBean;
 import com.pulltofresh.PullToRefreshBase;
 import com.pulltofresh.extras.CustomNestedScrollView;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +77,7 @@ public class ZccxActivity extends BaseActivity<ActivityZccxBinding> {
                 mViewModel.getData(pageNo);
             }
         });
+        mBinding.ivScan.setOnClickListener(v -> NavigateUtils.startScanActivity(111));
     }
 
     public void setData(ZcxgBean data) {
@@ -94,5 +99,44 @@ public class ZccxActivity extends BaseActivity<ActivityZccxBinding> {
 
     public void complete() {
         mBinding.ptrRv.onRefreshComplete();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        doNext(requestCode, grantResults);
+    }
+
+    private void doNext(int requestCode, int[] grantResults) {
+        if (requestCode == 111) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                NavigateUtils.startScanActivity(111);
+
+            } else {
+                Utils.showToast("请在应用管理中打开“相机”访问权限！");
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        /**
+         * 处理二维码扫描结果
+         */
+        if (requestCode == 111) {
+            //处理扫描结果（在界面上显示）
+            if (null != data) {
+                Bundle bundle = data.getExtras();
+                if (bundle == null) {
+                    return;
+                }
+                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                    String result = bundle.getString(CodeUtils.RESULT_STRING);
+                    mViewModel.zcbh.set(result);
+                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                    Utils.showToast("解析二维码失败");
+                }
+            }
+        }
     }
 }

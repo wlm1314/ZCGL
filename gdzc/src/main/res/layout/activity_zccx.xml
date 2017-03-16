@@ -43,6 +43,12 @@
                             android:layout_weight="1"
                             android:hint="请输入资产编号"
                             android:text="@={viewModel.zcbh}"/>
+                        <ImageView
+                            android:id="@+id/iv_scan"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/icon_scan"/>
                     </LinearLayout>
                     <View style="@style/line_cell_light_h"/>
                     <LinearLayout
@@ -93,6 +99,7 @@
                             android:text="@={viewModel.cfdbh}"/>
                     </LinearLayout>
                     <View style="@style/line_cell_light_h"/>
+                    <View style="@style/line_cell_light_h"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -120,7 +127,6 @@
                             android:text="@={viewModel.gz_end}"
                             app:clickCommand="@{viewModel.gzEndCommand}"/>
                     </LinearLayout>
-                    <View style="@style/line_cell_light_h"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

@@ -1,11 +1,16 @@
 package com.gdzc.utils;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 
 import com.gdzc.app.App;
+import com.uuzuche.lib_zxing.activity.CaptureActivity;
 
 
 /**
@@ -58,5 +63,12 @@ public class NavigateUtils {
         Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + tel));
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         App.getAppContext().getCurrentActivity().startActivity(intent);
+    }
+
+    public static void startScanActivity(int req) {
+        if (ContextCompat.checkSelfPermission(App.getAppContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(App.getAppContext().getCurrentActivity(), new String[]{Manifest.permission.CAMERA}, req);
+        } else
+            startActivityForResult(App.getAppContext().getCurrentActivity(), CaptureActivity.class, req);
     }
 }

@@ -74,6 +74,7 @@ dependencies {
     compile 'com.orhanobut:logger:1.15'
     // circleimageview
     compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'cn.yipianfengye.android:zxing-library:1.5'
     compile project(':databinding')
     compile project(':pulltofresh')
     compile project(':pickerview')
