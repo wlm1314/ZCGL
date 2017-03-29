@@ -13,7 +13,7 @@ import com.gdzc.net.http.HttpParams;
 import com.gdzc.net.http.HttpRequest;
 import com.gdzc.net.subscribers.RetrofitSubscriber;
 import com.gdzc.utils.Utils;
-import com.gdzc.zccx.view.ZccxActivity;
+import com.gdzc.zccx.view.OtherFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,9 +23,11 @@ import java.util.Date;
  */
 
 public class ZccxViewModel {
+    private OtherFragment mOtherFragment;
     private String son;
 
-    public ZccxViewModel() {
+    public ZccxViewModel(OtherFragment fragment) {
+        mOtherFragment = fragment;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String now = sdf.format(new Date());
         zcbh.set("");
@@ -64,21 +66,21 @@ public class ZccxViewModel {
     public void getData(int pageNo) {
         HttpRequest.SelectMyAllData(HttpParams.paramSelectMyAllData(zcbh.get(), zcmc.get(), cfdmc.get(), cfdbh.get(), gz_start.get(), gz_end.get(), rk_start.get(), rk_end.get(), pageNo + ""))
                 .subscribe(new RetrofitSubscriber<>(zcxgBean -> {
-                    ((ZccxActivity) App.getAppContext().getCurrentActivity()).complete();
+                    mOtherFragment.complete();
                     if (pageNo == 1)
-                        ((ZccxActivity) App.getAppContext().getCurrentActivity()).setPageNo(1);
-                    ((ZccxActivity) App.getAppContext().getCurrentActivity()).setData(zcxgBean);
-                }, throwable -> ((ZccxActivity) App.getAppContext().getCurrentActivity()).complete()));
+                        mOtherFragment.setPageNo(1);
+                    mOtherFragment.setData(zcxgBean);
+                }, throwable -> mOtherFragment.complete()));
     }
 
     public void getChildData(int pageNo) {
         HttpRequest.selectMySonData(HttpParams.paramSelectMySonData(zcbh.get(), zcmc.get(), cfdmc.get(), cfdbh.get(), gz_start.get(), gz_end.get(), rk_start.get(), rk_end.get(), pageNo + "", son))
                 .subscribe(new RetrofitSubscriber<>(zcxgBean -> {
-                    ((ZccxActivity) App.getAppContext().getCurrentActivity()).complete();
+                    mOtherFragment.complete();
                     if (pageNo == 1)
-                        ((ZccxActivity) App.getAppContext().getCurrentActivity()).setPageNo(1);
-                    ((ZccxActivity) App.getAppContext().getCurrentActivity()).setData(zcxgBean);
-                }, throwable -> ((ZccxActivity) App.getAppContext().getCurrentActivity()).complete()));
+                        mOtherFragment.setPageNo(1);
+                    mOtherFragment.setData(zcxgBean);
+                }, throwable -> mOtherFragment.complete()));
     }
 
     public void showTimePicker(String title, ObservableField<String> editText) {

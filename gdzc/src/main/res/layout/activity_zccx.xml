@@ -4,7 +4,6 @@
 
     <data>
         <variable name="appbar" type="com.gdzc.base.AppBar"/>
-        <variable name="viewModel" type="com.gdzc.zccx.viewmodel.ZccxViewModel"/>
     </data>
 
     <RelativeLayout android:layout_width="wrap_content"
@@ -13,189 +12,26 @@
             android:id="@+id/layout_appbar"
             layout="@layout/app_bar"
             app:appbar="@{appbar}"/>
-        <com.pulltofresh.PullToRefreshNestedScrollView
-            android:id="@+id/ptr_rv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/layout_appbar"
-            android:background="@color/white"
-            app:ptrMode="disabled">
-            <LinearLayout
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_below="@id/layout_appbar"
+                      android:orientation="vertical">
+            <com.magicindicator.MagicIndicator
+                android:id="@+id/magic_indicator"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-                <LinearLayout android:layout_width="match_parent"
-                              android:layout_height="wrap_content"
-                              android:background="@color/white"
-                              android:orientation="vertical"
-                              app:layout_scrollFlags="scroll|enterAlways">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingLeft="@dimen/margin_vertical"
-                        android:paddingRight="@dimen/margin_vertical">
-                        <TextView style="@style/CommonText"
-                                  android:text="资产编号"/>
-                        <EditText
-                            style="@style/CommonEdit"
-                            android:layout_marginLeft="@dimen/dimen_10"
-                            android:layout_weight="1"
-                            android:hint="请输入资产编号"
-                            android:text="@={viewModel.zcbh}"/>
-                        <ImageView
-                            android:id="@+id/iv_scan"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@mipmap/icon_scan"/>
-                    </LinearLayout>
-                    <View style="@style/line_cell_light_h"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingLeft="@dimen/margin_vertical"
-                        android:paddingRight="@dimen/margin_vertical">
-                        <TextView style="@style/CommonText"
-                                  android:text="资产名称"/>
-                        <EditText
-                            style="@style/CommonEdit"
-                            android:layout_marginLeft="@dimen/dimen_10"
-                            android:layout_weight="1"
-                            android:hint="请输入资产名称"
-                            android:text="@={viewModel.zcmc}"/>
-                    </LinearLayout>
-                    <View style="@style/line_cell_light_h"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingLeft="@dimen/margin_vertical"
-                        android:paddingRight="@dimen/margin_vertical">
-                        <TextView style="@style/CommonText"
-                                  android:text="存放地名称"/>
-                        <EditText
-                            style="@style/CommonEdit"
-                            android:layout_marginLeft="@dimen/dimen_10"
-                            android:layout_weight="1"
-                            android:hint="请输入存放地名称"
-                            android:text="@={viewModel.cfdmc}"/>
-                    </LinearLayout>
-                    <View style="@style/line_cell_light_h"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingLeft="@dimen/margin_vertical"
-                        android:paddingRight="@dimen/margin_vertical">
-                        <TextView style="@style/CommonText"
-                                  android:text="存放地编号"/>
-                        <EditText
-                            style="@style/CommonEdit"
-                            android:layout_marginLeft="@dimen/dimen_10"
-                            android:layout_weight="1"
-                            android:hint="请输入存放地编号"
-                            android:text="@={viewModel.cfdbh}"/>
-                    </LinearLayout>
-                    <View style="@style/line_cell_light_h"/>
-                    <View style="@style/line_cell_light_h"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingLeft="@dimen/margin_vertical"
-                        android:paddingRight="@dimen/margin_vertical">
-                        <TextView style="@style/CommonText"
-                                  android:text="购置日期"/>
-                        <TextView
-                            style="@style/CommonEdit"
-                            android:layout_marginLeft="@dimen/dimen_10"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:hint="开始时间"
-                            android:text="@={viewModel.gz_start}"
-                            app:clickCommand="@{viewModel.gzStartCommand}"/>
-                        <TextView style="@style/CommonText"
-                                  android:text="~"/>
-                        <TextView
-                            style="@style/CommonEdit"
-                            android:layout_marginLeft="@dimen/dimen_10"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:hint="结束时间"
-                            android:text="@={viewModel.gz_end}"
-                            app:clickCommand="@{viewModel.gzEndCommand}"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingLeft="@dimen/margin_vertical"
-                        android:paddingRight="@dimen/margin_vertical">
-                        <TextView style="@style/CommonText"
-                                  android:text="入库时间"/>
-                        <TextView
-                            style="@style/CommonEdit"
-                            android:layout_marginLeft="@dimen/dimen_10"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:hint="开始时间"
-                            android:text="@={viewModel.rk_start}"
-                            app:clickCommand="@{viewModel.rkStartCommand}"/>
-                        <TextView style="@style/CommonText"
-                                  android:text="~"/>
-                        <TextView
-                            style="@style/CommonEdit"
-                            android:layout_marginLeft="@dimen/dimen_10"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:hint="结束时间"
-                            android:text="@={viewModel.rk_end}"
-                            app:clickCommand="@{viewModel.rkEndCommand}"/>
-                    </LinearLayout>
-                    <View style="@style/line_cell_light_h"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingLeft="@dimen/margin_vertical"
-                        android:paddingRight="@dimen/dimen_10">
-                        <TextView style="@style/CommonText"
-                                  android:text="子模块"/>
-                        <TextView
-                            style="@style/CommonEdit"
-                            android:layout_marginLeft="@dimen/dimen_10"
-                            android:layout_weight="1"
-                            android:drawableRight="@mipmap/icon_details"
-                            android:gravity="right"
-                            android:text="@={viewModel.child}"
-                            app:clickCommand="@{viewModel.childCommand}"/>
-                    </LinearLayout>
-                    <View style="@style/line_cell_light_h"/>
-                    <android.support.v7.widget.AppCompatButton
-                        android:id="@+id/bt_create"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dimen_10"
-                        android:text="查询"
-                        android:textColor="@color/white"
-                        app:clickCommand="@{viewModel.searchCommand}"/>
-                </LinearLayout>
+                android:layout_height="44dp"
+                android:background="@color/white"/>
 
-                <View style="@style/line_cell_light_h"/>
+            <View style="@style/line_cell_light_h"/>
 
-                <TextView android:id="@+id/tv_msg"
-                          android:textColor="@color/blue_primary"
-                          style="@style/CommonText"
-                          android:padding="@dimen/dimen_10"
-                          android:visibility="gone"/>
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-            </LinearLayout>
-        </com.pulltofresh.PullToRefreshNestedScrollView>
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="#ffffff"
+            />
+        </LinearLayout>
     </RelativeLayout>
 </layout>
