@@ -41,6 +41,8 @@ public class ZcxgEditBean {
         SimpleDateFormat sdf1 = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.US);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
+            if (汉字取值 == null)
+                汉字取值 = "null";
             return sdf.format(sdf1.parse(汉字取值));
         } catch (ParseException e) {
             return 汉字取值.equals("null") ? "" : 汉字取值;

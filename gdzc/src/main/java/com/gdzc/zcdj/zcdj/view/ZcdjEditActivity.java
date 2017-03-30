@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.bigkoo.pickerview.TimePickerView;
+import com.bumptech.glide.Glide;
 import com.gdzc.BR;
 import com.gdzc.R;
 import com.gdzc.app.App;
@@ -146,9 +147,18 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
                     public void onNext(ArrayList<ZcxgEditBean> zcxgEditBeen) {
                         mList.addAll(TsxxViewModel.getTsxxViewModelByZcxg(zcxg));
                         Observable.from(zcxgEditBeen)
-                                .filter(zcxgEditBean -> zcxgEditBean.修改否.equals("1"))
+                                .filter(zcxgEditBean -> zcxgEditBean.修改否.equals("1") && !zcxgEditBean.字段类型.equals("图片"))
                                 .subscribe(dataBean -> mList.add(new TsxxViewModel(dataBean)));
                         Observable.from(zcxgEditBeen).filter(dataBean -> dataBean.字段名.equals("资产编号")).subscribe(dataBean -> yqbh = dataBean.值);
+                        Observable.from(zcxgEditBeen)
+                                .filter(zcxgEditBean -> zcxgEditBean.字段类型.equals("图片"))
+                                .subscribe(zcxgEditBean -> mBinding.layoutImage.setVisibility(View.VISIBLE));
+                        Observable.from(zcxgEditBeen)
+                                .filter(zcxgEditBean -> zcxgEditBean.显示内容.equals("资产图片"))
+                                .subscribe(zcxgEditBean -> Glide.with(ZcdjEditActivity.this).load(zcxgEditBean.值).into(mBinding.ivZc));
+                        Observable.from(zcxgEditBeen)
+                                .filter(zcxgEditBean -> zcxgEditBean.显示内容.equals("发票图片"))
+                                .subscribe(zcxgEditBean -> Glide.with(ZcdjEditActivity.this).load(zcxgEditBean.值).into(mBinding.ivFp));
                         mAdapter.notifyDataSetChanged();
                         if (!zcxg.批量.equals("1")) mBinding.tvCch.setVisibility(View.VISIBLE);
                     }
