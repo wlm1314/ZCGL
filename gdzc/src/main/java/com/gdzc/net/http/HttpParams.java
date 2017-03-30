@@ -219,4 +219,27 @@ public class HttpParams {
         return map;
     }
 
+    public static Map<String, String> paramList(String pageNum) {
+        Map<String, String> map = new HashMap();
+        map.put("pageNum", pageNum);
+        map.put("pageSize", "20");
+        return map;
+    }
+
+    public static Map<String, String> paramLyr(String who, String pageNum) {
+        Map<String, String> map = new HashMap();
+        map.put("who", who);
+        map.put("pageNum", pageNum);
+        map.put("pageSize", "20");
+        return map;
+    }
+
+    public static Map<String, String> paramLydw(String dwid, String pageNum) {
+        Map<String, String> map = new HashMap();
+        map.put("dwid", dwid);
+        map.put("pageNum", pageNum);
+        map.put("pageSize", "20");
+        return map;
+    }
+
 }

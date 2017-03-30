@@ -22,11 +22,11 @@ import java.util.Date;
  * Created by 王少岩 on 2017/1/19.
  */
 
-public class ZccxViewModel {
+public class ZccxOtherViewModel {
     private OtherFragment mOtherFragment;
     private String son;
 
-    public ZccxViewModel(OtherFragment fragment) {
+    public ZccxOtherViewModel(OtherFragment fragment) {
         mOtherFragment = fragment;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String now = sdf.format(new Date());

@@ -35,9 +35,9 @@ public class ZccxActivity extends BaseActivity<ActivityZccxBinding> {
         list.add("领用单位");
         list.add("其他");
         mBinding.setAppbar(new AppBar("资产查询", true));
-        mFragments.add(new OtherFragment());
-        mFragments.add(new OtherFragment());
-        mFragments.add(new OtherFragment());
+        mFragments.add(new GrzcFragment());
+        mFragments.add(new LyrFragment());
+        mFragments.add(new LydwFragment());
         mFragments.add(new OtherFragment());
         mBinding.viewPager.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), list, mFragments));
         NavBarUtils.setTabs(mBinding.magicIndicator, list, mBinding.viewPager);

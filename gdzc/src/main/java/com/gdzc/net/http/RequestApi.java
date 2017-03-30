@@ -135,4 +135,19 @@ public interface RequestApi {
     @POST(HttpPath.selectMySonData3Url)
     Observable<ZcxgBean> selectMySonData(@FieldMap Map<String, String> params);
 
+    //个人资产查询
+    @FormUrlEncoded
+    @POST(HttpPath.underMyNameDataUrl)
+    Observable<ZcxgBean> underMyNameData(@FieldMap Map<String, String> params);
+
+    //领用人查询
+    @FormUrlEncoded
+    @POST(HttpPath.recipientsWhoUrl)
+    Observable<ZcxgBean> recipientsWho(@FieldMap Map<String, String> params);
+
+    //领用单位查询
+    @FormUrlEncoded
+    @POST(HttpPath.selectDataByDeptUrl)
+    Observable<ZcxgBean> selectDataByDept(@FieldMap Map<String, String> params);
+
 }

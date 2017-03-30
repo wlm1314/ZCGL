@@ -33,7 +33,6 @@ public class MKViewModel extends ViewModel<Object> {
     private String columName, dwId;
 
     public MKViewModel(String columName, String dwId) {
-        mAdapter = new CommonAdapter<>(mItemViewModels, R.layout.adapter_custom_item, BR.viewModel);
         mAdapter = new CommonAdapter(mItemViewModels, R.layout.adapter_custom_item, BR.viewModel);
         mAdapter.setItemViewClickListener(position -> {
             Observable.from(mItemViewModels).subscribe(flh -> flh.checked.set(false));

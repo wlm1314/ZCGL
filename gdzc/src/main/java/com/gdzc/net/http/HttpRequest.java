@@ -326,6 +326,33 @@ public class HttpRequest {
     }
 
     /**
+     * @param params
+     * @return
+     */
+    public static Observable<ZcxgBean> underMyNameData(Map<String, String> params) {
+        return getInstance().create(RequestApi.class).underMyNameData(params)
+                .compose(applySchedulers());
+    }
+
+    /**
+     * @param params
+     * @return
+     */
+    public static Observable<ZcxgBean> recipientsWho(Map<String, String> params) {
+        return getInstance().create(RequestApi.class).recipientsWho(params)
+                .compose(applySchedulers());
+    }
+
+    /**
+     * @param params
+     * @return
+     */
+    public static Observable<ZcxgBean> selectDataByDept(Map<String, String> params) {
+        return getInstance().create(RequestApi.class).selectDataByDept(params)
+                .compose(applySchedulers());
+    }
+
+    /**
      * @param
      * @return
      */

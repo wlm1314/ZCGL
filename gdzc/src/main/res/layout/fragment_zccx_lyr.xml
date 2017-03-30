@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical">
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:focusable="true"
+                      android:focusableInTouchMode="true"
+                      android:padding="@dimen/dimen_10">
+
+            <EditText
+                android:id="@+id/et_person"
+                style="@style/CommonText"
+                android:layout_weight="1"
+                android:hint="请输入人员名称/人员编号"
+                android:inputType="text"
+                android:padding="@dimen/dimen_10"
+                android:singleLine="true"/>
+            <TextView
+                android:id="@+id/tv_search"
+                style="@style/CommonText"
+                android:layout_marginLeft="@dimen/dimen_10"
+                android:background="@drawable/rect_radius_blue"
+                android:padding="@dimen/dimen_10"
+                android:text="搜索"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+
+        <View style="@style/line_cell_light_h"/>
+
+        <TextView android:id="@+id/tv_msg"
+                  style="@style/CommonText"
+                  android:padding="@dimen/dimen_10"
+                  android:textColor="@color/blue_primary"
+                  android:visibility="gone"/>
+
+        <View style="@style/line_cell_light_h"/>
+
+        <FrameLayout android:layout_width="match_parent"
+                     android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawablePadding="@dimen/dimen_5"
+                android:drawableTop="@mipmap/empty"
+                android:gravity="center"
+                android:text="暂无内容"/>
+            <com.pulltofresh.PullToRefreshRecyclerViewEmptySupport
+                android:id="@+id/pull_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:ptrMode="pullFromStart"/>
+        </FrameLayout>
+
+    </LinearLayout>
+</layout>

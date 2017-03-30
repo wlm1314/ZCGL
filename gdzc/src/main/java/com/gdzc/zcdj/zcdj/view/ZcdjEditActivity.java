@@ -1,12 +1,18 @@
 package com.gdzc.zcdj.zcdj.view;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.database.Cursor;
+import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.bigkoo.pickerview.TimePickerView;
 import com.bumptech.glide.Glide;
@@ -17,6 +23,7 @@ import com.gdzc.base.AppBar;
 import com.gdzc.base.BaseActivity;
 import com.gdzc.common.recyclerview.InitRecyclerView;
 import com.gdzc.databinding.ActivityZcdjEditBinding;
+import com.gdzc.databinding.LayoutPhotoBinding;
 import com.gdzc.net.entity.HttpResult;
 import com.gdzc.net.http.HttpParams;
 import com.gdzc.net.http.HttpRequest;
@@ -38,6 +45,7 @@ import com.gdzc.zcdj.zcdj.viewmodel.TsxxViewModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -55,6 +63,10 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
     private ZcxgBean.Zcxg zcxg;
     private String yqbh = "";
     private TsxxViewModel mTsxxViewModel;
+
+    private File tempFile;
+    private ImageView tempIv;
+    public String zcImg, fpImg, imageType;
 
     @Override
     protected int getLayoutId() {
@@ -130,6 +142,44 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
             bundle.putString("yqbh", yqbh);
             NavigateUtils.startActivity(this, ZcdjCchActivity.class, bundle);
         });
+
+        mBinding.ivZc.setOnClickListener(v -> uploadImage(v, "zc"));
+        mBinding.ivFp.setOnClickListener(v -> uploadImage(v, "fp"));
+    }
+
+    private void uploadImage(View view, String type) {
+        this.tempIv = (ImageView) view;
+        this.imageType = type;
+        LayoutPhotoBinding choiceBinding = DataBindingUtil.inflate(App.getAppContext().getCurrentActivity().getLayoutInflater(), R.layout.layout_photo, null, false);
+        Dialog dialog = Utils.showBottomDialog(App.getAppContext().getCurrentActivity(), choiceBinding.getRoot());
+        choiceBinding.takePhote.setOnClickListener(v -> {
+            tempFile = Utils.getCameraFile();
+            Intent intentCamera = new Intent("android.media.action.IMAGE_CAPTURE");
+            intentCamera.putExtra("output", Uri.fromFile(tempFile));
+            App.getAppContext().getCurrentActivity().startActivityForResult(intentCamera, 1005);
+            dialog.dismiss();
+        });
+        choiceBinding.selectPhoto.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_PICK, null);
+            intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+            App.getAppContext().getCurrentActivity().startActivityForResult(intent, 1006);
+            dialog.dismiss();
+        });
+        choiceBinding.tvCancel.setOnClickListener(v -> dialog.dismiss());
+    }
+
+    private void uploadImage() {
+        HttpRequest.ImageUpload(HttpParams.paramImageUpload(tempFile))
+                .subscribe(new ProgressSubscriber<String>() {
+                    @Override
+                    public void onNext(String s) {
+                        Utils.showToast("上传成功");
+                        if (imageType.equals("zc"))
+                            zcImg = s;
+                        else
+                            fpImg = s;
+                    }
+                });
     }
 
     private void startMKActivity(String title, int reqCode) {
@@ -155,10 +205,16 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
                                 .subscribe(zcxgEditBean -> mBinding.layoutImage.setVisibility(View.VISIBLE));
                         Observable.from(zcxgEditBeen)
                                 .filter(zcxgEditBean -> zcxgEditBean.显示内容.equals("资产图片"))
-                                .subscribe(zcxgEditBean -> Glide.with(ZcdjEditActivity.this).load(zcxgEditBean.值).into(mBinding.ivZc));
+                                .subscribe(zcxgEditBean -> {
+                                    Glide.with(ZcdjEditActivity.this).load(zcxgEditBean.值).into(mBinding.ivZc);
+                                    zcImg = zcxgEditBean.值;
+                                });
                         Observable.from(zcxgEditBeen)
                                 .filter(zcxgEditBean -> zcxgEditBean.显示内容.equals("发票图片"))
-                                .subscribe(zcxgEditBean -> Glide.with(ZcdjEditActivity.this).load(zcxgEditBean.值).into(mBinding.ivFp));
+                                .subscribe(zcxgEditBean -> {
+                                    Glide.with(ZcdjEditActivity.this).load(zcxgEditBean.值).into(mBinding.ivFp);
+                                    fpImg = zcxgEditBean.值;
+                                });
                         mAdapter.notifyDataSetChanged();
                         if (!zcxg.批量.equals("1")) mBinding.tvCch.setVisibility(View.VISIBLE);
                     }
@@ -185,6 +241,10 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
                     jsonObj.put(tsxxViewModel.colum.get(), TextUtils.isEmpty(tsxxViewModel.id.get().trim()) ? tsxxViewModel.content.get().trim() : tsxxViewModel.id.get().trim());
                 }
             }
+            if (!TextUtils.isEmpty(zcImg))
+                jsonObj.put("图片文件", zcImg);
+            if (!TextUtils.isEmpty(fpImg))
+                jsonObj.put("图片文件1", fpImg);
 
             HttpRequest.UpdateZj(HttpParams.paramUpdateZj(jsonObj.toString()))
                     .subscribe(new ProgressSubscriber<HttpResult>() {
@@ -229,6 +289,34 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
                 MKBean.Mk mk = (MKBean.Mk) data.getExtras().getSerializable("Mk");
                 mTsxxViewModel.content.set(mk.nr.substring(2, mk.nr.length()));
                 mTsxxViewModel.id.set(mk.nr.substring(0, 1));
+                break;
+            case 1005:
+                Glide.with(App.getAppContext()).load(tempFile).into(tempIv);
+                uploadImage();
+                break;
+            case 1006:
+                String filePath = null;
+                Uri selectedImage = data.getData();
+                if (null != selectedImage) {
+                    String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+                    Cursor cursor = App.getAppContext().getCurrentActivity().getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+                    if (cursor.moveToFirst()) {
+                        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                        filePath = cursor.getString(columnIndex);
+                        cursor.close();
+                        if (filePath == null) {
+                            Utils.showToast("不支持网络图片,请从本地选择!");
+                        }
+                    }
+                } else {
+                    filePath = data.getAction().replace("file://", "");
+                }
+                if (null != filePath) {
+                    tempFile = new File(filePath);
+                    Glide.with(App.getAppContext()).load(tempFile).into(tempIv);
+                    uploadImage();
+                }
                 break;
             case 1008:
                 RyBean.Ry ry = (RyBean.Ry) data.getExtras().getSerializable("Mk");

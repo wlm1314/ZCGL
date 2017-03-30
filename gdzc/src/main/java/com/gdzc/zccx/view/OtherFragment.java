@@ -11,7 +11,7 @@ import com.gdzc.base.BaseFragment;
 import com.gdzc.databinding.FragmentZccxOtherBinding;
 import com.gdzc.utils.NavigateUtils;
 import com.gdzc.utils.Utils;
-import com.gdzc.zccx.viewmodel.ZccxViewModel;
+import com.gdzc.zccx.viewmodel.ZccxOtherViewModel;
 import com.gdzc.zcdj.zcdj.adapter.ZcxgAdapter;
 import com.gdzc.zcdj.zcdj.model.ZcxgBean;
 import com.pulltofresh.PullToRefreshBase;
@@ -28,7 +28,7 @@ import java.util.List;
 public class OtherFragment extends BaseFragment<FragmentZccxOtherBinding> {
     private ZcxgAdapter mAdapter;
     private List<ZcxgBean.Zcxg> mList = new ArrayList<>();
-    private ZccxViewModel mViewModel;
+    private ZccxOtherViewModel mViewModel;
     private int pageNo = 1;
 
     @Override
@@ -48,8 +48,7 @@ public class OtherFragment extends BaseFragment<FragmentZccxOtherBinding> {
     }
 
     private void initView() {
-        mViewModel = new ZccxViewModel(this);
-        mBinding.setViewModel(mViewModel);
+        mViewModel = new ZccxOtherViewModel(this);
         mBinding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mBinding.recyclerView.setHasFixedSize(true);
         mAdapter = new ZcxgAdapter(mList);
