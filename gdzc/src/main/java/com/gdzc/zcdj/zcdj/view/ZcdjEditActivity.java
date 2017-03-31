@@ -201,19 +201,16 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
                                 .subscribe(dataBean -> mList.add(new TsxxViewModel(dataBean)));
                         Observable.from(zcxgEditBeen).filter(dataBean -> dataBean.字段名.equals("资产编号")).subscribe(dataBean -> yqbh = dataBean.值);
                         Observable.from(zcxgEditBeen)
-                                .filter(zcxgEditBean -> zcxgEditBean.字段类型.equals("图片"))
-                                .subscribe(zcxgEditBean -> mBinding.layoutImage.setVisibility(View.VISIBLE));
-                        Observable.from(zcxgEditBeen)
                                 .filter(zcxgEditBean -> zcxgEditBean.显示内容.equals("资产图片"))
                                 .subscribe(zcxgEditBean -> {
                                     Glide.with(ZcdjEditActivity.this).load(zcxgEditBean.值).into(mBinding.ivZc);
-                                    zcImg = zcxgEditBean.值;
+                                    zcImg = zcxgEditBean.值.substring(zcxgEditBean.值.lastIndexOf("/")+1);
                                 });
                         Observable.from(zcxgEditBeen)
                                 .filter(zcxgEditBean -> zcxgEditBean.显示内容.equals("发票图片"))
                                 .subscribe(zcxgEditBean -> {
                                     Glide.with(ZcdjEditActivity.this).load(zcxgEditBean.值).into(mBinding.ivFp);
-                                    fpImg = zcxgEditBean.值;
+                                    fpImg = zcxgEditBean.值.substring(zcxgEditBean.值.lastIndexOf("/")+1);
                                 });
                         mAdapter.notifyDataSetChanged();
                         if (!zcxg.批量.equals("1")) mBinding.tvCch.setVisibility(View.VISIBLE);

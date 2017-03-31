@@ -112,7 +112,7 @@ public class LydwFragment extends BaseFragment<FragmentZccxLydwBinding> {
                         else
                             mBinding.tvEmpty.setVisibility(View.GONE);
 
-                        mBinding.tvMsg.setText("台件：" + data.total.totalCount + "      条数：" + data.total.totalRow + "     金额（元）：" + data.total.totalMoney);
+                        mBinding.tvMsg.setText("      条数：" + data.total.totalRow + "台件：" + data.total.totalCount + "     金额（万元）：" + data.total.totalMoney);
                         mBinding.tvMsg.setVisibility(View.VISIBLE);
                     }
                 });

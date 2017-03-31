@@ -21,6 +21,6 @@ public class ZctjBean extends BaseBean {
     public static class Zctj {
         public String name;
         public int totalCount;
-        public int totalMoney;
+        public float totalMoney;
     }
 }

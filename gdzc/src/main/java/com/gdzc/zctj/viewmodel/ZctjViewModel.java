@@ -28,8 +28,8 @@ public class ZctjViewModel {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         startTime.set("1900-01-01");
         endTime.set(sdf.format(new Date()));
-        tjType.set("6类统计");
-        chartType.set("饼状图");
+        tjType.set("6大类（含无形资产）");
+        chartType.set("数量(台件)");
         createChart();
     }
 
@@ -55,7 +55,7 @@ public class ZctjViewModel {
                 break;
             case "chart":
                 chartType.set(type1.get());
-                ((ZctjActivity)App.getAppContext().getCurrentActivity()).showPieChart();
+                ((ZctjActivity)App.getAppContext().getCurrentActivity()).showSlChart();
                 break;
         }
     });
@@ -68,7 +68,7 @@ public class ZctjViewModel {
                 break;
             case "chart":
                 chartType.set(type2.get());
-                ((ZctjActivity)App.getAppContext().getCurrentActivity()).showBarChart();
+                ((ZctjActivity)App.getAppContext().getCurrentActivity()).showJeChart();
                 break;
         }
     });
@@ -93,12 +93,12 @@ public class ZctjViewModel {
         binding.setViewModel(this);
         switch (type) {
             case "data":
-                type1.set("6类统计");
+                type1.set("6大类（含无形资产）");
                 type2.set("16类统计");
                 break;
             case "chart":
-                type1.set("饼状图");
-                type2.set("柱状图");
+                type1.set("数量(台件)");
+                type2.set("金额(万元)");
                 break;
         }
         dialog =  Utils.showBottomDialog(App.getAppContext().getCurrentActivity(), binding.getRoot());
@@ -107,8 +107,8 @@ public class ZctjViewModel {
     public void createChart(){
         HttpRequest.SelectMyDataTotalByCategory(HttpParams.paramSelectMyDataTotalByCategory(category, startTime.get(), endTime.get()))
                 .subscribe(new RetrofitSubscriber<>(zctjBean -> {
-                    ((ZctjActivity) App.getAppContext().getCurrentActivity()).setPieData(zctjBean);
-                    ((ZctjActivity) App.getAppContext().getCurrentActivity()).setBarData(zctjBean);
+                    ((ZctjActivity) App.getAppContext().getCurrentActivity()).setBarData(zctjBean, "je");
+                    ((ZctjActivity) App.getAppContext().getCurrentActivity()).setBarData(zctjBean, "tj");
                 }));
     }
 }

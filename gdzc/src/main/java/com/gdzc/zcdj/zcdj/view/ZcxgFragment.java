@@ -89,7 +89,8 @@ public class ZcxgFragment extends BaseFragment<FragmentZcxgBinding> {
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<CustomNestedScrollView> refreshView) {
-                mViewModel.getData(pageNo++);
+                pageNo++;
+                mViewModel.getData(pageNo);
             }
         });
         // 设置菜单Item点击监听。

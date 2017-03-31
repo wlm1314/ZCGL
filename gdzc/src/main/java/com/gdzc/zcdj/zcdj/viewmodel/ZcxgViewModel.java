@@ -42,7 +42,7 @@ public class ZcxgViewModel {
             e.printStackTrace();
         }
         searchJson = json.toString();
-        mFragment.setPageNo(2);
+        mFragment.setPageNo(1);
         getData(1);
     });
 
