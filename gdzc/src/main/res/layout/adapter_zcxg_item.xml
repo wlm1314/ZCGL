@@ -48,7 +48,7 @@
             android:layout_height="30dp"
             android:gravity="center_vertical">
             <TextView style="@style/CommonText"
-                      android:text="单        价："/>
+                      android:text="单 价(元)："/>
             <TextView
                 android:id="@+id/tv_dj"
                 style="@style/CommonText"
@@ -87,7 +87,7 @@
                 android:minWidth="80dp"
                 android:singleLine="true"/>
             <TextView style="@style/CommonText"
-                      android:text="金        额："/>
+                      android:text="金 额(元)："/>
             <TextView
                 android:id="@+id/tv_je"
                 style="@style/CommonText"

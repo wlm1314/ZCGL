@@ -145,6 +145,16 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
 
         mBinding.ivZc.setOnClickListener(v -> uploadImage(v, "zc"));
         mBinding.ivFp.setOnClickListener(v -> uploadImage(v, "fp"));
+        mBinding.ivZcDelete.setOnClickListener(v -> {
+            zcImg = "";
+            mBinding.ivZcDelete.setVisibility(View.GONE);
+            mBinding.ivZc.setImageResource(R.mipmap.place_holder);
+        });
+        mBinding.ivFpDelete.setOnClickListener(v -> {
+            fpImg = "";
+            mBinding.ivFpDelete.setVisibility(View.GONE);
+            mBinding.ivFp.setImageResource(R.mipmap.place_holder);
+        });
     }
 
     private void uploadImage(View view, String type) {
@@ -174,10 +184,13 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
                     @Override
                     public void onNext(String s) {
                         Utils.showToast("上传成功");
-                        if (imageType.equals("zc"))
+                        if (imageType.equals("zc")) {
                             zcImg = s;
-                        else
+                            mBinding.ivZcDelete.setVisibility(View.VISIBLE);
+                        } else {
                             fpImg = s;
+                            mBinding.ivFpDelete.setVisibility(View.VISIBLE);
+                        }
                     }
                 });
     }
@@ -204,13 +217,15 @@ public class ZcdjEditActivity extends BaseActivity<ActivityZcdjEditBinding> {
                                 .filter(zcxgEditBean -> zcxgEditBean.显示内容.equals("资产图片"))
                                 .subscribe(zcxgEditBean -> {
                                     Glide.with(ZcdjEditActivity.this).load(zcxgEditBean.值).into(mBinding.ivZc);
-                                    zcImg = zcxgEditBean.值.substring(zcxgEditBean.值.lastIndexOf("/")+1);
+                                    zcImg = zcxgEditBean.值.substring(zcxgEditBean.值.lastIndexOf("/") + 1);
+                                    mBinding.ivZcDelete.setVisibility(View.VISIBLE);
                                 });
                         Observable.from(zcxgEditBeen)
                                 .filter(zcxgEditBean -> zcxgEditBean.显示内容.equals("发票图片"))
                                 .subscribe(zcxgEditBean -> {
                                     Glide.with(ZcdjEditActivity.this).load(zcxgEditBean.值).into(mBinding.ivFp);
-                                    fpImg = zcxgEditBean.值.substring(zcxgEditBean.值.lastIndexOf("/")+1);
+                                    fpImg = zcxgEditBean.值.substring(zcxgEditBean.值.lastIndexOf("/") + 1);
+                                    mBinding.ivFpDelete.setVisibility(View.VISIBLE);
                                 });
                         mAdapter.notifyDataSetChanged();
                         if (!zcxg.批量.equals("1")) mBinding.tvCch.setVisibility(View.VISIBLE);

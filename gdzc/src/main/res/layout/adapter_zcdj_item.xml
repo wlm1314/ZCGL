@@ -50,6 +50,7 @@
             android:layout_weight="1"
             android:hint="@{viewModel.tsnr}"
             android:maxLines="1"
+            android:textColor="@color/text_sub"
             android:text="@={viewModel.content}"
             android:visibility="@{!viewModel.isEditAble?View.VISIBLE:View.GONE}"/>
 

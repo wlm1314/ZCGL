@@ -101,7 +101,7 @@ public class LyrFragment extends BaseFragment<FragmentZccxLyrBinding> {
                         else
                             mBinding.tvEmpty.setVisibility(View.GONE);
 
-                        mBinding.tvMsg.setText("      条数：" + data.total.totalRow + "台件：" + data.total.totalCount + "     金额（万元）：" + data.total.totalMoney);
+                        mBinding.tvMsg.setText("条数:" + data.total.totalRow + "  台件:" + data.total.totalCount + "  金额（万元）:" + data.total.totalMoney);
                         mBinding.tvMsg.setVisibility(View.VISIBLE);
                     }
                 });

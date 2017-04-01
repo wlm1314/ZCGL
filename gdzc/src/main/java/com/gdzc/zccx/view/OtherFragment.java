@@ -86,7 +86,7 @@ public class OtherFragment extends BaseFragment<FragmentZccxOtherBinding> {
             mBinding.ptrRv.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
         mList.addAll(data.data.list);
         mAdapter.notifyDataSetChanged();
-        mBinding.tvMsg.setText("      条数：" + data.total.totalRow + "台件：" + data.total.totalCount + "     金额（万元）：" + data.total.totalMoney);
+        mBinding.tvMsg.setText("条数:" + data.total.totalRow + "  台件:" + data.total.totalCount + "  金额（万元）:" + data.total.totalMoney);
         mBinding.tvMsg.setVisibility(View.VISIBLE);
     }
 
