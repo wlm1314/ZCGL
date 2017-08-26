@@ -5,7 +5,6 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ObservableField;
 
 import com.bigkoo.pickerview.TimePickerView;
-import com.binding.command.ReplyCommand;
 import com.gdzc.R;
 import com.gdzc.app.App;
 import com.gdzc.databinding.LayoutTypeBinding;
@@ -14,6 +13,7 @@ import com.gdzc.net.http.HttpRequest;
 import com.gdzc.net.subscribers.RetrofitSubscriber;
 import com.gdzc.utils.Utils;
 import com.gdzc.zctj.view.ZctjActivity;
+import com.kelin.mvvmlight.command.ReplyCommand;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

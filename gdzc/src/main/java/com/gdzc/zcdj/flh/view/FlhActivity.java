@@ -4,13 +4,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.binding.messenger.Messenger;
 import com.gdzc.R;
 import com.gdzc.base.AppBar;
 import com.gdzc.base.BaseActivity;
 import com.gdzc.common.recyclerview.InitRecyclerView;
 import com.gdzc.databinding.ActivityFlhBinding;
 import com.gdzc.zcdj.flh.viewmodel.FlhViewModel;
+import com.kelin.mvvmlight.messenger.Messenger;
 import com.pulltofresh.PullToRefreshBase;
 import com.pulltofresh.extras.RecyclerViewEmptySupport;
 

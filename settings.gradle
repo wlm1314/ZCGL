@@ -1,2 +1,1 @@
-include ':databinding', ':pulltofresh', ':pickerview', ':gdzc', 'magicindicator'
-
+include ':pulltofresh', ':pickerview', ':gdzc', 'magicindicator','baselib'

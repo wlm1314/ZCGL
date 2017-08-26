@@ -2,7 +2,6 @@ package com.gdzc.zcdj.mk.viewmodel;
 
 import android.content.Intent;
 
-import com.binding.messenger.Messenger;
 import com.gdzc.BR;
 import com.gdzc.R;
 import com.gdzc.app.App;
@@ -18,6 +17,7 @@ import com.gdzc.zcdj.mk.model.CfdBean;
 import com.gdzc.zcdj.mk.model.DwBean;
 import com.gdzc.zcdj.mk.model.MKBean;
 import com.gdzc.zcdj.mk.model.RyBean;
+import com.kelin.mvvmlight.messenger.Messenger;
 
 import java.io.Serializable;
 

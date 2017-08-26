@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bigkoo.pickerview.TimePickerView;
-import com.binding.command.ReplyCommand;
 import com.bumptech.glide.Glide;
 import com.gdzc.BR;
 import com.gdzc.R;
@@ -36,6 +35,7 @@ import com.gdzc.zcdj.mk.model.MKBean;
 import com.gdzc.zcdj.mk.model.RyBean;
 import com.gdzc.zcdj.mk.view.MKActivity;
 import com.gdzc.zcdj.zcdj.model.TsxxBean;
+import com.kelin.mvvmlight.command.ReplyCommand;
 
 import org.json.JSONException;
 import org.json.JSONObject;

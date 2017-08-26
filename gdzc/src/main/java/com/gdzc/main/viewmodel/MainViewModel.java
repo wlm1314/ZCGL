@@ -2,7 +2,6 @@ package com.gdzc.main.viewmodel;
 
 import android.databinding.ObservableField;
 
-import com.binding.command.ReplyCommand;
 import com.gdzc.app.App;
 import com.gdzc.login.view.LoginActivity;
 import com.gdzc.utils.NavigateUtils;
@@ -10,6 +9,7 @@ import com.gdzc.utils.SPUtils;
 import com.gdzc.zccx.view.ZccxActivity;
 import com.gdzc.zcdj.zcdj.view.ZcdjActivity;
 import com.gdzc.zctj.view.ZctjActivity;
+import com.kelin.mvvmlight.command.ReplyCommand;
 
 /**
  * Created by 王少岩 on 2016/12/20.

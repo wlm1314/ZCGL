@@ -2,9 +2,9 @@ package com.gdzc.base;
 
 import android.databinding.ObservableField;
 
-import com.binding.command.ReplyCommand;
 import com.gdzc.R;
 import com.gdzc.app.App;
+import com.kelin.mvvmlight.command.ReplyCommand;
 
 import rx.functions.Action0;
 

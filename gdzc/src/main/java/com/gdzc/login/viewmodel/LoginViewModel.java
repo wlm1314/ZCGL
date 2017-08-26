@@ -3,7 +3,6 @@ package com.gdzc.login.viewmodel;
 import android.databinding.ObservableField;
 import android.text.TextUtils;
 
-import com.binding.command.ReplyCommand;
 import com.gdzc.app.App;
 import com.gdzc.login.model.LoginBean;
 import com.gdzc.main.view.MainActivity;
@@ -13,6 +12,7 @@ import com.gdzc.net.subscribers.ProgressSubscriber;
 import com.gdzc.utils.NavigateUtils;
 import com.gdzc.utils.SPUtils;
 import com.gdzc.utils.Utils;
+import com.kelin.mvvmlight.command.ReplyCommand;
 
 /**
  * Created by 王少岩 on 2016/12/20.

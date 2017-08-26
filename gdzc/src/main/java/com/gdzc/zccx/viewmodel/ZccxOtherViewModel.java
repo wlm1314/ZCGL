@@ -6,7 +6,6 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.bigkoo.pickerview.TimePickerView;
-import com.binding.command.ReplyCommand;
 import com.gdzc.R;
 import com.gdzc.app.App;
 import com.gdzc.net.http.HttpParams;
@@ -14,6 +13,7 @@ import com.gdzc.net.http.HttpRequest;
 import com.gdzc.net.subscribers.RetrofitSubscriber;
 import com.gdzc.utils.Utils;
 import com.gdzc.zccx.view.OtherFragment;
+import com.kelin.mvvmlight.command.ReplyCommand;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

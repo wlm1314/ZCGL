@@ -3,8 +3,6 @@ package com.gdzc.zcdj.flh.viewmodel;
 import android.content.Intent;
 import android.databinding.ObservableField;
 
-import com.binding.command.ReplyCommand;
-import com.binding.messenger.Messenger;
 import com.gdzc.BR;
 import com.gdzc.R;
 import com.gdzc.app.App;
@@ -16,6 +14,8 @@ import com.gdzc.net.http.HttpRequest;
 import com.gdzc.net.subscribers.ProgressSubscriber;
 import com.gdzc.utils.Utils;
 import com.gdzc.zcdj.flh.model.FlhBean;
+import com.kelin.mvvmlight.command.ReplyCommand;
+import com.kelin.mvvmlight.messenger.Messenger;
 
 import rx.Observable;
 
