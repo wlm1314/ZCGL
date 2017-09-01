@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ZCGL.iml" filepath="$PROJECT_DIR$/ZCGL.iml" />
+      <module fileurl="file://$PROJECT_DIR$/baselib/baselib.iml" filepath="$PROJECT_DIR$/baselib/baselib.iml" />
       <module fileurl="file://$PROJECT_DIR$/databinding/databinding.iml" filepath="$PROJECT_DIR$/databinding/databinding.iml" />
       <module fileurl="file://$PROJECT_DIR$/gdzc/gdzc.iml" filepath="$PROJECT_DIR$/gdzc/gdzc.iml" />
       <module fileurl="file://$PROJECT_DIR$/magicindicator/magicindicator.iml" filepath="$PROJECT_DIR$/magicindicator/magicindicator.iml" />

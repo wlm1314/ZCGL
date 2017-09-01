@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="app_bg">#f3f4f5</color>
+    <color name="black">@android:color/black</color>
+    <color name="clear">@android:color/transparent</color>
+    <color name="white">@android:color/white</color>
+    <declare-styleable name="cell_view"><attr format="boolean" name="cover"/><attr format="reference" name="contentLayout"/><attr format="reference" name="iconLeft"/><attr format="reference" name="iconTop"/><attr format="reference" name="iconRight"/><attr format="reference" name="iconBottom"/><attr format="reference|string" name="labelText"/><attr format="reference|string" name="infoText"/><attr format="reference|string" name="subText"/><attr format="reference|string" name="flagText"/><attr format="reference|string" name="labelHint"/><attr format="reference|string" name="infoHint"/><attr format="reference|string" name="subHint"/><attr format="reference|color" name="labelColor"/><attr format="reference|color" name="infoColor"/><attr format="reference|color" name="subColor"/><attr format="reference|color" name="flagColor"/><attr format="reference" name="labelId"/><attr format="reference" name="infoId"/><attr format="reference" name="subId"/><attr format="reference" name="flagId"/><attr format="reference" name="tipId"/><attr format="reference" name="iconLeftId"/><attr format="reference" name="iconTopId"/><attr format="reference" name="iconRightId"/><attr format="reference" name="iconBottomId"/></declare-styleable>
+    <dimen name="def_icon">18dp</dimen>
+    <item name="bottom_icon" type="id"/>
+    <item name="flag_view" type="id"/>
+    <item name="info_view" type="id"/>
+    <item name="label_view" type="id"/>
+    <item name="left_icon" type="id"/>
+    <item name="right_icon" type="id"/>
+    <item name="sub_view" type="id"/>
+    <item name="tip_view" type="id"/>
+    <item name="top_icon" type="id"/>
+    <string name="app_name">BaseUI</string>
+    <style name="DialogStyleBottom" parent="android:Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <!-- 边框 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowBackground">@color/app_bg</item>
+        <!-- 背景透明 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 模糊 -->
+    </style>
+    <style name="cell">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:minHeight">@dimen/dimen_55</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/dimen_10</item>
+        <item name="android:paddingTop">@dimen/dimen_6</item>
+        <item name="android:paddingBottom">@dimen/dimen_6</item>
+        <item name="android:paddingRight">@dimen/dimen_10</item>
+    </style>
+    <style name="custom_dialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">#1296db</item>
+    </style>
+</resources>

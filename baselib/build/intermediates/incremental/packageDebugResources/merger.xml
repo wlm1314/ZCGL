@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main$Generated" generated="true"><source path="E:\project\ZCGL\baselib\src\main\res"/><source path="E:\project\ZCGL\baselib\build\generated\res\rs\debug"/><source path="E:\project\ZCGL\baselib\build\generated\res\resValues\debug"/></dataSet><dataSet config="debug$Generated" generated="true"><source path="E:\project\ZCGL\baselib\src\debug\res"/></dataSet><dataSet config="main" generated-set="main$Generated"><source path="E:\project\ZCGL\baselib\src\main\res"><file name="right_in" path="E:\project\ZCGL\baselib\src\main\res\anim\right_in.xml" qualifiers="" type="anim"/><file name="right_out" path="E:\project\ZCGL\baselib\src\main\res\anim\right_out.xml" qualifiers="" type="anim"/><file name="zoom_in_entry" path="E:\project\ZCGL\baselib\src\main\res\anim\zoom_in_entry.xml" qualifiers="" type="anim"/><file name="zoom_in_exit" path="E:\project\ZCGL\baselib\src\main\res\anim\zoom_in_exit.xml" qualifiers="" type="anim"/><file name="zoom_out_entry" path="E:\project\ZCGL\baselib\src\main\res\anim\zoom_out_entry.xml" qualifiers="" type="anim"/><file name="zoom_out_exit" path="E:\project\ZCGL\baselib\src\main\res\anim\zoom_out_exit.xml" qualifiers="" type="anim"/><file name="anim_loading_white" path="E:\project\ZCGL\baselib\src\main\res\drawable\anim_loading_white.xml" qualifiers="" type="drawable"/><file name="rect_radius_black" path="E:\project\ZCGL\baselib\src\main\res\drawable\rect_radius_black.xml" qualifiers="" type="drawable"/><file name="cell_view_layout" path="E:\project\ZCGL\baselib\src\main\res\layout\cell_view_layout.xml" qualifiers="" type="layout"/><file name="dialog_loading" path="E:\project\ZCGL\baselib\src\main\res\layout\dialog_loading.xml" qualifiers="" type="layout"/><file name="loading4_0" path="E:\project\ZCGL\baselib\src\main\res\mipmap-hdpi\loading4_0.png" qualifiers="hdpi-v4" type="mipmap"/><file name="loading4_1" path="E:\project\ZCGL\baselib\src\main\res\mipmap-hdpi\loading4_1.png" qualifiers="hdpi-v4" type="mipmap"/><file name="loading4_10" path="E:\project\ZCGL\baselib\src\main\res\mipmap-hdpi\loading4_10.png" qualifiers="hdpi-v4" type="mipmap"/><file name="loading4_11" path="E:\project\ZCGL\baselib\src\main\res\mipmap-hdpi\loading4_11.png" qualifiers="hdpi-v4" type="mipmap"/><file name="loading4_2" path="E:\project\ZCGL\baselib\src\main\res\mipmap-hdpi\loading4_2.png" qualifiers="hdpi-v4" type="mipmap"/><file name="loading4_3" path="E:\project\ZCGL\baselib\src\main\res\mipmap-hdpi\loading4_3.png" qualifiers="hdpi-v4" type="mipmap"/><file name="loading4_4" path="E:\project\ZCGL\baselib\src\main\res\mipmap-hdpi\loading4_4.png" qualifiers="hdpi-v4" type="mipmap"/><file name="loading4_5" path="E:\project\ZCGL\baselib\src\main\res\mipmap-hdpi\loading4_5.png" qualifiers="hdpi-v4" type="mipmap"/><file name="loading4_6" path="E:\project\ZCGL\baselib\src\main\res\mipmap-hdpi\loading4_6.png" qualifiers="hdpi-v4" type="mipmap"/><file name="loading4_7" path="E:\project\ZCGL\baselib\src\main\res\mipmap-hdpi\loading4_7.png" qualifiers="hdpi-v4" type="mipmap"/><file name="loading4_8" path="E:\project\ZCGL\baselib\src\main\res\mipmap-hdpi\loading4_8.png" qualifiers="hdpi-v4" type="mipmap"/><file name="loading4_9" path="E:\project\ZCGL\baselib\src\main\res\mipmap-hdpi\loading4_9.png" qualifiers="hdpi-v4" type="mipmap"/><file path="E:\project\ZCGL\baselib\src\main\res\values\attrs_cellview.xml" qualifiers=""><item name="left_icon" type="id"/><item name="flag_view" type="id"/><item name="label_view" type="id"/><declare-styleable name="cell_view">
+
+        <attr format="boolean" name="cover"/>
+
+        <attr format="reference" name="contentLayout"/>
+
+        <attr format="reference" name="iconLeft"/>
+        <attr format="reference" name="iconTop"/>
+        <attr format="reference" name="iconRight"/>
+        <attr format="reference" name="iconBottom"/>
+
+        <attr format="reference|string" name="labelText"/>
+        <attr format="reference|string" name="infoText"/>
+        <attr format="reference|string" name="subText"/>
+        <attr format="reference|string" name="flagText"/>
+
+        <attr format="reference|string" name="labelHint"/>
+        <attr format="reference|string" name="infoHint"/>
+        <attr format="reference|string" name="subHint"/>
+        
+
+        <attr format="reference|color" name="labelColor"/>
+        <attr format="reference|color" name="infoColor"/>
+        <attr format="reference|color" name="subColor"/>
+        <attr format="reference|color" name="flagColor"/>
+
+        <attr format="reference" name="labelId"/>
+        <attr format="reference" name="infoId"/>
+        <attr format="reference" name="subId"/>
+        <attr format="reference" name="flagId"/>
+        <attr format="reference" name="tipId"/>
+        <attr format="reference" name="iconLeftId"/>
+        <attr format="reference" name="iconTopId"/>
+        <attr format="reference" name="iconRightId"/>
+        <attr format="reference" name="iconBottomId"/>
+
+    </declare-styleable><item name="right_icon" type="id"/><item name="sub_view" type="id"/><item name="top_icon" type="id"/><item name="tip_view" type="id"/><item name="bottom_icon" type="id"/><dimen name="def_icon">18dp</dimen><item name="info_view" type="id"/></file><file path="E:\project\ZCGL\baselib\src\main\res\values\colors.xml" qualifiers=""><color name="clear">@android:color/transparent</color><color name="app_bg">#f3f4f5</color><color name="white">@android:color/white</color><color name="black">@android:color/black</color></file><file path="E:\project\ZCGL\baselib\src\main\res\values\strings.xml" qualifiers=""><string name="app_name">BaseUI</string></file><file path="E:\project\ZCGL\baselib\src\main\res\values\styles.xml" qualifiers=""><style name="DialogStyleBottom" parent="android:Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        
+        <item name="android:windowIsTranslucent">true</item>
+        
+        <item name="android:windowNoTitle">true</item>
+        
+        <item name="android:windowBackground">@color/app_bg</item>
+        
+        <item name="android:backgroundDimEnabled">true</item>
+        
+    </style><style name="cell">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:minHeight">@dimen/dimen_55</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/dimen_10</item>
+        <item name="android:paddingTop">@dimen/dimen_6</item>
+        <item name="android:paddingBottom">@dimen/dimen_6</item>
+        <item name="android:paddingRight">@dimen/dimen_10</item>
+    </style><style name="custom_dialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">#1296db</item>
+    </style></file><file path="E:\project\ZCGL\baselib\src\main\res\values-v19\dimens.xml" qualifiers="v19"><dimen name="dimen_6">6dp</dimen><dimen name="text_size_18">18sp</dimen><dimen name="dimen_2">2dp</dimen><dimen name="text_size_22">22sp</dimen><dimen name="navbar_height">74dp</dimen><dimen name="text_size_13">13sp</dimen><dimen name="text_size_12">12sp</dimen><dimen name="text_size_15">15sp</dimen><dimen name="dimen_50">50dp</dimen><dimen name="text_size_14">14sp</dimen><dimen name="text_size_16">16sp</dimen><dimen name="dimen_55">55dp</dimen><dimen name="statusbarz_web_height">30dp</dimen><dimen name="dimen_10">10dp</dimen><dimen name="statusbar_height">24dp</dimen><dimen name="dimen_20">20dp</dimen><dimen name="dimen_30">30dp</dimen><dimen name="dimen_14">14dp</dimen><dimen name="dimen_12">12dp</dimen></file><file path="E:\project\ZCGL\baselib\src\main\res\values-v19\styles.xml" qualifiers="v19"><style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
+        
+    </style></file></source><source path="E:\project\ZCGL\baselib\build\generated\res\rs\debug"/><source path="E:\project\ZCGL\baselib\build\generated\res\resValues\debug"/></dataSet><dataSet config="debug" generated-set="debug$Generated"><source path="E:\project\ZCGL\baselib\src\debug\res"/></dataSet><mergedItems><configuration qualifiers=""><declare-styleable name="cell_view"><attr format="boolean" name="cover"/><attr format="reference" name="contentLayout"/><attr format="reference" name="iconLeft"/><attr format="reference" name="iconTop"/><attr format="reference" name="iconRight"/><attr format="reference" name="iconBottom"/><attr format="reference|string" name="labelText"/><attr format="reference|string" name="infoText"/><attr format="reference|string" name="subText"/><attr format="reference|string" name="flagText"/><attr format="reference|string" name="labelHint"/><attr format="reference|string" name="infoHint"/><attr format="reference|string" name="subHint"/><attr format="reference|color" name="labelColor"/><attr format="reference|color" name="infoColor"/><attr format="reference|color" name="subColor"/><attr format="reference|color" name="flagColor"/><attr format="reference" name="labelId"/><attr format="reference" name="infoId"/><attr format="reference" name="subId"/><attr format="reference" name="flagId"/><attr format="reference" name="tipId"/><attr format="reference" name="iconLeftId"/><attr format="reference" name="iconTopId"/><attr format="reference" name="iconRightId"/><attr format="reference" name="iconBottomId"/></declare-styleable></configuration></mergedItems></merger>

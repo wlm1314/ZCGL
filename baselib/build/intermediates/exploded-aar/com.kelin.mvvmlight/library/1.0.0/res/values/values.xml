@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr format="reference" name="adapter"/>
+    <attr format="reference" name="clickCommand"/>
+    <attr format="reference" name="itemView"/>
+    <attr format="reference" name="items"/>
+    <attr format="reference" name="onFocusChangeCommand"/>
+    <attr format="reference" name="onScrollChangeCommand"/>
+    <attr format="reference" name="onScrollStateChangedCommand"/>
+    <attr format="reference" name="onTouchCommand"/>
+    <attr format="boolean" name="requestFocus"/>
+    <attr format="string" name="uri"/>
+    <declare-styleable name="AdapterView"><attr name="itemView"/><attr name="items"/><attr name="adapter"/><attr format="reference" name="dropDownItemView"/><attr format="reference" name="itemIds"/><attr format="reference" name="itemIsEnabled"/><attr name="onScrollStateChangedCommand"/><attr name="onScrollChangeCommand"/><attr format="reference" name="onLoadMoreCommand"/></declare-styleable>
+    <declare-styleable name="ImageView"><attr name="clickCommand"/><attr name="uri"/><attr format="integer" name="request_width"/><attr format="integer" name="request_height"/><attr format="reference|color" name="placeholderImageRes"/><attr format="reference" name="onSuccessCommand"/><attr format="reference" name="onFailureCommand"/></declare-styleable>
+    <declare-styleable name="ListView"><attr format="reference" name="onItemClickCommand"/></declare-styleable>
+    <declare-styleable name="NestedScrollView"><attr name="onScrollChangeCommand"/></declare-styleable>
+    <declare-styleable name="RecyclerView"/>
+    <declare-styleable name="ScrollView"><attr name="onScrollChangeCommand"/></declare-styleable>
+    <declare-styleable name="SimpleDraweeView"><attr name="uri"/></declare-styleable>
+    <declare-styleable name="SwipeRefreshLayout"><attr format="reference" name="onRefreshCommand"/></declare-styleable>
+    <declare-styleable name="TextView"><attr name="clickCommand"/><attr name="requestFocus"/><attr format="reference" name="beforeTextChangedCommand"/><attr format="reference" name="onTextChangedCommand"/><attr format="reference" name="afterTextChangedCommand"/></declare-styleable>
+    <declare-styleable name="View"><attr name="clickCommand"/><attr name="onFocusChangeCommand"/><attr name="onTouchCommand"/></declare-styleable>
+    <declare-styleable name="ViewGroup"><attr name="clickCommand"/><attr name="itemView"/><attr format="reference" name="viewModels"/></declare-styleable>
+    <declare-styleable name="ViewPager"><attr name="itemView"/><attr name="items"/><attr name="adapter"/><attr format="reference" name="pageTitles"/><attr format="reference" name="onPageScrolledCommand"/><attr format="reference" name="onPageSelectedCommand"/><attr format="reference" name="onPageScrollStateChangedCommand"/></declare-styleable>
+    <declare-styleable name="WebView"><attr format="string" name="render"/></declare-styleable>
+    <string name="app_name">MVVMLight</string>
+</resources>

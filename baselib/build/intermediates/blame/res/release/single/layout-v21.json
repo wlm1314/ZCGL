@@ -1,0 +1,50 @@
+[
+    {
+        "merged": "E:\\project\\SX\\baselib\\build\\intermediates\\res\\merged\\release\\layout-v21\\notification_action_tombstone.xml",
+        "source": "E:\\project\\SX\\baselib\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.0.1\\res\\layout-v21\\notification_action_tombstone.xml"
+    },
+    {
+        "merged": "E:\\project\\SX\\baselib\\build\\intermediates\\res\\merged\\release\\layout-v21\\notification_action.xml",
+        "source": "E:\\project\\SX\\baselib\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.0.1\\res\\layout-v21\\notification_action.xml"
+    },
+    {
+        "merged": "E:\\project\\SX\\baselib\\build\\intermediates\\res\\merged\\release\\layout-v21\\notification_template_icon_group.xml",
+        "source": "E:\\project\\SX\\baselib\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.0.1\\res\\layout-v21\\notification_template_icon_group.xml"
+    },
+    {
+        "merged": "E:\\project\\ZCGL\\baselib\\build\\intermediates\\res\\merged\\release\\layout-v21\\notification_template_custom_big.xml",
+        "source": "E:\\project\\ZCGL\\baselib\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.0.1\\res\\layout-v21\\notification_template_custom_big.xml"
+    },
+    {
+        "merged": "E:\\project\\GDZC\\baselib\\build\\intermediates\\res\\merged\\release\\layout-v21\\notification_template_custom_big.xml",
+        "source": "E:\\project\\GDZC\\baselib\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.0.1\\res\\layout-v21\\notification_template_custom_big.xml"
+    },
+    {
+        "merged": "E:\\project\\GDZC\\baselib\\build\\intermediates\\res\\merged\\release\\layout-v21\\notification_action.xml",
+        "source": "E:\\project\\GDZC\\baselib\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.0.1\\res\\layout-v21\\notification_action.xml"
+    },
+    {
+        "merged": "E:\\project\\ZCGL\\baselib\\build\\intermediates\\res\\merged\\release\\layout-v21\\notification_template_icon_group.xml",
+        "source": "E:\\project\\ZCGL\\baselib\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.0.1\\res\\layout-v21\\notification_template_icon_group.xml"
+    },
+    {
+        "merged": "E:\\project\\GDZC\\baselib\\build\\intermediates\\res\\merged\\release\\layout-v21\\notification_action_tombstone.xml",
+        "source": "E:\\project\\GDZC\\baselib\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.0.1\\res\\layout-v21\\notification_action_tombstone.xml"
+    },
+    {
+        "merged": "E:\\project\\ZCGL\\baselib\\build\\intermediates\\res\\merged\\release\\layout-v21\\notification_action_tombstone.xml",
+        "source": "E:\\project\\ZCGL\\baselib\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.0.1\\res\\layout-v21\\notification_action_tombstone.xml"
+    },
+    {
+        "merged": "E:\\project\\ZCGL\\baselib\\build\\intermediates\\res\\merged\\release\\layout-v21\\notification_action.xml",
+        "source": "E:\\project\\ZCGL\\baselib\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.0.1\\res\\layout-v21\\notification_action.xml"
+    },
+    {
+        "merged": "E:\\project\\GDZC\\baselib\\build\\intermediates\\res\\merged\\release\\layout-v21\\notification_template_icon_group.xml",
+        "source": "E:\\project\\GDZC\\baselib\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.0.1\\res\\layout-v21\\notification_template_icon_group.xml"
+    },
+    {
+        "merged": "E:\\project\\SX\\baselib\\build\\intermediates\\res\\merged\\release\\layout-v21\\notification_template_custom_big.xml",
+        "source": "E:\\project\\SX\\baselib\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.0.1\\res\\layout-v21\\notification_template_custom_big.xml"
+    }
+]

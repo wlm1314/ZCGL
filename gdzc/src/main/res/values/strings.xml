@@ -14,6 +14,7 @@
     <string name="main_zcbg">资产变更</string>
     <string name="main_zcqc">资产清查</string>
     <string name="main_zctj">资产统计</string>
+    <string name="main_zcsh">资产审核</string>
 
     <string name="error_login">用户名或密码错误</string>
     <string name="empty_username">用户名不能为空</string>

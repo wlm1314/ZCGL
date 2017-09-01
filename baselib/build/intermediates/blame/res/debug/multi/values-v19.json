@@ -1,0 +1,1029 @@
+[
+    {
+        "outputFile": "E:\\project\\GDZC\\baselib\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v19\\values-v19.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 39,
+                    "endOffset": 90
+                },
+                "from": {
+                    "file": "E:\\project\\GDZC\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 135,
+                        "endColumn": 39,
+                        "endOffset": 170
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 95,
+                    "endColumn": 39,
+                    "endOffset": 130
+                },
+                "from": {
+                    "file": "E:\\project\\GDZC\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 176,
+                        "endColumn": 39,
+                        "endOffset": 211
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 135,
+                    "endColumn": 39,
+                    "endOffset": 170
+                },
+                "from": {
+                    "file": "E:\\project\\GDZC\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 217,
+                        "endColumn": 39,
+                        "endOffset": 252
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 175,
+                    "endColumn": 37,
+                    "endOffset": 208
+                },
+                "from": {
+                    "file": "E:\\project\\GDZC\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 57,
+                        "endColumn": 37,
+                        "endOffset": 90
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 213,
+                    "endColumn": 39,
+                    "endOffset": 248
+                },
+                "from": {
+                    "file": "E:\\project\\GDZC\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 258,
+                        "endColumn": 39,
+                        "endOffset": 293
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 253,
+                    "endColumn": 39,
+                    "endOffset": 288
+                },
+                "from": {
+                    "file": "E:\\project\\GDZC\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 299,
+                        "endColumn": 39,
+                        "endOffset": 334
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 8,
+                    "startColumn": 4,
+                    "startOffset": 293,
+                    "endColumn": 39,
+                    "endOffset": 328
+                },
+                "from": {
+                    "file": "E:\\project\\GDZC\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 340,
+                        "endColumn": 39,
+                        "endOffset": 375
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 9,
+                    "startColumn": 4,
+                    "startOffset": 333,
+                    "endColumn": 39,
+                    "endOffset": 368
+                },
+                "from": {
+                    "file": "E:\\project\\GDZC\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 381,
+                        "endColumn": 39,
+                        "endOffset": 416
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 10,
+                    "startColumn": 4,
+                    "startOffset": 373,
+                    "endColumn": 37,
+                    "endOffset": 406
+                },
+                "from": {
+                    "file": "E:\\project\\GDZC\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 96,
+                        "endColumn": 37,
+                        "endOffset": 129
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 411,
+                    "endColumn": 44,
+                    "endOffset": 451
+                },
+                "from": {
+                    "file": "E:\\project\\GDZC\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 4,
+                        "startOffset": 741,
+                        "endColumn": 44,
+                        "endOffset": 781
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 456,
+                    "endColumn": 47,
+                    "endOffset": 499
+                },
+                "from": {
+                    "file": "E:\\project\\GDZC\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 4,
+                        "startOffset": 787,
+                        "endColumn": 47,
+                        "endOffset": 830
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 13,
+                    "startColumn": 4,
+                    "startOffset": 504,
+                    "endColumn": 52,
+                    "endOffset": 552
+                },
+                "from": {
+                    "file": "E:\\project\\GDZC\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 22,
+                        "startColumn": 4,
+                        "startOffset": 836,
+                        "endColumn": 52,
+                        "endOffset": 884
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 557,
+                    "endColumn": 43,
+                    "endOffset": 596
+                },
+                "from": {
+                    "file": "E:\\project\\GDZC\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 4,
+                        "startOffset": 694,
+                        "endColumn": 43,
+                        "endOffset": 733
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 601,
+                    "endColumn": 43,
+                    "endOffset": 640
+                },
+                "from": {
+                    "file": "E:\\project\\GDZC\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 649,
+                        "endColumn": 43,
+                        "endOffset": 688
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 16,
+                    "startColumn": 4,
+                    "startOffset": 645,
+                    "endColumn": 43,
+                    "endOffset": 684
+                },
+                "from": {
+                    "file": "E:\\project\\GDZC\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 4,
+                        "startOffset": 604,
+                        "endColumn": 43,
+                        "endOffset": 643
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 17,
+                    "startColumn": 4,
+                    "startOffset": 689,
+                    "endColumn": 43,
+                    "endOffset": 728
+                },
+                "from": {
+                    "file": "E:\\project\\GDZC\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 559,
+                        "endColumn": 43,
+                        "endOffset": 598
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 18,
+                    "startColumn": 4,
+                    "startOffset": 733,
+                    "endColumn": 43,
+                    "endOffset": 772
+                },
+                "from": {
+                    "file": "E:\\project\\GDZC\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 4,
+                        "startOffset": 514,
+                        "endColumn": 43,
+                        "endOffset": 553
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 777,
+                    "endColumn": 43,
+                    "endOffset": 816
+                },
+                "from": {
+                    "file": "E:\\project\\GDZC\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 4,
+                        "startOffset": 469,
+                        "endColumn": 43,
+                        "endOffset": 508
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 20,
+                    "startColumn": 4,
+                    "startOffset": 821,
+                    "endColumn": 43,
+                    "endOffset": 860
+                },
+                "from": {
+                    "file": "E:\\project\\GDZC\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 424,
+                        "endColumn": 43,
+                        "endOffset": 463
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 21,
+                    "startColumn": 4,
+                    "startOffset": 865,
+                    "endLine": 24,
+                    "endColumn": 12,
+                    "endOffset": 1088
+                },
+                "from": {
+                    "file": "E:\\project\\GDZC\\baselib\\src\\main\\res\\values-v19\\styles.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 95,
+                        "endLine": 6,
+                        "endColumn": 12,
+                        "endOffset": 321
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "E:\\project\\ZCGL\\baselib\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v19\\values-v19.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 39,
+                    "endOffset": 90
+                },
+                "from": {
+                    "file": "E:\\project\\ZCGL\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 135,
+                        "endColumn": 39,
+                        "endOffset": 170
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 95,
+                    "endColumn": 39,
+                    "endOffset": 130
+                },
+                "from": {
+                    "file": "E:\\project\\ZCGL\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 176,
+                        "endColumn": 39,
+                        "endOffset": 211
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 135,
+                    "endColumn": 39,
+                    "endOffset": 170
+                },
+                "from": {
+                    "file": "E:\\project\\ZCGL\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 217,
+                        "endColumn": 39,
+                        "endOffset": 252
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 175,
+                    "endColumn": 37,
+                    "endOffset": 208
+                },
+                "from": {
+                    "file": "E:\\project\\ZCGL\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 57,
+                        "endColumn": 37,
+                        "endOffset": 90
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 213,
+                    "endColumn": 39,
+                    "endOffset": 248
+                },
+                "from": {
+                    "file": "E:\\project\\ZCGL\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 258,
+                        "endColumn": 39,
+                        "endOffset": 293
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 253,
+                    "endColumn": 39,
+                    "endOffset": 288
+                },
+                "from": {
+                    "file": "E:\\project\\ZCGL\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 299,
+                        "endColumn": 39,
+                        "endOffset": 334
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 8,
+                    "startColumn": 4,
+                    "startOffset": 293,
+                    "endColumn": 39,
+                    "endOffset": 328
+                },
+                "from": {
+                    "file": "E:\\project\\ZCGL\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 340,
+                        "endColumn": 39,
+                        "endOffset": 375
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 9,
+                    "startColumn": 4,
+                    "startOffset": 333,
+                    "endColumn": 39,
+                    "endOffset": 368
+                },
+                "from": {
+                    "file": "E:\\project\\ZCGL\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 381,
+                        "endColumn": 39,
+                        "endOffset": 416
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 10,
+                    "startColumn": 4,
+                    "startOffset": 373,
+                    "endColumn": 37,
+                    "endOffset": 406
+                },
+                "from": {
+                    "file": "E:\\project\\ZCGL\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 96,
+                        "endColumn": 37,
+                        "endOffset": 129
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 411,
+                    "endColumn": 44,
+                    "endOffset": 451
+                },
+                "from": {
+                    "file": "E:\\project\\ZCGL\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 4,
+                        "startOffset": 741,
+                        "endColumn": 44,
+                        "endOffset": 781
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 456,
+                    "endColumn": 47,
+                    "endOffset": 499
+                },
+                "from": {
+                    "file": "E:\\project\\ZCGL\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 4,
+                        "startOffset": 787,
+                        "endColumn": 47,
+                        "endOffset": 830
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 13,
+                    "startColumn": 4,
+                    "startOffset": 504,
+                    "endColumn": 52,
+                    "endOffset": 552
+                },
+                "from": {
+                    "file": "E:\\project\\ZCGL\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 22,
+                        "startColumn": 4,
+                        "startOffset": 836,
+                        "endColumn": 52,
+                        "endOffset": 884
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 557,
+                    "endColumn": 43,
+                    "endOffset": 596
+                },
+                "from": {
+                    "file": "E:\\project\\ZCGL\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 4,
+                        "startOffset": 694,
+                        "endColumn": 43,
+                        "endOffset": 733
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 601,
+                    "endColumn": 43,
+                    "endOffset": 640
+                },
+                "from": {
+                    "file": "E:\\project\\ZCGL\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 649,
+                        "endColumn": 43,
+                        "endOffset": 688
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 16,
+                    "startColumn": 4,
+                    "startOffset": 645,
+                    "endColumn": 43,
+                    "endOffset": 684
+                },
+                "from": {
+                    "file": "E:\\project\\ZCGL\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 4,
+                        "startOffset": 604,
+                        "endColumn": 43,
+                        "endOffset": 643
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 17,
+                    "startColumn": 4,
+                    "startOffset": 689,
+                    "endColumn": 43,
+                    "endOffset": 728
+                },
+                "from": {
+                    "file": "E:\\project\\ZCGL\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 559,
+                        "endColumn": 43,
+                        "endOffset": 598
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 18,
+                    "startColumn": 4,
+                    "startOffset": 733,
+                    "endColumn": 43,
+                    "endOffset": 772
+                },
+                "from": {
+                    "file": "E:\\project\\ZCGL\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 4,
+                        "startOffset": 514,
+                        "endColumn": 43,
+                        "endOffset": 553
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 777,
+                    "endColumn": 43,
+                    "endOffset": 816
+                },
+                "from": {
+                    "file": "E:\\project\\ZCGL\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 4,
+                        "startOffset": 469,
+                        "endColumn": 43,
+                        "endOffset": 508
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 20,
+                    "startColumn": 4,
+                    "startOffset": 821,
+                    "endColumn": 43,
+                    "endOffset": 860
+                },
+                "from": {
+                    "file": "E:\\project\\ZCGL\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 424,
+                        "endColumn": 43,
+                        "endOffset": 463
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 21,
+                    "startColumn": 4,
+                    "startOffset": 865,
+                    "endLine": 24,
+                    "endColumn": 12,
+                    "endOffset": 1088
+                },
+                "from": {
+                    "file": "E:\\project\\ZCGL\\baselib\\src\\main\\res\\values-v19\\styles.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 95,
+                        "endLine": 6,
+                        "endColumn": 12,
+                        "endOffset": 321
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "E:\\project\\SX\\baselib\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v19\\values-v19.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 39,
+                    "endOffset": 90
+                },
+                "from": {
+                    "file": "E:\\project\\SX\\baselib\\src\\main\\res\\values-v19\\dimens.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 95,
+                    "endColumn": 39,
+                    "endOffset": 130
+                },
+                "from": {
+                    "file": "E:\\project\\SX\\baselib\\src\\main\\res\\values-v19\\dimens.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 135,
+                    "endColumn": 39,
+                    "endOffset": 170
+                },
+                "from": {
+                    "file": "E:\\project\\SX\\baselib\\src\\main\\res\\values-v19\\dimens.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 175,
+                    "endColumn": 37,
+                    "endOffset": 208
+                },
+                "from": {
+                    "file": "E:\\project\\SX\\baselib\\src\\main\\res\\values-v19\\dimens.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 213,
+                    "endColumn": 39,
+                    "endOffset": 248
+                },
+                "from": {
+                    "file": "E:\\project\\SX\\baselib\\src\\main\\res\\values-v19\\dimens.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 253,
+                    "endColumn": 39,
+                    "endOffset": 288
+                },
+                "from": {
+                    "file": "E:\\project\\SX\\baselib\\src\\main\\res\\values-v19\\dimens.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 8,
+                    "startColumn": 4,
+                    "startOffset": 293,
+                    "endColumn": 39,
+                    "endOffset": 328
+                },
+                "from": {
+                    "file": "E:\\project\\SX\\baselib\\src\\main\\res\\values-v19\\dimens.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 9,
+                    "startColumn": 4,
+                    "startOffset": 333,
+                    "endColumn": 39,
+                    "endOffset": 368
+                },
+                "from": {
+                    "file": "E:\\project\\SX\\baselib\\src\\main\\res\\values-v19\\dimens.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 381,
+                        "endColumn": 39,
+                        "endOffset": 416
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 10,
+                    "startColumn": 4,
+                    "startOffset": 373,
+                    "endColumn": 37,
+                    "endOffset": 406
+                },
+                "from": {
+                    "file": "E:\\project\\SX\\baselib\\src\\main\\res\\values-v19\\dimens.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 411,
+                    "endColumn": 44,
+                    "endOffset": 451
+                },
+                "from": {
+                    "file": "E:\\project\\SX\\baselib\\src\\main\\res\\values-v19\\dimens.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 456,
+                    "endColumn": 47,
+                    "endOffset": 499
+                },
+                "from": {
+                    "file": "E:\\project\\SX\\baselib\\src\\main\\res\\values-v19\\dimens.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 13,
+                    "startColumn": 4,
+                    "startOffset": 504,
+                    "endColumn": 52,
+                    "endOffset": 552
+                },
+                "from": {
+                    "file": "E:\\project\\SX\\baselib\\src\\main\\res\\values-v19\\dimens.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 557,
+                    "endColumn": 43,
+                    "endOffset": 596
+                },
+                "from": {
+                    "file": "E:\\project\\SX\\baselib\\src\\main\\res\\values-v19\\dimens.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 601,
+                    "endColumn": 43,
+                    "endOffset": 640
+                },
+                "from": {
+                    "file": "E:\\project\\SX\\baselib\\src\\main\\res\\values-v19\\dimens.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 16,
+                    "startColumn": 4,
+                    "startOffset": 645,
+                    "endColumn": 43,
+                    "endOffset": 684
+                },
+                "from": {
+                    "file": "E:\\project\\SX\\baselib\\src\\main\\res\\values-v19\\dimens.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 17,
+                    "startColumn": 4,
+                    "startOffset": 689,
+                    "endColumn": 43,
+                    "endOffset": 728
+                },
+                "from": {
+                    "file": "E:\\project\\SX\\baselib\\src\\main\\res\\values-v19\\dimens.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 18,
+                    "startColumn": 4,
+                    "startOffset": 733,
+                    "endColumn": 43,
+                    "endOffset": 772
+                },
+                "from": {
+                    "file": "E:\\project\\SX\\baselib\\src\\main\\res\\values-v19\\dimens.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 777,
+                    "endColumn": 43,
+                    "endOffset": 816
+                },
+                "from": {
+                    "file": "E:\\project\\SX\\baselib\\src\\main\\res\\values-v19\\dimens.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 20,
+                    "startColumn": 4,
+                    "startOffset": 821,
+                    "endColumn": 43,
+                    "endOffset": 860
+                },
+                "from": {
+                    "file": "E:\\project\\SX\\baselib\\src\\main\\res\\values-v19\\dimens.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 21,
+                    "startColumn": 4,
+                    "startOffset": 865,
+                    "endLine": 24,
+                    "endColumn": 12,
+                    "endOffset": 1021
+                },
+                "from": {
+                    "file": "E:\\project\\SX\\baselib\\src\\main\\res\\values-v19\\styles.xml"
+                }
+            }
+        ]
+    }
+]

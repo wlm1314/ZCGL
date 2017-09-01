@@ -18,6 +18,7 @@ import com.kelin.mvvmlight.command.ReplyCommand;
 public class MainViewModel {
     public final ObservableField<String> username = new ObservableField<>();
     public ReplyCommand zcdjCommon = new ReplyCommand(() -> NavigateUtils.startActivity(App.getAppContext().getCurrentActivity(), ZcdjActivity.class));
+    public ReplyCommand zcshCommon = new ReplyCommand(() -> {});
     public ReplyCommand zccxCommon = new ReplyCommand(() -> NavigateUtils.startActivity(App.getAppContext().getCurrentActivity(), ZccxActivity.class));
     public ReplyCommand zcbgCommon = new ReplyCommand(() -> {});
     public ReplyCommand zcqcCommon = new ReplyCommand(() -> {});
